@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hugo on My New Hugo Site</title>
-    <link>http://example.org/tags/hugo/</link>
+    <link>https://alatan.github.io/tags/hugo/</link>
     <description>Recent content in hugo on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 14 Dec 2017 11:18:15 +0800</lastBuildDate>
     
-	<atom:link href="http://example.org/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://alatan.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>My First Post</title>
-      <link>http://example.org/post/my-first-post/</link>
+      <link>https://alatan.github.io/post/my-first-post/</link>
       <pubDate>Thu, 14 Dec 2017 11:18:15 +0800</pubDate>
       
-      <guid>http://example.org/post/my-first-post/</guid>
+      <guid>https://alatan.github.io/post/my-first-post/</guid>
       <description>这里是文章内容</description>
     </item>
     
