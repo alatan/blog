@@ -12,8 +12,6 @@ disablePathToLower = true
 hasCJKLanguage = true
 summaryLength = 140
 
-disqusShortname = "yourdiscussshortname"  ## 是否开启disqus评论，不要和utteranc同时开启
-
 [author]
   name = "默哥"
 
@@ -63,10 +61,10 @@ disqusShortname = "yourdiscussshortname"  ## 是否开启disqus评论，不要�
     identifier = "archives"
     name = "归档"
     url = "/archives/"
-    weight = 3
+    weight = 2
 
   [[menu.main]]
     identifier = "about"
     name = "关于"
     url = "/about/"
-    weight = 4
+    weight = 3
