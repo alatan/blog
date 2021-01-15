@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>追求卓越，幸福机会不期而遇。</title>
     <link>https://alatan.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on 追求卓越，幸福机会不期而遇。</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-cn</language>
     <lastBuildDate>Thu, 14 Dec 2017 11:18:15 +0800</lastBuildDate>
     
 	<atom:link href="https://alatan.github.io/index.xml" rel="self" type="application/rss+xml" />
