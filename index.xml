@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>追求卓越，幸福机会不期而遇。</title>
+    <title>追求卓越，幸福机会不期而遇</title>
     <link>https://alatan.github.io/</link>
-    <description>Recent content on 追求卓越，幸福机会不期而遇。</description>
+    <description>Recent content on 追求卓越，幸福机会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Thu, 14 Dec 2017 11:18:15 +0800</lastBuildDate>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 15 Jan 2021 09:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://alatan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>My First Post</title>
+      <title>写作就是促进思考</title>
       <link>https://alatan.github.io/post/my-first-post/</link>
-      <pubDate>Thu, 14 Dec 2017 11:18:15 +0800</pubDate>
+      <pubDate>Fri, 15 Jan 2021 09:00:00 +0800</pubDate>
       
       <guid>https://alatan.github.io/post/my-first-post/</guid>
-      <description>这里是文章内容</description>
+      <description>将所思所想通过文件记录，记录的过程就是总结思考的过程。</description>
     </item>
     
   </channel>
