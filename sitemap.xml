@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://alatan.github.io/post/my-first-post/</loc>
+    <loc>https://alatan.github.io/post/firstpost/</loc>
     <lastmod>2021-01-15T09:00:00+08:00</lastmod>
   </url>
   
@@ -40,6 +40,14 @@
   <url>
     <loc>https://alatan.github.io/</loc>
     <lastmod>2021-01-15T09:00:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://alatan.github.io/archives/</loc>
+  </url>
+  
+  <url>
+    <loc>https://alatan.github.io/search/</loc>
   </url>
   
 </urlset>
