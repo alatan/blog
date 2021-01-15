@@ -6,7 +6,7 @@
     <description>Recent content on 追求卓越，幸福就会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 15 Jan 2021 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Mar 2015 00:13:27 +0000</lastBuildDate>
     
 	<atom:link href="https://alatan.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>https://alatan.github.io/post/firstpost/</guid>
       <description>将所思所想通过文件记录，记录的过程就是总结思考的过程。</description>
+    </item>
+    
+    <item>
+      <title>关于我</title>
+      <link>https://alatan.github.io/about/</link>
+      <pubDate>Tue, 10 Mar 2015 00:13:27 +0000</pubDate>
+      
+      <guid>https://alatan.github.io/about/</guid>
+      <description>写作可以触发思考，因此想用此博客记录自己，让自己沉淀下来，慢即是快。 公众号，扫码关注</description>
     </item>
     
     <item>
