@@ -1,6 +1,6 @@
 baseURL = "https://alatan.github.io/"
 languageCode = "zh-CN"
-title = "追求卓越，幸福机会不期而遇"
+title = "追求卓越，幸福就会不期而遇"
 theme = "maupassant"
 googleAnalytics = ""  # UA-XXXXXXXX-X
 
@@ -19,7 +19,7 @@ disqusShortname = "yourdiscussshortname"  ## 是否开启disqus评论，不要�
 
 [params]
   author = "默哥"
-  subtitle = "记录生活，反思生活"
+  subtitle = "记录就是思考的过程"
   keywords = "Java,项目管理,思考,软件架构,书籍,理财"
   description = "记录美好的事物，反哺生活的本真。"
   busuanzi = true #启用不算子网页统计
@@ -33,21 +33,7 @@ disqusShortname = "yourdiscussshortname"  ## 是否开启disqus评论，不要�
   # if ['custom.js'], load '/static/js/custom.js' file
 
   # 全局开关，你也可以在每一篇内容的 front matter 中针对单篇内容关闭或开启某些功能
-  toc = true  # 是否开启目录
-
-## 友情链接，可以多个
-
-[[params.links]]
-  title = "飞雪无情的博客"
-  name = "飞雪无情的博客"
-  url = "https://www.flysnow.org/"
-
-
-## 侧边栏广告位
-[[params.ads]]
- # title = "【2019双12】ALL IN CLoud 低至1折"
- # url = "https://www.aliyun.com/minisite/goods?userCode=jdg9oj97&share_source=copy_link"
- # img = "https://img.alicdn.com/tfs/TB1_rYHo7P2gK0jSZPxXXacQpXa-690-388.jpg"
+  toc = false  # 是否开启目录
 
 
 
