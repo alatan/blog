@@ -8,6 +8,6 @@ keywords: [""]
 description: "第一篇文章"  
 tags: ["记录", "反思"]  
 categories: ["记录"]  
-author: "MoGe"  
+author: "默哥"  
 ---  
 将所思所想通过文件记录，记录的过程就是总结思考的过程。
