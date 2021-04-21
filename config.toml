@@ -44,8 +44,8 @@ summaryLength = 140
 
 ## 开启版权声明，协议名字和链接都可以换
 [params.cc]
-    name = "知识共享署名"
-    link = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+##    name = "转载注明出处"
+##    link = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
 
 ## 配置代码高亮
 [markup]
