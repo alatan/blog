@@ -1,6 +1,6 @@
 baseURL = "https://alatan.github.io/"
 languageCode = "zh-CN"
-title = "追求卓越，幸福就会不期而遇"
+title = "追求卓越幸福就会不期而遇"
 theme = "maupassant"
 googleAnalytics = ""  # UA-XXXXXXXX-X
 
@@ -17,8 +17,8 @@ summaryLength = 140
 
 [params]
   author = "默哥"
-  subtitle = "记录就是思考的过程"
-  keywords = "Java,项目管理,思考,软件架构,书籍,理财"
+  subtitle = "学而思"
+  keywords = "Java,软件架构,思考,理财"
   description = "记录美好的事物，反哺生活的本真。"
   busuanzi = true #启用不算子网页统计
   googleAd = ""  #ca-pub-xxxxxxxxxxxxxx
@@ -44,7 +44,7 @@ summaryLength = 140
 
 ## 开启版权声明，协议名字和链接都可以换
 [params.cc]
-    name = "知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议"
+    name = "知识共享署名"
     link = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
 
 ## 配置代码高亮
