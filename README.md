@@ -1,2 +1,2 @@
 # blog
-my blog src files
+blog src files

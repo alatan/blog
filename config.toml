@@ -1,6 +1,6 @@
-baseURL = "https://alatan.github.io/"
+baseURL = "https://moge.fun"
 languageCode = "zh-CN"
-title = "追求卓越幸福就会不期而遇"
+title = "追求卓越，幸福就会不期而遇"
 theme = "maupassant"
 googleAnalytics = ""  # UA-XXXXXXXX-X
 
@@ -17,9 +17,9 @@ summaryLength = 140
 
 [params]
   author = "默哥"
-  subtitle = "学而思"
-  keywords = "Java,软件架构,思考,理财"
-  description = "记录美好的事物，反哺生活的本真。"
+  subtitle = "学而不思则罔，思而不学则怠。"
+  keywords = "思考,编程,长期主义"
+  description = "记录美好，反哺生活。"
   busuanzi = true #启用不算子网页统计
   googleAd = ""  #ca-pub-xxxxxxxxxxxxxx
   localSearch = true # 启用本地搜索
@@ -31,7 +31,7 @@ summaryLength = 140
   # if ['custom.js'], load '/static/js/custom.js' file
 
   # 全局开关，你也可以在每一篇内容的 front matter 中针对单篇内容关闭或开启某些功能
-  toc = false  # 是否开启目录
+  toc = true  # 是否开启目录
 
 
 
@@ -43,7 +43,7 @@ summaryLength = 140
   theme = "github-light"
 
 ## 开启版权声明，协议名字和链接都可以换
-[params.cc]
+## [params.cc]
 ##    name = "转载注明出处"
 ##    link = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
 
