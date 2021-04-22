@@ -9,15 +9,19 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title> | 追求卓越，幸福就会不期而遇</title>
-    <meta property="og:title" content=" - 追求卓越，幸福就会不期而遇">
+    <title>Markdown语法 | 追求卓越，幸福就会不期而遇</title>
+    <meta property="og:title" content="Markdown语法 - 追求卓越，幸福就会不期而遇">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2021-04-01T00:00:00&#43;08:00'>
         
-    <meta name="Keywords" content="思考,编程,长期主义">
-    <meta name="description" content="">
         
-    <meta name="author" content="默哥">
+    <meta property="article:modified_time" content='2021-04-01T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="[]">
+    <meta name="description" content="Markdown常用语法">
+        <meta name="author" content="默哥">
+        
     <meta property="og:url" content="https://moge.fun/post/mdGrammar/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
@@ -74,11 +78,18 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title"></h1>
+            <h1 class="post-title">Markdown语法</h1>
         </header>
         <date class="post-meta meta-date">
-            1年1月1日
+            2021年4月1日
         </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E8%AE%B0%E5%BD%95'>记录</a></span>
+            
+        </div>
         
         
         <div class="post-meta">
@@ -89,48 +100,78 @@
         
         <div class="post-content">
             <h2 id="markdown基本语法">Markdown基本语法</h2>
+
 <h4 id="标题">标题</h4>
-<h5 id="这是-h5-">这是 H5</h5>
+
+<h5 id="这是-h5">这是 H5</h5>
+
 <h4 id="段落">段落</h4>
+
 <p>这是一个段落。</p>
+
 <p>这是另一个段落。</p>
+
 <h4 id="斜体">斜体</h4>
+
 <p><em>这是斜体</em></p>
+
 <h4 id="粗体">粗体</h4>
+
 <p><strong>这是粗体</strong></p>
-<p><em><strong>这是粗体+斜体</strong></em></p>
+
+<p><strong><em>这是粗体+斜体</em></strong></p>
+
 <h4 id="删除线">删除线</h4>
+
 <p><del>没有价值就会被抛弃</del></p>
+
 <h4 id="引用">引用</h4>
+
 <blockquote>
 <p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
 </blockquote>
+
 <h4 id="嵌套引用">嵌套引用</h4>
+
 <blockquote>
 <p>markdown是好的写作方式。</p>
+
 <blockquote>
 <p>前提是要写。</p>
 </blockquote>
+
 <p>行动就成功了一半。</p>
-</blockquote>
+
 <h4 id="列表">列表</h4>
+
 <ul>
 <li>学习</li>
 <li>思考</li>
-<li>创造</li>
+
+<li><p>创造</p>
+
+<h4 id="有序列表">有序列表</h4></li>
+
+<li><p>昨夜西风凋碧树。独上高楼，望尽天涯路。</p></li>
+
+<li><p>衣带渐宽终不悔，为伊消得人憔悴。</p></li>
+
+<li><p>众里寻他千百度。蓦然回首，那人却在，灯火阑珊处。</p></li>
 </ul>
-<h4 id="有序列表">有序列表</h4>
-<ol>
-<li>昨夜西风凋碧树。独上高楼，望尽天涯路。</li>
-<li>衣带渐宽终不悔，为伊消得人憔悴。</li>
-<li>众里寻他千百度。蓦然回首，那人却在，灯火阑珊处。</li>
-</ol>
+</blockquote>
+
 <h4 id="分隔线">分隔线</h4>
+
 <hr>
+
 <h4 id="链接">链接</h4>
+
 <p><a href="http://www.baidu.com/">百度一下</a></p>
+
 <p><a href="http://www.google.com/" title="google">Google</a></p>
+
 <h4 id="表格">表格</h4>
+
 <table>
 <thead>
 <tr>
@@ -139,17 +180,20 @@
 <th align="center">类别</th>
 </tr>
 </thead>
+
 <tbody>
 <tr>
 <td align="left">人民币</td>
 <td align="right">5百万</td>
 <td align="center">活期</td>
 </tr>
+
 <tr>
 <td align="left">比特币</td>
 <td align="right">5个</td>
 <td align="center">数字资产</td>
 </tr>
+
 <tr>
 <td align="left">股票基金</td>
 <td align="right">5亿</td>
@@ -157,20 +201,18 @@
 </tr>
 </tbody>
 </table>
+
 <h4 id="代码区域四个空格">代码区域（四个空格）</h4>
 <pre><code>/** 这是一个Java代码区块 */
 public static void main(String[] args) {
-    System.out.println(&quot;Hello World&quot;);
-}
-</code></pre>
+    System.out.println(&#34;Hello World&#34;);
+}</code></pre>
 <h4 id="图像">图像</h4>
-<p><figure class="max-w-2xl mx-auto overflow-hidden">
-    
-        <img alt="星辰大海" src="./star.png" />
-    
-    <figcaption class="p-2 text-center">征途是星辰大海</figcaption>
-</figure></p>
+
+<p><figure><img src="./star.png" alt="星辰大海" title="征途是星辰大海"><figcaption>征途是星辰大海</figcaption></figure></p>
+
 <h2 id="markdown高级语法">Markdown高级语法</h2>
+
 <blockquote>
 <p>暂时不用</p>
 </blockquote>
@@ -186,11 +228,7 @@ public static void main(String[] args) {
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/about/">关于我</a></li>
-        
-        <li><a href="/archives/">归档</a></li>
-        
-        <li><a href="/search/">搜索</a></li>
+        <li><a href="/post/studyAndThink/">学与思</a></li>
         
     </ul>
 </div>
@@ -198,7 +236,11 @@ public static void main(String[] args) {
 
         <div class="post-meta meta-tags">
             
-            没有标签
+            <ul class="clearfix">
+                
+                <li><a href='/tags/Markdown'>Markdown</a></li>
+                
+            </ul>
             
         </div>
     </article>
@@ -283,11 +325,11 @@ public static void main(String[] args) {
     </li>
     
     <li>
-        <a href="https://moge.fun/post/studyAndThink/" title="学与思">学与思</a>
+        <a href="https://moge.fun/post/mdGrammar/" title="Markdown语法">Markdown语法</a>
     </li>
     
     <li>
-        <a href="https://moge.fun/post/mdGrammar/" title=""></a>
+        <a href="https://moge.fun/post/studyAndThink/" title="学与思">学与思</a>
     </li>
     
 </ul>
@@ -303,12 +345,16 @@ public static void main(String[] args) {
     
     <li><a href="https://moge.fun/categories/%E5%8F%8D%E6%80%9D/">反思 (1)</a></li>
     
+    <li><a href="https://moge.fun/categories/%E8%AE%B0%E5%BD%95/">记录 (1)</a></li>
+    
 </ul>
     </section>
 
     <section class="widget">
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
+    
+    <a href="https://moge.fun/tags/Markdown/">Markdown</a>
     
     <a href="https://moge.fun/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
     
