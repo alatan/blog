@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>微服务方案SpringCloudAlibaba</title>
+      <link>https://moge.fun/post/SpringCloudAlibaba/</link>
+      <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/SpringCloudAlibaba/</guid>
+      <description>Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案 组件 Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。 Sentinel：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。 Seata：阿里巴巴开源产品，一个易于使用的高性能微服务分布</description>
+    </item>
+    
+    <item>
       <title>Markdown语法</title>
       <link>https://moge.fun/post/mdGrammar/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
