@@ -76,4 +76,4 @@ author: "默哥"
 
 ### 图像
 
-![星辰大海](./images/star.png)
+![星辰大海](/images/star.png)
