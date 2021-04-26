@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>分布式介绍 | 追求卓越，幸福就会不期而遇</title>
-    <meta property="og:title" content="分布式介绍 - 追求卓越，幸福就会不期而遇">
+    <title>Java架构演变历史 | 追求卓越，幸福就会不期而遇</title>
+    <meta property="og:title" content="Java架构演变历史 - 追求卓越，幸福就会不期而遇">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2021-04-21T00:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2021-04-20T00:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2021-04-21T00:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2021-04-20T00:00:00&#43;08:00'>
         
-    <meta name="Keywords" content="[分布式]">
-    <meta name="description" content="分布式基础介绍">
+    <meta name="Keywords" content="[微服务]">
+    <meta name="description" content="Java架构演变历史">
         <meta name="author" content="默哥">
         
-    <meta property="og:url" content="https://moge.fun/post/distributed/">
+    <meta property="og:url" content="https://moge.fun/post/JavaArchHistory/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -78,16 +78,16 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">分布式介绍</h1>
+            <h1 class="post-title">Java架构演变历史</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年4月21日
+            2021年4月20日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/%E5%88%86%E5%B8%83%E5%BC%8F'>分布式</a></span>
+            <span class="meta-category"><a href='/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1'>微服务</a></span>
             
         </div>
         
@@ -99,15 +99,83 @@
         
         
         <div class="post-content">
-            <h3 id="分布式理论基础">分布式理论基础</h3>
+            <p><strong><em>Java网站架构演变过程，大致分为5个阶段，分别为单体架构、集群架构、分布式架构、SOA架构和微服务架构。</em></strong></p>
 
-<p><strong>CAP 理论是分布式中基础理论，有三个重要指标：一致性、可用性、分区容错性。</strong></p>
+<h3 id="单体架构">单体架构</h3>
+
+<blockquote>
+<p>所有的应用、数据库、文件都部署在一台机器上。简单来讲其实就是我们熟知的SSH架构或SSM架构，把所有的业务模块都放在一个应用中开发，这里面又衍生出三层架构，即表示层、业务逻辑层和数据库访问层，虽然在软件设计中划分了经典的三层模型，但是对业务场景没有划分，一个典型的单体应用就是将所有的业务场景的表示层、业务逻辑层和数据访问层放在一个工程项目中，最终经过编译、打包，部署在一台服务器上。</p>
+</blockquote>
+
+<p><figure><img src="/images/archHistory/single.jpg" alt="单体架构"></figure></p>
+
+<h4 id="单体架构优点">单体架构优点</h4>
+
+<ol>
+<li>部署简单: 由于是完整的结构体，可以直接部署在一个服务器上即可。</li>
+<li>技术单一: 项目不需要复杂的技术栈，往往一套熟悉的技术栈就可以完成开发。</li>
+<li>用人成本低: 单个程序员可以完成业务接口到数据库的整个流程。</li>
+</ol>
+
+<h4 id="单体架构缺点">单体架构缺点</h4>
+
+<ol>
+<li>系统启动慢： 一个进程包含了所有的业务逻辑，涉及到的启动模块过多，导致系统的启动、重启时间周期过长;</li>
+<li>系统错误隔离性差、可用性差：任何一个模块的错误均可能造成整个系统的宕机;</li>
+<li>可伸缩性差：系统的扩容只能只对这个应用进行扩容，不能做到对某个功能点进行扩容;</li>
+<li>线上问题修复周期长：任何一个线上问题修复需要对整个应用系统进行全面升级。</li>
+</ol>
+
+<h3 id="集群架构">集群架构</h3>
+
+<blockquote>
+<p>不同服务器部署同一套应用程序对外提供服务，实现服务的负载均衡或者互备(热备，主从)，指同一种组件的多个实例，形成逻辑上的整体。单个节点可以提供完整服务。集群是物理形态。</p>
+</blockquote>
+
+<p><figure><img src="/images/archHistory/cluster.jpg" alt="集群架构"></figure></p>
+
+<ol>
+<li>应用和数据分离(大量用户高并发的访问导致系统性能越来越差，数据存储空间开始出现不足)</li>
+<li>缓存的使用(QPS持续提高，为了降低接口访问时间、提高服务性能和并发，我们注意到，网站访问有个著名的二八定律)</li>
+<li>负载均衡器的代理服务器</li>
+<li>数据库读写分离</li>
+<li>反向代理和CDN加速</li>
+</ol>
+
+<h3 id="分布式架构">分布式架构</h3>
+
+<blockquote>
+<p>服务的不同模块部署在不同的机器上，单个节点不能提供完整服务，需要多节点协调提供服务，分布式强调的是工作方式。</p>
+</blockquote>
+
+<p><figure><img src="/images/archHistory/distributed.jpg" alt="分布式架构"></figure></p>
+
+<ol>
+<li>业务分库分表</li>
+<li>NoSQL和搜索引擎对可伸缩的分布式特性具有更好的支持，应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。</li>
+<li>业务模块拆分成子项目</li>
+</ol>
+
+<h3 id="soa架构">SOA架构</h3>
+
+<blockquote>
+<p>面向服务的架构，一种设计方式，其中包含多个服务，服务之间通过相互依赖提供一系列的功能。一个服务通常以独立的形式存在于操作系统进程中。各个服务之间通过网络调用。</p>
+</blockquote>
+
+<p><figure><img src="/images/archHistory/soa.png" alt="SOA架构"></figure></p>
 
 <ul>
-<li>一致性（Consistency）</li>
-<li>可用性（Availability）</li>
-<li>分区容错性（Partition Tolerance）</li>
+<li>中心化实现：ESB(企业服务总线)，各服务通过ESB进行交互，解决异构系统之间的连通性，通过协议转换，消息解析，消息路由把服务提供者的数据传送到服务消费者。</li>
+<li>去中心化实现：微服务</li>
 </ul>
+
+<h3 id="微服务架构">微服务架构</h3>
+
+<blockquote>
+<p>在SOA上做的升华，微服务强调业务要彻底组件化和服务化，原有的单个业务系统会拆分为多个可独立开发，设计，运行的小应用。这些小应用通过服务完成交互和集成。</p>
+</blockquote>
+
+<p><figure><img src="/images/archHistory/microservice.jpg" alt="微服务架构"></figure></p>
 
         </div>
 
@@ -121,7 +189,7 @@
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/%E5%88%86%E5%B8%83%E5%BC%8F'>分布式</a></li>
+                <li><a href='/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1'>微服务</a></li>
                 
             </ul>
             
