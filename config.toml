@@ -17,7 +17,7 @@ summaryLength = 140
 
 [params]
   author = "默哥"
-  subtitle = "学而不思则罔，思而不学则怠。"
+  subtitle = "汝需自取真经"
   keywords = "思考,编程,长期主义"
   description = "记录美好，反哺生活。"
   busuanzi = true #启用不算子网页统计

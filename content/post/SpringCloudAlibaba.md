@@ -4,6 +4,8 @@ date: 2021-04-21
 weight: 70  
 markup: mmark  
 draft: false  
+sequenceDiagrams
+  enable: true
 keywords: ["SpringCloud"]  
 description: "微服务最佳实践方案"  
 tags: [ "微服务 SpringCloud"]  
