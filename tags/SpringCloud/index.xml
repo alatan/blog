@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>微服务, SpringCloud on 追求卓越，幸福就会不期而遇</title>
-    <link>https://moge.fun/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1-SpringCloud/</link>
-    <description>Recent content in 微服务, SpringCloud on 追求卓越，幸福就会不期而遇</description>
+    <title>SpringCloud on 追求卓越，幸福就会不期而遇</title>
+    <link>https://moge.fun/tags/SpringCloud/</link>
+    <description>Recent content in SpringCloud on 追求卓越，幸福就会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 15 Mar 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://moge.fun/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1-SpringCloud/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://moge.fun/tags/SpringCloud/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
