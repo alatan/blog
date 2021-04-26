@@ -6,7 +6,7 @@
     <description>Recent content in 记录 on 追求卓越，幸福就会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://moge.fun/categories/%E8%AE%B0%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Markdown语法</title>
       <link>https://moge.fun/post/mdGrammar/</link>
-      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/mdGrammar/</guid>
       <description>标题 这是 H5 段落 这是一个段落。 这是另一个段落。 斜体 这是斜体 粗体 这是粗体 这是粗体+斜体 删除线 没有价值就会被抛弃 引用 Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。 嵌套引用 markdown是好的写作方式。 前提是要写。 行</description>
