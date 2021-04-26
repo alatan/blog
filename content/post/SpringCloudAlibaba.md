@@ -6,7 +6,7 @@ markup: mmark
 draft: false  
 keywords: ["SpringCloud"]  
 description: "微服务最佳实践方案"  
-tags: [ "微服务, SpringCloud"]  
+tags: [ "SpringCloud"]  
 categories: ["微服务"]  
 author: "默哥"  
 ---  
