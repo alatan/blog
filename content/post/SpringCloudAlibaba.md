@@ -6,11 +6,11 @@ markup: mmark
 draft: false  
 keywords: ["SpringCloud"]  
 description: "微服务最佳实践方案"  
-tags: [ "微服务,SpringCloud"]  
+tags: [ "微服务 SpringCloud"]  
 categories: ["微服务"]  
 author: "默哥"  
 ---  
-***Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案***
+**Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案**
 
 ### 组件
 * Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
