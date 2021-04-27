@@ -5,7 +5,7 @@ weight: 70
 markup: mmark  
 draft: false  
 keywords: [""]  
-description: "面向对象"  
+description: "面向对象的三大法宝和七大戒律"  
 tags: ["Java基础"]  
 categories: ["Java基础"]  
 author: "默哥"  
