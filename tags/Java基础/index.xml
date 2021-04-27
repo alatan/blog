@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java基础 on 追求卓越，幸福就会不期而遇</title>
+    <link>https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in Java基础 on 追求卓越，幸福就会不期而遇</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java世界的入场券-面向对象</title>
+      <link>https://moge.fun/post/Object-oriented/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/Object-oriented/</guid>
+      <description>面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软</description>
+    </item>
+    
+  </channel>
+</rss>
