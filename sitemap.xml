@@ -18,13 +18,13 @@
   </url>
   
   <url>
-    <loc>https://moge.fun/post/studyAndThink/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+    <loc>https://moge.fun/post/Object-oriented/</loc>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://moge.fun/post/Object-oriented/</loc>
-    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+    <loc>https://moge.fun/post/studyAndThink/</loc>
+    <lastmod>2020-01-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -73,16 +73,6 @@
   </url>
   
   <url>
-    <loc>https://moge.fun/tags/%E5%8F%8D%E6%80%9D/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://moge.fun/categories/%E5%8F%8D%E6%80%9D/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-02-01T00:00:00+00:00</lastmod>
   </url>
@@ -90,6 +80,16 @@
   <url>
     <loc>https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://moge.fun/tags/%E5%8F%8D%E6%80%9D/</loc>
+    <lastmod>2020-01-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://moge.fun/categories/%E5%8F%8D%E6%80%9D/</loc>
+    <lastmod>2020-01-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
