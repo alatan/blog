@@ -19,7 +19,7 @@
     <meta property="article:modified_time" content='2020-02-02T00:00:00&#43;08:00'>
         
     <meta name="Keywords" content="[]">
-    <meta name="description" content="泛型参数化类型">
+    <meta name="description" content="参数化类型">
         <meta name="author" content="默哥">
         
     <meta property="og:url" content="https://moge.fun/post/generic/">
@@ -99,7 +99,8 @@
         
         
         <div class="post-content">
-            <p><strong>泛型，即参数化类型。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（类型形参），然后在使用/调用时传入具体的类型（类型实参）。</strong></p>
+            <p><strong>泛型，即参数化类型。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。</strong>
+<strong>那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（类型形参），然后在使用/调用时传入具体的类型（类型实参）。</strong></p>
 
 <p><em>Java 语言中引入泛型是一个较大的功能增强。不仅语言、类型系统和编译器有了较大的变化，而且类库也进行了大翻修，所以许多重要的类，比如集合框架，都已经成为泛型化的了。这带来了很多好处：</em></p>
 
@@ -117,7 +118,7 @@
 <li>V：值，比如 List 和 Set 的内容，或者 Map 中的值</li>
 <li>E：元素</li>
 <li>T：泛型</li>
-<li>？ 表示不确定的 java 类型</li>
+<li>?：表示不确定的 java 类型</li>
 </ul>
 
 <h3 id="通配符">通配符</h3>
@@ -165,66 +166,65 @@ showKeyValue1(genericInteger);</code></pre>
 <h3 id="一个泛型的增删改查service">一个泛型的增删改查Service</h3>
 <pre><code>@Transactional(readOnly = true)
 public abstract class CrudService&lt;D extends CrudDao&lt;T&gt;, T extends DataEntity&lt;T&gt;&gt; extends BaseService {
-
-/**
+    /**
     * 持久层对象
     */
-@Autowired
-protected D dao;
+    @Autowired
+    protected D dao;
 
-/**
+    /**
     * 获取单条数据
     * @param entity
     * @return
     */
-public T get(T entity) {
-    return dao.get(entity);
-}
+    public T get(T entity) {
+        return dao.get(entity);
+    }
 
-/**
+    /**
     * 查询列表数据
     * @param entity
     * @return
     */
-public List&lt;T&gt; findList(T entity) {
-    return dao.findList(entity);
-}
+    public List&lt;T&gt; findList(T entity) {
+        return dao.findList(entity);
+    }
 
-/**
+    /**
     * 查询分页数据
     * @param page 分页对象
     * @param entity
     * @return
     */
-public Page&lt;T&gt; findPage(Page&lt;T&gt; page, T entity) {
-    entity.setPage(page);
-    page.setList(dao.findList(entity));
-    return page;
-}
+    public Page&lt;T&gt; findPage(Page&lt;T&gt; page, T entity) {
+        entity.setPage(page);
+        page.setList(dao.findList(entity));
+        return page;
+    }
 
-/**
+    /**
     * 保存数据（插入或更新）
     * @param entity
     */
-@Transactional(readOnly = false)
-public int save(T entity) {
-    if (entity.getIsNewRecord()){
-        entity.preInsert();
-        return dao.insert(entity);
-    }else{
-        entity.preUpdate();
-        return dao.update(entity);
+    @Transactional(readOnly = false)
+    public int save(T entity) {
+        if (entity.getIsNewRecord()){
+            entity.preInsert();
+            return dao.insert(entity);
+        }else{
+            entity.preUpdate();
+            return dao.update(entity);
+        }
     }
-}
 
-/**
+    /**
     * 删除数据
     * @param entity
     */
-@Transactional(readOnly = false)
-public int delete(T entity) {
-    return dao.delete(entity);
-}
+    @Transactional(readOnly = false)
+    public int delete(T entity) {
+        return dao.delete(entity);
+    }
 }</code></pre>
         </div>
 
