@@ -65,10 +65,8 @@ author: "默哥"
 ---------------------------------------
 
 ### 链接
-    [百度一下](http://www.baidu.com/)
-    [Google](http://www.google.com/ "google")
-[百度一下](http://www.baidu.com/)
-[Google](http://www.google.com/ "google")
+    [百度](http://www.baidu.com/ "百度一下")
+[百度](http://www.baidu.com/ "百度一下")
 
 ### 表格
     | 账户     | 余额 | 类别   |
