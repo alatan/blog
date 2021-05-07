@@ -1,5 +1,5 @@
 ---  
-title: "Java七武器-反射"  
+title: "框架的灵魂-反射"  
 date: 2020-02-03
 weight: 70  
 markup: mmark  
@@ -24,6 +24,7 @@ author: "默哥"
 
 ## 反射的主要用途
 **反射最重要的用途就是开发各种通用框架。**
+
 很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。
 
 举一个例子，在运用 Struts 2 框架的开发中我们一般会在 struts.xml 里去配置 Action，比如：
@@ -37,6 +38,12 @@ author: "默哥"
 
 对与框架开发人员来说，反射虽小但作用非常大，它是各种容器实现的核心。而对于一般的开发者来说，不深入框架开发则用反射用的就会少一点，不过了解一下框架的底层机制有助于丰富自己的编程思想，也是很有益的。
 
+**像Java中的一大利器注解的实现也用到了反射。**
+
+为什么你使用 Spring 的时候 ，一个@Component注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 @Value注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？
+
+这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。
+
 ## 反射的基本运用
 ### 获得Class对象
 使用Class类的forName 静态方法。
@@ -49,3 +56,49 @@ author: "默哥"
 
     Apple apple = new Apple();
     Class appleClass = apple.getClass();
+
+通过类加载器ClassLoader.loadClass()传入类路径获取
+
+    ClassLoader loader = ClassLoader.getSystemClassLoader();
+    Class appleClass = loader.loadClass("base.reflection.Apple");
+
+### 构造方法
+    Constructor[] declaredConstructors = appleClass.getDeclaredConstructors();
+    Constructor[] constructors = appleClass.getConstructors();
+    //通过无参构造来获取该类对象 newInstance()
+    Apple apple= (Apple)appleClass.newInstance();
+    //通过有参构造来获取该类对象 newInstance
+    Constructor constructor = appleClass.getConstructor(String.class,int.class,int.class);
+    Apple apple=(Apple)constructor.newInstance("红色",10,5);
+
+### 属性
+      //getDeclaredFields所有已声明的成员变量，但不能得到其父类的成员变量
+      Field[] declaredFields = appleClass.getDeclaredFields();
+      //getFields访问公有的成员变量
+      Field[] fields = appleClass.getFields();
+
+### 方法
+    //getDeclaredMethods 方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。
+    Method[] declaredMethods = appleClass.getDeclaredMethods();
+    //getMethods方法返回某个类的所有公用（public）方法，包括其继承类的公用方法。
+    Method[] methods = appleClass.getMethods();
+
+### 调用方法
+    Constructor constructor = appleClass.getConstructor(String.class,int.class,int.class);
+    Apple apple = (Apple)constructor.newInstance("红色",10,5);
+    //获取toString方法并调用
+    Method method = appleClass.getDeclaredMethod("toString");
+    String str = (String)method.invoke(apple);
+    System.out.println(str);
+
+### 利用反射创建数组
+    Class<?> cls = Class.forName("java.lang.String");
+    Object array = Array.newInstance(cls,5);
+    //往数组里添加内容
+    Array.set(array,0,"hello");
+    Array.set(array,1,"Java");
+    Array.set(array,2,"fuck");
+    Array.set(array,3,"Scala");
+    Array.set(array,4,"Clojure");
+    //获取某一项的内容
+    System.out.println(Array.get(array,3));
