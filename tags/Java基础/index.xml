@@ -6,10 +6,19 @@
     <description>Recent content in Java基础 on 追求卓越，幸福就会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 02 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java七武器-反射</title>
+      <link>https://moge.fun/post/reflection/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/reflection/</guid>
+      <description>什么是反射 简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未</description>
+    </item>
     
     <item>
       <title>Java特性-泛型</title>
