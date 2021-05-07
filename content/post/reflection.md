@@ -59,8 +59,7 @@ author: "默哥"
 
 通过类加载器ClassLoader.loadClass()传入类路径获取
 
-    ClassLoader loader = ClassLoader.getSystemClassLoader();
-    Class appleClass = loader.loadClass("base.reflection.Apple");
+    Class appleClass = ClassLoader.getSystemClassLoader().loadClass("base.reflection.Apple");
 
 ### 构造方法
     Constructor[] declaredConstructors = appleClass.getDeclaredConstructors();
