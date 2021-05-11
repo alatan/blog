@@ -9,20 +9,20 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Java特性-泛型 | 追求卓越，幸福就会不期而遇</title>
-    <meta property="og:title" content="Java特性-泛型 - 追求卓越，幸福就会不期而遇">
+    <title>投资纲领 | 追求卓越，幸福就会不期而遇</title>
+    <meta property="og:title" content="投资纲领 - 追求卓越，幸福就会不期而遇">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-02-02T00:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2019-01-01T00:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-02-02T00:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2019-01-01T00:00:00&#43;08:00'>
         
     <meta name="Keywords" content="[]">
-    <meta name="description" content="参数化类型">
+    <meta name="description" content="投资纲领">
         <meta name="author" content="默哥">
         
-    <meta property="og:url" content="https://moge.fun/post/generic/">
+    <meta property="og:url" content="https://moge.fun/post/investment/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -78,16 +78,16 @@
     
     <article class="post">
         <header>
-            <h1 class="post-title">Java特性-泛型</h1>
+            <h1 class="post-title">投资纲领</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年2月2日
+            2019年1月1日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
+            <span class="meta-category"><a href='/categories/%E7%90%86%E8%B4%A2'>理财</a></span>
             
         </div>
         
@@ -99,133 +99,65 @@
         
         
         <div class="post-content">
-            <p><strong>泛型，即参数化类型。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。</strong>
-<strong>那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（类型形参），然后在使用/调用时传入具体的类型（类型实参）。</strong></p>
+            <h2 id="总体策略">总体策略</h2>
 
-<p><em>Java 语言中引入泛型是一个较大的功能增强。不仅语言、类型系统和编译器有了较大的变化，而且类库也进行了大翻修，所以许多重要的类，比如集合框架，都已经成为泛型化的了。这带来了很多好处：</em></p>
+<ol>
+<li>低估加倍</li>
+<li>高估不买</li>
+<li>高估卖出</li>
 
-<ul>
-<li>类型安全。 泛型的主要目标是提高 Java 程序的类型安全。通过知道使用泛型定义的变量的类型限制，编译器可以在一个高得多的程度上验证类型假设。</li>
-<li>消除强制类型转换。 泛型的一个附带好处是，消除源代码中的许多强制类型转换。这使得代码更加可读，并且减少了出错机会。</li>
-<li>潜在的性能收益。 泛型为较大的优化带来可能。在泛型的初始实现中，编译器将强制类型转换（没有泛型的话，程序员会指定这些强制类型转换）插入生成的字节码中。</li>
-<li>注意泛型的类型参数只能是类类型（包括自定义类），不能是简单类型。</li>
-</ul>
+<li><p>好资产 + 好价格 + 长期持有</p>
 
-<h3 id="常用命名类型参数">常用命名类型参数</h3>
+<h2 id="资产配置">资产配置</h2></li>
+</ol>
 
-<ul>
-<li>K：键，比如映射的键</li>
-<li>V：值，比如 List 和 Set 的内容，或者 Map 中的值</li>
-<li>E：元素</li>
-<li>T：泛型</li>
-<li>?：表示不确定的 java 类型</li>
-</ul>
+<h2 id="购买标的">购买标的</h2>
 
-<h3 id="通配符">通配符</h3>
+<h3 id="宽基指数沪深300和中证500">宽基指数（沪深300和中证500）</h3>
 
-<p>Ingeter 是 Number 的一个子类，同时 Generic<Ingeter> 与 Generic<Number> 实际上是相同的一种基本类型。那么问题来了，在使用 Generic<Number> 作为形参的方法中，能否使用Generic<Ingeter> 的实例传入呢？在逻辑上类似于 Generic<Number> 和 Generic<Ingeter> 是否可以看成具有父子关系的泛型类型呢？下面我们通过定义一个方法来验证。</p>
-<pre><code>public void show(Generic&lt;Number&gt; obj) {
-    System.out.println(&#34;key value is &#34; + obj.getKey());
-}</code></pre>
-<p>进行如下的调用：</p>
-<pre><code>Generic&lt;Integer&gt; genericInteger = new Generic&lt;Integer&gt;(123);
+<ol>
+<li>我们可以把沪深300和中证500这样的宽基指数作为「核心」资产，比如占整体仓位的 60% 以上，保证我们能够跟上中国经济的增长，投资到未来头部的公司。</li>
 
-show(genericInteger);  //error Generic&lt;java.lang.Integer&gt;  cannot be applied to Generic&lt;java.lang.Number&gt;</code></pre>
-<p>通过提示信息我们可以看到 Generic<Integer> 不能被看作为 Generic<Number> 的子类。由此可以看出：同一种泛型可以对应多个版本（因为参数类型是不确定的），不同版本的泛型类实例是不兼容的。</p>
+<li><p>40% 基于估值和增强型指数基金进一步提高仓位。</p>
 
-<p>我们不能因此定义一个 show(Generic<Integer> obj)来处理，因此我们需要一个在逻辑上可以表示同时是Generic和Generic父类的引用类型。由此类型通配符应运而生。</p>
+<h3 id="卫星资产">「卫星」资产</h3></li>
 
-<p>T、K、V、E 等泛型字母为有类型，类型参数赋予具体的值。除了有类型，还可以用通配符来表述类型，？ 未知类型，类型参数赋予不确定值，任意类型只能用在声明类型、方法参数上，不能用在定义泛型类上。将方法改写成如下：</p>
-<pre><code>public void show(Generic&lt;?&gt; obj) {
-    System.out.println(&#34;key value is &#34; + obj.getKey());
-}</code></pre>
-<p>此处 ? 是类型实参，而不是类型形参。即和 Number、String、Integer 一样都是实际的类型，可以把 ？ 看成所有类型的父类，是一种真实的类型。可以解决当具体类型不确定的时候，这个通配符就是 ?；当操作类型时，不需要使用类型的具体功能时，只使用 Object 类中的功能。那么可以用 ? 通配符来表未知类型。</p>
+<li><p>我们可以根据自己的判断或者市场的估值，加入一部分「卫星」资产。</p></li>
 
-<h3 id="泛型上下边界">泛型上下边界</h3>
+<li><p>主动基金（优秀基金精力管理的基金）中概互联基金 科创板（还需观看） 。</p></li>
+
+<li><p>30% 分散投资给几个优秀的主动型基金经理。</p>
+
+<h3 id="债券">债券</h3></li>
+
+<li><p>30% 的债券仓位，用债券基金以及有知有行未来推荐的其它「固收+」产品来进一步提高收益。</p></li>
+</ol>
+
+<p><strong>计算得出年化收益率：40% * 13% + 30% * 11% + 30% * 4% + 1% = 10.7%。</strong></p>
+
+<h2 id="具体操作">具体操作</h2>
+
+<h3 id="每年一次大额买入">每年一次大额买入</h3>
 
 <ul>
-<li>通配符上限为：Generic&lt;? extends Number&gt;</li>
-<li>通配符下限为：Generic&lt;? super Number&gt;</li>
+<li>参考有知有行的「股市温度计」来确定自己一次性买入的仓位。</li>
+
+<li><p>假如当年大额资金5万，当时股市温度为40处于中估状态，则先投入50%，计算得出当年大额买入资金为2.5万。</p>
+
+<h3 id="每年一次的再平衡">每年一次的再平衡</h3></li>
+
+<li><p>根据自定的家庭资产比例和当年股债实时状态，进行股债再平衡调整。</p>
+
+<h3 id="每月定投">每月定投</h3></li>
+
+<li><p>参考有知有行的「股市温度计」，在中估时投入，低估时加倍，高估时停止买入</p>
+
+<h3 id="高估状态卖出部分锁定收益">高估状态卖出部分锁定收益</h3></li>
+
+<li><p>A股的波动太大了，牛市之后往往出现暴跌，而浮亏越大，回本难度越大，甚至难度是呈指数级增长的。
+<em>例如 2015 年 6 月之后股市大跌，最大跌幅达到了 50%，如果你在高点买入，回本所需收益达到 100%。但如果我们能抓住大周期，在高估时卖出，尽量控制浮亏，就能有效提高收益。</em></p></li>
 </ul>
 
-<p>在使用泛型的时候，我们还可以为传入的泛型类型实参进行上下边界的限制，如：类型实参只准传入某种类型的父类或某种类型的子类。为泛型添加上边界，即传入的类型实参必须是指定类型的子类型。</p>
-<pre><code>public void show(Generic&lt;? extends Number&gt; obj) {
-    System.out.println(&#34;key value is &#34; + obj.getKey());
-}</code></pre>
-<p>我们在泛型方法的入参限定参数类型为 Number 的子类。</p>
-<pre><code>Generic&lt;String&gt; genericString = new Generic&lt;String&gt;(&#34;11111&#34;);
-Generic&lt;Integer&gt; genericInteger = new Generic&lt;Integer&gt;(2222);
-
-
-showKeyValue1(genericString); // error
-showKeyValue1(genericInteger);</code></pre>
-<p>当我们的入参为 String 类型时，编译报错，因为 String 类型并不是 Number 类型的子类。</p>
-
-<p>类型通配符上限通过形如 Generic&lt;? extends Number&gt; 形式定义；相对应的，类型通配符下限为Generic&lt;? super Number&gt;形式，其含义与类型通配符上限正好相反，在此不作过多阐述。</p>
-
-<h3 id="一个泛型的增删改查service">一个泛型的增删改查Service</h3>
-<pre><code>@Transactional(readOnly = true)
-public abstract class CrudService&lt;D extends CrudDao&lt;T&gt;, T extends DataEntity&lt;T&gt;&gt; extends BaseService {
-    /**
-    * 持久层对象
-    */
-    @Autowired
-    protected D dao;
-
-    /**
-    * 获取单条数据
-    * @param entity
-    * @return
-    */
-    public T get(T entity) {
-        return dao.get(entity);
-    }
-
-    /**
-    * 查询列表数据
-    * @param entity
-    * @return
-    */
-    public List&lt;T&gt; findList(T entity) {
-        return dao.findList(entity);
-    }
-
-    /**
-    * 查询分页数据
-    * @param page 分页对象
-    * @param entity
-    * @return
-    */
-    public Page&lt;T&gt; findPage(Page&lt;T&gt; page, T entity) {
-        entity.setPage(page);
-        page.setList(dao.findList(entity));
-        return page;
-    }
-
-    /**
-    * 保存数据（插入或更新）
-    * @param entity
-    */
-    @Transactional(readOnly = false)
-    public int save(T entity) {
-        if (entity.getIsNewRecord()){
-            entity.preInsert();
-            return dao.insert(entity);
-        }else{
-            entity.preUpdate();
-            return dao.update(entity);
-        }
-    }
-
-    /**
-    * 删除数据
-    * @param entity
-    */
-    @Transactional(readOnly = false)
-    public int delete(T entity) {
-        return dao.delete(entity);
-    }
-}</code></pre>
         </div>
 
         
@@ -233,27 +165,12 @@ public abstract class CrudService&lt;D extends CrudDao&lt;T&gt;, T extends DataE
 
         
 
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/Object-oriented/">Java世界的入场券-面向对象</a></li>
-        
-        <li><a href="/post/studyAndThink/">学与思</a></li>
-        
-        <li><a href="/post/mdGrammar/">Markdown语法</a></li>
-        
-        <li><a href="/post/investment/">投资纲领</a></li>
-        
-    </ul>
-</div>
-
 
         <div class="post-meta meta-tags">
             
             <ul class="clearfix">
                 
-                <li><a href='/tags/Java%E5%9F%BA%E7%A1%80'>Java基础</a></li>
+                <li><a href='/tags/%E7%90%86%E8%B4%A2'>理财</a></li>
                 
             </ul>
             
