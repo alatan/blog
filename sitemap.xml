@@ -18,6 +18,16 @@
   </url>
   
   <url>
+    <loc>https://moge.fun/post/JavaContainer/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://moge.fun/post/JavaCollections/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://moge.fun/post/reflection/</loc>
     <lastmod>2020-02-03T00:00:00+00:00</lastmod>
   </url>
@@ -88,12 +98,22 @@
   </url>
   
   <url>
-    <loc>https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2020-02-03T00:00:00+00:00</lastmod>
+    <loc>https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://moge.fun/tags/Java%E9%9B%86%E5%90%88/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://moge.fun/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-02-03T00:00:00+00:00</lastmod>
   </url>
   
