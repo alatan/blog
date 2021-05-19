@@ -9,21 +9,24 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Java集合 | 追求卓越，幸福就会不期而遇</title>
-    <meta property="og:title" content="Java集合 - 追求卓越，幸福就会不期而遇">
+    <title>ArrayList详解 | 追求卓越，幸福就会不期而遇</title>
+    <meta property="og:title" content="ArrayList详解 - 追求卓越，幸福就会不期而遇">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2020-03-01T00:00:00&#43;08:00'>
         
-    <meta name="Keywords" content="思考,编程,长期主义">
-    <meta name="description" content="Java集合">
         
-    <meta name="author" content="默哥">
-    <meta property="og:url" content="https://moge.fun/tags/Java%E9%9B%86%E5%90%88/">
+    <meta property="article:modified_time" content='2020-03-01T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="[]">
+    <meta name="description" content="ArrayList详解">
+        <meta name="author" content="默哥">
+        
+    <meta property="og:url" content="https://moge.fun/post/ArrayList/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://moge.fun/tags/Java%E9%9B%86%E5%90%88/index.xml" title="追求卓越，幸福就会不期而遇" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -53,7 +56,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://moge.fun">首页</a>
+                    <a class="current" href="https://moge.fun">首页</a>
                     
                     <a  href="https://moge.fun/archives/" title="归档">归档</a>
                     
@@ -73,44 +76,80 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        包含标签
-        <span class="keyword">Java集合</span>
-        的文章
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://moge.fun/post/JavaCollections/">Java集合概览</a>
-            </h1>
+            <h1 class="post-title">ArrayList详解</h1>
         </header>
         <date class="post-meta meta-date">
             2020年3月1日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a>
+            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
             
         </div>
         
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
         <div class="post-content">
-            ……
-            <p class="readmore"><a href="https://moge.fun/post/JavaCollections/">阅读全文</a></p>
+            
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/JavaContainer/">Java容器概览</a></li>
+        
+        <li><a href="/post/reflection/">框架的灵魂-反射</a></li>
+        
+        <li><a href="/post/generic/">Java特性-泛型</a></li>
+        
+        <li><a href="/post/Object-oriented/">Java世界的入场券-面向对象</a></li>
+        
+        <li><a href="/post/studyAndThink/">学与思</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84'>数据结构</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-
     
 
-
-
-
-
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "alatan/BlogDiscuss"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -133,6 +172,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
@@ -175,11 +224,11 @@
     </li>
     
     <li>
-        <a href="https://moge.fun/post/JavaContainer/" title="Java容器概览">Java容器概览</a>
+        <a href="https://moge.fun/post/ArrayList/" title="ArrayList详解">ArrayList详解</a>
     </li>
     
     <li>
-        <a href="https://moge.fun/post/JavaCollections/" title="Java集合概览">Java集合概览</a>
+        <a href="https://moge.fun/post/JavaContainer/" title="Java容器概览">Java容器概览</a>
     </li>
     
     <li>
@@ -231,8 +280,6 @@
 <div class="tagcloud">
     
     <a href="https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-    
-    <a href="https://moge.fun/tags/Java%E9%9B%86%E5%90%88/">Java集合</a>
     
     <a href="https://moge.fun/tags/Markdown/">Markdown</a>
     
