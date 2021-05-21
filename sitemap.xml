@@ -48,6 +48,11 @@
   </url>
   
   <url>
+    <loc>https://moge.fun/post/JavaOutline/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://moge.fun/post/mdGrammar/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
   </url>
@@ -129,6 +134,16 @@
   
   <url>
     <loc>https://moge.fun/about/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/</loc>
+    <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://moge.fun/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</loc>
     <lastmod>2020-01-01T00:00:00+00:00</lastmod>
   </url>
   
