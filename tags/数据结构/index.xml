@@ -29,5 +29,14 @@
       <description>概览 容器主要包括 Collection 和 Map 两种，Collection 存储着对象的集合，而 Map 存储着键值对（两个对象）的映射表。 Collection List 对付顺序的好帮手： 存储的元素是有序的、可重复的。 ArrayList：基于动态数组实现，支持随机访问。 Vector：和 ArrayList 类似，但它是线程安全的。 LinkedList：基于双向</description>
     </item>
     
+    <item>
+      <title>数组</title>
+      <link>https://moge.fun/post/Array/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/Array/</guid>
+      <description>定义 有限个相同数据类型的元素按顺序排列的集合为数组。 由于是紧凑连续存储,可以随机访问，通过索引快速找到对应元素，而且相对节约存储空间。 但正因为连续存储，内存空间必须一次性分配够，所以说数组如果要扩容，需要重新分配一块更大的空间，再把数据全部复制过去，时间复杂度 O(N)； 而且你如果</description>
+    </item>
+    
   </channel>
 </rss>
