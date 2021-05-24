@@ -11,25 +11,25 @@ categories: ["Java基础"]
 author: "默哥"  
 ---  
 ## 概览
-容器主要包括 Collection 和 Map 两种，Collection 存储着对象的集合，而 Map 存储着键值对（两个对象）的映射表。
+容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。
 
 ## Collection
 ![collection](/images/container/collection.png)
 
 ### List
 **对付顺序的好帮手： 存储的元素是有序的、可重复的。**
-* ArrayList：基于动态数组实现，支持随机访问。
-* Vector：和 ArrayList 类似，但它是线程安全的。
-* LinkedList：基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList 还可以用作栈、队列和双向队列。
+* ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。
+* Vector：和ArrayList类似，但它是线程安全的。
+* LinkedList：基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList还可以用作栈、队列和双向队列。
 
 #### Arraylist与 LinkedList 区别?
-1. 是否保证线程安全： ArrayList 和 LinkedList 都是不同步的，也就是不保证线程安全；
-2. 底层数据结构： Arraylist底层使用的是 Object 数组；LinkedList底层使用的是双向链表数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。）
+1. 是否保证线程安全： ArrayList和LinkedList都是不同步的，也就是不保证线程安全；
+2. 底层数据结构： Arraylist底层使用的是Object数组；LinkedList底层使用的是双向链表数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。）
 3. 插入和删除是否受元素位置的影响：
     * ArrayList 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行add(E e)方法的时候， ArrayList 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（add(int index, E element)）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。
     * LinkedList 采用链表存储，所以对于add(E e)方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O(1)，如果是要在指定位置 i 插入和删除元素的话（(add(int index, E element)） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。
 4. 是否支持快速随机访问： LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于get(int index)方法)。
-5. 内存空间占用： ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。
+5. 内存空间占用： ArrayList的空间浪费主要体现在在list列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。
 
 ### Set
 **注重独一无二的性质: 存储的元素是无序的、不可重复的。**
@@ -37,6 +37,15 @@ author: "默哥"
 * LinkedHashSet：具有 HashSet 的查找效率，并且内部使用双向链表维护元素的插入顺序。LinkedHashSet 是 HashSet 的子类，并且其内部是通过 LinkedHashMap 来实现的。
 * TreeSet：基于红黑树实现（(自平衡的排序二叉树)），支持有序性操作，例如根据一个范围查找元素的操作。查找效率不如HashSet，HashSet 查找的时间复杂度为 O(1)，TreeSet 则为 O(logN)。
 
+#### HashSet 如何检查重复
+*当你把对象加入HashSet时，HashSet 会先计算对象的hashcode值来判断对象加入的位置，同时也会与其他加入的对象的 hashcode 值作比较，如果没有相符的 hashcode，HashSet 会假设对象没有重复出现。但是如果发现有相同 hashcode 值的对象，这时会调用equals()方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让加入操作成功。* 
+
+hashCode()与 equals() 的相关规定：
+1. 如果两个对象相等，则 hashcode 一定也是相同的
+2. 两个对象相等,对两个 equals() 方法返回 true
+3. 两个对象有相同的 hashcode 值，它们也不一定是相等的
+4. 综上，equals() 方法被覆盖过，则 hashCode() 方法也必须被覆盖
+5. hashCode()的默认行为是对堆上的对象产生独特值。如果没有重写 hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）。
 
 ### Queue
 * LinkedList：可以用它来实现双向队列。
