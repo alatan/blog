@@ -14,7 +14,7 @@ author: "默哥"
 ![HashMap](/images/container/HashMap.png)
 
 ## 实现步骤
-1. HashMap基于哈希散列表实现。
+1. HashMap基于哈希散列表，数组+链表/红黑树实现。
 2. 通过key的hashCode()方法计算出hashCode。
 3. 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。
 4. 通过第3步中hash值和HashMap中数组长度做&(与运算)得出在数组中的位置。
@@ -41,7 +41,8 @@ author: "默哥"
 ## 方法（JDK1.8-数组+链表/红黑树）
 #### 确定哈希桶数组索引位置
 ![HashMpaCalPosition](/images/container/HashMpaCalPosition.png)
-第1步 计算hash
+**第1步计算hash**
+
 通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h >>> 16)，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。
 
     static final int hash(Object key) {
@@ -52,7 +53,8 @@ author: "默哥"
       return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
   }
 
-第2步
+**第2步计算数组位置**
+
 通过(n - 1) & hash来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化。当length总是2的n次方时，h& (length-1)运算等价于对length取模，也就是h%length，但是&比%具有更高的效率。
 
     (n - 1) & hash
