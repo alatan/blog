@@ -6,7 +6,7 @@
     <description>Recent content in Java基础 on 追求卓越，幸福就会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>框架的灵魂-反射</title>
       <link>https://moge.fun/post/reflection/</link>
-      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/reflection/</guid>
       <description>什么是反射 简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未</description>
@@ -23,7 +23,7 @@
     <item>
       <title>Java特性-泛型</title>
       <link>https://moge.fun/post/generic/</link>
-      <pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/generic/</guid>
       <description>泛型，即参数化类型。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。 那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（类型形参），然后在使用/调用时传入具体的类型（类型实参）。 Java 语言中引入</description>
@@ -32,7 +32,7 @@
     <item>
       <title>Java世界的入场券-面向对象</title>
       <link>https://moge.fun/post/Object-oriented/</link>
-      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/Object-oriented/</guid>
       <description>面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软</description>
