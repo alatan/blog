@@ -62,13 +62,13 @@
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/HashMap/</guid>
-      <description>实现步骤 HashMap基于哈希散列表实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;amp;(与运算)得出在数组中的位置。</description>
+      <description>实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;amp;(与运算)</description>
     </item>
     
     <item>
       <title>Java容器概览</title>
       <link>https://moge.fun/post/JavaContainer/</link>
-      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/JavaContainer/</guid>
       <description>概览 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。 Collection List 对付顺序的好帮手： 存储的元素是有序的、可重复的。 ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。 Vector：和Arra</description>

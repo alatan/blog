@@ -104,7 +104,7 @@
 <h2 id="实现步骤">实现步骤</h2>
 
 <ol>
-<li>HashMap基于哈希散列表实现。</li>
+<li>HashMap基于哈希散列表，数组+链表/红黑树实现。</li>
 <li>通过key的hashCode()方法计算出hashCode。</li>
 <li>通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。</li>
 <li>通过第3步中hash值和HashMap中数组长度做&amp;(与运算)得出在数组中的位置。</li>
@@ -139,8 +139,9 @@
 <h4 id="确定哈希桶数组索引位置">确定哈希桶数组索引位置</h4>
 
 <p><figure><img src="/images/container/HashMpaCalPosition.png" alt="HashMpaCalPosition"></figure>
-第1步 计算hash
-通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。</p>
+<strong>第1步计算hash</strong></p>
+
+<p>通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。</p>
 <pre><code>static final int hash(Object key) {
   int h;
   // key.hashCode()：返回散列值也就是hashcode
@@ -149,8 +150,9 @@
   return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</code></pre>
 <p>}</p>
 
-<p>第2步
-通过(n - 1) &amp; hash来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化。当length总是2的n次方时，h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;比%具有更高的效率。</p>
+<p><strong>第2步计算数组位置</strong></p>
+
+<p>通过(n - 1) &amp; hash来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化。当length总是2的n次方时，h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;比%具有更高的效率。</p>
 <pre><code>(n - 1) &amp; hash</code></pre>
 <h4 id="hashmap的put方法">HashMap的put方法</h4>
 
