@@ -1,6 +1,6 @@
 ---  
 title: "投资纲领"  
-date: 2019-01-01
+date: 2016-01-01
 weight: 70  
 markup: mmark  
 draft: false  

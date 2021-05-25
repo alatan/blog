@@ -1,6 +1,6 @@
 ---  
 title: "Java特性-泛型"  
-date: 2020-02-02
+date: 2018-02-02
 weight: 70  
 markup: mmark  
 draft: false  

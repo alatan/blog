@@ -1,6 +1,6 @@
 ---  
 title: "分布式介绍"  
-date: 2021-03-10
+date: 2020-03-10
 weight: 70  
 markup: mmark  
 draft: false  
