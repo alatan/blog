@@ -13,6 +13,8 @@ author: "默哥"
 ## 概览
 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。
 
+![java_container](/images/container/java_container.png)
+
 ## Collection
 ![collection](/images/container/collection.png)
 
@@ -56,7 +58,7 @@ hashCode()与 equals() 的相关规定：
 **用 Key 来搜索的专家: 使用键值对（key-value）存储，Key 是无序的、不可重复的，value 是无序的、可重复的，每个键最多映射到一个值。**
 * TreeMap： 红黑树（自平衡的排序二叉树）
 * HashMap： JDK1.8之前HashMap由数组+链表组成的，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间
-* HashTable：和 HashMap 类似，但它是线程安全的，这意味着同一时刻多个线程同时写入 HashTable 不会导致数据不一致。它是遗留类，不应该去使用它，而是使用 ConcurrentHashMap 来支持线程安全，ConcurrentHashMap 的效率会更高，因为 ConcurrentHashMap 引入了分段锁。
+* HashTable：和 HashMap 类似，但它是线程安全的，这意味着同一时刻多个线程同时写入 HashTable 不会导致数据不一致。它是遗留类，不应该去使用它，而是使用 ConcurrentHashMap 来支持线程安全，ConcurrentHashMap 的效率会更高。
 * LinkedHashMap：LinkedHashMap 继承自 HashMap，LinkedHashMap 在上面结构的基础上，增加了一条双向链表，使得上面的结构可以保持键值对的插入顺序，顺序为插入顺序或者最近最少使用（LRU）顺序。
 
 ## 如何选择
