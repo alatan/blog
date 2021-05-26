@@ -6,10 +6,19 @@
     <description>Recent content in Java基础 on 追求卓越，幸福就会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 01 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HashMap详解</title>
+      <link>https://moge.fun/post/HashMap/</link>
+      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/HashMap/</guid>
+      <description>实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;amp;(位运算)</description>
+    </item>
     
     <item>
       <title>ArrayList详解</title>
@@ -17,16 +26,16 @@
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/ArrayList/</guid>
-      <description></description>
+      <description>ArrayList 简介 ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这可以减少递增式再分配的数量。 ArrayList 核心源码解读 package java.util; import java.util.function.Consumer; import java.util.function.Predicate; import java.util.function.UnaryOperator; public class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt; implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable { private static final long serialVersionUID = 8683452581122892189L; /** * 默认初始容量大</description>
     </item>
     
     <item>
-      <title>HashMap详解</title>
-      <link>https://moge.fun/post/HashMap/</link>
+      <title>ConcurrentHashMap详解</title>
+      <link>https://moge.fun/post/ConcurrentHashMap/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://moge.fun/post/HashMap/</guid>
-      <description>实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;amp;(与运算)</description>
+      <guid>https://moge.fun/post/ConcurrentHashMap/</guid>
+      <description></description>
     </item>
     
     <item>

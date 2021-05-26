@@ -13,10 +13,10 @@
     <meta property="og:title" content="HashMap详解 - 追求卓越，幸福就会不期而遇">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2018-03-01T00:00:00&#43;08:00'>
+    <meta property="article:published_time" content='2018-03-02T00:00:00&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2018-03-01T00:00:00&#43;08:00'>
+    <meta property="article:modified_time" content='2018-03-02T00:00:00&#43;08:00'>
         
     <meta name="Keywords" content="[]">
     <meta name="description" content="HashMap详解">
@@ -81,7 +81,7 @@
             <h1 class="post-title">HashMap详解</h1>
         </header>
         <date class="post-meta meta-date">
-            2018年3月1日
+            2018年3月2日
         </date>
         
         <div class="post-meta">
@@ -107,7 +107,7 @@
 <li>HashMap基于哈希散列表，数组+链表/红黑树实现。</li>
 <li>通过key的hashCode()方法计算出hashCode。</li>
 <li>通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。</li>
-<li>通过第3步中hash值和HashMap中数组长度做&amp;(与运算)得出在数组中的位置。</li>
+<li>通过第3步中hash值和HashMap中数组长度做&amp;(位运算)得出在数组中的位置。</li>
 <li>当第4步中位置中没有值则直接放入。</li>
 <li>当第4步中位置中有值即产生hash冲突问题，此时通过链表(拉链法)来解决hash冲突问题。</li>
 <li>如果第6步中第链表大小超过阈值（TREEIFY_THRESHOLD,8），链表转换为红黑树。</li>
@@ -141,7 +141,8 @@
 <p><figure><img src="/images/container/HashMpaCalPosition.png" alt="HashMpaCalPosition"></figure>
 <strong>第1步计算hash</strong></p>
 
-<p>通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。</p>
+<p>在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度、功效、质量来考虑的。
+目的都是在数组很小也能降低hash碰撞。</p>
 <pre><code>static final int hash(Object key) {
   int h;
   // key.hashCode()：返回散列值也就是hashcode
@@ -152,7 +153,8 @@
 
 <p><strong>第2步计算数组位置</strong></p>
 
-<p>通过(n - 1) &amp; hash来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化。当length总是2的n次方时，h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;比%具有更高的效率。</p>
+<p>通过(n - 1) &amp; hash来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方。
+当<strong>length总是2的n次方</strong>时，h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;(位运算)比%(取模运算)具有更高的效率。</p>
 <pre><code>(n - 1) &amp; hash</code></pre>
 <h4 id="hashmap的put方法">HashMap的put方法</h4>
 
@@ -388,6 +390,7 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
 <h2 id="参考文章">参考文章</h2>
 
 <ol>
+<li><a href="https://www.hollischuang.com/archives/2091">https://www.hollischuang.com/archives/2091</a></li>
 <li><a href="https://yuanrengu.com/2020/ba184259.html">https://yuanrengu.com/2020/ba184259.html</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/21673805">https://zhuanlan.zhihu.com/p/21673805</a></li>
 </ol>
@@ -405,13 +408,13 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
         
         <li><a href="/post/ArrayList/">ArrayList详解</a></li>
         
+        <li><a href="/post/ConcurrentHashMap/">ConcurrentHashMap详解</a></li>
+        
         <li><a href="/post/JavaContainer/">Java容器概览</a></li>
         
         <li><a href="/post/LinkedList/">链表</a></li>
         
         <li><a href="/post/Array/">数组</a></li>
-        
-        <li><a href="/post/reflection/">框架的灵魂-反射</a></li>
         
     </ul>
 </div>
@@ -520,11 +523,15 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
     </li>
     
     <li>
+        <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
+    </li>
+    
+    <li>
         <a href="https://moge.fun/post/ArrayList/" title="ArrayList详解">ArrayList详解</a>
     </li>
     
     <li>
-        <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
+        <a href="https://moge.fun/post/ConcurrentHashMap/" title="ConcurrentHashMap详解">ConcurrentHashMap详解</a>
     </li>
     
     <li>
@@ -539,10 +546,6 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
         <a href="https://moge.fun/post/generic/" title="Java特性-泛型">Java特性-泛型</a>
     </li>
     
-    <li>
-        <a href="https://moge.fun/post/Object-oriented/" title="Java世界的入场券-面向对象">Java世界的入场券-面向对象</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -552,7 +555,7 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (6)</a></li>
+    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (7)</a></li>
     
     <li><a href="https://moge.fun/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (1)</a></li>
     
@@ -560,7 +563,7 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
     
     <li><a href="https://moge.fun/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 (1)</a></li>
     
-    <li><a href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构 (2)</a></li>
+    <li><a href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构 (3)</a></li>
     
     <li><a href="https://moge.fun/categories/%E7%90%86%E8%B4%A2/">理财 (1)</a></li>
     

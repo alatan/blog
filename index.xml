@@ -48,21 +48,30 @@
     </item>
     
     <item>
+      <title>HashMap详解</title>
+      <link>https://moge.fun/post/HashMap/</link>
+      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/HashMap/</guid>
+      <description>实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;amp;(位运算)</description>
+    </item>
+    
+    <item>
       <title>ArrayList详解</title>
       <link>https://moge.fun/post/ArrayList/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/ArrayList/</guid>
-      <description></description>
+      <description>ArrayList 简介 ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这可以减少递增式再分配的数量。 ArrayList 核心源码解读 package java.util; import java.util.function.Consumer; import java.util.function.Predicate; import java.util.function.UnaryOperator; public class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt; implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable { private static final long serialVersionUID = 8683452581122892189L; /** * 默认初始容量大</description>
     </item>
     
     <item>
-      <title>HashMap详解</title>
-      <link>https://moge.fun/post/HashMap/</link>
+      <title>ConcurrentHashMap详解</title>
+      <link>https://moge.fun/post/ConcurrentHashMap/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://moge.fun/post/HashMap/</guid>
-      <description>实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;amp;(与运算)</description>
+      <guid>https://moge.fun/post/ConcurrentHashMap/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -99,6 +108,15 @@
       
       <guid>https://moge.fun/post/Object-oriented/</guid>
       <description>面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软</description>
+    </item>
+    
+    <item>
+      <title>哈希表</title>
+      <link>https://moge.fun/post/HashTable/</link>
+      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/HashTable/</guid>
+      <description>定义 散列Hash是和顺序、链接和索引一样，是存储集合或者线性表的一种方法。 散列的基本思想是：以集合或线性表中的每个元素的关键字K为自变量，通过一个散列函数 h(K) 得到的结果，将这个结果解释为一块连续的存储空间（如数组）的地址（如数组下标），将这个元素存储到这个空间中。 h(K) 称为散列函数或者</description>
     </item>
     
     <item>

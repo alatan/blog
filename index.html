@@ -167,7 +167,53 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年3月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;(位运算)……
+        </div>
+        <p class="readmore"><a href="https://moge.fun/post/HashMap/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://moge.fun/post/ArrayList/" title="ArrayList详解">ArrayList详解</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年3月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            ArrayList 简介 ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这可以减少递增式再分配的数量。 ArrayList 核心源码解读 package java.util; import java.util.function.Consumer; import java.util.function.Predicate; import java.util.function.UnaryOperator; public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable { private static final long serialVersionUID = 8683452581122892189L; /** * 默认初始容量大……
+        </div>
+        <p class="readmore"><a href="https://moge.fun/post/ArrayList/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://moge.fun/post/ConcurrentHashMap/" title="ConcurrentHashMap详解">ConcurrentHashMap详解</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -184,30 +230,7 @@
         <div class="post-content">
             ……
         </div>
-        <p class="readmore"><a href="https://moge.fun/post/ArrayList/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年3月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;(与运算)……
-        </div>
-        <p class="readmore"><a href="https://moge.fun/post/HashMap/">阅读全文</a></p>
+        <p class="readmore"><a href="https://moge.fun/post/ConcurrentHashMap/">阅读全文</a></p>
     </article>
     
     <article class="post">
@@ -277,29 +300,6 @@
             泛型，即参数化类型。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。 那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（类型形参），然后在使用/调用时传入具体的类型（类型实参）。 Java 语言中引入……
         </div>
         <p class="readmore"><a href="https://moge.fun/post/generic/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://moge.fun/post/Object-oriented/" title="Java世界的入场券-面向对象">Java世界的入场券-面向对象</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年2月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软……
-        </div>
-        <p class="readmore"><a href="https://moge.fun/post/Object-oriented/">阅读全文</a></p>
     </article>
     
     
@@ -396,11 +396,15 @@
     </li>
     
     <li>
+        <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
+    </li>
+    
+    <li>
         <a href="https://moge.fun/post/ArrayList/" title="ArrayList详解">ArrayList详解</a>
     </li>
     
     <li>
-        <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
+        <a href="https://moge.fun/post/ConcurrentHashMap/" title="ConcurrentHashMap详解">ConcurrentHashMap详解</a>
     </li>
     
     <li>
@@ -415,10 +419,6 @@
         <a href="https://moge.fun/post/generic/" title="Java特性-泛型">Java特性-泛型</a>
     </li>
     
-    <li>
-        <a href="https://moge.fun/post/Object-oriented/" title="Java世界的入场券-面向对象">Java世界的入场券-面向对象</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -428,7 +428,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (6)</a></li>
+    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (7)</a></li>
     
     <li><a href="https://moge.fun/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (1)</a></li>
     
@@ -436,7 +436,7 @@
     
     <li><a href="https://moge.fun/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 (1)</a></li>
     
-    <li><a href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构 (2)</a></li>
+    <li><a href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构 (3)</a></li>
     
     <li><a href="https://moge.fun/categories/%E7%90%86%E8%B4%A2/">理财 (1)</a></li>
     

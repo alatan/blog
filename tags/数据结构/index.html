@@ -84,6 +84,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://moge.fun/post/HashMap/">HashMap详解</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年3月2日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a>
+            
+        </div>
+        
+        <div class="post-content">
+            实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;(位运算)……
+            <p class="readmore"><a href="https://moge.fun/post/HashMap/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://moge.fun/post/ArrayList/">ArrayList详解</a>
             </h1>
         </header>
@@ -99,7 +122,7 @@
         </div>
         
         <div class="post-content">
-            ……
+            ArrayList 简介 ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这可以减少递增式再分配的数量。 ArrayList 核心源码解读 package java.util; import java.util.function.Consumer; import java.util.function.Predicate; import java.util.function.UnaryOperator; public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable { private static final long serialVersionUID = 8683452581122892189L; /** * 默认初始容量大……
             <p class="readmore"><a href="https://moge.fun/post/ArrayList/">阅读全文</a></p>
         </div>
     </article>
@@ -107,7 +130,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://moge.fun/post/HashMap/">HashMap详解</a>
+                <a href="https://moge.fun/post/ConcurrentHashMap/">ConcurrentHashMap详解</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -122,8 +145,8 @@
         </div>
         
         <div class="post-content">
-            实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;(与运算)……
-            <p class="readmore"><a href="https://moge.fun/post/HashMap/">阅读全文</a></p>
+            ……
+            <p class="readmore"><a href="https://moge.fun/post/ConcurrentHashMap/">阅读全文</a></p>
         </div>
     </article>
     
@@ -147,6 +170,29 @@
         <div class="post-content">
             概览 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。 Collection List 对付顺序的好帮手： 存储的元素是有序的、可重复的。 ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。 Vector：和Arra……
             <p class="readmore"><a href="https://moge.fun/post/JavaContainer/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://moge.fun/post/HashTable/">哈希表</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年2月3日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84'>数据结构</a>
+            
+        </div>
+        
+        <div class="post-content">
+            定义 散列Hash是和顺序、链接和索引一样，是存储集合或者线性表的一种方法。 散列的基本思想是：以集合或线性表中的每个元素的关键字K为自变量，通过一个散列函数 h(K) 得到的结果，将这个结果解释为一块连续的存储空间（如数组）的地址（如数组下标），将这个元素存储到这个空间中。 h(K) 称为散列函数或者……
+            <p class="readmore"><a href="https://moge.fun/post/HashTable/">阅读全文</a></p>
         </div>
     </article>
     
@@ -271,11 +317,15 @@
     </li>
     
     <li>
+        <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
+    </li>
+    
+    <li>
         <a href="https://moge.fun/post/ArrayList/" title="ArrayList详解">ArrayList详解</a>
     </li>
     
     <li>
-        <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
+        <a href="https://moge.fun/post/ConcurrentHashMap/" title="ConcurrentHashMap详解">ConcurrentHashMap详解</a>
     </li>
     
     <li>
@@ -290,10 +340,6 @@
         <a href="https://moge.fun/post/generic/" title="Java特性-泛型">Java特性-泛型</a>
     </li>
     
-    <li>
-        <a href="https://moge.fun/post/Object-oriented/" title="Java世界的入场券-面向对象">Java世界的入场券-面向对象</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -303,7 +349,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (6)</a></li>
+    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (7)</a></li>
     
     <li><a href="https://moge.fun/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (1)</a></li>
     
@@ -311,7 +357,7 @@
     
     <li><a href="https://moge.fun/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 (1)</a></li>
     
-    <li><a href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构 (2)</a></li>
+    <li><a href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构 (3)</a></li>
     
     <li><a href="https://moge.fun/categories/%E7%90%86%E8%B4%A2/">理财 (1)</a></li>
     

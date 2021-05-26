@@ -6,10 +6,19 @@
     <description>Recent content in 数据结构 on 追求卓越，幸福就会不期而遇</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 02 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Feb 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>哈希表</title>
+      <link>https://moge.fun/post/HashTable/</link>
+      <pubDate>Fri, 03 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/HashTable/</guid>
+      <description>定义 散列Hash是和顺序、链接和索引一样，是存储集合或者线性表的一种方法。 散列的基本思想是：以集合或线性表中的每个元素的关键字K为自变量，通过一个散列函数 h(K) 得到的结果，将这个结果解释为一块连续的存储空间（如数组）的地址（如数组下标），将这个元素存储到这个空间中。 h(K) 称为散列函数或者</description>
+    </item>
     
     <item>
       <title>链表</title>
