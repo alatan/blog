@@ -4,6 +4,9 @@ date: 2017-02-01
 weight: 70  
 markup: mmark  
 draft: false  
+toc:
+  enable: true
+  auto: true
 keywords: [""]  
 description: "数组是用于储存多个相同类型数据的集合"  
 tags: ["数据结构"]  

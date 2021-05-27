@@ -78,7 +78,7 @@ theme = "LoveIt"
       # LOGO 的 URL
       logo = ""
       # 标题名称
-      name = ""
+      name = "追求卓越，幸福就会不期而遇"
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
@@ -134,13 +134,13 @@ theme = "LoveIt"
       # 主页显示头像的 URL
       avatarURL = "/images/avatar.png"
       #  主页显示的网站标题 (支持 HTML 格式)
-      title = "追求卓越，幸福就会不期而遇"
+      title = ""
       # 主页显示的网站副标题
       subtitle = "汝需自取真经"
       # 是否为副标题显示打字机动画
       typeit = true
       # 是否显示社交账号
-      social = true
+      social = false
       #  免责声明 (支持 HTML 格式)
       disclaimer = ""
     # 主页文章列表
@@ -154,7 +154,7 @@ theme = "LoveIt"
 
   # 作者的社交信息设置
   [params.social]
-    RSS = true # 
+    RSS = false # 
 
   #  文章页面配置
   [params.page]
@@ -173,7 +173,7 @@ theme = "LoveIt"
     #  是否使用 fontawesome 扩展语法
     fontawesome = true
     # 是否在文章页面显示原始 Markdown 文档链接
-    linkToMarkdown = true
+    linkToMarkdown = false
     #  是否在 RSS 中显示全文内容
     rssFullText = false
     #  目录配置
