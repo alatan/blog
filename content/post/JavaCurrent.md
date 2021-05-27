@@ -6,7 +6,7 @@ markup: mmark
 draft: false  
 keywords: [""]  
 description: "Java并发编程"  
-tags: ["并发编程"]  ["大纲"]  
+tags: ["并发编程"]
 categories: ["Java基础"]  
 author: "默哥"  
 ---
@@ -30,8 +30,8 @@ author: "默哥"
 
 ## 线程安全的实现方法
 #### 互斥同步
-1. synchronized
-2. ReentrantLock
+1. synchronized(JVM实现)
+2. ReentrantLock(JDK实现)
 
 互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。
 
