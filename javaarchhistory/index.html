@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Java架构演变历史 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="Java架构演变历史"><meta property="og:title" content="Java架构演变历史" />
+<meta property="og:description" content="Java架构演变历史" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moge.fun/javaarchhistory/" />
+<meta property="og:image" content="https://moge.fun/logo.png"/>
+<meta property="article:published_time" content="2020-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://moge.fun/logo.png"/>
+
+<meta name="twitter:title" content="Java架构演变历史"/>
+<meta name="twitter:description" content="Java架构演变历史"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/javaarchhistory/" /><link rel="prev" href="https://moge.fun/javaoutline/" /><link rel="next" href="https://moge.fun/distributed/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Java架构演变历史",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/moge.fun\/javaarchhistory\/"
+        },"genre": "posts","keywords": "大纲","wordcount":  36 ,
+        "url": "https:\/\/moge.fun\/javaarchhistory\/","datePublished": "2020-03-01T00:00:00+00:00","dateModified": "2020-03-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "默哥"
+            },"description": "Java架构演变历史"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="追求卓越，幸福就会不期而遇"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="追求卓越，幸福就会不期而遇"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Java架构演变历史</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/"><i class="far fa-folder fa-fw"></i>知识体系</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-01">2020-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 36 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"></div>
+            </div><div class="content" id="content"><p><strong><em>Java网站架构演变过程，大致分为5个阶段，分别为单体架构、集群架构、分布式架构、SOA架构和微服务架构。</em></strong></p>
+
+<h3 id="单体架构">单体架构</h3>
+
+<blockquote>
+<p>应用、数据库、文件都部署在一台机器上。简单来讲其实就是我们熟知的SSM架构(Spring+SpringMVC+MyBatis)，把所有的业务模块都放在一个应用中开发，这里面又衍生出三层架构，即表示层、业务逻辑层和数据库访问层，虽然在软件设计中划分了经典的三层模型，但是对业务场景没有划分，一个典型的单体应用就是将所有的业务场景的表示层、业务逻辑层和数据访问层放在一个工程项目中，最终经过编译、打包，部署在一台服务器上。</p>
+</blockquote>
+
+<h4 id="单体架构优点">单体架构优点</h4>
+
+<ol>
+<li>部署简单: 由于是完整的结构体，可以直接部署在一个服务器上即可。</li>
+<li>技术单一: 项目不需要复杂的技术栈，往往一套熟悉的技术栈就可以完成开发。</li>
+<li>用人成本低: 单个程序员可以完成业务接口到数据库的整个流程。</li>
+</ol>
+
+<h4 id="单体架构缺点">单体架构缺点</h4>
+
+<ol>
+<li>系统启动慢： 一个进程包含了所有的业务逻辑，涉及到的启动模块过多，导致系统的启动、重启时间周期过长;</li>
+<li>系统错误隔离性差、可用性差：任何一个模块的错误均可能造成整个系统的宕机;</li>
+<li>可伸缩性差：系统的扩容只能只对这个应用进行扩容，不能做到对某个功能点进行扩容;</li>
+<li>线上问题修复周期长：任何一个线上问题修复需要对整个应用系统进行全面升级。</li>
+</ol>
+
+<p><figure><img src="/images/archHistory/single.jpg" alt="单体架构"></figure></p>
+
+<h3 id="集群架构">集群架构</h3>
+
+<blockquote>
+<p>不同服务器部署同一套应用程序对外提供服务，实现服务的负载均衡或者互备(热备，主从)。同一种组件的多个实例，形成逻辑上的整体。单个节点可以提供完整服务，集群是物理形态。</p>
+</blockquote>
+
+<h4 id="集群架构相关技术点">集群架构相关技术点</h4>
+
+<ol>
+<li>应用和数据分离(大量用户高并发的访问导致系统性能越来越差，数据存储空间开始出现不足)</li>
+<li>缓存的使用(QPS持续提高，为了降低接口访问时间、提高服务性能和并发，根据二八定律可以将80%的数据缓存)</li>
+<li>负载均衡器的代理服务器</li>
+<li>数据库读写分离</li>
+<li>反向代理和CDN加速</li>
+</ol>
+
+<p><figure><img src="/images/archHistory/cluster.jpg" alt="集群架构"></figure></p>
+
+<h3 id="分布式架构">分布式架构</h3>
+
+<blockquote>
+<p>服务的不同模块部署在不同的机器上，单个节点不能提供完整服务，需要多节点协调提供服务(相同组件部署在不同节点，节点间通过交互信息协作提供服务)，分布式强调的是工作方式。</p>
+</blockquote>
+
+<h4 id="分布式相关技术点">分布式相关技术点</h4>
+
+<ol>
+<li>业务分库分表</li>
+<li>NoSQL和搜索引擎对可伸缩的分布式特性具有更好的支持，应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。</li>
+<li>业务模块拆分成子项目</li>
+</ol>
+
+<p><figure><img src="/images/archHistory/distributed.jpg" alt="分布式架构"></figure></p>
+
+<h3 id="soa架构">SOA架构</h3>
+
+<blockquote>
+<p>面向服务的设计架构，其中包含多个服务，服务之间通过相互依赖最终提供一系列的功能。一个服务通常以独立的形式存在于操作系统进程中。各个服务之间通过网络调用。</p>
+</blockquote>
+
+<ul>
+<li>中心化实现：ESB(企业服务总线)，各服务通过ESB进行交互，解决异构系统之间的连通性，通过协议转换，消息解析，消息路由把服务提供者的数据传送到服务消费者。</li>
+<li>去中心化实现：微服务</li>
+</ul>
+
+<p><figure><img src="/images/archHistory/soa.png" alt="SOA架构"></figure></p>
+
+<h3 id="微服务架构">微服务架构</h3>
+
+<blockquote>
+<p>在SOA上做的升华，微服务架构强调业务需要彻底组件化和服务化，原有的单个业务系统会拆分为多个可独立开发，设计，运行的小应用。这些小应用通过服务完成交互和集成。</p>
+</blockquote>
+
+<p><figure><img src="/images/archHistory/microservice.jpg" alt="微服务架构"></figure></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-03-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/javaarchhistory/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/javaarchhistory/" data-title="Java架构演变历史"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/javaoutline/" class="prev" rel="prev" title="Java知识大纲"><i class="fas fa-angle-left fa-fw"></i>Java知识大纲</a>
+            <a href="/distributed/" class="next" rel="next" title="分布式介绍">分布式介绍<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2015 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

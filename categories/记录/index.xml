@@ -5,10 +5,10 @@
         <description>记录 - 分类 - 追求卓越，幸福就会不期而遇</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 01 Jan 2015 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E8%AE%B0%E5%BD%95/" rel="self" type="application/rss+xml" /><item>
     <title>Markdown语法</title>
-    <link>https://moge.fun/post/mdgrammar/</link>
+    <link>https://moge.fun/mdgrammar/</link>
     <pubDate>Thu, 01 Jan 2015 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
-    <guid>https://moge.fun/post/mdgrammar/</guid>
+    <guid>https://moge.fun/mdgrammar/</guid>
     <description><![CDATA[标题 1  #### 这是 H5 ####   这是 H5 段落 1 2 3  这是一个段落。 这是另一个段落。   这是一个段落。
 这是另一个段落。
 斜体 1  *这是斜体*   这是斜体
