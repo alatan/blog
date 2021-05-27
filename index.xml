@@ -57,12 +57,21 @@
     </item>
     
     <item>
+      <title>synchronized详解</title>
+      <link>https://moge.fun/post/synchronized/</link>
+      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/synchronized/</guid>
+      <description>synchronized的使用 对象锁 包括方法锁(默认锁对象为this,当前实例对象)和同步代码块锁(自己指定锁对象) 类锁 指synchronize修饰静态的方法或指定锁对象为Class对象 注意点 一把锁只能同时被一个线程获取，没有获得锁的线程只能等待。 每个实例都对应有自己的一把锁(t</description>
+    </item>
+    
+    <item>
       <title>Java并发编程概览</title>
       <link>https://moge.fun/post/JavaCurrent/</link>
       <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/JavaCurrent/</guid>
-      <description>并发三要素 可见性 由于CPU增加了缓存，以均衡与内存的速度差异导致，方法：一个线程对共享变量的修改，另外一个线程能够立刻看到。 原子性 由于操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致，方法：一个操作或者多个操作 要么全部执行并且执行的过程不会被任</description>
+      <description>并发三要素 可见性 一个线程对共享变量的修改，另外一个线程能够立刻看到；产生原因：CPU增加了缓存，以均衡与内存的速度差异导致。 原子性 一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行；产生原因：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU</description>
     </item>
     
     <item>

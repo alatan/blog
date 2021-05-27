@@ -202,6 +202,31 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://moge.fun/post/synchronized/" title="synchronized详解">synchronized详解</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2018年4月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            synchronized的使用 对象锁 包括方法锁(默认锁对象为this,当前实例对象)和同步代码块锁(自己指定锁对象) 类锁 指synchronize修饰静态的方法或指定锁对象为Class对象 注意点 一把锁只能同时被一个线程获取，没有获得锁的线程只能等待。 每个实例都对应有自己的一把锁(t……
+        </div>
+        <p class="readmore"><a href="https://moge.fun/post/synchronized/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://moge.fun/post/JavaCurrent/" title="Java并发编程概览">Java并发编程概览</a>
             </h1>
         </header>
@@ -217,7 +242,7 @@
         </div>
         
         <div class="post-content">
-            并发三要素 可见性 由于CPU增加了缓存，以均衡与内存的速度差异导致，方法：一个线程对共享变量的修改，另外一个线程能够立刻看到。 原子性 由于操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致，方法：一个操作或者多个操作 要么全部执行并且执行的过程不会被任……
+            并发三要素 可见性 一个线程对共享变量的修改，另外一个线程能够立刻看到；产生原因：CPU增加了缓存，以均衡与内存的速度差异导致。 原子性 一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行；产生原因：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU……
         </div>
         <p class="readmore"><a href="https://moge.fun/post/JavaCurrent/">阅读全文</a></p>
     </article>
@@ -295,31 +320,6 @@
             概览 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。 Collection List 对付顺序的好帮手： 存储的元素是有序的、可重复的。 ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。 Vector：和Arra……
         </div>
         <p class="readmore"><a href="https://moge.fun/post/JavaContainer/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://moge.fun/post/reflection/" title="框架的灵魂-反射">框架的灵魂-反射</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年2月3日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            什么是反射 简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未……
-        </div>
-        <p class="readmore"><a href="https://moge.fun/post/reflection/">阅读全文</a></p>
     </article>
     
     
@@ -421,6 +421,10 @@
     </li>
     
     <li>
+        <a href="https://moge.fun/post/synchronized/" title="synchronized详解">synchronized详解</a>
+    </li>
+    
+    <li>
         <a href="https://moge.fun/post/JavaCurrent/" title="Java并发编程概览">Java并发编程概览</a>
     </li>
     
@@ -436,10 +440,6 @@
         <a href="https://moge.fun/post/JavaContainer/" title="Java容器概览">Java容器概览</a>
     </li>
     
-    <li>
-        <a href="https://moge.fun/post/reflection/" title="框架的灵魂-反射">框架的灵魂-反射</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -449,7 +449,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (8)</a></li>
+    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (9)</a></li>
     
     <li><a href="https://moge.fun/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (1)</a></li>
     
