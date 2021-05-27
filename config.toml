@@ -1,7 +1,7 @@
 baseURL = "https://moge.fun"
 languageCode = "zh-CN"
 title = "追求卓越，幸福就会不期而遇"
-theme = "maupassant"
+theme = "LoveIt"
 googleAnalytics = ""  # UA-XXXXXXXX-X
 
 ## 保持分类的原始名字（false会做转小写处理）

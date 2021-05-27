@@ -14,7 +14,8 @@ install:
   - wget https://github.com/gohugoio/hugo/releases/download/v0.69.1/hugo_0.69.1_Linux-64bit.deb
   - sudo dpkg -i hugo*.deb
   # 安装主题
-  - git clone https://github.com/flysnow-org/maupassant-hugo.git themes/maupassant
+  # git clone https://github.com/flysnow-org/maupassant-hugo.git themes/maupassant
+  - git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 script:
   # 运行hugo命令
