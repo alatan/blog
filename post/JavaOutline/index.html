@@ -149,7 +149,16 @@
 <li>支付幂等性</li>
 <li>减库存</li>
 <li>秒杀</li>
-<li>分布式锁</li>
+<li>分布式锁
+redis实现的分布式锁。
+
+<ol>
+<li>应该保证互斥性（在任何时候只有一个客户端持有锁。使用setnx）。</li>
+<li>不能死锁（设置过期时间）。</li>
+<li>保证上锁和解锁是同一个客户端（设置不同的value值）。</li>
+<li>业务时间太长。导致锁过期（设置看门狗。自动续锁）。</li>
+<li>锁的重入性（使用redis的hset）。</li>
+</ol></li>
 <li>分布式事务</li>
 <li>分布式缓存</li>
 </ul>
@@ -234,15 +243,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/post/ConcurrentHashMap/">ConcurrentHashMap详解</a></li>
+        
+        <li><a href="/post/JavaCurrent/">Java并发编程概览</a></li>
+        
         <li><a href="/post/HashMap/">HashMap详解</a></li>
         
         <li><a href="/post/ArrayList/">ArrayList详解</a></li>
         
-        <li><a href="/post/ConcurrentHashMap/">ConcurrentHashMap详解</a></li>
-        
         <li><a href="/post/JavaContainer/">Java容器概览</a></li>
-        
-        <li><a href="/post/reflection/">框架的灵魂-反射</a></li>
         
     </ul>
 </div>
@@ -351,6 +360,14 @@
     </li>
     
     <li>
+        <a href="https://moge.fun/post/ConcurrentHashMap/" title="ConcurrentHashMap详解">ConcurrentHashMap详解</a>
+    </li>
+    
+    <li>
+        <a href="https://moge.fun/post/JavaCurrent/" title="Java并发编程概览">Java并发编程概览</a>
+    </li>
+    
+    <li>
         <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
     </li>
     
@@ -359,19 +376,11 @@
     </li>
     
     <li>
-        <a href="https://moge.fun/post/ConcurrentHashMap/" title="ConcurrentHashMap详解">ConcurrentHashMap详解</a>
-    </li>
-    
-    <li>
         <a href="https://moge.fun/post/JavaContainer/" title="Java容器概览">Java容器概览</a>
     </li>
     
     <li>
         <a href="https://moge.fun/post/reflection/" title="框架的灵魂-反射">框架的灵魂-反射</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/generic/" title="Java特性-泛型">Java特性-泛型</a>
     </li>
     
 </ul>
@@ -383,7 +392,7 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (7)</a></li>
+    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (8)</a></li>
     
     <li><a href="https://moge.fun/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (1)</a></li>
     
@@ -417,6 +426,8 @@
     <a href="https://moge.fun/tags/%E5%8F%8D%E6%80%9D/">反思</a>
     
     <a href="https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/">大纲</a>
+    
+    <a href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>
     
     <a href="https://moge.fun/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     

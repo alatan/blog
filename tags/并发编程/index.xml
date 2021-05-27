@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>并发编程 on 追求卓越，幸福就会不期而遇</title>
+    <link>https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 并发编程 on 追求卓越，幸福就会不期而遇</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java并发编程概览</title>
+      <link>https://moge.fun/post/JavaCurrent/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/JavaCurrent/</guid>
+      <description>并发三要素 可见性 由于CPU增加了缓存，以均衡与内存的速度差异导致，方法：一个线程对共享变量的修改，另外一个线程能够立刻看到。 原子性 由于操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致，方法：一个操作或者多个操作 要么全部执行并且执行的过程不会被任</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -26,7 +26,7 @@
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/JavaOutline/</guid>
-      <description>基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化 性能指标体系 JVM调优 Tomcat调优 MySQL调优 故障排除 最佳实践 重构 设计模式 开发框架 Spring体系 MyBatis 常见业务 支付幂等性 减库存 秒杀 分布式锁 分布式事务 分布式缓存 中间价 消息队列 缓存 本地缓存 分布式缓</description>
+      <description>基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化 性能指标体系 JVM调优 Tomcat调优 MySQL调优 故障排除 最佳实践 重构 设计模式 开发框架 Spring体系 MyBatis 常见业务 支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。 应该保证互斥性（在任何时候只</description>
     </item>
     
   </channel>

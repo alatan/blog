@@ -44,13 +44,31 @@
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/JavaOutline/</guid>
-      <description>基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化 性能指标体系 JVM调优 Tomcat调优 MySQL调优 故障排除 最佳实践 重构 设计模式 开发框架 Spring体系 MyBatis 常见业务 支付幂等性 减库存 秒杀 分布式锁 分布式事务 分布式缓存 中间价 消息队列 缓存 本地缓存 分布式缓</description>
+      <description>基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化 性能指标体系 JVM调优 Tomcat调优 MySQL调优 故障排除 最佳实践 重构 设计模式 开发框架 Spring体系 MyBatis 常见业务 支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。 应该保证互斥性（在任何时候只</description>
+    </item>
+    
+    <item>
+      <title>ConcurrentHashMap详解</title>
+      <link>https://moge.fun/post/ConcurrentHashMap/</link>
+      <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/ConcurrentHashMap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java并发编程概览</title>
+      <link>https://moge.fun/post/JavaCurrent/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://moge.fun/post/JavaCurrent/</guid>
+      <description>并发三要素 可见性 由于CPU增加了缓存，以均衡与内存的速度差异导致，方法：一个线程对共享变量的修改，另外一个线程能够立刻看到。 原子性 由于操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致，方法：一个操作或者多个操作 要么全部执行并且执行的过程不会被任</description>
     </item>
     
     <item>
       <title>HashMap详解</title>
       <link>https://moge.fun/post/HashMap/</link>
-      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/HashMap/</guid>
       <description>实现步骤 HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;amp;(位运算)</description>
@@ -59,25 +77,16 @@
     <item>
       <title>ArrayList详解</title>
       <link>https://moge.fun/post/ArrayList/</link>
-      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/ArrayList/</guid>
       <description>ArrayList 简介 ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这可以减少递增式再分配的数量。 ArrayList 核心源码解读 package java.util; import java.util.function.Consumer; import java.util.function.Predicate; import java.util.function.UnaryOperator; public class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt; implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable { private static final long serialVersionUID = 8683452581122892189L; /** * 默认初始容量大</description>
     </item>
     
     <item>
-      <title>ConcurrentHashMap详解</title>
-      <link>https://moge.fun/post/ConcurrentHashMap/</link>
-      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://moge.fun/post/ConcurrentHashMap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Java容器概览</title>
       <link>https://moge.fun/post/JavaContainer/</link>
-      <pubDate>Wed, 28 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://moge.fun/post/JavaContainer/</guid>
       <description>概览 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。 Collection List 对付顺序的好帮手： 存储的元素是有序的、可重复的。 ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。 Vector：和Arra</description>

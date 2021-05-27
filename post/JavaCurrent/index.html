@@ -9,21 +9,24 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>数据结构 | 追求卓越，幸福就会不期而遇</title>
-    <meta property="og:title" content="数据结构 - 追求卓越，幸福就会不期而遇">
+    <title>Java并发编程概览 | 追求卓越，幸福就会不期而遇</title>
+    <meta property="og:title" content="Java并发编程概览 - 追求卓越，幸福就会不期而遇">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2018-04-01T00:00:00&#43;08:00'>
         
-    <meta name="Keywords" content="思考,编程,长期主义">
-    <meta name="description" content="数据结构">
         
-    <meta name="author" content="默哥">
-    <meta property="og:url" content="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+    <meta property="article:modified_time" content='2018-04-01T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="[]">
+    <meta name="description" content="Java并发编程">
+        <meta name="author" content="默哥">
+        
+    <meta property="og:url" content="https://moge.fun/post/JavaCurrent/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" title="追求卓越，幸福就会不期而遇" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -53,7 +56,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://moge.fun">首页</a>
+                    <a class="current" href="https://moge.fun">首页</a>
                     
                     <a  href="https://moge.fun/archives/" title="归档">归档</a>
                     
@@ -73,90 +76,140 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">数据结构</span>
-        中的文章
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://moge.fun/post/HashTable/">哈希表</a>
-            </h1>
+            <h1 class="post-title">Java并发编程概览</h1>
         </header>
         <date class="post-meta meta-date">
-            2017年2月3日
+            2018年4月1日
         </date>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
+            <span>|</span>
             
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84'>数据结构</a>
+            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
             
         </div>
         
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
         <div class="post-content">
-            定义 散列Hash是和顺序、链接和索引一样，是存储集合或者线性表的一种方法。 散列的基本思想是：以集合或线性表中的每个元素的关键字K为自变量，通过一个散列函数 h(K) 得到的结果，将这个结果解释为一块连续的存储空间（如数组）的地址（如数组下标），将这个元素存储到这个空间中。 h(K) 称为散列函数或者……
-            <p class="readmore"><a href="https://moge.fun/post/HashTable/">阅读全文</a></p>
+            <p><figure><img src="/images/current/concurrentOverview.png" alt="Java并发编程概览"></figure></p>
+
+<h2 id="并发三要素">并发三要素</h2>
+
+<h4 id="可见性">可见性</h4>
+
+<p>由于CPU增加了缓存，以均衡与内存的速度差异导致，方法：一个线程对共享变量的修改，另外一个线程能够立刻看到。</p>
+
+<h4 id="原子性">原子性</h4>
+
+<p>由于操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致，方法：一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</p>
+<pre><code>x = 10;        //语句1: 直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中
+y = x;         //语句2: 包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。
+x++;           //语句3： x++包括3个操作：读取x的值，进行加1操作，写入新的值。
+x = x + 1;     //语句4： 同语句3</code></pre>
+<h4 id="有序性">有序性</h4>
+
+<p>由于编译程序指令重排序优化指令执行次序，使得缓存能够得到更加合理地利用导致，方法：程序执行的顺序按照代码的先后顺序执行。</p>
+
+<h2 id="线程安全的实现方法">线程安全的实现方法</h2>
+
+<h4 id="互斥同步">互斥同步</h4>
+
+<ol>
+<li>synchronized(JVM实现)</li>
+<li>ReentrantLock(JDK实现)</li>
+</ol>
+
+<p>互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。</p>
+
+<p>互斥同步属于一种悲观的并发策略，总是认为只要不去做正确的同步措施，那就肯定会出现问题。无论共享数据是否真的会出现竞争，它都要进行加锁(这里讨论的是概念模型，实际上虚拟机会优化掉很大一部分不必要的加锁)、用户态核心态转换、维护锁计数器和检查是否有被阻塞的线程需要唤醒等操作。</p>
+
+<h4 id="非阻塞同步">非阻塞同步</h4>
+
+<ol>
+<li>CAS</li>
+</ol>
+
+<p>随着硬件指令集的发展，我们可以使用基于冲突检测的乐观并发策略: 先进行操作，如果没有其它线程争用共享数据，那操作就成功了，否则采取补偿措施(不断地重试，直到成功为止)。这种乐观的并发策略的许多实现都不需要将线程阻塞，因此这种同步操作称为非阻塞同步。</p>
+
+<p>乐观锁需要操作和冲突检测这两个步骤具备原子性，这里就不能再使用互斥同步来保证了，只能靠硬件来完成。</p>
+
+<p>硬件支持的原子性操作最典型的是: 比较并交换(Compare-and-Swap，CAS)。
+CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新值B。当执行操作时，只有当V的值等于A，才将V的值更新为B。</p>
+
+<h4 id="无同步方案">无同步方案</h4>
+
+<ol>
+<li>栈封闭（多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为局部变量存储在虚拟机栈中，属于线程私有的。）</li>
+
+<li><p>线程本地存储(可以使用java.lang.ThreadLocal类来实现线程本地存储功能)</p>
+
+<ul>
+<li><p>如果一段代码中所需要的数据必须与其他代码共享，那就看看这些共享数据的代码是否能保证在同一个线程中执行。如果能保证，我们就可以把共享数据的可见范围限制在同一个线程之内，这样，无须同步也能保证线程之间不出现数据争用的问题。</p></li>
+
+<li><p>符合这种特点的应用并不少见，大部分使用消费队列的架构模式(如“生产者-消费者”模式)都会将产品的消费过程尽量在一个线程中消费完。</p></li>
+
+<li><p>其中最重要的一个应用实例就是经典 Web 交互模型中的“一个请求对应一个服务器线程”(Thread-per-Request)的处理方式，这种处理方式的广泛应用使得很多 Web 服务端应用都可以使用线程本地存储来解决线程安全问题。</p></li>
+</ul></li>
+</ol>
+
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/HashMap/">HashMap详解</a></li>
+        
+        <li><a href="/post/ArrayList/">ArrayList详解</a></li>
+        
+        <li><a href="/post/JavaContainer/">Java容器概览</a></li>
+        
+        <li><a href="/post/reflection/">框架的灵魂-反射</a></li>
+        
+        <li><a href="/post/generic/">Java特性-泛型</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B'>并发编程</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://moge.fun/post/LinkedList/">链表</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2017年2月2日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84'>数据结构</a>
-            
-        </div>
-        
-        <div class="post-content">
-            定义 链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。 详解 链表的存在就是为了解决数组的增删复杂耗时，内存占用较大的问题。它并不需要一块连续的内存空间，它通过指针将一组零散的内存块串联起来。 根据指针的不同，有单链表，双向链表，循环……
-            <p class="readmore"><a href="https://moge.fun/post/LinkedList/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://moge.fun/post/Array/">数组</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2017年2月1日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84'>数据结构</a>
-            
-        </div>
-        
-        <div class="post-content">
-            定义 有限个相同数据类型的元素按顺序排列的集合为数组。 特性 数组是相同数据类型的元素的集合。 数组中的各元素的存储是有先后顺序的，它们在内存中按照这个先后顺序连续存放在一起。 优点： 由于是紧凑连续存储,可以随机访问，通过索引快速找到对应元素，而且相对节约存储空间，查询修改元素的效率O(1……
-            <p class="readmore"><a href="https://moge.fun/post/Array/">阅读全文</a></p>
-        </div>
-    </article>
     
 
     
-
-
-
-
-
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "alatan/BlogDiscuss"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
 </div>
 
                     <footer id="footer">
@@ -179,6 +232,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
