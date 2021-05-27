@@ -1,33 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>并发编程 on 追求卓越，幸福就会不期而遇</title>
-    <link>https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
-    <description>Recent content in 并发编程 on 追求卓越，幸福就会不期而遇</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Mon, 02 Apr 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>synchronized详解</title>
-      <link>https://moge.fun/post/synchronized/</link>
-      <pubDate>Mon, 02 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://moge.fun/post/synchronized/</guid>
-      <description>synchronized的使用 对象锁 包括方法锁(默认锁对象为this,当前实例对象)和同步代码块锁(自己指定锁对象) 类锁 指synchronize修饰静态的方法或指定锁对象为Class对象 注意点 一把锁只能同时被一个线程获取，没有获得锁的线程只能等待。 每个实例都对应有自己的一把锁(t</description>
-    </item>
-    
-    <item>
-      <title>Java并发编程概览</title>
-      <link>https://moge.fun/post/JavaCurrent/</link>
-      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://moge.fun/post/JavaCurrent/</guid>
-      <description>并发三要素 可见性 一个线程对共享变量的修改，另外一个线程能够立刻看到；产生原因：CPU增加了缓存，以均衡与内存的速度差异导致。 原子性 一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行；产生原因：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>并发编程 - 标签 - 追求卓越，幸福就会不期而遇</title>
+        <link>https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
+        <description>并发编程 - 标签 - 追求卓越，幸福就会不期而遇</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 02 Apr 2018 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
+    <title>synchronized详解</title>
+    <link>https://moge.fun/post/synchronized/</link>
+    <pubDate>Mon, 02 Apr 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/synchronized/</guid>
+    <description><![CDATA[synchronized的使用 对象锁 包括方法锁(默认锁对象为this,当前实例对象)和同步代码块锁(自己指定锁对象)
+类锁 指synchronize修饰静态的方法或指定锁对象为Class对象
+注意点  一把锁只能同时被一个线程获取，没有获得锁的线程只能等待。 每个实例都对应有自己的一把锁(this),不同实例之间互不影响；例外：锁对象是*.class以及synchronized修饰的是static方法的时候，所有对象公用同一把锁 。 synchronized修饰的方法，无论方法正常执行完毕还是抛出异常，都会释放锁。  synchronized原理分析 加锁和释放锁的原理 Monitorenter和Monitorexit指令，会让对象在执行，使其锁计数器加1或者减1。每一个对象在同一时间只与一个monitor(锁)相关联，而一个monitor在同一时间只能被一个线程获得，一个对象在尝试获得与这个对象相关联的Monitor锁的所有权的时候，monitorenter指令会发生如下3中情况之一：
+ monitor计数器为0，意味着目前还没有被获得，那这个线程就会立刻获得然后把锁计数器+1，一旦+1，别的线程再想获取，就需要等待 如果这个monitor已经拿到了这个锁的所有权，又重入了这把锁，那锁计数器就会累加，变成2，并且随着重入的次数，会一直累加 这把锁已经被别的线程获取了，等待锁释放  monitorexit指令：释放对于monitor的所有权，释放过程很简单，就是讲monitor的计数器减1，如果减完以后，计数器不是0，则代表刚才是重入进来的，当前线程还继续持有这把锁的所有权，如果计数器变成0，则代表当前线程不再拥有该monitor的所有权，即释放锁。
+可重入原理：加锁次数计数器 上面的demo中在执行完同步代码块之后紧接着再会去执行一个静态同步方法，而这个方法锁的对象依然就这个类对象，那么这个正在执行的线程还需要获取该锁吗? 答案是不必的，从上图中就可以看出来，执行静态同步方法的时候就只有一条monitorexit指令，并没有monitorenter获取锁的指令。这就是锁的重入性，即在同一锁程中，线程不需要再次获取同一把锁。
+synchronized先天具有重入性。每个对象拥有一个计数器，当线程获取该对象锁后，计数器就会加一，释放锁后就会将计数器减一。
+保证可见性的原理：内存模型和happens-before规则 Synchronized的happens-before规则，即监视器锁规则：对同一个监视器的解锁，happens-before于对该监视器的加锁。继续来看代码：
+1 2 3 4 5 6 7 8 9 10 11  public class MonitorDemo { private int a = 0; public synchronized void writer() { // 1 a++; // 2 } // 3 public synchronized void reader() { // 4 int i = a; // 5 } // 6 }   该代码的happens-before关系如图所示：]]></description>
+</item><item>
+    <title>Java并发编程概览</title>
+    <link>https://moge.fun/post/javacurrent/</link>
+    <pubDate>Sun, 01 Apr 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/javacurrent/</guid>
+    <description><![CDATA[并发三要素 可见性 一个线程对共享变量的修改，另外一个线程能够立刻看到；产生原因：CPU增加了缓存，以均衡与内存的速度差异导致。
+原子性 一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行；产生原因：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致。
+1 2 3 4  x = 10; //语句1: 直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中 y = x; //语句2: 包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。 x++; //语句3： x++包括3个操作：读取x的值，进行加1操作，写入新的值。 x = x + 1; //语句4： 同语句3   有序性 程序执行的顺序按照代码的先后顺序执行；产生原因：由于编译程序指令重排序优化指令执行次序，使得缓存能够得到更加合理地利用导致。
+线程安全的实现方法 互斥同步(阻塞同步)  synchronized(JVM实现) ReentrantLock(JDK实现)  互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。
+互斥同步属于一种悲观的并发策略，总是认为只要不去做正确的同步措施，那就肯定会出现问题。无论共享数据是否真的会出现竞争，它都要进行加锁(这里讨论的是概念模型，实际上虚拟机会优化掉很大一部分不必要的加锁)、用户态核心态转换、维护锁计数器和检查是否有被阻塞的线程需要唤醒等操作。
+非阻塞同步  CAS  随着硬件指令集的发展，我们可以使用基于冲突检测的乐观并发策略: 先进行操作，如果没有其它线程争用共享数据，那操作就成功了，否则采取补偿措施(不断地重试，直到成功为止)。这种乐观的并发策略的许多实现都不需要将线程阻塞，因此这种同步操作称为非阻塞同步。
+乐观锁需要操作和冲突检测这两个步骤具备原子性，这里就不能再使用互斥同步来保证了，只能靠硬件来完成。
+硬件支持的原子性操作最典型的是: 比较并交换(Compare-and-Swap，CAS)。 CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新值B。当执行操作时，只有当V的值等于A，才将V的值更新为B。
+无需同步方案  栈封闭（多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为局部变量存储在虚拟机栈中，属于线程私有的。） 线程本地存储(可以使用java.lang.ThreadLocal类来实现线程本地存储功能)
+ 如果一段代码中所需要的数据必须与其他代码共享，那就看看这些共享数据的代码是否能保证在同一个线程中执行。如果能保证，我们就可以把共享数据的可见范围限制在同一个线程之内，这样，无须同步也能保证线程之间不出现数据争用的问题。
+ 符合这种特点的应用并不少见，大部分使用消费队列的架构模式(如“生产者-消费者”模式)都会将产品的消费过程尽量在一个线程中消费完。
+ 其中最重要的一个应用实例就是经典 Web 交互模型中的“一个请求对应一个服务器线程”(Thread-per-Request)的处理方式，这种处理方式的广泛应用使得很多 Web 服务端应用都可以使用线程本地存储来解决线程安全问题。]]></description>
+</item></channel>
 </rss>

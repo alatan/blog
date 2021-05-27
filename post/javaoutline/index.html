@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Java知识大纲 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="Java知识大纲"><meta property="og:title" content="Java知识大纲" />
+<meta property="og:description" content="Java知识大纲" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moge.fun/post/javaoutline/" />
+<meta property="og:image" content="https://moge.fun/logo.png"/>
+<meta property="article:published_time" content="2020-01-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-01-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://moge.fun/logo.png"/>
+
+<meta name="twitter:title" content="Java知识大纲"/>
+<meta name="twitter:description" content="Java知识大纲"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/post/javaoutline/" /><link rel="prev" href="https://moge.fun/post/concurrenthashmap/" /><link rel="next" href="https://moge.fun/post/javaarchhistory/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Java知识大纲",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/moge.fun\/post\/javaoutline\/"
+        },"genre": "post","keywords": "大纲","wordcount":  93 ,
+        "url": "https:\/\/moge.fun\/post\/javaoutline\/","datePublished": "2020-01-01T00:00:00+00:00","dateModified": "2020-01-01T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "默哥"
+            },"description": "Java知识大纲"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="追求卓越，幸福就会不期而遇"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="追求卓越，幸福就会不期而遇"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animated pulse faster">Java知识大纲</h1><div class="content" id="content"><h2 id="基础">基础</h2>
+
+<h4 id="数据结构与算法">数据结构与算法</h4>
+
+<h4 id="操作系统">操作系统</h4>
+
+<h4 id="网络基础">网络基础</h4>
+
+<h4 id="数据库基础">数据库基础</h4>
+
+<h4 id="编译原理">编译原理</h4>
+
+<h2 id="java">Java</h2>
+
+<h4 id="java基础">Java基础</h4>
+
+<h4 id="并发编程">并发编程</h4>
+
+<h4 id="jvm">JVM</h4>
+
+<h4 id="性能优化">性能优化</h4>
+
+<ul>
+<li>性能指标体系</li>
+<li>JVM调优</li>
+<li>Tomcat调优</li>
+<li>MySQL调优</li>
+</ul>
+
+<h4 id="故障排除">故障排除</h4>
+
+<h2 id="最佳实践">最佳实践</h2>
+
+<h4 id="重构">重构</h4>
+
+<h4 id="设计模式">设计模式</h4>
+
+<h4 id="开发框架">开发框架</h4>
+
+<ul>
+<li>Spring体系</li>
+<li>MyBatis</li>
+</ul>
+
+<h4 id="常见业务">常见业务</h4>
+
+<ul>
+<li>支付幂等性</li>
+<li>减库存</li>
+<li>秒杀</li>
+<li>分布式锁
+redis实现的分布式锁。
+
+<ol>
+<li>应该保证互斥性（在任何时候只有一个客户端持有锁。使用setnx）。</li>
+<li>不能死锁（设置过期时间）。</li>
+<li>保证上锁和解锁是同一个客户端（设置不同的value值）。</li>
+<li>业务时间太长。导致锁过期（设置看门狗。自动续锁）。</li>
+<li>锁的重入性（使用redis的hset）。</li>
+</ol></li>
+<li>分布式事务</li>
+<li>分布式缓存</li>
+</ul>
+
+<h2 id="中间价">中间价</h2>
+
+<h4 id="消息队列">消息队列</h4>
+
+<h4 id="缓存">缓存</h4>
+
+<ul>
+<li>本地缓存</li>
+<li>分布式缓存</li>
+</ul>
+
+<h4 id="elk">ELK</h4>
+
+<h4 id="数据库">数据库</h4>
+
+<ul>
+<li>分库分表</li>
+<li>数据同步</li>
+<li>数据库连接池</li>
+</ul>
+
+<h2 id="分布式">分布式</h2>
+
+<p>分布式架构原理
+分布式架构策略
+分布式中间件
+分布式架构实战</p>
+
+<h4 id="四大理论">四大理论</h4>
+
+<ul>
+<li>拜占庭将军问题</li>
+<li>CAP 理论</li>
+<li>ACID 理论</li>
+<li>BASE 理论</li>
+</ul>
+
+<h4 id="八大协议算法">八大协议/算法</h4>
+
+<ul>
+<li>Paxos 算法</li>
+<li>Raft 算法</li>
+<li>一致性 Hash 算法</li>
+<li>Gossip 协议算法</li>
+<li>Quorum NWR 算法</li>
+<li>FBFT 算法</li>
+<li>POW 算法</li>
+<li>ZAB 协议</li>
+</ul>
+
+<h2 id="微服务">微服务</h2>
+
+<h2 id="工具">工具</h2>
+
+<ul>
+<li>版本管理 Git</li>
+<li>项目管理 Maven/Gradle</li>
+<li>代码质量管理 Sonar</li>
+<li>持续集成部署 Jenkins&amp;GitLab CI/CD</li>
+<li>监控系统</li>
+<li>测试
+
+<ul>
+<li>Postman</li>
+<li>Jmeter</li>
+<li>VisualVM</li>
+</ul></li>
+</ul>
+</div><div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2015 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

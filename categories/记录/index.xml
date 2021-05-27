@@ -1,24 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>记录 on 追求卓越，幸福就会不期而遇</title>
-    <link>https://moge.fun/categories/%E8%AE%B0%E5%BD%95/</link>
-    <description>Recent content in 记录 on 追求卓越，幸福就会不期而遇</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Thu, 01 Jan 2015 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://moge.fun/categories/%E8%AE%B0%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Markdown语法</title>
-      <link>https://moge.fun/post/mdGrammar/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://moge.fun/post/mdGrammar/</guid>
-      <description>标题 #### 这是 H5 #### 这是 H5 段落 这是一个段落。 这是另一个段落。 这是一个段落。 这是另一个段落。 斜体 *这是斜体* 这是斜体 粗体 **这是粗体** 这是粗体 粗体+斜体 ***这是粗体+斜体*** 这是粗体+斜体 删除线 ~~没有价值就会被抛弃~~ 没有价值就会被抛弃 引用 &amp;gt; Markdown是一种可以使用普通文本</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>记录 - 分类 - 追求卓越，幸福就会不期而遇</title>
+        <link>https://moge.fun/categories/%E8%AE%B0%E5%BD%95/</link>
+        <description>记录 - 分类 - 追求卓越，幸福就会不期而遇</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 01 Jan 2015 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E8%AE%B0%E5%BD%95/" rel="self" type="application/rss+xml" /><item>
+    <title>Markdown语法</title>
+    <link>https://moge.fun/post/mdgrammar/</link>
+    <pubDate>Thu, 01 Jan 2015 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/mdgrammar/</guid>
+    <description><![CDATA[标题 1  #### 这是 H5 ####   这是 H5 段落 1 2 3  这是一个段落。 这是另一个段落。   这是一个段落。
+这是另一个段落。
+斜体 1  *这是斜体*   这是斜体
+粗体 1  **这是粗体**   这是粗体
+粗体+斜体 1  ***这是粗体+斜体***    这是粗体+斜体
+删除线 1  ~~没有价值就会被抛弃~~   没有价值就会被抛弃
+引用 1  &gt; Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。    Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。
+ 列表 1 2 3  * 学习 * 思考 * 创造    学习 思考 创造  有序列表 1 2 3  1.]]></description>
+</item></channel>
 </rss>

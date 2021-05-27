@@ -1,0 +1,53 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Java基础 - 标签 - 追求卓越，幸福就会不期而遇</title>
+        <link>https://moge.fun/tags/java%E5%9F%BA%E7%A1%80/</link>
+        <description>Java基础 - 标签 - 追求卓越，幸福就会不期而遇</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 03 Feb 2018 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/java%E5%9F%BA%E7%A1%80/" rel="self" type="application/rss+xml" /><item>
+    <title>框架的灵魂-反射</title>
+    <link>https://moge.fun/post/reflection/</link>
+    <pubDate>Sat, 03 Feb 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/reflection/</guid>
+    <description><![CDATA[什么是反射 简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未知的。
+反射的核心是 JVM 在运行时才动态加载类或调用方法/访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。
+Java 反射主要提供以下功能  在运行时构造任意一个类的对象。 在运行时调用任意一个对象的方法。 在运行时判断任意一个对象所属的类。 在运行时判断任意一个类所具有的成员变量和方法（通过反射甚至可以调用private方法）。  反射的主要用途 反射最重要的用途就是开发各种通用框架。
+很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。
+举一个例子，在运用 Struts 2 框架的开发中我们一般会在 struts.xml 里去配置 Action，比如：
+1 2 3 4  &lt;action name=&#34;login&#34; class=&#34;org.ScZyhSoft.test.action.SimpleLoginAction&#34; method=&#34;execute&#34;&gt; &lt;result&gt;/shop/shop-index.jsp&lt;/result&gt; &lt;result name=&#34;error&#34;&gt;login.jsp&lt;/result&gt; &lt;/action&gt;   配置文件与 Action 建立了一种映射关系，当 View 层发出请求时，请求会被 StrutsPrepareAndExecuteFilter 拦截，然后 StrutsPrepareAndExecuteFilter 会去动态地创建 Action 实例。比如我们请求 login.action，那么 StrutsPrepareAndExecuteFilter就会去解析struts.xml文件，检索action中name为login的Action，并根据class属性创建SimpleLoginAction实例，并用invoke方法来调用execute方法，这个过程离不开反射。
+对与框架开发人员来说，反射虽小但作用非常大，它是各种容器实现的核心。而对于一般的开发者来说，不深入框架开发则用反射用的就会少一点，不过了解一下框架的底层机制有助于丰富自己的编程思想，也是很有益的。
+像Java中的一大利器注解的实现也用到了反射。
+为什么你使用 Spring 的时候 ，一个@Component注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 @Value注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？
+这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。]]></description>
+</item><item>
+    <title>Java特性-泛型</title>
+    <link>https://moge.fun/post/generic/</link>
+    <pubDate>Fri, 02 Feb 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/generic/</guid>
+    <description><![CDATA[泛型，即参数化类型。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。 那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（类型形参），然后在使用/调用时传入具体的类型（类型实参）。
+Java 语言中引入泛型是一个较大的功能增强。不仅语言、类型系统和编译器有了较大的变化，而且类库也进行了大翻修，所以许多重要的类，比如集合框架，都已经成为泛型化的了。这带来了很多好处：
+ 类型安全。 泛型的主要目标是提高 Java 程序的类型安全。通过知道使用泛型定义的变量的类型限制，编译器可以在一个高得多的程度上验证类型假设。 消除强制类型转换。 泛型的一个附带好处是，消除源代码中的许多强制类型转换。这使得代码更加可读，并且减少了出错机会。 潜在的性能收益。 泛型为较大的优化带来可能。在泛型的初始实现中，编译器将强制类型转换（没有泛型的话，程序员会指定这些强制类型转换）插入生成的字节码中。 注意泛型的类型参数只能是类类型（包括自定义类），不能是简单类型。  常用命名类型参数  K：键，比如映射的键 V：值，比如 List 和 Set 的内容，或者 Map 中的值 E：元素 T：泛型 ?：表示不确定的 java 类型  通配符 Ingeter 是 Number 的一个子类，同时 Generic 与 Generic 实际上是相同的一种基本类型。那么问题来了，在使用 Generic 作为形参的方法中，能否使用Generic 的实例传入呢？在逻辑上类似于 Generic 和 Generic 是否可以看成具有父子关系的泛型类型呢？下面我们通过定义一个方法来验证。
+1 2 3  public void show(Generic&lt;Number&gt; obj) { System.out.println(&#34;key value is &#34; + obj.getKey()); }   进行如下的调用：
+1 2 3  Generic&lt;Integer&gt; genericInteger = new Generic&lt;Integer&gt;(123); show(genericInteger); //error Generic&lt;java.]]></description>
+</item><item>
+    <title>Java世界的入场券-面向对象</title>
+    <link>https://moge.fun/post/object-oriented/</link>
+    <pubDate>Thu, 01 Feb 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/object-oriented/</guid>
+    <description><![CDATA[面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的重用性、灵活性和扩展性，对象里的程序可以访问及经常修改对象相关连的数据。在面向对象程序编程里，计算机程序会被设计成彼此相关的对象。
+ 面向对象就像是一张入场券，掌握了面向对象的思想，就可以在Java世界里尽情遨游，面向对象有三大法宝和七大戒律，并在其指导下萃取出了无数的锦囊妙计和绝世武器，下面我们揭开他们的神秘面纱。
+OOP（面向对象编程）的三大法宝 封装 封装，也就是把客观事物封装成抽象的类，并且类可以把自己的属性和方法只让可信的类操作，对不可信的类进行信息隐藏。
+继承 继承是指这样一种能力，它可以使用现有的类的所有功能，并在无需重新编写原来类的情况下对这些功能进行扩展。
+多态 多态指一个类实例的相同方法在不同情形有不同的表现形式。具体来说就是不同实现类对公共接口有不同的实现方式，但这些操作可以通过相同的方式（公共接口）予以调用。
+OOD（面向对象设计）七大戒律 开-闭原则 Open-Close Principle（OCP），即开-闭原则。开，指的是对扩展开放，即要支持方便地扩展；闭，指的是对修改关闭，即要严格限制对已有内容的修改。开-闭原则是最抽象也是最重要的OOD原则。简单工厂模式、工厂方法模式、抽象工厂模式中都提到了如何通过良好的设计遵循开-闭原则。
+里氏替换原则 Liskov Substitution Principle（LSP），即里氏替换原则。该原则规定“子类必须能够替换其父类，否则不应当设计为其子类”。换句话说，父类出现的地方，都应该能由其子类代替。所以，子类只能去扩展基类，而不是隐藏或者覆盖基类。
+依赖倒置原则 Dependence Inversion Principle（DIP），依赖倒置原则。它讲的是“设计和实现要依赖于抽象而非具体”。一方面抽象化更符合人的思维习惯；另一方面，根据里氏替换原则，可以很容易将原来的抽象替换为扩展后的具体，这样可以很好的支持开-闭原则。
+接口隔离原则 Interface Segration Principle（ISP），接口隔离原则，“将大的接口打散成多个小的独立的接口”。由于Java类支持实现多个接口，可以很容易的让类具有多种接口的特征，同时每个类可以选择性地只实现目标接口。
+单一职责原则 Single Responsibility Principle（SRP），单一职责原则。它讲的是，不要存在多于一个导致类变更的原因，是高内聚低耦合的一个体现。
+迪米特法则/最少知道原则 Law of Demeter or Least Knowledge Principle（LoD or LKP），迪米特法则或最少知道原则。它讲的是“一个对象就尽可能少的去了解其它对象”，从而实现松耦合。如果一个类的职责过多，由于多个职责耦合在了一起，任何一个职责的变更都可能引起其它职责的问题，严重影响了代码的可维护性和可重用性。
+合成/聚合复用原则 Composite/Aggregate Reuse Principle（CARP / CRP），合成/聚合复用原则。如果新对象的某些功能在别的已经创建好的对象里面已经实现，那么应当尽量使用别的对象提供的功能，使之成为新对象的一部分，而不要再重新创建。新对象可通过向这些对象的委派达到复用已有功能的效果。简而言之，要尽量使用合成/聚合，而非使用继承。《Java设计模式（九） 桥接模式》中介绍的桥接模式即是对这一原则的典型应用。
+行走江湖的锦囊妙计和绝世武器 上面的法宝和戒律是心法，真正行走江湖还需要趁手的兵器和锦囊妙计。 而设计模式就是应用三大法宝和七大戒律下经过反复实践铸造出来锦囊妙计和武器，具体有哪些武器我们暂且不表，毕竟倚天屠龙出世，江湖必将血雨腥风，在这之前我们还需要做好准备工作。]]></description>
+</item></channel>
+</rss>

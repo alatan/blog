@@ -1,33 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>知识体系 on 追求卓越，幸福就会不期而遇</title>
-    <link>https://moge.fun/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</link>
-    <description>Recent content in 知识体系 on 追求卓越，幸福就会不期而遇</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://moge.fun/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Java架构演变历史</title>
-      <link>https://moge.fun/post/JavaArchHistory/</link>
-      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://moge.fun/post/JavaArchHistory/</guid>
-      <description>Java网站架构演变过程，大致分为5个阶段，分别为单体架构、集群架构、分布式架构、SOA架构和微服务架构。 单体架构 应用、数据库、文件都部署在一台机器上。简单来讲其实就是我们熟知的SSM架构(Spring+SpringMVC+MyBatis)，把所有的业务模块都放在一个应用中开发，</description>
-    </item>
-    
-    <item>
-      <title>Java知识大纲</title>
-      <link>https://moge.fun/post/JavaOutline/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://moge.fun/post/JavaOutline/</guid>
-      <description>基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化 性能指标体系 JVM调优 Tomcat调优 MySQL调优 故障排除 最佳实践 重构 设计模式 开发框架 Spring体系 MyBatis 常见业务 支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。 应该保证互斥性（在任何时候只</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>知识体系 - 分类 - 追求卓越，幸福就会不期而遇</title>
+        <link>https://moge.fun/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</link>
+        <description>知识体系 - 分类 - 追求卓越，幸福就会不期而遇</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/" rel="self" type="application/rss+xml" /><item>
+    <title>Java架构演变历史</title>
+    <link>https://moge.fun/post/javaarchhistory/</link>
+    <pubDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/javaarchhistory/</guid>
+    <description><![CDATA[Java网站架构演变过程，大致分为5个阶段，分别为单体架构、集群架构、分布式架构、SOA架构和微服务架构。
+单体架构  应用、数据库、文件都部署在一台机器上。简单来讲其实就是我们熟知的SSM架构(Spring+SpringMVC+MyBatis)，把所有的业务模块都放在一个应用中开发，这里面又衍生出三层架构，即表示层、业务逻辑层和数据库访问层，虽然在软件设计中划分了经典的三层模型，但是对业务场景没有划分，一个典型的单体应用就是将所有的业务场景的表示层、业务逻辑层和数据访问层放在一个工程项目中，最终经过编译、打包，部署在一台服务器上。
+ 单体架构优点  部署简单: 由于是完整的结构体，可以直接部署在一个服务器上即可。 技术单一: 项目不需要复杂的技术栈，往往一套熟悉的技术栈就可以完成开发。 用人成本低: 单个程序员可以完成业务接口到数据库的整个流程。  单体架构缺点  系统启动慢： 一个进程包含了所有的业务逻辑，涉及到的启动模块过多，导致系统的启动、重启时间周期过长; 系统错误隔离性差、可用性差：任何一个模块的错误均可能造成整个系统的宕机; 可伸缩性差：系统的扩容只能只对这个应用进行扩容，不能做到对某个功能点进行扩容; 线上问题修复周期长：任何一个线上问题修复需要对整个应用系统进行全面升级。  
+集群架构  不同服务器部署同一套应用程序对外提供服务，实现服务的负载均衡或者互备(热备，主从)。同一种组件的多个实例，形成逻辑上的整体。单个节点可以提供完整服务，集群是物理形态。
+ 集群架构相关技术点  应用和数据分离(大量用户高并发的访问导致系统性能越来越差，数据存储空间开始出现不足) 缓存的使用(QPS持续提高，为了降低接口访问时间、提高服务性能和并发，根据二八定律可以将80%的数据缓存) 负载均衡器的代理服务器 数据库读写分离 反向代理和CDN加速  
+分布式架构  服务的不同模块部署在不同的机器上，单个节点不能提供完整服务，需要多节点协调提供服务(相同组件部署在不同节点，节点间通过交互信息协作提供服务)，分布式强调的是工作方式。
+ 分布式相关技术点  业务分库分表 NoSQL和搜索引擎对可伸缩的分布式特性具有更好的支持，应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。 业务模块拆分成子项目  
+SOA架构  面向服务的设计架构，其中包含多个服务，服务之间通过相互依赖最终提供一系列的功能。一个服务通常以独立的形式存在于操作系统进程中。各个服务之间通过网络调用。
+  中心化实现：ESB(企业服务总线)，各服务通过ESB进行交互，解决异构系统之间的连通性，通过协议转换，消息解析，消息路由把服务提供者的数据传送到服务消费者。 去中心化实现：微服务  
+微服务架构  在SOA上做的升华，微服务架构强调业务需要彻底组件化和服务化，原有的单个业务系统会拆分为多个可独立开发，设计，运行的小应用。这些小应用通过服务完成交互和集成。]]></description>
+</item><item>
+    <title>Java知识大纲</title>
+    <link>https://moge.fun/post/javaoutline/</link>
+    <pubDate>Wed, 01 Jan 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/post/javaoutline/</guid>
+    <description><![CDATA[基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化  性能指标体系 JVM调优 Tomcat调优 MySQL调优  故障排除 最佳实践 重构 设计模式 开发框架  Spring体系 MyBatis  常见业务  支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。  应该保证互斥性（在任何时候只有一个客户端持有锁。使用setnx）。 不能死锁（设置过期时间）。 保证上锁和解锁是同一个客户端（设置不同的value值）。 业务时间太长。导致锁过期（设置看门狗。自动续锁）。 锁的重入性（使用redis的hset）。  分布式事务 分布式缓存  中间价 消息队列 缓存  本地缓存 分布式缓存  ELK 数据库  分库分表 数据同步 数据库连接池  分布式 分布式架构原理 分布式架构策略 分布式中间件 分布式架构实战
+四大理论  拜占庭将军问题 CAP 理论 ACID 理论 BASE 理论  八大协议/算法  Paxos 算法 Raft 算法 一致性 Hash 算法 Gossip 协议算法 Quorum NWR 算法 FBFT 算法 POW 算法 ZAB 协议  微服务 工具  版本管理 Git 项目管理 Maven/Gradle 代码质量管理 Sonar 持续集成部署 Jenkins&amp;GitLab CI/CD 监控系统 测试  Postman Jmeter VisualVM   ]]></description>
+</item></channel>
 </rss>

@@ -1,105 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>synchronized详解 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="synchronized详解"><meta property="og:title" content="synchronized详解" />
+<meta property="og:description" content="synchronized详解" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moge.fun/post/synchronized/" />
+<meta property="og:image" content="https://moge.fun/logo.png"/>
+<meta property="article:published_time" content="2018-04-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://moge.fun/logo.png"/>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
+<meta name="twitter:title" content="synchronized详解"/>
+<meta name="twitter:description" content="synchronized详解"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/post/synchronized/" /><link rel="prev" href="https://moge.fun/post/javacurrent/" /><link rel="next" href="https://moge.fun/post/concurrenthashmap/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "synchronized详解",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/moge.fun\/post\/synchronized\/"
+        },"genre": "post","keywords": "并发编程","wordcount":  254 ,
+        "url": "https:\/\/moge.fun\/post\/synchronized\/","datePublished": "2018-04-02T00:00:00+00:00","dateModified": "2018-04-02T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "默哥"
+            },"description": "synchronized详解"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-    <title>synchronized详解 | 追求卓越，幸福就会不期而遇</title>
-    <meta property="og:title" content="synchronized详解 - 追求卓越，幸福就会不期而遇">
-    <meta property="og:type" content="article">
-        
-    <meta property="article:published_time" content='2018-04-02T00:00:00&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2018-04-02T00:00:00&#43;08:00'>
-        
-    <meta name="Keywords" content="[]">
-    <meta name="description" content="synchronized详解">
-        <meta name="author" content="默哥">
-        
-    <meta property="og:url" content="https://moge.fun/post/synchronized/">
-    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
-
-    <link rel="stylesheet" href='/css/normalize.css'>
-    <link rel="stylesheet" href='/css/style.css'>
-    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    
-    
-    
-    
-    
-    
-        <link rel="stylesheet" href='/css/douban.css'>
-    
-        <link rel="stylesheet" href='/css/other.css'>
-    
-</head>
-
-
-<body>
-    <header id="header" class="clearfix">
-    <div class="container">
-        <div class="col-group">
-            <div class="site-name ">
-                
-                    <a id="logo" href="https://moge.fun">
-                        追求卓越，幸福就会不期而遇
-                    </a>
-                
-                <p class="description">汝需自取真经</p>
-            </div>
-            <div>
-                <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://moge.fun">首页</a>
-                    
-                    <a  href="https://moge.fun/archives/" title="归档">归档</a>
-                    
-                    <a  href="https://moge.fun/about/" title="关于">关于</a>
-                    
-                </nav>
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="追求卓越，幸福就会不期而遇"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
             </div>
         </div>
     </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="追求卓越，幸福就会不期而遇"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
 </header>
-
-    <div id="body">
-        <div class="container">
-            <div class="col-group">
-
-                <div class="col-8" id="main">
-                    
-<div class="res-cons">
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">synchronized详解</h1>
-        </header>
-        <date class="post-meta meta-date">
-            2018年4月2日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/Java%E5%9F%BA%E7%A1%80'>Java基础</a></span>
-            
-        </div>
-        
-        
-        <div class="post-meta">
-            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
-                    阅读</span></span>
-        </div>
-        
-        
-        <div class="post-content">
-            <h2 id="synchronized的使用">synchronized的使用</h2>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animated pulse faster">synchronized详解</h1><div class="content" id="content"><h2 id="synchronized的使用">synchronized的使用</h2>
 
 <h4 id="对象锁">对象锁</h4>
 
@@ -140,7 +142,22 @@
 <h4 id="保证可见性的原理内存模型和happensbefore规则">保证可见性的原理：内存模型和happens-before规则</h4>
 
 <p>Synchronized的happens-before规则，即监视器锁规则：对同一个监视器的解锁，happens-before于对该监视器的加锁。继续来看代码：</p>
-<pre><code>public class MonitorDemo {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public class MonitorDemo {
     private int a = 0;
 
     public synchronized void writer() {     // 1
@@ -150,7 +167,9 @@
     public synchronized void reader() {    // 4
         int i = a;                         // 5
     }                                      // 6
-}</code></pre>
+}</code></pre></td></tr></table>
+</div>
+</div>
 <p>该代码的happens-before关系如图所示：</p>
 
 <p><figure><img src="/images/current/synchronized/schronized-happens-before.png" alt="happens-before"></figure></p>
@@ -198,10 +217,20 @@
 <p>锁消除时指虚拟机即时编译器再运行时，对一些代码上要求同步，但是被检测到不可能存在共享数据竞争的锁进行消除。锁消除的主要判定依据来源于逃逸分析的数据支持。意思就是：JVM会判断再一段程序中的同步明显不会逃逸出去从而被其他线程访问到，那JVM就把它们当作栈上数据对待，认为这些数据时线程独有的，不需要加同步。此时就会进行锁消除。 ​</p>
 
 <p>当然在实际开发中，我们很清楚的知道那些地方时线程独有的，不需要加同步锁，但是在Java API中有很多方法都是加了同步的，那么此时JVM会判断这段代码是否需要加锁。如果数据并不会逃逸，则会进行锁消除。比如如下操作：在操作String类型数据时，由于String是一个不可变类，对字符串的连接操作总是通过生成的新的String对象来进行的。因此Javac编译器会对String连接做自动优化。在JDK 1.5之前会使用StringBuffer对象的连续append()操作，在JDK 1.5及以后的版本中，会转化为StringBuidler对象的连续append()操作。</p>
-<pre><code>public static String test03(String s1, String s2, String s3) {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">public static String test03(String s1, String s2, String s3) {
     String s = s1 + s2 + s3;
     return s;
-}</code></pre>
+}</code></pre></td></tr></table>
+</div>
+</div>
 <p>上述代码使用javap 编译结果</p>
 
 <p><figure><img src="/images/current/synchronized/schronized-xiaochu.png" alt="xiaochu"></figure></p>
@@ -334,225 +363,19 @@
 <h2 id="参考文章">参考文章</h2>
 
 <p><a href="https://www.pdai.tech/md/java/thread/java-thread-x-key-synchronized.html" title="synchronized详解">synchronized详解</a></p>
-
+</div><div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2015 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
+    </footer></div>
 
-        
-
-
-        
-
-<div class="post-archive">
-    <h2>See Also</h2>
-    <ul class="listing">
-        
-        <li><a href="/post/JavaCurrent/">Java并发编程概览</a></li>
-        
-        <li><a href="/post/HashMap/">HashMap详解</a></li>
-        
-        <li><a href="/post/ArrayList/">ArrayList详解</a></li>
-        
-        <li><a href="/post/JavaContainer/">Java容器概览</a></li>
-        
-        <li><a href="/post/reflection/">框架的灵魂-反射</a></li>
-        
-    </ul>
-</div>
-
-
-        <div class="post-meta meta-tags">
-            
-            <ul class="clearfix">
-                
-                <li><a href='/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B'>并发编程</a></li>
-                
-            </ul>
-            
-        </div>
-    </article>
-    
-    
-
-    
-    
-    <div class="post bg-white">
-      <script src="https://utteranc.es/client.js"
-            repo= "alatan/BlogDiscuss"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-      </script>
-    </div>
-    
-</div>
-
-                    <footer id="footer">
-    <div>
-        &copy; 2021 <a href="https://moge.fun">追求卓越，幸福就会不期而遇 By 默哥</a>
-        
-    </div>
-    <br />
-    <div>
-        <div class="github-badge">
-            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
-        </div>
-        <div class="github-badge">
-            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
-        </div>
-    </div>
-</footer>
-
-
-    
-    <script type="text/javascript">
-        window.MathJax = {
-            tex2jax: {
-                inlineMath: [['$', '$']],
-                processEscapes: true
-                }
-            };
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-
-<a id="rocket" href="#top"></a>
-<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
-
-
-
-    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
-
-
-
-
-    <script src='/js/douban.js'></script>
-
-                </div>
-
-                <div id="secondary">
-    <section class="widget">
-        <form id="search" action='https://moge.fun/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
-      
-      <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://moge.fun">
-      <button type="submit" class="submit icon-search"></button>
-</form>
-    </section>
-    
-    <section class="widget">
-        <h3 class="widget-title">最近文章</h3>
-<ul class="widget-list">
-    
-    <li>
-        <a href="https://moge.fun/post/SpringCloudAlibaba/" title="微服务方案SpringCloudAlibaba">微服务方案SpringCloudAlibaba</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/distributed/" title="分布式介绍">分布式介绍</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/JavaArchHistory/" title="Java架构演变历史">Java架构演变历史</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/JavaOutline/" title="Java知识大纲">Java知识大纲</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/ConcurrentHashMap/" title="ConcurrentHashMap详解">ConcurrentHashMap详解</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/synchronized/" title="synchronized详解">synchronized详解</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/JavaCurrent/" title="Java并发编程概览">Java并发编程概览</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/HashMap/" title="HashMap详解">HashMap详解</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/ArrayList/" title="ArrayList详解">ArrayList详解</a>
-    </li>
-    
-    <li>
-        <a href="https://moge.fun/post/JavaContainer/" title="Java容器概览">Java容器概览</a>
-    </li>
-    
-</ul>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
-<ul class="widget-list">
-    
-    <li><a href="https://moge.fun/categories/Java%E5%9F%BA%E7%A1%80/">Java基础 (9)</a></li>
-    
-    <li><a href="https://moge.fun/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (1)</a></li>
-    
-    <li><a href="https://moge.fun/categories/%E5%8F%8D%E6%80%9D/">反思 (2)</a></li>
-    
-    <li><a href="https://moge.fun/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 (1)</a></li>
-    
-    <li><a href="https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构 (3)</a></li>
-    
-    <li><a href="https://moge.fun/categories/%E7%90%86%E8%B4%A2/">理财 (1)</a></li>
-    
-    <li><a href="https://moge.fun/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/">知识体系 (2)</a></li>
-    
-    <li><a href="https://moge.fun/categories/%E8%AE%B0%E5%BD%95/">记录 (1)</a></li>
-    
-</ul>
-    </section>
-
-    <section class="widget">
-        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
-<div class="tagcloud">
-    
-    <a href="https://moge.fun/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-    
-    <a href="https://moge.fun/tags/Markdown/">Markdown</a>
-    
-    <a href="https://moge.fun/tags/SpringCloud/">SpringCloud</a>
-    
-    <a href="https://moge.fun/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
-    
-    <a href="https://moge.fun/tags/%E5%8F%8D%E6%80%9D/">反思</a>
-    
-    <a href="https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/">大纲</a>
-    
-    <a href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>
-    
-    <a href="https://moge.fun/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-    
-    <a href="https://moge.fun/tags/%E7%90%86%E8%B4%A2/">理财</a>
-    
-    <a href="https://moge.fun/tags/%E7%94%9F%E6%B4%BB/">生活</a>
-    
-</div>
-    </section>
-
-    
-
-    <section class="widget">
-        <h3 class="widget-title">其它</h3>
-        <ul class="widget-list">
-            <li><a href="https://moge.fun/index.xml">文章 RSS</a></li>
-        </ul>
-    </section>
-</div>
-            </div>
-        </div>
-    </div>
-</body>
-
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
