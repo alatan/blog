@@ -2,13 +2,15 @@
 title: "框架的灵魂-反射"  
 date: 2018-02-03
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: [""]  
 description: "反射让一切有了可能"  
 tags: ["Java基础"]  
 categories: ["Java基础"]  
 author: "默哥"  
+
+toc:
+  auto: false
 ---  
 ## 什么是反射
 *简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。

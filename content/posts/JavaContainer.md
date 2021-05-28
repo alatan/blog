@@ -9,8 +9,6 @@ author: "默哥"
 tags: ["数据结构", "大纲"]  
 categories: ["Java基础"]  
 
-lightgallery: true
-
 toc:
   auto: false
 ---  

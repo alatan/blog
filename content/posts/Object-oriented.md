@@ -2,13 +2,15 @@
 title: "Java世界的入场券-面向对象"  
 date: 2018-02-01
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: [""]  
 description: "面向对象的三大法宝和七大戒律"  
 tags: ["Java基础"]  
 categories: ["Java基础"]  
 author: "默哥"  
+
+toc:
+  auto: false
 ---  
 > 面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的重用性、灵活性和扩展性，对象里的程序可以访问及经常修改对象相关连的数据。在面向对象程序编程里，计算机程序会被设计成彼此相关的对象。 
 

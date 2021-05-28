@@ -9,8 +9,6 @@ tags: ["并发编程"]
 categories: ["Java基础"]  
 author: "默哥"  
 
-lightgallery: true
-
 toc:
   auto: false
 ---

@@ -2,13 +2,15 @@
 title: "链表"  
 date: 2017-02-02
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: [""]  
 description: "数组是用于储存多个相同类型数据的集合"  
 tags: ["数据结构"]  
 categories: ["数据结构"]  
 author: "默哥"  
+
+toc:
+  auto: false
 ---
 ## 定义
 **链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。**

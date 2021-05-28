@@ -2,13 +2,14 @@
 title: "投资纲领"  
 date: 2016-01-01
 weight: 70  
-markup: mmark  
 draft: false  
-keywords: [""]  
 description: "投资纲领"  
 tags: ["理财"]  
 categories: ["理财"]  
 author: "默哥"  
+
+toc:
+  auto: false
 ---  
 ## 总体策略
 1. 低估加倍 
@@ -17,7 +18,6 @@ author: "默哥"
 4. 好资产 + 好价格 + 长期持有
 
 ## 资产配置
-
 
 ## 购买标的
 ### 宽基指数（沪深300和中证500）
