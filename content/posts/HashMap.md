@@ -9,6 +9,8 @@ description: "HashMap详解"
 tags: ["数据结构"]  
 categories: ["Java基础"]  
 author: "默哥"  
+toc:
+  auto: false
 ---  
 
 ![HashMap](/images/container/HashMap.png)
