@@ -36,25 +36,29 @@
 
 在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h >>> 16)，主要是从速度、功效、质量来考虑的。
 目的都是在数组很小也能降低hash碰撞。
-
-    static final int hash(Object key) {
-      int h;
-      // key.hashCode()：返回散列值也就是hashcode
-      // ^ ：按位异或
-      // >>>:无符号右移，忽略符号位，空位都以0补齐
-      return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-  }
+```java
+static final int hash(Object key) {
+    int h;
+    // key.hashCode()：返回散列值也就是hashcode
+    // ^ ：按位异或
+    // >>>:无符号右移，忽略符号位，空位都以0补齐
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+}
+```
 
 **第2步计算数组位置**
 
 通过(n - 1) & hash来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方。
 当**length总是2的n次方**时，h& (length-1)运算等价于对length取模，也就是h%length，但是&(位运算)比%(取模运算)具有更高的效率。
 
-    (n - 1) & hash
+```java
+(n - 1) & hash
+```
 
 #### HashMap的put方法
 ![HashMpaPut](/images/container/HashMpaPut.png)
 
+```java
     public V put(K key, V value) {
         // 对key的hashCode()做hash
         return putVal(hash(key), key, value, false, true);
@@ -284,8 +288,7 @@
         }
         return newTab;
     }
-
-
+```
 ## 参考文章
 1. https://www.hollischuang.com/archives/2091
 2. https://yuanrengu.com/2020/ba184259.html

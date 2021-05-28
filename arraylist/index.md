@@ -6,7 +6,7 @@ ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数�
 
 
 ## ArrayList 核心源码解读
-
+```java
     package java.util;
 
     import java.util.function.Consumer;
@@ -508,5 +508,4 @@ ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数�
     public Iterator<E> iterator() {
         return new Itr();
     }
-
-
+```

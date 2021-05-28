@@ -18,7 +18,7 @@
     <guid>https://moge.fun/hashmap/</guid>
     <description><![CDATA[实现步骤  HashMap基于哈希散列表，数组+链表/红黑树实现。 通过key的hashCode()方法计算出hashCode。 通过HashMap类中内部hash()方法将第2步中hashCode带入得出hash值。 通过第3步中hash值和HashMap中数组长度做&amp;(位运算)得出在数组中的位置。 当第4步中位置中没有值则直接放入。 当第4步中位置中有值即产生hash冲突问题，此时通过链表(拉链法)来解决hash冲突问题。 如果第6步中第链表大小超过阈值（TREEIFY_THRESHOLD,8），链表转换为红黑树。 在转换为红黑树时，会判断数组长度大于64才转换，否则继续采用扩容策略而不转换。  关键特性  默认初始容量值为16，负载因子为0.75，当size&gt;=threshold（ threshold等于“容量负载因子”）时，会发生扩容：newsize = oldsize2，size一定为2的n次幂 hash冲突默认采用单链表存储，当单链表节点个数大于8时且数组长度大于64，会转化为红黑树存储， 当红黑树中节点少于6时，则转化为单链表存储。 扩容针对整个Map，每次扩容时，原来数组中的元素依次重新计算存放位置，并重新插入 当Map中元素总数超过Entry数组的75%，触发扩容操作，为了减少链表长度，元素分配更均匀  HashMap在1.7和1.8之间的变化：  1.7中是先扩容后插入新值的，1.8中是先插值再扩容 1.7中采用数组+链表，1.8采用的是数组+链表/红黑树，即在1.7中链表长度超过一定长度后就改成红黑树存储。 1.7扩容时需要重新计算哈希值和索引位置，1.8并不重新计算哈希值，巧妙地采用和扩容后容量进行&amp;操作来计算新的索引位置。 1.7是采用表头插入法插入链表，1.8采用的是尾部插入法。 在1.7中采用表头插入法，在扩容时会改变链表中元素原本的顺序，以至于在并发场景下导致链表成环的问题；在1.8中采用尾部插入法，在扩容时会保持链表元素原本的顺序，就不会出现链表成环的问题了。  方法（JDK1.8-数组+链表/红黑树） 确定哈希桶数组索引位置 第1步计算hash
 在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &raquo;&gt; 16)，主要是从速度、功效、质量来考虑的。 目的都是在数组很小也能降低hash碰撞。
-static final int hash(Object key) { int h; // key.hashCode()：返回散列值也就是hashcode // ^ ：按位异或 // &gt;&gt;&gt;:无符号右移，忽略符号位，空位都以0补齐 return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);  }]]></description>
+1 2 3 4 5 6 7  static final int hash(Object key) { int h; // key.hashCode()：返回散列值也就是hashcode  // ^ ：按位异或  // &gt;&gt;&gt;:无符号右移，忽略符号位，空位都以0补齐  return (key == null) ?]]></description>
 </item><item>
     <title>ArrayList详解</title>
     <link>https://moge.fun/arraylist/</link>

@@ -624,507 +624,507 @@
 </span><span class="lnt">501
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">java</span><span class="p">.</span><span class="nx">util</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="kn">package</span> <span class="nn">java.util</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nx">java</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">function</span><span class="p">.</span><span class="nx">Consumer</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nx">java</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">function</span><span class="p">.</span><span class="nx">Predicate</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nx">java</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">function</span><span class="p">.</span><span class="nx">UnaryOperator</span><span class="p">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.function.Consumer</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.function.Predicate</span><span class="o">;</span>
+    <span class="kn">import</span> <span class="nn">java.util.function.UnaryOperator</span><span class="o">;</span>
 
 
-<span class="nx">public</span> <span class="nx">class</span> <span class="nx">ArrayList</span><span class="p">&lt;</span><span class="nx">E</span><span class="p">&gt;</span> <span class="nx">extends</span> <span class="nx">AbstractList</span><span class="p">&lt;</span><span class="nx">E</span><span class="p">&gt;</span>
-    <span class="nx">implements</span> <span class="nx">List</span><span class="p">&lt;</span><span class="nx">E</span><span class="p">&gt;,</span> <span class="nx">RandomAccess</span><span class="p">,</span> <span class="nx">Cloneable</span><span class="p">,</span> <span class="nx">java</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">Serializable</span>
-<span class="p">{</span>
-<span class="nx">private</span> <span class="nx">static</span> <span class="nx">final</span> <span class="nx">long</span> <span class="nx">serialVersionUID</span> <span class="p">=</span> <span class="mi">8683452581122892189</span><span class="nx">L</span><span class="p">;</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+        <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">RandomAccess</span><span class="o">,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
+    <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">8683452581122892189L</span><span class="o">;</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 默认初始容量大小
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">static</span> <span class="nx">final</span> <span class="kt">int</span> <span class="nx">DEFAULT_CAPACITY</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="cm">/**
+</span><span class="cm">        * 默认初始容量大小
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_CAPACITY</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 空数组（用于空实例）。
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">static</span> <span class="nx">final</span> <span class="nx">Object</span><span class="p">[]</span> <span class="nx">EMPTY_ELEMENTDATA</span> <span class="p">=</span> <span class="p">{};</span>
+    <span class="cm">/**
+</span><span class="cm">        * 空数组（用于空实例）。
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">EMPTY_ELEMENTDATA</span> <span class="o">=</span> <span class="o">{};</span>
 
-    <span class="c1">//用于默认大小空实例的共享空数组实例。
-</span><span class="c1"></span>    <span class="c1">//我们把它从EMPTY_ELEMENTDATA数组中区分出来，以知道在添加第一个元素时容量需要增加多少。
-</span><span class="c1"></span><span class="nx">private</span> <span class="nx">static</span> <span class="nx">final</span> <span class="nx">Object</span><span class="p">[]</span> <span class="nx">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span> <span class="p">=</span> <span class="p">{};</span>
+        <span class="c1">//用于默认大小空实例的共享空数组实例。
+</span><span class="c1"></span>        <span class="c1">//我们把它从EMPTY_ELEMENTDATA数组中区分出来，以知道在添加第一个元素时容量需要增加多少。
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span> <span class="o">=</span> <span class="o">{};</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 保存ArrayList数据的数组
-</span><span class="cm">    */</span>
-<span class="nx">transient</span> <span class="nx">Object</span><span class="p">[]</span> <span class="nx">elementData</span><span class="p">;</span> <span class="c1">// non-private to simplify nested class access
+    <span class="cm">/**
+</span><span class="cm">        * 保存ArrayList数据的数组
+</span><span class="cm">        */</span>
+    <span class="kd">transient</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elementData</span><span class="o">;</span> <span class="c1">// non-private to simplify nested class access
 </span><span class="c1"></span>
-<span class="cm">/**
-</span><span class="cm">    * ArrayList 所包含的元素个数
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="kt">int</span> <span class="nx">size</span><span class="p">;</span>
+    <span class="cm">/**
+</span><span class="cm">        * ArrayList 所包含的元素个数
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 带初始容量参数的构造函数（用户可以在创建ArrayList对象时自己指定集合的初始大小）
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nf">ArrayList</span><span class="p">(</span><span class="kt">int</span> <span class="nx">initialCapacity</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">initialCapacity</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//如果传入的参数大于0，创建initialCapacity大小的数组
-</span><span class="c1"></span>        <span class="nx">this</span><span class="p">.</span><span class="nx">elementData</span> <span class="p">=</span> <span class="nx">new</span> <span class="nx">Object</span><span class="p">[</span><span class="nx">initialCapacity</span><span class="p">];</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">initialCapacity</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//如果传入的参数等于0，创建空数组
-</span><span class="c1"></span>        <span class="nx">this</span><span class="p">.</span><span class="nx">elementData</span> <span class="p">=</span> <span class="nx">EMPTY_ELEMENTDATA</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">//其他情况，抛出异常
-</span><span class="c1"></span>        <span class="nx">throw</span> <span class="nx">new</span> <span class="nf">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Illegal Capacity: &#34;</span><span class="o">+</span>
-                                            <span class="nx">initialCapacity</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 带初始容量参数的构造函数（用户可以在创建ArrayList对象时自己指定集合的初始大小）
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//如果传入的参数大于0，创建initialCapacity大小的数组
+</span><span class="c1"></span>            <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">initialCapacity</span><span class="o">];</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//如果传入的参数等于0，创建空数组
+</span><span class="c1"></span>            <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">EMPTY_ELEMENTDATA</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">//其他情况，抛出异常
+</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal Capacity: &#34;</span><span class="o">+</span>
+                                                <span class="n">initialCapacity</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    *默认无参构造函数
-</span><span class="cm">    *DEFAULTCAPACITY_EMPTY_ELEMENTDATA 为0.初始化为10，也就是说初始其实是空数组 当添加第一个元素的时候数组容量才变成10
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nf">ArrayList</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">this</span><span class="p">.</span><span class="nx">elementData</span> <span class="p">=</span> <span class="nx">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        *默认无参构造函数
+</span><span class="cm">        *DEFAULTCAPACITY_EMPTY_ELEMENTDATA 为0.初始化为10，也就是说初始其实是空数组 当添加第一个元素的时候数组容量才变成10
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 构造一个包含指定集合的元素的列表，按照它们由集合的迭代器返回的顺序。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nf">ArrayList</span><span class="p">(</span><span class="nx">Collection</span><span class="p">&lt;</span><span class="err">?</span> <span class="nx">extends</span> <span class="nx">E</span><span class="p">&gt;</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//将指定集合转换为数组
-</span><span class="c1"></span>    <span class="nx">elementData</span> <span class="p">=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">toArray</span><span class="p">();</span>
-    <span class="c1">//如果elementData数组的长度不为0
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">((</span><span class="nx">size</span> <span class="p">=</span> <span class="nx">elementData</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 如果elementData不是Object类型数据（c.toArray可能返回的不是Object类型的数组所以加上下面的语句用于判断）
-</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">elementData</span><span class="p">.</span><span class="nf">getClass</span><span class="p">()</span> <span class="o">!=</span> <span class="nx">Object</span><span class="p">[].</span><span class="nx">class</span><span class="p">)</span>
-            <span class="c1">//将原来不是Object类型的elementData数组的内容，赋值给新的Object类型的elementData数组
-</span><span class="c1"></span>            <span class="nx">elementData</span> <span class="p">=</span> <span class="nx">Arrays</span><span class="p">.</span><span class="nf">copyOf</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">Object</span><span class="p">[].</span><span class="nx">class</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">// 其他情况，用空数组代替
-</span><span class="c1"></span>        <span class="nx">this</span><span class="p">.</span><span class="nx">elementData</span> <span class="p">=</span> <span class="nx">EMPTY_ELEMENTDATA</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 构造一个包含指定集合的元素的列表，按照它们由集合的迭代器返回的顺序。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//将指定集合转换为数组
+</span><span class="c1"></span>        <span class="n">elementData</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+        <span class="c1">//如果elementData数组的长度不为0
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">((</span><span class="n">size</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// 如果elementData不是Object类型数据（c.toArray可能返回的不是Object类型的数组所以加上下面的语句用于判断）
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">)</span>
+                <span class="c1">//将原来不是Object类型的elementData数组的内容，赋值给新的Object类型的elementData数组
+</span><span class="c1"></span>                <span class="n">elementData</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// 其他情况，用空数组代替
+</span><span class="c1"></span>            <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">EMPTY_ELEMENTDATA</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 修改这个ArrayList实例的容量是列表的当前大小。 应用程序可以使用此操作来最小化ArrayList实例的存储。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">void</span> <span class="nf">trimToSize</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">modCount</span><span class="o">++</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">size</span> <span class="p">&lt;</span> <span class="nx">elementData</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">elementData</span> <span class="p">=</span> <span class="p">(</span><span class="nx">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="err">?</span> <span class="nx">EMPTY_ELEMENTDATA</span>
-            <span class="p">:</span> <span class="nx">Arrays</span><span class="p">.</span><span class="nf">copyOf</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="c1">//下面是ArrayList的扩容机制
-</span><span class="c1">//ArrayList的扩容机制提高了性能，如果每次只扩充一个，
-</span><span class="c1">//那么频繁的插入会导致频繁的拷贝，降低性能，而ArrayList的扩容机制避免了这种情况。
-</span><span class="c1"></span><span class="cm">/**
-</span><span class="cm">    * 如有必要，增加此ArrayList实例的容量，以确保它至少能容纳元素的数量
-</span><span class="cm">    * @param   minCapacity   所需的最小容量
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">void</span> <span class="nf">ensureCapacity</span><span class="p">(</span><span class="kt">int</span> <span class="nx">minCapacity</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//如果是true，minExpand的值为0，如果是false,minExpand的值为10
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="nx">minExpand</span> <span class="p">=</span> <span class="p">(</span><span class="nx">elementData</span> <span class="o">!=</span> <span class="nx">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="p">)</span>
-        <span class="c1">// any size if not default element table
-</span><span class="c1"></span>        <span class="err">?</span> <span class="mi">0</span>
-        <span class="c1">// larger than default for default empty table. It&#39;s already
-</span><span class="c1"></span>        <span class="c1">// supposed to be at default size.
-</span><span class="c1"></span>        <span class="p">:</span> <span class="nx">DEFAULT_CAPACITY</span><span class="p">;</span>
-    <span class="c1">//如果最小容量大于已有的最大容量
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">minCapacity</span> <span class="p">&gt;</span> <span class="nx">minExpand</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nf">ensureExplicitCapacity</span><span class="p">(</span><span class="nx">minCapacity</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="c1">//得到最小扩容量
-</span><span class="c1"></span><span class="nx">private</span> <span class="nx">void</span> <span class="nf">ensureCapacityInternal</span><span class="p">(</span><span class="kt">int</span> <span class="nx">minCapacity</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">elementData</span> <span class="o">==</span> <span class="nx">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 获取“默认的容量”和“传入参数”两者之间的最大值
-</span><span class="c1"></span>        <span class="nx">minCapacity</span> <span class="p">=</span> <span class="nx">Math</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="nx">DEFAULT_CAPACITY</span><span class="p">,</span> <span class="nx">minCapacity</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 修改这个ArrayList实例的容量是列表的当前大小。 应用程序可以使用此操作来最小化ArrayList实例的存储。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">trimToSize</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">modCount</span><span class="o">++;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">elementData</span> <span class="o">=</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+                <span class="o">?</span> <span class="n">EMPTY_ELEMENTDATA</span>
+                <span class="o">:</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="c1">//下面是ArrayList的扩容机制
+</span><span class="c1"></span>    <span class="c1">//ArrayList的扩容机制提高了性能，如果每次只扩充一个，
+</span><span class="c1"></span>    <span class="c1">//那么频繁的插入会导致频繁的拷贝，降低性能，而ArrayList的扩容机制避免了这种情况。
+</span><span class="c1"></span>    <span class="cm">/**
+</span><span class="cm">        * 如有必要，增加此ArrayList实例的容量，以确保它至少能容纳元素的数量
+</span><span class="cm">        * @param   minCapacity   所需的最小容量
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//如果是true，minExpand的值为0，如果是false,minExpand的值为10
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">minExpand</span> <span class="o">=</span> <span class="o">(</span><span class="n">elementData</span> <span class="o">!=</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">)</span>
+            <span class="c1">// any size if not default element table
+</span><span class="c1"></span>            <span class="o">?</span> <span class="n">0</span>
+            <span class="c1">// larger than default for default empty table. It&#39;s already
+</span><span class="c1"></span>            <span class="c1">// supposed to be at default size.
+</span><span class="c1"></span>            <span class="o">:</span> <span class="n">DEFAULT_CAPACITY</span><span class="o">;</span>
+        <span class="c1">//如果最小容量大于已有的最大容量
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&gt;</span> <span class="n">minExpand</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ensureExplicitCapacity</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="c1">//得到最小扩容量
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacityInternal</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span> <span class="o">==</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// 获取“默认的容量”和“传入参数”两者之间的最大值
+</span><span class="c1"></span>            <span class="n">minCapacity</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">DEFAULT_CAPACITY</span><span class="o">,</span> <span class="n">minCapacity</span><span class="o">);</span>
+        <span class="o">}</span>
 
-    <span class="nf">ensureExplicitCapacity</span><span class="p">(</span><span class="nx">minCapacity</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">//判断是否需要扩容
-</span><span class="c1"></span><span class="nx">private</span> <span class="nx">void</span> <span class="nf">ensureExplicitCapacity</span><span class="p">(</span><span class="kt">int</span> <span class="nx">minCapacity</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">modCount</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">ensureExplicitCapacity</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">//判断是否需要扩容
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureExplicitCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">modCount</span><span class="o">++;</span>
 
-    <span class="c1">// overflow-conscious code
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">minCapacity</span> <span class="o">-</span> <span class="nx">elementData</span><span class="p">.</span><span class="nx">length</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="c1">//调用grow方法进行扩容，调用此方法代表已经开始扩容了
-</span><span class="c1"></span>        <span class="nf">grow</span><span class="p">(</span><span class="nx">minCapacity</span><span class="p">);</span>
-<span class="p">}</span>
+        <span class="c1">// overflow-conscious code
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">-</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="c1">//调用grow方法进行扩容，调用此方法代表已经开始扩容了
+</span><span class="c1"></span>            <span class="n">grow</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 要分配的最大数组大小
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">static</span> <span class="nx">final</span> <span class="kt">int</span> <span class="nx">MAX_ARRAY_SIZE</span> <span class="p">=</span> <span class="nx">Integer</span><span class="p">.</span><span class="nx">MAX_VALUE</span> <span class="o">-</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="cm">/**
+</span><span class="cm">        * 要分配的最大数组大小
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">-</span> <span class="n">8</span><span class="o">;</span>
 
-<span class="cm">/**
-</span><span class="cm">    * ArrayList扩容的核心方法。
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">void</span> <span class="nf">grow</span><span class="p">(</span><span class="kt">int</span> <span class="nx">minCapacity</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// oldCapacity为旧容量，newCapacity为新容量
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="nx">oldCapacity</span> <span class="p">=</span> <span class="nx">elementData</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="c1">//将oldCapacity 右移一位，其效果相当于oldCapacity /2，
-</span><span class="c1"></span>    <span class="c1">//我们知道位运算的速度远远快于整除运算，整句运算式的结果就是将新容量更新为旧容量的1.5倍，
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="nx">newCapacity</span> <span class="p">=</span> <span class="nx">oldCapacity</span> <span class="o">+</span> <span class="p">(</span><span class="nx">oldCapacity</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="c1">//然后检查新容量是否大于最小需要容量，若还是小于最小需要容量，那么就把最小需要容量当作数组的新容量，
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">newCapacity</span> <span class="o">-</span> <span class="nx">minCapacity</span> <span class="p">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="nx">newCapacity</span> <span class="p">=</span> <span class="nx">minCapacity</span><span class="p">;</span>
-    <span class="c1">//再检查新容量是否超出了ArrayList所定义的最大容量，
-</span><span class="c1"></span>    <span class="c1">//若超出了，则调用hugeCapacity()来比较minCapacity和 MAX_ARRAY_SIZE，
-</span><span class="c1"></span>    <span class="c1">//如果minCapacity大于MAX_ARRAY_SIZE，则新容量则为Interger.MAX_VALUE，否则，新容量大小则为 MAX_ARRAY_SIZE。
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">newCapacity</span> <span class="o">-</span> <span class="nx">MAX_ARRAY_SIZE</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="nx">newCapacity</span> <span class="p">=</span> <span class="nf">hugeCapacity</span><span class="p">(</span><span class="nx">minCapacity</span><span class="p">);</span>
-    <span class="c1">// minCapacity is usually close to size, so this is a win:
-</span><span class="c1"></span>    <span class="nx">elementData</span> <span class="p">=</span> <span class="nx">Arrays</span><span class="p">.</span><span class="nf">copyOf</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">newCapacity</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">//比较minCapacity和 MAX_ARRAY_SIZE
-</span><span class="c1"></span><span class="nx">private</span> <span class="nx">static</span> <span class="kt">int</span> <span class="nf">hugeCapacity</span><span class="p">(</span><span class="kt">int</span> <span class="nx">minCapacity</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">minCapacity</span> <span class="p">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// overflow
-</span><span class="c1"></span>        <span class="nx">throw</span> <span class="nx">new</span> <span class="nf">OutOfMemoryError</span><span class="p">();</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nx">minCapacity</span> <span class="p">&gt;</span> <span class="nx">MAX_ARRAY_SIZE</span><span class="p">)</span> <span class="err">?</span>
-        <span class="nx">Integer</span><span class="p">.</span><span class="nx">MAX_VALUE</span> <span class="p">:</span>
-        <span class="nx">MAX_ARRAY_SIZE</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * ArrayList扩容的核心方法。
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">grow</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// oldCapacity为旧容量，newCapacity为新容量
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">oldCapacity</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="c1">//将oldCapacity 右移一位，其效果相当于oldCapacity /2，
+</span><span class="c1"></span>        <span class="c1">//我们知道位运算的速度远远快于整除运算，整句运算式的结果就是将新容量更新为旧容量的1.5倍，
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">oldCapacity</span> <span class="o">+</span> <span class="o">(</span><span class="n">oldCapacity</span> <span class="o">&gt;&gt;</span> <span class="n">1</span><span class="o">);</span>
+        <span class="c1">//然后检查新容量是否大于最小需要容量，若还是小于最小需要容量，那么就把最小需要容量当作数组的新容量，
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">minCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">minCapacity</span><span class="o">;</span>
+        <span class="c1">//再检查新容量是否超出了ArrayList所定义的最大容量，
+</span><span class="c1"></span>        <span class="c1">//若超出了，则调用hugeCapacity()来比较minCapacity和 MAX_ARRAY_SIZE，
+</span><span class="c1"></span>        <span class="c1">//如果minCapacity大于MAX_ARRAY_SIZE，则新容量则为Interger.MAX_VALUE，否则，新容量大小则为 MAX_ARRAY_SIZE。
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">hugeCapacity</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
+        <span class="c1">// minCapacity is usually close to size, so this is a win:
+</span><span class="c1"></span>        <span class="n">elementData</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">newCapacity</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">//比较minCapacity和 MAX_ARRAY_SIZE
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">hugeCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="c1">// overflow
+</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">();</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&gt;</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">)</span> <span class="o">?</span>
+            <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">:</span>
+            <span class="n">MAX_ARRAY_SIZE</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    *返回此列表中的元素数。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">size</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        *返回此列表中的元素数。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">size</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 如果此列表不包含元素，则返回 true 。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">isEmpty</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">//注意=和==的区别
-</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 如果此列表不包含元素，则返回 true 。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">//注意=和==的区别
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">size</span> <span class="o">==</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 如果此列表包含指定的元素，则返回true 。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">contains</span><span class="p">(</span><span class="nx">Object</span> <span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//indexOf()方法：返回此列表中指定元素的首次出现的索引，如果此列表不包含此元素，则为-1
-</span><span class="c1"></span>    <span class="k">return</span> <span class="nf">indexOf</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 如果此列表包含指定的元素，则返回true 。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//indexOf()方法：返回此列表中指定元素的首次出现的索引，如果此列表不包含此元素，则为-1
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">indexOf</span><span class="o">(</span><span class="n">o</span><span class="o">)</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    *返回此列表中指定元素的首次出现的索引，如果此列表不包含此元素，则为-1
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="kt">int</span> <span class="nf">indexOf</span><span class="p">(</span><span class="nx">Object</span> <span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">o</span> <span class="o">==</span> <span class="nx">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">elementData</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">==</span><span class="nx">null</span><span class="p">)</span>
-                <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
-            <span class="c1">//equals()方法比较
-</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nf">equals</span><span class="p">(</span><span class="nx">elementData</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span>
-                <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        *返回此列表中指定元素的首次出现的索引，如果此列表不包含此元素，则为-1
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">indexOf</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="kc">null</span><span class="o">)</span>
+                    <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="c1">//equals()方法比较
+</span><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span>
+                    <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 返回此列表中指定元素的最后一次出现的索引，如果此列表不包含元素，则返回-1。.
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="kt">int</span> <span class="nf">lastIndexOf</span><span class="p">(</span><span class="nx">Object</span> <span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">o</span> <span class="o">==</span> <span class="nx">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">i</span> <span class="p">=</span> <span class="nx">size</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">elementData</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">==</span><span class="nx">null</span><span class="p">)</span>
-                <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">i</span> <span class="p">=</span> <span class="nx">size</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nf">equals</span><span class="p">(</span><span class="nx">elementData</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span>
-                <span class="k">return</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 返回此列表中指定元素的最后一次出现的索引，如果此列表不包含元素，则返回-1。.
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">lastIndexOf</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">size</span><span class="o">-</span><span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="kc">null</span><span class="o">)</span>
+                    <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">size</span><span class="o">-</span><span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span>
+                    <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 返回此ArrayList实例的浅拷贝。 （元素本身不被复制。）
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">Object</span> <span class="nf">clone</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">try</span> <span class="p">{</span>
-        <span class="nx">ArrayList</span><span class="p">&lt;</span><span class="err">?</span><span class="p">&gt;</span> <span class="nx">v</span> <span class="p">=</span> <span class="p">(</span><span class="nx">ArrayList</span><span class="p">&lt;</span><span class="err">?</span><span class="p">&gt;)</span> <span class="nx">super</span><span class="p">.</span><span class="nf">clone</span><span class="p">();</span>
-        <span class="c1">//Arrays.copyOf功能是实现数组的复制，返回复制后的数组。参数是被复制的数组和复制的长度
-</span><span class="c1"></span>        <span class="nx">v</span><span class="p">.</span><span class="nx">elementData</span> <span class="p">=</span> <span class="nx">Arrays</span><span class="p">.</span><span class="nf">copyOf</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
-        <span class="nx">v</span><span class="p">.</span><span class="nx">modCount</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
-    <span class="p">}</span> <span class="nf">catch</span> <span class="p">(</span><span class="nx">CloneNotSupportedException</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 这不应该发生，因为我们是可以克隆的
-</span><span class="c1"></span>        <span class="nx">throw</span> <span class="nx">new</span> <span class="nf">InternalError</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 返回此ArrayList实例的浅拷贝。 （元素本身不被复制。）
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">ArrayList</span><span class="o">&lt;?&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="o">(</span><span class="n">ArrayList</span><span class="o">&lt;?&gt;)</span> <span class="kd">super</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+            <span class="c1">//Arrays.copyOf功能是实现数组的复制，返回复制后的数组。参数是被复制的数组和复制的长度
+</span><span class="c1"></span>            <span class="n">v</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+            <span class="n">v</span><span class="o">.</span><span class="na">modCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">v</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">CloneNotSupportedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// 这不应该发生，因为我们是可以克隆的
+</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">InternalError</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    *以正确的顺序（从第一个到最后一个元素）返回一个包含此列表中所有元素的数组。
-</span><span class="cm">    *返回的数组将是“安全的”，因为该列表不保留对它的引用。 （换句话说，这个方法必须分配一个新的数组）。
-</span><span class="cm">    *因此，调用者可以自由地修改返回的数组。 此方法充当基于阵列和基于集合的API之间的桥梁。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">Object</span><span class="p">[]</span> <span class="nf">toArray</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">Arrays</span><span class="p">.</span><span class="nf">copyOf</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        *以正确的顺序（从第一个到最后一个元素）返回一个包含此列表中所有元素的数组。
+</span><span class="cm">        *返回的数组将是“安全的”，因为该列表不保留对它的引用。 （换句话说，这个方法必须分配一个新的数组）。
+</span><span class="cm">        *因此，调用者可以自由地修改返回的数组。 此方法充当基于阵列和基于集合的API之间的桥梁。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">Object</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 以正确的顺序返回一个包含此列表中所有元素的数组（从第一个到最后一个元素）;
-</span><span class="cm">    *返回的数组的运行时类型是指定数组的运行时类型。 如果列表适合指定的数组，则返回其中。
-</span><span class="cm">    *否则，将为指定数组的运行时类型和此列表的大小分配一个新数组。
-</span><span class="cm">    *如果列表适用于指定的数组，其余空间（即数组的列表数量多于此元素），则紧跟在集合结束后的数组中的元素设置为null 。
-</span><span class="cm">    *（这仅在调用者知道列表不包含任何空元素的情况下才能确定列表的长度。）
-</span><span class="cm">    */</span>
-<span class="err">@</span><span class="nf">SuppressWarnings</span><span class="p">(</span><span class="s">&#34;unchecked&#34;</span><span class="p">)</span>
-<span class="nx">public</span> <span class="p">&lt;</span><span class="nx">T</span><span class="p">&gt;</span> <span class="nx">T</span><span class="p">[]</span> <span class="nf">toArray</span><span class="p">(</span><span class="nx">T</span><span class="p">[]</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span> <span class="p">&lt;</span> <span class="nx">size</span><span class="p">)</span>
-        <span class="c1">// 新建一个运行时类型的数组，但是ArrayList数组的内容
-</span><span class="c1"></span>        <span class="k">return</span> <span class="p">(</span><span class="nx">T</span><span class="p">[])</span> <span class="nx">Arrays</span><span class="p">.</span><span class="nf">copyOf</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">a</span><span class="p">.</span><span class="nf">getClass</span><span class="p">());</span>
-        <span class="c1">//调用System提供的arraycopy()方法实现数组之间的复制
-</span><span class="c1"></span>    <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span> <span class="p">&gt;</span> <span class="nx">size</span><span class="p">)</span>
-        <span class="nx">a</span><span class="p">[</span><span class="nx">size</span><span class="p">]</span> <span class="p">=</span> <span class="nx">null</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 以正确的顺序返回一个包含此列表中所有元素的数组（从第一个到最后一个元素）;
+</span><span class="cm">        *返回的数组的运行时类型是指定数组的运行时类型。 如果列表适合指定的数组，则返回其中。
+</span><span class="cm">        *否则，将为指定数组的运行时类型和此列表的大小分配一个新数组。
+</span><span class="cm">        *如果列表适用于指定的数组，其余空间（即数组的列表数量多于此元素），则紧跟在集合结束后的数组中的元素设置为null 。
+</span><span class="cm">        *（这仅在调用者知道列表不包含任何空元素的情况下才能确定列表的长度。）
+</span><span class="cm">        */</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unchecked&#34;</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">)</span>
+            <span class="c1">// 新建一个运行时类型的数组，但是ArrayList数组的内容
+</span><span class="c1"></span>            <span class="k">return</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+            <span class="c1">//调用System提供的arraycopy()方法实现数组之间的复制
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">size</span><span class="o">)</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="c1">// Positional Access Operations
+    <span class="c1">// Positional Access Operations
 </span><span class="c1"></span>
-<span class="err">@</span><span class="nf">SuppressWarnings</span><span class="p">(</span><span class="s">&#34;unchecked&#34;</span><span class="p">)</span>
-<span class="nx">E</span> <span class="nf">elementData</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nx">E</span><span class="p">)</span> <span class="nx">elementData</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
-<span class="p">}</span>
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unchecked&#34;</span><span class="o">)</span>
+    <span class="n">E</span> <span class="nf">elementData</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">E</span><span class="o">)</span> <span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 返回此列表中指定位置的元素。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">E</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">rangeCheck</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+    <span class="cm">/**
+</span><span class="cm">        * 返回此列表中指定位置的元素。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
 
-    <span class="k">return</span> <span class="nf">elementData</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="p">}</span>
+        <span class="k">return</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 用指定的元素替换此列表中指定位置的元素。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">E</span> <span class="nf">set</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">E</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//对index进行界限检查
-</span><span class="c1"></span>    <span class="nf">rangeCheck</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+    <span class="cm">/**
+</span><span class="cm">        * 用指定的元素替换此列表中指定位置的元素。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">E</span> <span class="nf">set</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//对index进行界限检查
+</span><span class="c1"></span>        <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
 
-    <span class="nx">E</span> <span class="nx">oldValue</span> <span class="p">=</span> <span class="nf">elementData</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-    <span class="nx">elementData</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="p">=</span> <span class="nx">element</span><span class="p">;</span>
-    <span class="c1">//返回原来在这个位置的元素
-</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">oldValue</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+        <span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+        <span class="c1">//返回原来在这个位置的元素
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 将指定的元素追加到此列表的末尾。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">add</span><span class="p">(</span><span class="nx">E</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">ensureCapacityInternal</span><span class="p">(</span><span class="nx">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// Increments modCount!!
-</span><span class="c1"></span>    <span class="c1">//这里看到ArrayList添加元素的实质就相当于为数组赋值
-</span><span class="c1"></span>    <span class="nx">elementData</span><span class="p">[</span><span class="nx">size</span><span class="o">++</span><span class="p">]</span> <span class="p">=</span> <span class="nx">e</span><span class="p">;</span>
-    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 将指定的元素追加到此列表的末尾。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>  <span class="c1">// Increments modCount!!
+</span><span class="c1"></span>        <span class="c1">//这里看到ArrayList添加元素的实质就相当于为数组赋值
+</span><span class="c1"></span>        <span class="n">elementData</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 在此列表中的指定位置插入指定的元素。
-</span><span class="cm">    *先调用 rangeCheckForAdd 对index进行界限检查；然后调用 ensureCapacityInternal 方法保证capacity足够大；
-</span><span class="cm">    *再将从index开始之后的所有成员后移一个位置；将element插入index位置；最后size加1。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">E</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">rangeCheckForAdd</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+    <span class="cm">/**
+</span><span class="cm">        * 在此列表中的指定位置插入指定的元素。
+</span><span class="cm">        *先调用 rangeCheckForAdd 对index进行界限检查；然后调用 ensureCapacityInternal 方法保证capacity足够大；
+</span><span class="cm">        *再将从index开始之后的所有成员后移一个位置；将element插入index位置；最后size加1。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">rangeCheckForAdd</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
 
-    <span class="nf">ensureCapacityInternal</span><span class="p">(</span><span class="nx">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// Increments modCount!!
-</span><span class="c1"></span>    <span class="c1">//elementData:源数组;index:源数组中的起始位置;elementData：目标数组；index + 1：目标数组中的起始位置； size - index：要复制的数组元素的数量；
-</span><span class="c1"></span>    <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-                        <span class="nx">size</span> <span class="o">-</span> <span class="nx">index</span><span class="p">);</span>
-    <span class="nx">elementData</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="p">=</span> <span class="nx">element</span><span class="p">;</span>
-    <span class="nx">size</span><span class="o">++</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>  <span class="c1">// Increments modCount!!
+</span><span class="c1"></span>        <span class="c1">//elementData:源数组;index:源数组中的起始位置;elementData：目标数组；index + 1：目标数组中的起始位置； size - index：要复制的数组元素的数量；
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span>
+                            <span class="n">size</span> <span class="o">-</span> <span class="n">index</span><span class="o">);</span>
+        <span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+        <span class="n">size</span><span class="o">++;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 删除该列表中指定位置的元素。 将任何后续元素移动到左侧（从其索引中减去一个元素）。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">E</span> <span class="nf">remove</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">rangeCheck</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+    <span class="cm">/**
+</span><span class="cm">        * 删除该列表中指定位置的元素。 将任何后续元素移动到左侧（从其索引中减去一个元素）。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
 
-    <span class="nx">modCount</span><span class="o">++</span><span class="p">;</span>
-    <span class="nx">E</span> <span class="nx">oldValue</span> <span class="p">=</span> <span class="nf">elementData</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+        <span class="n">modCount</span><span class="o">++;</span>
+        <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
 
-    <span class="kt">int</span> <span class="nx">numMoved</span> <span class="p">=</span> <span class="nx">size</span> <span class="o">-</span> <span class="nx">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">numMoved</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span>
-                            <span class="nx">numMoved</span><span class="p">);</span>
-    <span class="nx">elementData</span><span class="p">[</span><span class="o">--</span><span class="nx">size</span><span class="p">]</span> <span class="p">=</span> <span class="nx">null</span><span class="p">;</span> <span class="c1">// clear to let GC do its work
-</span><span class="c1"></span>    <span class="c1">//从列表中删除的元素
-</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">oldValue</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
+                                <span class="n">numMoved</span><span class="o">);</span>
+        <span class="n">elementData</span><span class="o">[--</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// clear to let GC do its work
+</span><span class="c1"></span>        <span class="c1">//从列表中删除的元素
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 从列表中删除指定元素的第一个出现（如果存在）。 如果列表不包含该元素，则它不会更改。
-</span><span class="cm">    *返回true，如果此列表包含指定的元素
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">remove</span><span class="p">(</span><span class="nx">Object</span> <span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">o</span> <span class="o">==</span> <span class="nx">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">index</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">index</span> <span class="p">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">index</span><span class="o">++</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">elementData</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">==</span> <span class="nx">null</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nf">fastRemove</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="p">}</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">index</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">index</span> <span class="p">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">index</span><span class="o">++</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nf">equals</span><span class="p">(</span><span class="nx">elementData</span><span class="p">[</span><span class="nx">index</span><span class="p">]))</span> <span class="p">{</span>
-                <span class="nf">fastRemove</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 从列表中删除指定元素的第一个出现（如果存在）。 如果列表不包含该元素，则它不会更改。
+</span><span class="cm">        *返回true，如果此列表包含指定的元素
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">fastRemove</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="o">}</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">fastRemove</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/*
-</span><span class="cm">    * Private remove method that skips bounds checking and does not
-</span><span class="cm">    * return the value removed.
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">void</span> <span class="nf">fastRemove</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">modCount</span><span class="o">++</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="nx">numMoved</span> <span class="p">=</span> <span class="nx">size</span> <span class="o">-</span> <span class="nx">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">numMoved</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span>
-                            <span class="nx">numMoved</span><span class="p">);</span>
-    <span class="nx">elementData</span><span class="p">[</span><span class="o">--</span><span class="nx">size</span><span class="p">]</span> <span class="p">=</span> <span class="nx">null</span><span class="p">;</span> <span class="c1">// clear to let GC do its work
-</span><span class="c1"></span><span class="p">}</span>
+    <span class="cm">/*
+</span><span class="cm">        * Private remove method that skips bounds checking and does not
+</span><span class="cm">        * return the value removed.
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">fastRemove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">modCount</span><span class="o">++;</span>
+        <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
+                                <span class="n">numMoved</span><span class="o">);</span>
+        <span class="n">elementData</span><span class="o">[--</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// clear to let GC do its work
+</span><span class="c1"></span>    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 从列表中删除所有元素。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">void</span> <span class="nf">clear</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">modCount</span><span class="o">++</span><span class="p">;</span>
+    <span class="cm">/**
+</span><span class="cm">        * 从列表中删除所有元素。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clear</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">modCount</span><span class="o">++;</span>
 
-    <span class="c1">// 把数组中所有的元素的值设为null
-</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="nx">elementData</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">null</span><span class="p">;</span>
+        <span class="c1">// 把数组中所有的元素的值设为null
+</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+            <span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-    <span class="nx">size</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 按指定集合的Iterator返回的顺序将指定集合中的所有元素追加到此列表的末尾。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">addAll</span><span class="p">(</span><span class="nx">Collection</span><span class="p">&lt;</span><span class="err">?</span> <span class="nx">extends</span> <span class="nx">E</span><span class="p">&gt;</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">Object</span><span class="p">[]</span> <span class="nx">a</span> <span class="p">=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">toArray</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="nx">numNew</span> <span class="p">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="nf">ensureCapacityInternal</span><span class="p">(</span><span class="nx">size</span> <span class="o">+</span> <span class="nx">numNew</span><span class="p">);</span>  <span class="c1">// Increments modCount
-</span><span class="c1"></span>    <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">elementData</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">numNew</span><span class="p">);</span>
-    <span class="nx">size</span> <span class="o">+=</span> <span class="nx">numNew</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nx">numNew</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 按指定集合的Iterator返回的顺序将指定集合中的所有元素追加到此列表的末尾。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">numNew</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">);</span>  <span class="c1">// Increments modCount
+</span><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">numNew</span><span class="o">);</span>
+        <span class="n">size</span> <span class="o">+=</span> <span class="n">numNew</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">numNew</span> <span class="o">!=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 将指定集合中的所有元素插入到此列表中，从指定的位置开始。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">addAll</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">Collection</span><span class="p">&lt;</span><span class="err">?</span> <span class="nx">extends</span> <span class="nx">E</span><span class="p">&gt;</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">rangeCheckForAdd</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+    <span class="cm">/**
+</span><span class="cm">        * 将指定集合中的所有元素插入到此列表中，从指定的位置开始。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">rangeCheckForAdd</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
 
-    <span class="nx">Object</span><span class="p">[]</span> <span class="nx">a</span> <span class="p">=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">toArray</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="nx">numNew</span> <span class="p">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="nf">ensureCapacityInternal</span><span class="p">(</span><span class="nx">size</span> <span class="o">+</span> <span class="nx">numNew</span><span class="p">);</span>  <span class="c1">// Increments modCount
+        <span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">numNew</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">);</span>  <span class="c1">// Increments modCount
 </span><span class="c1"></span>
-    <span class="kt">int</span> <span class="nx">numMoved</span> <span class="p">=</span> <span class="nx">size</span> <span class="o">-</span> <span class="nx">index</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">numMoved</span> <span class="p">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span> <span class="o">+</span> <span class="nx">numNew</span><span class="p">,</span>
-                            <span class="nx">numMoved</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">,</span>
+                                <span class="n">numMoved</span><span class="o">);</span>
 
-    <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">elementData</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">numNew</span><span class="p">);</span>
-    <span class="nx">size</span> <span class="o">+=</span> <span class="nx">numNew</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nx">numNew</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">numNew</span><span class="o">);</span>
+        <span class="n">size</span> <span class="o">+=</span> <span class="n">numNew</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">numNew</span> <span class="o">!=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 从此列表中删除所有索引为fromIndex （含）和toIndex之间的元素。
-</span><span class="cm">    *将任何后续元素移动到左侧（减少其索引）。
-</span><span class="cm">    */</span>
-<span class="nx">protected</span> <span class="nx">void</span> <span class="nf">removeRange</span><span class="p">(</span><span class="kt">int</span> <span class="nx">fromIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="nx">toIndex</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">modCount</span><span class="o">++</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="nx">numMoved</span> <span class="p">=</span> <span class="nx">size</span> <span class="o">-</span> <span class="nx">toIndex</span><span class="p">;</span>
-    <span class="nx">System</span><span class="p">.</span><span class="nf">arraycopy</span><span class="p">(</span><span class="nx">elementData</span><span class="p">,</span> <span class="nx">toIndex</span><span class="p">,</span> <span class="nx">elementData</span><span class="p">,</span> <span class="nx">fromIndex</span><span class="p">,</span>
-                        <span class="nx">numMoved</span><span class="p">);</span>
+    <span class="cm">/**
+</span><span class="cm">        * 从此列表中删除所有索引为fromIndex （含）和toIndex之间的元素。
+</span><span class="cm">        *将任何后续元素移动到左侧（减少其索引）。
+</span><span class="cm">        */</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">removeRange</span><span class="o">(</span><span class="kt">int</span> <span class="n">fromIndex</span><span class="o">,</span> <span class="kt">int</span> <span class="n">toIndex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">modCount</span><span class="o">++;</span>
+        <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">toIndex</span><span class="o">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">toIndex</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">fromIndex</span><span class="o">,</span>
+                            <span class="n">numMoved</span><span class="o">);</span>
 
-    <span class="c1">// clear to let GC do its work
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="nx">newSize</span> <span class="p">=</span> <span class="nx">size</span> <span class="o">-</span> <span class="p">(</span><span class="nx">toIndex</span><span class="o">-</span><span class="nx">fromIndex</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nx">i</span> <span class="p">=</span> <span class="nx">newSize</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">size</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">elementData</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">null</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nx">size</span> <span class="p">=</span> <span class="nx">newSize</span><span class="p">;</span>
-<span class="p">}</span>
+        <span class="c1">// clear to let GC do its work
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">newSize</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="o">(</span><span class="n">toIndex</span><span class="o">-</span><span class="n">fromIndex</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">newSize</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">elementData</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">newSize</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 检查给定的索引是否在范围内。
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">void</span> <span class="nf">rangeCheck</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&gt;=</span> <span class="nx">size</span><span class="p">)</span>
-        <span class="nx">throw</span> <span class="nx">new</span> <span class="nf">IndexOutOfBoundsException</span><span class="p">(</span><span class="nf">outOfBoundsMsg</span><span class="p">(</span><span class="nx">index</span><span class="p">));</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 检查给定的索引是否在范围内。
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rangeCheck</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="n">outOfBoundsMsg</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * add和addAll使用的rangeCheck的一个版本
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">void</span> <span class="nf">rangeCheckForAdd</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="p">&gt;</span> <span class="nx">size</span> <span class="o">||</span> <span class="nx">index</span> <span class="p">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="nx">throw</span> <span class="nx">new</span> <span class="nf">IndexOutOfBoundsException</span><span class="p">(</span><span class="nf">outOfBoundsMsg</span><span class="p">(</span><span class="nx">index</span><span class="p">));</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * add和addAll使用的rangeCheck的一个版本
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rangeCheckForAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">size</span> <span class="o">||</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="n">outOfBoundsMsg</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 返回IndexOutOfBoundsException细节信息
-</span><span class="cm">    */</span>
-<span class="nx">private</span> <span class="nx">String</span> <span class="nf">outOfBoundsMsg</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="s">&#34;Index: &#34;</span><span class="o">+</span><span class="nx">index</span><span class="o">+</span><span class="s">&#34;, Size: &#34;</span><span class="o">+</span><span class="nx">size</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 返回IndexOutOfBoundsException细节信息
+</span><span class="cm">        */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">outOfBoundsMsg</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Index: &#34;</span><span class="o">+</span><span class="n">index</span><span class="o">+</span><span class="s">&#34;, Size: &#34;</span><span class="o">+</span><span class="n">size</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 从此列表中删除指定集合中包含的所有元素。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">removeAll</span><span class="p">(</span><span class="nx">Collection</span><span class="p">&lt;</span><span class="err">?</span><span class="p">&gt;</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">Objects</span><span class="p">.</span><span class="nf">requireNonNull</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
-    <span class="c1">//如果此列表被修改则返回true
-</span><span class="c1"></span>    <span class="k">return</span> <span class="nf">batchRemove</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 从此列表中删除指定集合中包含的所有元素。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+        <span class="c1">//如果此列表被修改则返回true
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">batchRemove</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    * 仅保留此列表中包含在指定集合中的元素。
-</span><span class="cm">    *换句话说，从此列表中删除其中不包含在指定集合中的所有元素。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">boolean</span> <span class="nf">retainAll</span><span class="p">(</span><span class="nx">Collection</span><span class="p">&lt;</span><span class="err">?</span><span class="p">&gt;</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">Objects</span><span class="p">.</span><span class="nf">requireNonNull</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nf">batchRemove</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 仅保留此列表中包含在指定集合中的元素。
+</span><span class="cm">        *换句话说，从此列表中删除其中不包含在指定集合中的所有元素。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">batchRemove</span><span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
 
 
-<span class="cm">/**
-</span><span class="cm">    * 从列表中的指定位置开始，返回列表中的元素（按正确顺序）的列表迭代器。
-</span><span class="cm">    *指定的索引表示初始调用将返回的第一个元素为next 。 初始调用previous将返回指定索引减1的元素。
-</span><span class="cm">    *返回的列表迭代器是fail-fast 。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">ListIterator</span><span class="p">&lt;</span><span class="nx">E</span><span class="p">&gt;</span> <span class="nf">listIterator</span><span class="p">(</span><span class="kt">int</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">index</span> <span class="p">&gt;</span> <span class="nx">size</span><span class="p">)</span>
-        <span class="nx">throw</span> <span class="nx">new</span> <span class="nf">IndexOutOfBoundsException</span><span class="p">(</span><span class="s">&#34;Index: &#34;</span><span class="o">+</span><span class="nx">index</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">new</span> <span class="nf">ListItr</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        * 从列表中的指定位置开始，返回列表中的元素（按正确顺序）的列表迭代器。
+</span><span class="cm">        *指定的索引表示初始调用将返回的第一个元素为next 。 初始调用previous将返回指定索引减1的元素。
+</span><span class="cm">        *返回的列表迭代器是fail-fast 。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">listIterator</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="n">size</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="s">&#34;Index: &#34;</span><span class="o">+</span><span class="n">index</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">ListItr</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    *返回列表中的列表迭代器（按适当的顺序）。
-</span><span class="cm">    *返回的列表迭代器是fail-fast 。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">ListIterator</span><span class="p">&lt;</span><span class="nx">E</span><span class="p">&gt;</span> <span class="nf">listIterator</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">new</span> <span class="nf">ListItr</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="cm">/**
+</span><span class="cm">        *返回列表中的列表迭代器（按适当的顺序）。
+</span><span class="cm">        *返回的列表迭代器是fail-fast 。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">listIterator</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">ListItr</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+    <span class="o">}</span>
 
-<span class="cm">/**
-</span><span class="cm">    *以正确的顺序返回该列表中的元素的迭代器。
-</span><span class="cm">    *返回的迭代器是fail-fast 。
-</span><span class="cm">    */</span>
-<span class="nx">public</span> <span class="nx">Iterator</span><span class="p">&lt;</span><span class="nx">E</span><span class="p">&gt;</span> <span class="nf">iterator</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">new</span> <span class="nf">Itr</span><span class="p">();</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="cm">/**
+</span><span class="cm">        *以正确的顺序返回该列表中的元素的迭代器。
+</span><span class="cm">        *返回的迭代器是fail-fast 。
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Itr</span><span class="o">();</span>
+    <span class="o">}</span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
