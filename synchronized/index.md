@@ -49,7 +49,7 @@ Synchronized的happens-before规则，即监视器锁规则：对同一个监视
 ```
 该代码的happens-before关系如图所示：
 
-![happens-before](/images/current/synchronized/schronized-happens-before.png "happens-before")
+![](/images/current/synchronized/schronized-happens-before.png "happens-before")
 
 在图中每一个箭头连接的两个节点就代表之间的happens-before关系，黑色的是通过程序顺序规则推导出来，红色的为监视器锁规则推导而出：线程A释放锁happens-before线程B加锁，蓝色的则是通过程序顺序规则和监视器锁规则推测出来happens-befor关系，通过传递性规则进一步推导的happens-before关系。现在我们来重点关注2 happens-before 5，通过这个关系我们可以得出什么? 
 
@@ -94,7 +94,7 @@ Synchronized的happens-before规则，即监视器锁规则：对同一个监视
 ```
 上述代码使用javap 编译结果
 
-![xiaochu](/images/current/synchronized/schronized-xiaochu.png "锁消除")
+![](/images/current/synchronized/schronized-xiaochu.png "锁消除")
 
 众所周知，StringBuilder不是安全同步的，但是在上述代码中，JVM判断该段代码并不会逃逸，则将该代码带默认为线程独有的资源，并不需要同步，所以执行了锁消除操作。(还有Vector中的各种操作也可实现锁消除。在没有逃逸出数据安全防卫内) 
 
@@ -112,30 +112,30 @@ Synchronized的happens-before规则，即监视器锁规则：对同一个监视
 #### 轻量级锁加锁 
 在线程执行同步块之前，JVM会先在当前线程的栈帧中创建一个名为锁记录(Lock Record)的空间，用于存储锁对象目前的Mark Word的拷贝(JVM会将对象头中的Mark Word拷贝到锁记录中，官方称为Displaced Mark Ward)这个时候线程堆栈与对象头的状态如图：
 
-![Lightweight-1](/images/current/synchronized/Lightweight-1.png "轻量级锁加锁1")
+![](/images/current/synchronized/Lightweight-1.png "轻量级锁加锁1")
 
 如上图所示：如果当前对象没有被锁定，那么锁标志位位01状态，JVM在执行当前线程时，首先会在当前线程栈帧中创建锁记录Lock Record的空间用于存储锁对象目前的Mark Word的拷贝。 ​ 
 
 然后，虚拟机使用CAS操作将标记字段Mark Word拷贝到锁记录中，并且将Mark Word更新为指向Lock Record的指针。如果更新成功了，那么这个线程就有用了该对象的锁，并且对象Mark Word的锁标志位更新为(Mark Word中最后的2bit)00，即表示此对象处于轻量级锁定状态，如图：
 
-![Lightweight-2](/images/current/synchronized/Lightweight-2.png "轻量级锁加锁2")
+![](/images/current/synchronized/Lightweight-2.png "轻量级锁加锁2")
 
 如果这个更新操作失败，JVM会检查当前的Mark Word中是否存在指向当前线程的栈帧的指针，如果有，说明该锁已经被获取，可以直接调用。如果没有，则说明该锁被其他线程抢占了，如果有两条以上的线程竞争同一个锁，那轻量级锁就不再有效，直接膨胀位重量级锁，没有获得锁的线程会被阻塞。此时，锁的标志位为10.Mark Word中存储的时指向重量级锁的指针。 ​ 
  
 轻量级解锁时，会使用原子的CAS操作将Displaced Mark Word替换回到对象头中，如果成功，则表示没有发生竞争关系。如果失败，表示当前锁存在竞争关系。锁就会膨胀成重量级锁。两个线程同时争夺锁，导致锁膨胀的流程图如下：
 
-![Lightweight-3](/images/current/synchronized/Lightweight-3.png "轻量级锁加锁3")
+![](/images/current/synchronized/Lightweight-3.png "轻量级锁加锁3")
 
 ### 偏向锁
 > 引入背景：在大多实际环境下，锁不仅不存在多线程竞争，而且总是由同一个线程多次获取，那么在同一个线程反复获取所释放锁中，其中并还没有锁的竞争，那么这样看上去，多次的获取锁和释放锁带来了很多不必要的性能开销和上下文切换。 ​
 
 为了解决这一问题，HotSpot的作者在Java SE 1.6 中对Synchronized进行了优化，引入了偏向锁。当一个线程访问同步快并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程ID，以后该线程在进入和推出同步块时不需要进行CAS操作来加锁和解锁。只需要简单地测试一下对象头的Mark Word里是否存储着指向当前线程的偏向锁。如果成功，表示线程已经获取到了锁。
 
-![pianxiang1](/images/current/synchronized/pianxiang1.png "偏向锁1")
+![](/images/current/synchronized/pianxiang1.png "偏向锁1")
 
 #### 偏向锁的撤销
 偏向锁使用了一种等待竞争出现才会释放锁的机制。所以当其他线程尝试获取偏向锁时，持有偏向锁的线程才会释放锁。但是偏向锁的撤销需要等到全局安全点(就是当前线程没有正在执行的字节码)。它会首先暂停拥有偏向锁的线程，让你后检查持有偏向锁的线程是否活着。如果线程不处于活动状态，直接将对象头设置为无锁状态。如果线程活着，JVM会遍历栈帧中的锁记录，栈帧中的锁记录和对象头要么偏向于其他线程，要么恢复到无锁状态或者标记对象不适合作为偏向锁。
-![pianxiang2](/images/current/synchronized/pianxiang2.png "偏向锁2")
+![](/images/current/synchronized/pianxiang2.png "偏向锁2")
 
 ### 锁的优缺点对比
 | 锁    | 优点 | 缺点   | 使用场景   |
