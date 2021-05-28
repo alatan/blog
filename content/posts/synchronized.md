@@ -9,6 +9,8 @@ tags: ["并发编程"]
 categories: ["Java基础"]  
 author: "默哥"  
 
+lightgallery: true
+
 toc:
   auto: false
 ---
@@ -62,6 +64,8 @@ Synchronized的happens-before规则，即监视器锁规则：对同一个监视
 该代码的happens-before关系如图所示：
 
 ![happens-before](/images/current/synchronized/schronized-happens-before.png)
+
+![基本配置下的预览](basic-configuration-preview.zh-cn.png "基本配置下的预览")
 
 在图中每一个箭头连接的两个节点就代表之间的happens-before关系，黑色的是通过程序顺序规则推导出来，红色的为监视器锁规则推导而出：线程A释放锁happens-before线程B加锁，蓝色的则是通过程序顺序规则和监视器锁规则推测出来happens-befor关系，通过传递性规则进一步推导的happens-before关系。现在我们来重点关注2 happens-before 5，通过这个关系我们可以得出什么? 
 
