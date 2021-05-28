@@ -106,7 +106,7 @@
         <a href="/javacurrent/">Java并发编程概览</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-04-01">2018-04-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">并发三要素 可见性 一个线程对共享变量的修改，另外一个线程能够立刻看到；产生原因：CPU增加了缓存，以均衡与内存的速度差异导致。
 原子性 一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行；产生原因：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致。
-x = 10; //语句1: 直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中 y = x; //语句2: 包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。 x++; //语句3： x++包括3个操作：读取x的值，进行加1操作，写入新的值。 x = x + 1; //语句4： 同语句3  有序性 程序执行的顺序按照代码的先后顺序执行；产生原因：由于编译程序指令重排序优化指令执行次序，使得缓存能够得到更加合理地利用导致。
+1 2 3 4  x = 10; //语句1: 直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中  y = x; //语句2: 包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。  x++; //语句3： x++包括3个操作：读取x的值，进行加1操作，写入新的值。  x = x + 1; //语句4： 同语句3   有序性 程序执行的顺序按照代码的先后顺序执行；产生原因：由于编译程序指令重排序优化指令执行次序，使得缓存能够得到更加合理地利用导致。
 线程安全的实现方法 互斥同步(阻塞同步)  synchronized(JVM实现) ReentrantLock(JDK实现)  互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。
 互斥同步属于一种悲观的并发策略，总是认为只要不去做正确的同步措施，那就肯定会出现问题。无论共享数据是否真的会出现竞争，它都要进行加锁(这里讨论的是概念模型，实际上虚拟机会优化掉很大一部分不必要的加锁)、用户态核心态转换、维护锁计数器和检查是否有被阻塞的线程需要唤醒等操作。
 非阻塞同步  CAS  随着硬件指令集的发展，我们可以使用基于冲突检测的乐观并发策略: 先进行操作，如果没有其它线程争用共享数据，那操作就成功了，否则采取补偿措施(不断地重试，直到成功为止)。这种乐观的并发策略的许多实现都不需要将线程阻塞，因此这种同步操作称为非阻塞同步。
@@ -115,9 +115,7 @@ x = 10; //语句1: 直接将数值10赋值给x，也就是说线程执行这个�
 无需同步方案   栈封闭（多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为局部变量存储在虚拟机栈中，属于线程私有的。）
   线程本地存储(可以使用java.lang.ThreadLocal类来实现线程本地存储功能)
   如果一段代码中所需要的数据必须与其他代码共享，那就看看这些共享数据的代码是否能保证在同一个线程中执行。如果能保证，我们就可以把共享数据的可见范围限制在同一个线程之内，这样，无须同步也能保证线程之间不出现数据争用的问题。
-  符合这种特点的应用并不少见，大部分使用消费队列的架构模式(如“生产者-消费者”模式)都会将产品的消费过程尽量在一个线程中消费完。
-  其中最重要的一个应用实例就是经典 Web 交互模型中的“一个请求对应一个服务器线程”(Thread-per-Request)的处理方式，这种处理方式的广泛应用使得很多 Web 服务端应用都可以使用线程本地存储来解决线程安全问题。
-    </div><div class="post-footer">
+  符合这种特点的应用并不少见，大部分使用消费队列的架构模式(如“生产者-消费者”模式)都会将产品的消费过程尽量在一个线程中消费完。</div><div class="post-footer">
         <a href="/javacurrent/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
@@ -147,11 +145,13 @@ Collection List 对付顺序的好帮手： 存储的元素是有序的、可重
 Java 反射主要提供以下功能  在运行时构造任意一个类的对象。 在运行时调用任意一个对象的方法。 在运行时判断任意一个对象所属的类。 在运行时判断任意一个类所具有的成员变量和方法（通过反射甚至可以调用private方法）。  反射的主要用途 反射最重要的用途就是开发各种通用框架。
 很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。
 举一个例子，在运用 Struts 2 框架的开发中我们一般会在 struts.xml 里去配置 Action，比如：
-1 2 3 4  &lt;action name=&#34;login&#34; class=&#34;org.ScZyhSoft.test.action.SimpleLoginAction&#34; method=&#34;execute&#34;&gt; &lt;result&gt;/shop/shop-index.jsp&lt;/result&gt; &lt;result name=&#34;error&#34;&gt;login.jsp&lt;/result&gt; &lt;/action&gt;   配置文件与 Action 建立了一种映射关系，当 View 层发出请求时，请求会被 StrutsPrepareAndExecuteFilter 拦截，然后 StrutsPrepareAndExecuteFilter 会去动态地创建 Action 实例。比如我们请求 login.action，那么 StrutsPrepareAndExecuteFilter就会去解析struts.xml文件，检索action中name为login的Action，并根据class属性创建SimpleLoginAction实例，并用invoke方法来调用execute方法，这个过程离不开反射。
+&lt;action name=&quot;login&quot; class=&quot;org.ScZyhSoft.test.action.SimpleLoginAction&quot; method=&quot;execute&quot;&gt; &lt;result&gt;/shop/shop-index.jsp&lt;/result&gt; &lt;result name=&quot;error&quot;&gt;login.jsp&lt;/result&gt; &lt;/action&gt;  配置文件与 Action 建立了一种映射关系，当 View 层发出请求时，请求会被 StrutsPrepareAndExecuteFilter 拦截，然后 StrutsPrepareAndExecuteFilter 会去动态地创建 Action 实例。比如我们请求 login.action，那么 StrutsPrepareAndExecuteFilter就会去解析struts.xml文件，检索action中name为login的Action，并根据class属性创建SimpleLoginAction实例，并用invoke方法来调用execute方法，这个过程离不开反射。
 对与框架开发人员来说，反射虽小但作用非常大，它是各种容器实现的核心。而对于一般的开发者来说，不深入框架开发则用反射用的就会少一点，不过了解一下框架的底层机制有助于丰富自己的编程思想，也是很有益的。
 像Java中的一大利器注解的实现也用到了反射。
 为什么你使用 Spring 的时候 ，一个@Component注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 @Value注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？
-这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。</div><div class="post-footer">
+这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。
+反射的基本运用 获得Class对象 使用Class类的forName 静态方法。
+Class appleClass = Class.</div><div class="post-footer">
         <a href="/reflection/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">

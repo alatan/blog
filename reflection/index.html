@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/reflection\/"
-        },"genre": "posts","keywords": "Java基础","wordcount":  210 ,
+        },"genre": "posts","keywords": "Java基础","wordcount":  170 ,
         "url": "https:\/\/moge.fun\/reflection\/","datePublished": "2018-02-03T00:00:00+00:00","dateModified": "2018-02-03T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,204 +103,118 @@
 <main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">框架的灵魂-反射</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-03">2018-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 210 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-03">2018-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 170 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"></div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是反射">什么是反射</a>
+      <ul>
+        <li><a href="#java-反射主要提供以下功能">Java 反射主要提供以下功能</a></li>
+      </ul>
+    </li>
+    <li><a href="#反射的主要用途">反射的主要用途</a></li>
+    <li><a href="#反射的基本运用">反射的基本运用</a>
+      <ul>
+        <li><a href="#获得class对象">获得Class对象</a></li>
+        <li><a href="#构造方法">构造方法</a></li>
+        <li><a href="#属性">属性</a></li>
+        <li><a href="#方法">方法</a></li>
+        <li><a href="#调用方法">调用方法</a></li>
+        <li><a href="#利用反射创建数组">利用反射创建数组</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
             </div><div class="content" id="content"><h2 id="什么是反射">什么是反射</h2>
-
 <p><em>简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。
 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。
 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未知的。</em></p>
-
 <p><strong>反射的核心是 JVM 在运行时才动态加载类或调用方法/访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。</strong></p>
-
 <h3 id="java-反射主要提供以下功能">Java 反射主要提供以下功能</h3>
-
 <ul>
 <li>在运行时构造任意一个类的对象。</li>
 <li>在运行时调用任意一个对象的方法。</li>
 <li>在运行时判断任意一个对象所属的类。</li>
 <li>在运行时判断任意一个类所具有的成员变量和方法（通过反射甚至可以调用private方法）。</li>
 </ul>
-
 <h2 id="反射的主要用途">反射的主要用途</h2>
-
 <p><strong>反射最重要的用途就是开发各种通用框架。</strong></p>
-
 <p>很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。</p>
-
 <p>举一个例子，在运用 Struts 2 框架的开发中我们一般会在 struts.xml 里去配置 Action，比如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;action name=&#34;login&#34; class=&#34;org.ScZyhSoft.test.action.SimpleLoginAction&#34; method=&#34;execute&#34;&gt;
+<pre><code>&lt;action name=&quot;login&quot; class=&quot;org.ScZyhSoft.test.action.SimpleLoginAction&quot; method=&quot;execute&quot;&gt;
     &lt;result&gt;/shop/shop-index.jsp&lt;/result&gt;
-    &lt;result name=&#34;error&#34;&gt;login.jsp&lt;/result&gt;
-&lt;/action&gt;</code></pre></td></tr></table>
-</div>
-</div>
+    &lt;result name=&quot;error&quot;&gt;login.jsp&lt;/result&gt;
+&lt;/action&gt;
+</code></pre>
 <p>配置文件与 Action 建立了一种映射关系，当 View 层发出请求时，请求会被 StrutsPrepareAndExecuteFilter 拦截，然后 StrutsPrepareAndExecuteFilter 会去动态地创建 Action 实例。比如我们请求 login.action，那么 StrutsPrepareAndExecuteFilter就会去解析struts.xml文件，检索action中name为login的Action，并根据class属性创建SimpleLoginAction实例，并用invoke方法来调用execute方法，这个过程离不开反射。</p>
-
 <p>对与框架开发人员来说，反射虽小但作用非常大，它是各种容器实现的核心。而对于一般的开发者来说，不深入框架开发则用反射用的就会少一点，不过了解一下框架的底层机制有助于丰富自己的编程思想，也是很有益的。</p>
-
 <p><strong>像Java中的一大利器注解的实现也用到了反射。</strong></p>
-
 <p>为什么你使用 Spring 的时候 ，一个@Component注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 @Value注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？</p>
-
 <p>这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。</p>
-
 <h2 id="反射的基本运用">反射的基本运用</h2>
-
 <h3 id="获得class对象">获得Class对象</h3>
-
 <p>使用Class类的forName 静态方法。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Class appleClass = Class.forName(&#34;base.reflection.Apple&#34;);</code></pre></td></tr></table>
-</div>
-</div>
+<pre><code>Class appleClass = Class.forName(&quot;base.reflection.Apple&quot;);
+</code></pre>
 <p>直接获取</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Class appleClass = Apple.class;</code></pre></td></tr></table>
-</div>
-</div>
+<pre><code>Class appleClass = Apple.class;
+</code></pre>
 <p>获取某一个对象的class</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Apple apple = new Apple();
-Class appleClass = apple.getClass();</code></pre></td></tr></table>
-</div>
-</div>
+<pre><code>Apple apple = new Apple();
+Class appleClass = apple.getClass();
+</code></pre>
 <p>通过类加载器ClassLoader.loadClass()传入类路径获取</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Class appleClass = ClassLoader.getSystemClassLoader().loadClass(&#34;base.reflection.Apple&#34;);</code></pre></td></tr></table>
-</div>
-</div>
+<pre><code>Class appleClass = ClassLoader.getSystemClassLoader().loadClass(&quot;base.reflection.Apple&quot;);
+</code></pre>
 <h3 id="构造方法">构造方法</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Constructor[] declaredConstructors = appleClass.getDeclaredConstructors();
+<pre><code>Constructor[] declaredConstructors = appleClass.getDeclaredConstructors();
 Constructor[] constructors = appleClass.getConstructors();
 //通过无参构造来获取该类对象 newInstance()
 Apple apple= (Apple)appleClass.newInstance();
 //通过有参构造来获取该类对象 newInstance
 Constructor constructor = appleClass.getConstructor(String.class,int.class,int.class);
-Apple apple=(Apple)constructor.newInstance(&#34;红色&#34;,10,5);</code></pre></td></tr></table>
-</div>
-</div>
+Apple apple=(Apple)constructor.newInstance(&quot;红色&quot;,10,5);
+</code></pre>
 <h3 id="属性">属性</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">  //getDeclaredFields所有已声明的成员变量，但不能得到其父类的成员变量
+<pre><code>  //getDeclaredFields所有已声明的成员变量，但不能得到其父类的成员变量
   Field[] declaredFields = appleClass.getDeclaredFields();
   //getFields访问公有的成员变量
-  Field[] fields = appleClass.getFields();</code></pre></td></tr></table>
-</div>
-</div>
+  Field[] fields = appleClass.getFields();
+</code></pre>
 <h3 id="方法">方法</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">//getDeclaredMethods 方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。
+<pre><code>//getDeclaredMethods 方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。
 Method[] declaredMethods = appleClass.getDeclaredMethods();
 //getMethods方法返回某个类的所有公用（public）方法，包括其继承类的公用方法。
-Method[] methods = appleClass.getMethods();</code></pre></td></tr></table>
-</div>
-</div>
+Method[] methods = appleClass.getMethods();
+</code></pre>
 <h3 id="调用方法">调用方法</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Constructor constructor = appleClass.getConstructor(String.class,int.class,int.class);
-Apple apple = (Apple)constructor.newInstance(&#34;红色&#34;,10,5);
+<pre><code>Constructor constructor = appleClass.getConstructor(String.class,int.class,int.class);
+Apple apple = (Apple)constructor.newInstance(&quot;红色&quot;,10,5);
 //获取toString方法并调用
-Method method = appleClass.getDeclaredMethod(&#34;toString&#34;);
+Method method = appleClass.getDeclaredMethod(&quot;toString&quot;);
 String str = (String)method.invoke(apple);
-System.out.println(str);</code></pre></td></tr></table>
-</div>
-</div>
+System.out.println(str);
+</code></pre>
 <h3 id="利用反射创建数组">利用反射创建数组</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Class&lt;?&gt; cls = Class.forName(&#34;java.lang.String&#34;);
+<pre><code>Class&lt;?&gt; cls = Class.forName(&quot;java.lang.String&quot;);
 Object array = Array.newInstance(cls,5);
 //往数组里添加内容
-Array.set(array,0,&#34;hello&#34;);
-Array.set(array,1,&#34;Java&#34;);
-Array.set(array,2,&#34;fuck&#34;);
-Array.set(array,3,&#34;Scala&#34;);
-Array.set(array,4,&#34;Clojure&#34;);
+Array.set(array,0,&quot;hello&quot;);
+Array.set(array,1,&quot;Java&quot;);
+Array.set(array,2,&quot;fuck&quot;);
+Array.set(array,3,&quot;Scala&quot;);
+Array.set(array,4,&quot;Clojure&quot;);
 //获取某一项的内容
-System.out.println(Array.get(array,3));</code></pre></td></tr></table>
-</div>
-</div></div><div class="post-footer" id="post-footer">
+System.out.println(Array.get(array,3));</code></pre>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
