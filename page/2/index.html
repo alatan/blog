@@ -145,13 +145,11 @@ Collection List 对付顺序的好帮手： 存储的元素是有序的、可重
 Java 反射主要提供以下功能  在运行时构造任意一个类的对象。 在运行时调用任意一个对象的方法。 在运行时判断任意一个对象所属的类。 在运行时判断任意一个类所具有的成员变量和方法（通过反射甚至可以调用private方法）。  反射的主要用途 反射最重要的用途就是开发各种通用框架。
 很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。
 举一个例子，在运用 Struts 2 框架的开发中我们一般会在 struts.xml 里去配置 Action，比如：
-&lt;action name=&quot;login&quot; class=&quot;org.ScZyhSoft.test.action.SimpleLoginAction&quot; method=&quot;execute&quot;&gt; &lt;result&gt;/shop/shop-index.jsp&lt;/result&gt; &lt;result name=&quot;error&quot;&gt;login.jsp&lt;/result&gt; &lt;/action&gt;  配置文件与 Action 建立了一种映射关系，当 View 层发出请求时，请求会被 StrutsPrepareAndExecuteFilter 拦截，然后 StrutsPrepareAndExecuteFilter 会去动态地创建 Action 实例。比如我们请求 login.action，那么 StrutsPrepareAndExecuteFilter就会去解析struts.xml文件，检索action中name为login的Action，并根据class属性创建SimpleLoginAction实例，并用invoke方法来调用execute方法，这个过程离不开反射。
+1 2 3 4  &lt;action name=&#34;login&#34; class=&#34;org.ScZyhSoft.test.action.SimpleLoginAction&#34; method=&#34;execute&#34;&gt; &lt;result&gt;/shop/shop-index.jsp&lt;/result&gt; &lt;result name=&#34;error&#34;&gt;login.jsp&lt;/result&gt; &lt;/action&gt;   配置文件与 Action 建立了一种映射关系，当 View 层发出请求时，请求会被 StrutsPrepareAndExecuteFilter 拦截，然后 StrutsPrepareAndExecuteFilter 会去动态地创建 Action 实例。比如我们请求 login.action，那么 StrutsPrepareAndExecuteFilter就会去解析struts.xml文件，检索action中name为login的Action，并根据class属性创建SimpleLoginAction实例，并用invoke方法来调用execute方法，这个过程离不开反射。
 对与框架开发人员来说，反射虽小但作用非常大，它是各种容器实现的核心。而对于一般的开发者来说，不深入框架开发则用反射用的就会少一点，不过了解一下框架的底层机制有助于丰富自己的编程思想，也是很有益的。
 像Java中的一大利器注解的实现也用到了反射。
 为什么你使用 Spring 的时候 ，一个@Component注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 @Value注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？
-这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。
-反射的基本运用 获得Class对象 使用Class类的forName 静态方法。
-Class appleClass = Class.</div><div class="post-footer">
+这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。</div><div class="post-footer">
         <a href="/reflection/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
