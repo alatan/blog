@@ -1,7 +1,7 @@
 ---  
-weight: 2
 title: "数组"  
 date: 2017-02-01
+weight: 70
 draft: false  
 keywords: ["数组"]  
 description: "数组是用于储存多个相同类型数据的集合"  
@@ -11,8 +11,6 @@ author: "默哥"
 lightgallery: true
 toc:
   auto: false
-math:
-  enable: true
 ---
 
 ## 定义
