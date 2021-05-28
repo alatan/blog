@@ -2,12 +2,15 @@
 title: "HashMap详解"  
 date: 2018-03-03
 weight: 70  
-draft: false  
-keywords: ["HashMap"]  
+draft: false 
+author: "默哥"
 description: "HashMap详解"  
+
 tags: ["数据结构"]  
 categories: ["Java基础"]  
-author: "默哥"  
+
+lightgallery: true
+
 toc:
   auto: false
 ---  

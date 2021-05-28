@@ -2,13 +2,17 @@
 title: "Java并发编程概览"  
 date: 2018-04-01
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: [""]  
 description: "Java并发编程"  
-tags: ["并发编程"]
+tags: ["并发编程", "大纲"]
 categories: ["Java基础"]  
 author: "默哥"  
+
+lightgallery: true
+
+toc:
+  auto: false
 ---
 
 ![Java并发编程概览](/images/current/concurrentOverview.png)

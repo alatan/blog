@@ -2,13 +2,17 @@
 title: "Java知识大纲"  
 date: 2020-01-01
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: [""]  
 description: "Java知识大纲"  
 tags: ["大纲"]  
 categories: ["知识体系"]  
 author: "默哥"  
+
+lightgallery: true
+
+toc:
+  auto: false
 ---  
 ## 基础
 #### 数据结构与算法

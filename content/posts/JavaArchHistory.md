@@ -2,13 +2,17 @@
 title: "Java架构演变历史"  
 date: 2020-03-01
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: ["微服务"]  
 description: "Java架构演变历史"  
 tags: [ "大纲"]  
 categories: ["知识体系"]  
 author: "默哥"  
+
+lightgallery: true
+
+toc:
+  auto: false
 ---  
 ***Java网站架构演变过程，大致分为5个阶段，分别为单体架构、集群架构、分布式架构、SOA架构和微服务架构。***
 

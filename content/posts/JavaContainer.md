@@ -2,13 +2,17 @@
 title: "Java容器概览"  
 date: 2018-03-01
 weight: 70  
-markup: mmark  
 draft: false  
-keywords: [""]  
 description: "Java容器"  
-tags: ["数据结构"]  
-categories: ["Java基础"]  
 author: "默哥"  
+
+tags: ["数据结构", "大纲"]  
+categories: ["Java基础"]  
+
+lightgallery: true
+
+toc:
+  auto: false
 ---  
 ## 概览
 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。

@@ -2,13 +2,17 @@
 title: "synchronized详解"  
 date: 2018-04-02
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: [""]  
 description: "synchronized详解"  
 tags: ["并发编程"]
 categories: ["Java基础"]  
 author: "默哥"  
+
+lightgallery: true
+
+toc:
+  auto: false
 ---
 
 ##  synchronized的使用
