@@ -2,13 +2,15 @@
 title: "减缓焦虑，积聚生活正能量"  
 date: 2015-01-01
 weight: 70  
-markup: mmark  
 draft: false  
-keywords: [""]  
+author: "默哥" 
 description: "舒缓生活"  
+
 tags: ["生活"]  
 categories: ["反思"]  
-author: "默哥"  
+
+toc:
+  auto: false
 ---  
 
 1. 面对不断袭来的压力和信息，我们要做的，就是找到自己的节奏，建立一套稳定的模式，用来应对和处理种种事务。尽可能让一切「平稳」下来。

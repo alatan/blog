@@ -2,13 +2,15 @@
 title: "哈希表"  
 date: 2017-02-03
 weight: 70  
-markup: mmark  
 draft: false  
 keywords: ["散列"]  
 description: "散列是数组和链表的结合体"  
 tags: ["数据结构"]  
 categories: ["数据结构"]  
 author: "默哥"  
+
+toc:
+  auto: false
 ---
 ## 定义
 散列Hash是和顺序、链接和索引一样，是存储集合或者线性表的一种方法。

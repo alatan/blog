@@ -3,12 +3,12 @@ title: "数组"
 date: 2017-02-01
 weight: 70
 draft: false  
-keywords: ["数组"]  
+author: "默哥"  
 description: "数组是用于储存多个相同类型数据的集合"  
+
 tags: ["数据结构"]  
 categories: ["数据结构"]  
-author: "默哥"  
-lightgallery: true
+
 toc:
   auto: false
 ---
