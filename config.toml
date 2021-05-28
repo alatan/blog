@@ -26,14 +26,14 @@ theme = "LoveIt"
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   #  日期格式
-  dateFormat = "2006-01-02"
+  dateFormat = "1990-01-22"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
 
   #  应用图标配置
   [params.app]
     # 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题
-    title = "LoveIt"
+    title = "Journey to the Life"
     # 是否隐藏网站图标资源链接
     noFavicon = false
     # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
@@ -55,7 +55,7 @@ theme = "LoveIt"
     # 搜索框的占位提示语
     placeholder = ""
     #  最大结果数目
-    maxResultLength = 10
+    maxResultLength = 5
     #  结果内容片段长度
     snippetLength = 50
     #  搜索结果中高亮部分的 HTML 标签
@@ -73,7 +73,7 @@ theme = "LoveIt"
     desktopMode = "fixed"
     # 移动端导航栏模式 ("fixed", "normal", "auto")
     mobileMode = "auto"
-    #  页面头部导航栏标题配置
+    # 页面头部导航栏标题配置
     [params.header.title]
       # LOGO 的 URL
       logo = ""
@@ -183,7 +183,7 @@ theme = "LoveIt"
       #  是否保持使用文章前面的静态目录
       keepStatic = false
       # 是否使侧边目录自动折叠展开
-      auto = false
+      auto = true
     #  代码配置
     [params.page.code]
       # 是否显示代码块的复制按钮
@@ -225,7 +225,7 @@ theme = "LoveIt"
       Weibo = true
     #  评论系统设置
     [params.page.comment]
-      enable = false
+      enable = true
       #  Utterances 评论系统设置
       [params.page.comment.utterances]
         enable = true
@@ -298,7 +298,7 @@ theme = "LoveIt"
 
   #  Cookie 许可配置
   [params.cookieconsent]
-    enable = true
+    enable = false
     # 用于 Cookie 许可横幅的文本字符串
     [params.cookieconsent.content]
       message = ""
