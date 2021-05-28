@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/hashmap\/"
-        },"genre": "posts","keywords": "数据结构","wordcount":  1215 ,
+        },"genre": "posts","keywords": "数据结构","wordcount":  983 ,
         "url": "https:\/\/moge.fun\/hashmap\/","datePublished": "2018-03-03T00:00:00+00:00","dateModified": "2018-03-03T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,18 +106,41 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">HashMap详解</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-03-03">2018-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1215 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-03-03">2018-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 983 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"></div>
-            </div><div class="content" id="content"><p><figure><img src="/images/container/HashMap.png" alt="HashMap"></figure></p>
-
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#实现步骤">实现步骤</a></li>
+    <li><a href="#关键特性">关键特性</a></li>
+    <li><a href="#hashmap在17和18之间的变化">HashMap在1.7和1.8之间的变化：</a></li>
+    <li><a href="#方法jdk18-数组链表红黑树">方法（JDK1.8-数组+链表/红黑树）</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#确定哈希桶数组索引位置">确定哈希桶数组索引位置</a></li>
+            <li><a href="#hashmap的put方法">HashMap的put方法</a></li>
+            <li><a href="#扩容resize-方法">扩容resize 方法</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#参考文章">参考文章</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/container/HashMap.png"
+        data-srcset="/images/container/HashMap.png, /images/container/HashMap.png 1.5x, /images/container/HashMap.png 2x"
+        data-sizes="auto"
+        alt="/images/container/HashMap.png"
+        title="HashMap" /></p>
 <h2 id="实现步骤">实现步骤</h2>
-
 <ol>
 <li>HashMap基于哈希散列表，数组+链表/红黑树实现。</li>
 <li>通过key的hashCode()方法计算出hashCode。</li>
@@ -128,9 +151,7 @@
 <li>如果第6步中第链表大小超过阈值（TREEIFY_THRESHOLD,8），链表转换为红黑树。</li>
 <li>在转换为红黑树时，会判断数组长度大于64才转换，否则继续采用扩容策略而不转换。</li>
 </ol>
-
 <h2 id="关键特性">关键特性</h2>
-
 <ol>
 <li>默认初始容量值为16，负载因子为0.75，当size&gt;=threshold（ threshold等于“容量<em>负载因子”）时，会发生扩容：newsize = oldsize</em>2，size一定为2的n次幂</li>
 <li>hash冲突默认采用单链表存储，当单链表节点个数大于8时且数组长度大于64，会转化为红黑树存储，</li>
@@ -138,9 +159,7 @@
 <li>扩容针对整个Map，每次扩容时，原来数组中的元素依次重新计算存放位置，并重新插入</li>
 <li>当Map中元素总数超过Entry数组的75%，触发扩容操作，为了减少链表长度，元素分配更均匀</li>
 </ol>
-
 <h2 id="hashmap在17和18之间的变化">HashMap在1.7和1.8之间的变化：</h2>
-
 <ol>
 <li>1.7中是先扩容后插入新值的，1.8中是先插值再扩容</li>
 <li>1.7中采用数组+链表，1.8采用的是数组+链表/红黑树，即在1.7中链表长度超过一定长度后就改成红黑树存储。</li>
@@ -148,201 +167,42 @@
 <li>1.7是采用表头插入法插入链表，1.8采用的是尾部插入法。</li>
 <li>在1.7中采用表头插入法，在扩容时会改变链表中元素原本的顺序，以至于在并发场景下导致链表成环的问题；在1.8中采用尾部插入法，在扩容时会保持链表元素原本的顺序，就不会出现链表成环的问题了。</li>
 </ol>
-
-<h2 id="方法jdk18数组链表红黑树">方法（JDK1.8-数组+链表/红黑树）</h2>
-
+<h2 id="方法jdk18-数组链表红黑树">方法（JDK1.8-数组+链表/红黑树）</h2>
 <h4 id="确定哈希桶数组索引位置">确定哈希桶数组索引位置</h4>
-
-<p><figure><img src="/images/container/HashMpaCalPosition.png" alt="HashMpaCalPosition"></figure>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/container/HashMpaCalPosition.png"
+        data-srcset="/images/container/HashMpaCalPosition.png, /images/container/HashMpaCalPosition.png 1.5x, /images/container/HashMpaCalPosition.png 2x"
+        data-sizes="auto"
+        alt="/images/container/HashMpaCalPosition.png"
+        title="HashMpaCalPosition" />
 <strong>第1步计算hash</strong></p>
-
-<p>在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度、功效、质量来考虑的。
+<p>在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：(h = k.hashCode()) ^ (h &raquo;&gt; 16)，主要是从速度、功效、质量来考虑的。
 目的都是在数组很小也能降低hash碰撞。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">static final int hash(Object key) {
+<pre><code>static final int hash(Object key) {
   int h;
   // key.hashCode()：返回散列值也就是hashcode
   // ^ ：按位异或
   // &gt;&gt;&gt;:无符号右移，忽略符号位，空位都以0补齐
-  return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);</code></pre></td></tr></table>
-</div>
-</div>
+  return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+</code></pre>
 <p>}</p>
-
 <p><strong>第2步计算数组位置</strong></p>
-
 <p>通过(n - 1) &amp; hash来得到该对象的保存位，而HashMap底层数组的长度总是2的n次方。
 当<strong>length总是2的n次方</strong>时，h&amp; (length-1)运算等价于对length取模，也就是h%length，但是&amp;(位运算)比%(取模运算)具有更高的效率。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">(n - 1) &amp; hash</code></pre></td></tr></table>
-</div>
-</div>
+<pre><code>(n - 1) &amp; hash
+</code></pre>
 <h4 id="hashmap的put方法">HashMap的put方法</h4>
-
-<p><figure><img src="/images/container/HashMpaPut.png" alt="HashMpaPut"></figure></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span><span class="lnt">140
-</span><span class="lnt">141
-</span><span class="lnt">142
-</span><span class="lnt">143
-</span><span class="lnt">144
-</span><span class="lnt">145
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">public V put(K key, V value) {
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/container/HashMpaPut.png"
+        data-srcset="/images/container/HashMpaPut.png, /images/container/HashMpaPut.png 1.5x, /images/container/HashMpaPut.png 2x"
+        data-sizes="auto"
+        alt="/images/container/HashMpaPut.png"
+        title="HashMpaPut" /></p>
+<pre><code>public V put(K key, V value) {
     // 对key的hashCode()做hash
     return putVal(hash(key), key, value, false, true);
 }
@@ -486,97 +346,11 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
         }
         assert checkInvariants(root);
     }
-}</code></pre></td></tr></table>
-</div>
-</div>
+}
+</code></pre>
 <h4 id="扩容resize-方法">扩容resize 方法</h4>
-
 <p>进行扩容，会伴随着一次重新 hash 分配，并且会遍历 hash 表中所有的元素，是非常耗时的。在编写程序中，<strong>要尽量避免resize</strong>。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">final Node&lt;K,V&gt;[] resize() {
+<pre><code>final Node&lt;K,V&gt;[] resize() {
     Node&lt;K,V&gt;[] oldTab = table;
     int oldCap = (oldTab == null) ? 0 : oldTab.length;
     int oldThr = threshold;
@@ -604,7 +378,7 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
         newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ? (int)ft : Integer.MAX_VALUE);
     }
     threshold = newThr;
-    @SuppressWarnings({&#34;rawtypes&#34;,&#34;unchecked&#34;})
+    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
         Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
     table = newTab;
     if (oldTab != null) {
@@ -655,11 +429,9 @@ static &lt;K,V&gt; void moveRootToFront(Node&lt;K,V&gt;[] tab, TreeNode&lt;K,V&g
         }
     }
     return newTab;
-}</code></pre></td></tr></table>
-</div>
-</div>
+}
+</code></pre>
 <h2 id="参考文章">参考文章</h2>
-
 <ol>
 <li><a href="https://www.hollischuang.com/archives/2091">https://www.hollischuang.com/archives/2091</a></li>
 <li><a href="https://yuanrengu.com/2020/ba184259.html">https://yuanrengu.com/2020/ba184259.html</a></li>
