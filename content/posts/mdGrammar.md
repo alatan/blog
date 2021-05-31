@@ -82,12 +82,14 @@ author: "默哥"
 | 股票基金  | 5亿  |  理财     |
 
 ### 代码区域（四个空格）
-    /** 这是一个Java代码区块 */
-    public static void main(String[] args) {
-        System.out.println("Hello World");
-    }
+```java
+/** 这是一个Java代码区块 */
+public static void main(String[] args) {
+    System.out.println("Hello World");
+}
+```
 
 ### 图像
-    ![星辰大海](/images/star.png)
+    ![](/images/star.png "星辰大海")
 
-![星辰大海](/images/star.png)
+![](/images/star.png "星辰大海")
