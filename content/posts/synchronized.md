@@ -220,10 +220,10 @@ Synchronized只有锁只与一个条件(是否获取锁)相关联，不灵活，
 ## 再深入理解
 synchronized是通过软件(JVM)实现的，简单易用，即使在JDK5之后有了Lock，仍然被广泛地使用。 
 
-### 使用synchronized有哪些要注意的？ 
+### 使用synchronized注意点
+* 避免死锁 
 * 锁对象不能为空，因为锁的信息都保存在对象头里 
 * 作用域不宜过大，影响程序执行的速度，控制范围过大，编写代码也容易出错 
-* 避免死锁 
 * 在能选择的情况下，既不要用Lock也不要用synchronized关键字，用java.util.concurrent包中的各种各样的类，如果不用该包下的类，在满足业务的情况下，可以使用synchronized关键，因为代码量少，避免出错 
 
 ### synchronized是公平锁吗？ 

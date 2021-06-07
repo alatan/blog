@@ -100,9 +100,55 @@ J.U.C 包提供了一个带有标记的原子引用类 AtomicStampedReference �
 
 ## 解决并发
 ### 3个关键字
-* synchronized:可保证原子性，可见性，有序性
-* volatile：可见性
-* final：有序性
+#### synchronized：原子性，可见性，有序性
+#### volatile：有序性，可见性
+##### 防重排序
+```java
+public class Singleton {
+    public static volatile Singleton singleton;
+    /**
+     * 构造函数私有，禁止外部实例化
+     */
+    private Singleton() {};
+    public static Singleton getInstance() {
+        if (singleton == null) {
+            synchronized (singleton.class) {
+                if (singleton == null) {
+                    singleton = new Singleton();
+                }
+            }
+        }
+        return singleton;
+    }
+}
+```
+现在我们分析一下为什么要在变量singleton之间加上volatile关键字。要理解这个问题，先要了解对象的构造过程，实例化一个对象其实可以分为三个步骤： 
+1. 分配内存空间。
+2. 初始化对象。 
+3. 将内存空间的地址赋值给对应的引用。 
+
+但是由于操作系统可以对指令进行重排序，所以上面的过程也可能会变成如下过程： 
+1. 分配内存空间。 
+2. 将内存空间的地址赋值给对应的引用。 
+3. 初始化对象 
+ 
+如果是这个流程，多线程环境下就可能将一个未初始化的对象引用暴露出来，从而导致不可预料的结果。因此，为了防止这个过程的重排序，我们需要将变量设置为volatile类型的变量。
+
+##### 实现可见性
+
+volatile 变量的内存可见性是基于内存屏障(Memory Barrier)实现: 
+* 内存屏障，又称内存栅栏，是一个 CPU 指令。 
+* 在程序运行时，为了提高执行性能，编译器和处理器会对指令进行重排序，JMM 为了保证在不同的编译器和 CPU 上有相同的结果，通过插入特定类型的内存屏障来禁止+ 特定类型的编译器重排序和处理器重排序，插入一条内存屏障会告诉编译器和 CPU：不管什么指令都不能和这条 Memory Barrier 指令重排序。
+* 详细见：[volatile理论基础](https://www.pdai.tech/md/java/thread/java-thread-x-key-volatile.html  "volatile理论基础")
+
+##### 使用 volatile 必须具备的条件
+* 对变量的写操作不依赖于当前值。
+* 该变量没有包含在具有其他变量的不变式中。
+* 只有在状态真正独立于程序内其他内容时才能使用volatile。
+
+#### final：有序性
+* 写final域的重排序规则可以确保：在对象引用为任意线程可见之前，对象的final域已经被正确初始化过了，而普通域就不具有这个保障。
+* 读final域的重排序规则可以确保：在读一个对象的final域之前，一定会先读这个包含这个final域的对象的引用。
 
 ### Happens-Before 规则 
 *上面提到了可以用volatile和synchronized来保证有序性。除此之外，JVM 还规定了先行发生原则，让一个操作无需控制就能先于另一个操作完成。*
