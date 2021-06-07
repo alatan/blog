@@ -103,6 +103,20 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/synchronized/">synchronized(无锁→偏向锁→轻量级锁→重量级锁)</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-04-03">2018-04-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">synchronized的使用 对象锁 包括方法锁(默认锁对象为this,当前实例对象)和同步代码块锁(自己指定锁对象)
+类锁 指synchronize修饰静态的方法或指定锁对象为Class对象
+注意点  一把锁只能同时被一个线程获取，没有获得锁的线程只能等待。 每个实例都对应有自己的一把锁(this),不同实例之间互不影响；例外：锁对象是*.class以及synchronized修饰的是static方法的时候，所有对象共用同一把锁 。 synchronized修饰的方法，无论方法正常执行完毕还是抛出异常，都会释放锁。  synchronized原理分析 加锁和释放锁的原理 Monitorenter和Monitorexit指令，会让对象在执行，使其锁计数器加1或者减1。每一个对象在同一时间只与一个monitor(锁)相关联，而一个monitor在同一时间只能被一个线程获得，一个对象在尝试获得与这个对象相关联的Monitor锁的所有权的时候，monitorenter指令会发生如下3中情况之一：
+ monitor计数器为0，意味着目前还没有被获得，那这个线程就会立刻获得然后把锁计数器+1，一旦+1，别的线程再想获取，就需要等待 如果这个monitor已经拿到了这个锁的所有权，又重入了这把锁，那锁计数器就会累加，变成2，并且随着重入的次数，会一直累加 这把锁已经被别的线程获取了，等待锁释放  monitorexit指令：释放对于monitor的所有权，释放过程很简单，就是讲monitor的计数器减1，如果减完以后，计数器不是0，则代表刚才是重入进来的，当前线程还继续持有这把锁的所有权，如果计数器变成0，则代表当前线程不再拥有该monitor的所有权，即释放锁。
+schronized-moniter" schronized-moniter 
+该图可以看出，任意线程对Object的访问，首先要获得Object的监视器，如果获取失败，该线程就进入同步状态，线程状态变为BLOCKED，当Object的监视器占有者释放后，在同步队列中得线程就会有机会重新获取该监视器。
+可重入原理：加锁次数计数器 上面的demo中在执行完同步代码块之后紧接着再会去执行一个静态同步方法，而这个方法锁的对象依然就这个类对象，那么这个正在执行的线程还需要获取该锁吗? 答案是不必的，从上图中就可以看出来，执行静态同步方法的时候就只有一条monitorexit指令，并没有monitorenter获取锁的指令。这就是锁的重入性，即在同一锁程中，线程不需要再次获取同一把锁。
+synchronized先天具有重入性。每个对象拥有一个计数器，当线程获取该对象锁后，计数器就会加一，释放锁后就会将计数器减一。
+保证可见性的原理：内存模型和happens-before规则 Synchronized的happens-before规则，即监视器锁规则：对同一个监视器的解锁，happens-before于对该监视器的加锁。继续来看代码：
+1 2 3 4 5 6 7 8 9 10 11  public class MonitorDemo { private int a = 0; public synchronized void writer() { // 1  a++; // 2  } // 3  public synchronized void reader() { // 4  int i = a; // 5  } // 6  }   该代码的happens-before关系如图所示：</div><div class="post-footer">
+        <a href="/synchronized/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/juc/">JUC-并发编程利器</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-04-02">2018-04-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">JUC概览" JUC概览 
 Lock框架和Tools类 Lock框架和Tools类" Lock框架和Tools类 
@@ -150,20 +164,6 @@ Collection List 对付顺序的好帮手： 存储的元素是有序的、可重
  ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。 Vector：和ArrayList类似，但它是线程安全的。 LinkedList：基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList还可以用作栈、队列和双向队列。  Arraylist与 LinkedList 区别?  是否保证线程安全： ArrayList和LinkedList都是不同步的，也就是不保证线程安全； 底层数据结构： Arraylist底层使用的是Object数组；LinkedList底层使用的是双向链表数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。） 插入和删除是否受元素位置的影响：  ArrayList 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行add(E e)方法的时候， ArrayList 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（add(int index, E element)）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 LinkedList 采用链表存储，所以对于add(E e)方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O(1)，如果是要在指定位置 i 插入和删除元素的话（(add(int index, E element)） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。   是否支持快速随机访问： LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于get(int index)方法)。 内存空间占用： ArrayList的空间浪费主要体现在在list列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。  Set 注重独一无二的性质: 存储的元素是无序的、不可重复的。</div><div class="post-footer">
         <a href="/javacontainer/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/reflection/">框架的灵魂-反射</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-03">2018-02-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">什么是反射 简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未知的。
-反射的核心是 JVM 在运行时才动态加载类或调用方法/访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。
-Java 反射主要提供以下功能  在运行时构造任意一个类的对象。 在运行时调用任意一个对象的方法。 在运行时判断任意一个对象所属的类。 在运行时判断任意一个类所具有的成员变量和方法（通过反射甚至可以调用private方法）。  反射的主要用途 反射最重要的用途就是开发各种通用框架。
-很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。
-举一个例子，在运用 Struts 2 框架的开发中我们一般会在 struts.xml 里去配置 Action，比如：
-1 2 3 4  &lt;action name=&#34;login&#34; class=&#34;org.ScZyhSoft.test.action.SimpleLoginAction&#34; method=&#34;execute&#34;&gt; &lt;result&gt;/shop/shop-index.jsp&lt;/result&gt; &lt;result name=&#34;error&#34;&gt;login.jsp&lt;/result&gt; &lt;/action&gt;   配置文件与 Action 建立了一种映射关系，当 View 层发出请求时，请求会被 StrutsPrepareAndExecuteFilter 拦截，然后 StrutsPrepareAndExecuteFilter 会去动态地创建 Action 实例。比如我们请求 login.action，那么 StrutsPrepareAndExecuteFilter就会去解析struts.xml文件，检索action中name为login的Action，并根据class属性创建SimpleLoginAction实例，并用invoke方法来调用execute方法，这个过程离不开反射。
-对与框架开发人员来说，反射虽小但作用非常大，它是各种容器实现的核心。而对于一般的开发者来说，不深入框架开发则用反射用的就会少一点，不过了解一下框架的底层机制有助于丰富自己的编程思想，也是很有益的。
-像Java中的一大利器注解的实现也用到了反射。
-为什么你使用 Spring 的时候 ，一个@Component注解就声明了一个类为 Spring Bean 呢？为什么你通过一个 @Value注解就读取到配置文件中的值呢？究竟是怎么起作用的呢？
-这些都是因为你可以基于反射分析类，然后获取到类/属性/方法/方法的参数上的注解。你获取到注解之后，就可以做进一步的处理。</div><div class="post-footer">
-        <a href="/reflection/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

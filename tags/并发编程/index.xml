@@ -3,8 +3,20 @@
         <title>并发编程 - 标签 - 追求卓越，幸福就会不期而遇</title>
         <link>https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
         <description>并发编程 - 标签 - 追求卓越，幸福就会不期而遇</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 03 Apr 2018 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
-    <title>synchronized 及它的四个状态：无锁、偏向锁、轻量级所、重量级锁</title>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 04 Apr 2018 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
+    <title>LockSupport详解</title>
+    <link>https://moge.fun/locksupport/</link>
+    <pubDate>Wed, 04 Apr 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/locksupport/</guid>
+    <description><![CDATA[LockSupport简介 LockSupport用来创建锁和其他同步类的基本线程阻塞原语。简而言之，当调用LockSupport.park时，表示当前线程将会等待，直至获得许可，当调用LockSupport.unpark时，必须把等待获得许可的线程作为参数进行传递，好让此线程继续运行。
+核心函数分析 在分析LockSupport函数之前，先引入sun.misc.Unsafe类中的park和unpark函数，因为LockSupport的核心函数都是基于Unsafe类中定义的park和unpark函数，下面给出两个函数的定义:
+1 2  public native void park(boolean isAbsolute, long time); public native void unpark(Thread thread);   说明: 对两个函数的说明如下:
+ park函数，阻塞线程，并且该线程在下列情况发生之前都会被阻塞: ① 调用unpark函数，释放该线程的许可。② 该线程被中断。③ 设置的时间到了。并且，当time为绝对时间时，isAbsolute为true，否则，isAbsolute为false。当time为0时，表示无限等待，直到unpark发生。 unpark函数，释放线程的许可，即激活调用park后阻塞的线程。这个函数不是安全的，调用这个函数时要确保线程依旧存活。  park函数 park函数有两个重载版本，方法摘要如下
+1 2  public static void park()； public static void park(Object blocker)；   说明: 两个函数的区别在于park()函数没有没有blocker，即没有设置线程的parkBlocker字段。park(Object)型函数如下。
+1 2 3 4 5 6 7 8 9 10  public static void park(Object blocker) { // 获取当前线程  Thread t = Thread.]]></description>
+</item><item>
+    <title>synchronized(无锁→偏向锁→轻量级锁→重量级锁)</title>
     <link>https://moge.fun/synchronized/</link>
     <pubDate>Tue, 03 Apr 2018 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
