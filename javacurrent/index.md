@@ -21,7 +21,7 @@
 ## 线程安全的实现方法
 ### 互斥同步(阻塞同步)
 #### synchronized(JVM实现)
-#### ReentrantLock(JDK实现)
+#### Lock&ReentrantLock(JDK实现)
 
 互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。
 
@@ -37,6 +37,14 @@
 硬件支持的原子性操作最典型的是: 比较并交换(Compare-and-Swap，CAS)。
 CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新值B。当执行操作时，只有当V的值等于A，才将V的值更新为B。
 
+
+#### AtomicInteger
+J.U.C 包里面的整数原子类 AtomicInteger，其中的 compareAndSet() 和 getAndIncrement() 等方法都使用了 Unsafe 类的 CAS 操作。
+
+#### ABA 
+如果一个变量初次读取的时候是 A 值，它的值被改成了 B，后来又被改回为 A，那 CAS 操作就会误认为它从来没有被改变过。 J.U.C 包提供了一个带有标记的原子引用类 AtomicStampedReference 来解决这个问题，它可以通过控制变量值的版本来保证 CAS 的正确性。大部分情况下 ABA 问题不会影响程序并发的正确性，如果需要解决 ABA 问题，改用传统的互斥同步可能会比原子类更高效。
+
+
 ### 无需同步方案
 #### 栈封闭
 多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为**局部变量存储在虚拟机栈中，属于线程私有的**。
@@ -47,6 +55,60 @@ CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新�
 * 符合这种特点的应用并不少见，大部分使用消费队列的架构模式(如“生产者-消费者”模式)都会将产品的消费过程尽量在一个线程中消费完。
 
 * 其中最重要的一个应用实例就是经典 Web 交互模型中的“一个请求对应一个服务器线程”(Thread-per-Request)的处理方式，这种处理方式的广泛应用使得很多 Web 服务端应用都可以使用线程本地存储来解决线程安全问题。
+
+#### 可重入代码
+这种代码也叫做纯代码(Pure Code)，可以在代码执行的任何时刻中断它，转而去执行另外一段代码(包括递归调用它本身)，而在控制权返回后，原来的程序不会出现任何错误。 可重入代码有一些共同的特征，例如不依赖存储在堆上的数据和公用的系统资源、用到的状态量都由参数中传入、不调用非可重入的方法等。
+
+## 解决并发
+### 3个关键字: 
+volatile
+synchronized 
+final
+
+### Happens-Before 规则 
+*上面提到了可以用volatile和synchronized来保证有序性。除此之外，JVM 还规定了先行发生原则，让一个操作无需控制就能先于另一个操作完成。*
+
+1. 单一线程原则（在一个线程内，在程序前面的操作先行发生于后面的操作。）
+2. 管程锁定规则（一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。）
+3. volatile 变量规则（对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。）
+4. 线程启动规则（Thread 对象的 start() 方法调用先行发生于此线程的每一个动作。）
+5. 线程加入规则（Thread 对象的结束先行发生于 join() 方法返回。）
+6. 线程中断规则（对线程 interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过interrupted()方法检测到是否有中断发生。）
+7. 对象终结规则 一个对象的初始化完成(构造函数执行结束)先行发生于它的 finalize() 方法的开始。
+8. 传递性（如果操作 A 先行发生于操作 B，操作 B 先行发生于操作 C，那么操作 A 先行发生于操作 C。）
+
+### 锁优化及JMM
+
+## J.U.C框架
+### Unsafe(CAS)和原子类
+### AQS框架
+借助于两个类：Unsafe(提供CAS操作)和LockSupport(提供park/unpark操作)
+
+### 锁
+* LockSupport
+* ReentrantLock
+* ReentrantReadWriteLock
+
+### 并发集合
+* ConcurrentHashMap
+* CopyOnWriteArrayList
+* ConcurrentLinkedQueue
+* BlockingQueue
+
+### 线程池
+* FutureTask
+* ThreadPoolExecutor
+* ScheduledThreadPoolExecutor
+* Fork/Join
+
+### 工具类
+* CountDownLatch
+* CyclicBarrier
+* Semaphore
+* Phaser
+* Exchanger
+* ThreadLocal
+
 
 ## 参考文章
 [Java 并发 - 理论基础](https://www.pdai.tech/md/java/thread/java-thread-x-theorty.html "Java 并发 - 理论基础")

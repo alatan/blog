@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/javacurrent\/"
-        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  67 ,
+        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  170 ,
         "url": "https:\/\/moge.fun\/javacurrent\/","datePublished": "2018-04-01T00:00:00+00:00","dateModified": "2018-04-01T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Java并发编程概览</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-01">2018-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 67 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-01">2018-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 170 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -127,20 +127,40 @@
         <li><a href="#互斥同步阻塞同步">互斥同步(阻塞同步)</a>
           <ul>
             <li><a href="#synchronizedjvm实现">synchronized(JVM实现)</a></li>
-            <li><a href="#reentrantlockjdk实现">ReentrantLock(JDK实现)</a></li>
+            <li><a href="#lockreentrantlockjdk实现">Lock&amp;ReentrantLock(JDK实现)</a></li>
           </ul>
         </li>
         <li><a href="#非阻塞同步">非阻塞同步</a>
           <ul>
             <li><a href="#cas">CAS</a></li>
+            <li><a href="#atomicinteger">AtomicInteger</a></li>
+            <li><a href="#aba">ABA</a></li>
           </ul>
         </li>
         <li><a href="#无需同步方案">无需同步方案</a>
           <ul>
             <li><a href="#栈封闭">栈封闭</a></li>
             <li><a href="#线程本地存储threadlocal">线程本地存储(ThreadLocal)</a></li>
+            <li><a href="#可重入代码">可重入代码</a></li>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li><a href="#解决并发">解决并发</a>
+      <ul>
+        <li><a href="#3个关键字">3个关键字:</a></li>
+        <li><a href="#happens-before-规则">Happens-Before 规则</a></li>
+        <li><a href="#锁优化及jmm">锁优化及JMM</a></li>
+      </ul>
+    </li>
+    <li><a href="#juc框架">J.U.C框架</a>
+      <ul>
+        <li><a href="#unsafecas和原子类">Unsafe(CAS)和原子类</a></li>
+        <li><a href="#aqs框架">AQS框架</a></li>
+        <li><a href="#锁">锁</a></li>
+        <li><a href="#并发集合">并发集合</a></li>
+        <li><a href="#线程池">线程池</a></li>
+        <li><a href="#工具类">工具类</a></li>
       </ul>
     </li>
     <li><a href="#参考文章">参考文章</a></li>
@@ -180,7 +200,7 @@
 <h2 id="线程安全的实现方法">线程安全的实现方法</h2>
 <h3 id="互斥同步阻塞同步">互斥同步(阻塞同步)</h3>
 <h4 id="synchronizedjvm实现">synchronized(JVM实现)</h4>
-<h4 id="reentrantlockjdk实现">ReentrantLock(JDK实现)</h4>
+<h4 id="lockreentrantlockjdk实现">Lock&amp;ReentrantLock(JDK实现)</h4>
 <p>互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。</p>
 <p>互斥同步属于一种<strong>悲观的并发策略</strong>，总是认为只要不去做正确的同步措施，那就肯定会出现问题。无论共享数据是否真的会出现竞争，它都要进行加锁(这里讨论的是概念模型，实际上虚拟机会优化掉很大一部分不必要的加锁)、用户态核心态转换、维护锁计数器和检查是否有被阻塞的线程需要唤醒等操作。</p>
 <h3 id="非阻塞同步">非阻塞同步</h3>
@@ -189,6 +209,10 @@
 <p><strong>乐观锁需要操作和冲突检测这两个步骤具备原子性</strong>，这里就不能再使用互斥同步来保证了，只能<strong>靠硬件来完成</strong>。</p>
 <p>硬件支持的原子性操作最典型的是: 比较并交换(Compare-and-Swap，CAS)。
 CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新值B。当执行操作时，只有当V的值等于A，才将V的值更新为B。</p>
+<h4 id="atomicinteger">AtomicInteger</h4>
+<p>J.U.C 包里面的整数原子类 AtomicInteger，其中的 compareAndSet() 和 getAndIncrement() 等方法都使用了 Unsafe 类的 CAS 操作。</p>
+<h4 id="aba">ABA</h4>
+<p>如果一个变量初次读取的时候是 A 值，它的值被改成了 B，后来又被改回为 A，那 CAS 操作就会误认为它从来没有被改变过。 J.U.C 包提供了一个带有标记的原子引用类 AtomicStampedReference 来解决这个问题，它可以通过控制变量值的版本来保证 CAS 的正确性。大部分情况下 ABA 问题不会影响程序并发的正确性，如果需要解决 ABA 问题，改用传统的互斥同步可能会比原子类更高效。</p>
 <h3 id="无需同步方案">无需同步方案</h3>
 <h4 id="栈封闭">栈封闭</h4>
 <p>多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为<strong>局部变量存储在虚拟机栈中，属于线程私有的</strong>。</p>
@@ -203,6 +227,59 @@ CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新�
 <li>
 <p>其中最重要的一个应用实例就是经典 Web 交互模型中的“一个请求对应一个服务器线程”(Thread-per-Request)的处理方式，这种处理方式的广泛应用使得很多 Web 服务端应用都可以使用线程本地存储来解决线程安全问题。</p>
 </li>
+</ul>
+<h4 id="可重入代码">可重入代码</h4>
+<p>这种代码也叫做纯代码(Pure Code)，可以在代码执行的任何时刻中断它，转而去执行另外一段代码(包括递归调用它本身)，而在控制权返回后，原来的程序不会出现任何错误。 可重入代码有一些共同的特征，例如不依赖存储在堆上的数据和公用的系统资源、用到的状态量都由参数中传入、不调用非可重入的方法等。</p>
+<h2 id="解决并发">解决并发</h2>
+<h3 id="3个关键字">3个关键字:</h3>
+<p>volatile
+synchronized
+final</p>
+<h3 id="happens-before-规则">Happens-Before 规则</h3>
+<p><em>上面提到了可以用volatile和synchronized来保证有序性。除此之外，JVM 还规定了先行发生原则，让一个操作无需控制就能先于另一个操作完成。</em></p>
+<ol>
+<li>单一线程原则（在一个线程内，在程序前面的操作先行发生于后面的操作。）</li>
+<li>管程锁定规则（一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。）</li>
+<li>volatile 变量规则（对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。）</li>
+<li>线程启动规则（Thread 对象的 start() 方法调用先行发生于此线程的每一个动作。）</li>
+<li>线程加入规则（Thread 对象的结束先行发生于 join() 方法返回。）</li>
+<li>线程中断规则（对线程 interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过interrupted()方法检测到是否有中断发生。）</li>
+<li>对象终结规则 一个对象的初始化完成(构造函数执行结束)先行发生于它的 finalize() 方法的开始。</li>
+<li>传递性（如果操作 A 先行发生于操作 B，操作 B 先行发生于操作 C，那么操作 A 先行发生于操作 C。）</li>
+</ol>
+<h3 id="锁优化及jmm">锁优化及JMM</h3>
+<h2 id="juc框架">J.U.C框架</h2>
+<h3 id="unsafecas和原子类">Unsafe(CAS)和原子类</h3>
+<h3 id="aqs框架">AQS框架</h3>
+<p>借助于两个类：Unsafe(提供CAS操作)和LockSupport(提供park/unpark操作)</p>
+<h3 id="锁">锁</h3>
+<ul>
+<li>LockSupport</li>
+<li>ReentrantLock</li>
+<li>ReentrantReadWriteLock</li>
+</ul>
+<h3 id="并发集合">并发集合</h3>
+<ul>
+<li>ConcurrentHashMap</li>
+<li>CopyOnWriteArrayList</li>
+<li>ConcurrentLinkedQueue</li>
+<li>BlockingQueue</li>
+</ul>
+<h3 id="线程池">线程池</h3>
+<ul>
+<li>FutureTask</li>
+<li>ThreadPoolExecutor</li>
+<li>ScheduledThreadPoolExecutor</li>
+<li>Fork/Join</li>
+</ul>
+<h3 id="工具类">工具类</h3>
+<ul>
+<li>CountDownLatch</li>
+<li>CyclicBarrier</li>
+<li>Semaphore</li>
+<li>Phaser</li>
+<li>Exchanger</li>
+<li>ThreadLocal</li>
 </ul>
 <h2 id="参考文章">参考文章</h2>
 <p><a href="https://www.pdai.tech/md/java/thread/java-thread-x-theorty.html" title="Java 并发 - 理论基础" target="_blank" rel="noopener noreffer">Java 并发 - 理论基础</a></p>
