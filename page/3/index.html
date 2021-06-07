@@ -103,6 +103,15 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/generic/">Java特性-泛型</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-02">2018-02-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">泛型，即参数化类型。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。 那么参数化类型怎么理解呢？顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（类型形参），然后在使用/调用时传入具体的类型（类型实参）。
+Java 语言中引入泛型是一个较大的功能增强。不仅语言、类型系统和编译器有了较大的变化，而且类库也进行了大翻修，所以许多重要的类，比如集合框架，都已经成为泛型化的了。这带来了很多好处：
+ 类型安全。 泛型的主要目标是提高 Java 程序的类型安全。通过知道使用泛型定义的变量的类型限制，编译器可以在一个高得多的程度上验证类型假设。 消除强制类型转换。 泛型的一个附带好处是，消除源代码中的许多强制类型转换。这使得代码更加可读，并且减少了出错机会。 潜在的性能收益。 泛型为较大的优化带来可能。在泛型的初始实现中，编译器将强制类型转换（没有泛型的话，程序员会指定这些强制类型转换）插入生成的字节码中。 注意泛型的类型参数只能是类类型（包括自定义类），不能是简单类型。  常用命名类型参数  K：键，比如映射的键 V：值，比如 List 和 Set 的内容，或者 Map 中的值 E：元素 T：泛型 ?：表示不确定的 java 类型  通配符 Ingeter 是 Number 的一个子类，同时 Generic 与 Generic 实际上是相同的一种基本类型。那么问题来了，在使用 Generic 作为形参的方法中，能否使用Generic 的实例传入呢？在逻辑上类似于 Generic 和 Generic 是否可以看成具有父子关系的泛型类型呢？下面我们通过定义一个方法来验证。
+1 2 3  public void show(Generic&lt;Number&gt; obj) { System.out.println(&#34;key value is &#34; + obj.getKey()); }   进行如下的调用：
+1 2 3  Generic&lt;Integer&gt; genericInteger = new Generic&lt;Integer&gt;(123); show(genericInteger); //error Generic&lt;java.</div><div class="post-footer">
+        <a href="/generic/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/object-oriented/">Java世界的入场券-面向对象</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-01">2018-02-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的重用性、灵活性和扩展性，对象里的程序可以访问及经常修改对象相关连的数据。在面向对象程序编程里，计算机程序会被设计成彼此相关的对象。
  面向对象就像是一张入场券，掌握了面向对象的思想，就可以在Java世界里尽情遨游，面向对象有三大法宝和七大戒律，并在其指导下萃取出了无数的锦囊妙计和绝世武器，下面我们揭开他们的神秘面纱。
@@ -150,11 +159,6 @@ h(K) 称为散列函数或者哈希函数，它实现了关键字到存储地址
 具体操作 每年一次大额买入  参考有知有行的「股市温度计」来确定自己一次性买入的仓位。 假如当年大额资金5万，当时股市温度为40处于中估状态，则先投入50%，计算得出当年大额买入资金为2.5万。  每年一次的再平衡  根据自定的家庭资产比例和当年股债实时状态，进行股债再平衡调整。  每月定投  参考有知有行的「股市温度计」，在中估时投入，低估时加倍，高估时停止买入  高估状态卖出部分锁定收益  A股的波动大，牛市之后往往出现暴跌，而浮亏越大，回本难度越大，甚至难度是呈指数级增长的。  </div><div class="post-footer">
         <a href="/investment/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%90%86%E8%B4%A2/">理财</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/studyandthink/">学与思</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-01-02">2015-01-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8F%8D%E6%80%9D/"><i class="far fa-folder fa-fw"></i>反思</a></span></div><div class="content">学而不思则罔，思而不学则殆  一味学习而不思考，就会因为不能深刻理解而不能合理有效利用学习的知识，甚至会陷入迷茫。 一味空想而不去进行实实在在地学习和钻研，则终究是沙上建塔，一无所得。 因此我们只有把学习和思考结合起来，才能学到切实有用的知识，否则就会收效甚微。  </div><div class="post-footer">
-        <a href="/studyandthink/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%8F%8D%E6%80%9D/">反思</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

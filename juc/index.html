@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>JUC-并发编程利器 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="JUC并发编程利器"><meta property="og:title" content="JUC-并发编程利器" />
+<meta property="og:description" content="JUC并发编程利器" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moge.fun/juc/" />
+<meta property="og:image" content="https://moge.fun/logo.png"/>
+<meta property="article:published_time" content="2018-04-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://moge.fun/logo.png"/>
+
+<meta name="twitter:title" content="JUC-并发编程利器"/>
+<meta name="twitter:description" content="JUC并发编程利器"/>
+<meta name="application-name" content="Journey to the Life">
+<meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/juc/" /><link rel="prev" href="https://moge.fun/synchronized/" /><link rel="next" href="https://moge.fun/concurrenthashmap/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JUC-并发编程利器",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/moge.fun\/juc\/"
+        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  97 ,
+        "url": "https:\/\/moge.fun\/juc\/","datePublished": "2018-04-02T00:00:00+00:00","dateModified": "2018-04-02T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "默哥"
+            },"description": "JUC并发编程利器"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="追求卓越，幸福就会不期而遇">追求卓越，幸福就会不期而遇</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="追求卓越，幸福就会不期而遇">追求卓越，幸福就会不期而遇</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">JUC-并发编程利器</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-02">2018-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 97 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#lock框架和tools类">Lock框架和Tools类</a>
+      <ul>
+        <li><a href="#接口-condition">接口: Condition</a></li>
+        <li><a href="#接口-lock">接口: Lock</a></li>
+        <li><a href="#接口-readwritelock">接口: ReadWriteLock</a></li>
+        <li><a href="#抽象类-abstractownablesynchonizer">抽象类: AbstractOwnableSynchonizer</a></li>
+        <li><a href="#抽象类long-abstractqueuedlongsynchronizer">抽象类(long): AbstractQueuedLongSynchronizer</a></li>
+        <li><a href="#核心抽象类int-abstractqueuedsynchronizer">核心抽象类(int): AbstractQueuedSynchronizer</a></li>
+        <li><a href="#锁常用类-locksupport">锁常用类: LockSupport</a></li>
+        <li><a href="#锁常用类-reentrantlock">锁常用类: ReentrantLock</a></li>
+        <li><a href="#锁常用类-reentrantreadwritelock">锁常用类: ReentrantReadWriteLock</a></li>
+        <li><a href="#锁常用类-stampedlock">锁常用类: StampedLock</a></li>
+        <li><a href="#工具常用类-countdownlatch">工具常用类: CountDownLatch</a></li>
+        <li><a href="#工具常用类-cyclicbarrier">工具常用类: CyclicBarrier</a></li>
+        <li><a href="#工具常用类-phaser">工具常用类: Phaser</a></li>
+        <li><a href="#工具常用类-semaphore">工具常用类: Semaphore</a></li>
+        <li><a href="#工具常用类-exchanger">工具常用类: Exchanger</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><figure><a class="lightgallery" href="/images/current/juc/juc-overview.png" title="/images/current/juc/juc-overview.png" data-thumbnail="/images/current/juc/juc-overview.png" data-sub-html="<h2>JUC概览</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/current/juc/juc-overview.png"
+            data-srcset="/images/current/juc/juc-overview.png, /images/current/juc/juc-overview.png 1.5x, /images/current/juc/juc-overview.png 2x"
+            data-sizes="auto"
+            alt="/images/current/juc/juc-overview.png" />
+    </a><figcaption class="image-caption">JUC概览</figcaption>
+    </figure></p>
+<h2 id="lock框架和tools类">Lock框架和Tools类</h2>
+<p><figure><a class="lightgallery" href="/images/current/juc/juc-overview-lock.png" title="/images/current/juc/juc-overview-lock.png" data-thumbnail="/images/current/juc/juc-overview-lock.png" data-sub-html="<h2>JUC概览</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/current/juc/juc-overview-lock.png"
+            data-srcset="/images/current/juc/juc-overview-lock.png, /images/current/juc/juc-overview-lock.png 1.5x, /images/current/juc/juc-overview-lock.png 2x"
+            data-sizes="auto"
+            alt="/images/current/juc/juc-overview-lock.png" />
+    </a><figcaption class="image-caption">JUC概览</figcaption>
+    </figure></p>
+<h3 id="接口-condition">接口: Condition</h3>
+<blockquote>
+<p>Condition为接口类型，它将 Object 监视器方法(wait、notify 和 notifyAll)分解成截然不同的对象，以便通过将这些对象与任意Lock实现组合使用，为每个对象提供多个等待set (wait-set)。其中，Lock替代了synchronized方法和语句的使用，Condition替代了Object监视器方法的使用。可以通过await(),signal()来休眠/唤醒线程。</p>
+</blockquote>
+<h3 id="接口-lock">接口: Lock</h3>
+<blockquote>
+<p>Lock为接口类型，Lock实现提供了比使用synchronized方法和语句可获得的更广泛的锁定操作。此实现允许更灵活的结构，可以具有差别很大的属性，可以支持多个相关的Condition对象。</p>
+</blockquote>
+<h3 id="接口-readwritelock">接口: ReadWriteLock</h3>
+<blockquote>
+<p>ReadWriteLock为接口类型， 维护了一对相关的锁，一个用于只读操作，另一个用于写入操作。只要没有 writer，读取锁可以由多个 reader 线程同时保持。写入锁是独占的。</p>
+</blockquote>
+<h3 id="抽象类-abstractownablesynchonizer">抽象类: AbstractOwnableSynchonizer</h3>
+<blockquote>
+<p>AbstractOwnableSynchonizer为抽象类，可以由线程以独占方式拥有的同步器。此类为创建锁和相关同步器(伴随着所有权的概念)提供了基础。AbstractOwnableSynchronizer 类本身不管理或使用此信息。但是，子类和工具可以使用适当维护的值帮助控制和监视访问以及提供诊断。</p>
+</blockquote>
+<h3 id="抽象类long-abstractqueuedlongsynchronizer">抽象类(long): AbstractQueuedLongSynchronizer</h3>
+<blockquote>
+<p>AbstractQueuedLongSynchronizer为抽象类，以 long 形式维护同步状态的一个 AbstractQueuedSynchronizer 版本。此类具有的结构、属性和方法与 AbstractQueuedSynchronizer 完全相同，但所有与状态相关的参数和结果都定义为 long 而不是 int。当创建需要 64 位状态的多级别锁和屏障等同步器时，此类很有用。</p>
+</blockquote>
+<h3 id="核心抽象类int-abstractqueuedsynchronizer">核心抽象类(int): AbstractQueuedSynchronizer</h3>
+<blockquote>
+<p>AbstractQueuedSynchronizer为抽象类，其为实现依赖于先进先出 (FIFO) 等待队列的阻塞锁和相关同步器(信号量、事件，等等)提供一个框架。此类的设计目标是成为依靠单个原子int值来表示状态的大多数同步器的一个有用基础。</p>
+</blockquote>
+<h3 id="锁常用类-locksupport">锁常用类: LockSupport</h3>
+<blockquote>
+<p>LockSupport为常用类，用来创建锁和其他同步类的基本线程阻塞原语。LockSupport的功能和&quot;Thread中的 Thread.suspend()和Thread.resume()有点类似&rdquo;，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。</p>
+</blockquote>
+<h3 id="锁常用类-reentrantlock">锁常用类: ReentrantLock</h3>
+<blockquote>
+<p>ReentrantLock为常用类，它是一个可重入的互斥锁 Lock，它具有与使用 synchronized 方法和语句所访问的隐式监视器锁相同的一些基本行为和语义，但功能更强大。</p>
+</blockquote>
+<h3 id="锁常用类-reentrantreadwritelock">锁常用类: ReentrantReadWriteLock</h3>
+<blockquote>
+<p>ReentrantReadWriteLock是读写锁接口ReadWriteLock的实现类，它包括Lock子类ReadLock和WriteLock。ReadLock是共享锁，WriteLock是独占锁。</p>
+</blockquote>
+<h3 id="锁常用类-stampedlock">锁常用类: StampedLock</h3>
+<blockquote>
+<p>它是java8在java.util.concurrent.locks新增的一个API。StampedLock控制锁有三种模式(写，读，乐观读)，一个StampedLock状态是由版本和模式两个部分组成，锁获取方法返回一个数字作为票据stamp，它用相应的锁状态表示并控制访问，数字0表示没有写锁被授权访问。在读锁上分为悲观锁和乐观锁。</p>
+</blockquote>
+<h3 id="工具常用类-countdownlatch">工具常用类: CountDownLatch</h3>
+<blockquote>
+<p>CountDownLatch为常用类，它是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。</p>
+</blockquote>
+<h3 id="工具常用类-cyclicbarrier">工具常用类: CyclicBarrier</h3>
+<blockquote>
+<p>CyclicBarrier为常用类，其是一个同步辅助类，它允许一组线程互相等待，直到到达某个公共屏障点 (common barrier point)。在涉及一组固定大小的线程的程序中，这些线程必须不时地互相等待，此时 CyclicBarrier 很有用。因为该 barrier 在释放等待线程后可以重用，所以称它为循环 的 barrier。</p>
+</blockquote>
+<h3 id="工具常用类-phaser">工具常用类: Phaser</h3>
+<blockquote>
+<p>Phaser是JDK 7新增的一个同步辅助类，它可以实现CyclicBarrier和CountDownLatch类似的功能，而且它支持对任务的动态调整，并支持分层结构来达到更高的吞吐量。</p>
+</blockquote>
+<h3 id="工具常用类-semaphore">工具常用类: Semaphore</h3>
+<blockquote>
+<p>Semaphore为常用类，其是一个计数信号量，从概念上讲，信号量维护了一个许可集。如有必要，在许可可用前会阻塞每一个 acquire()，然后再获取该许可。每个 release() 添加一个许可，从而可能释放一个正在阻塞的获取者。但是，不使用实际的许可对象，Semaphore 只对可用许可的号码进行计数，并采取相应的行动。通常用于限制可以访问某些资源(物理或逻辑的)的线程数目。</p>
+</blockquote>
+<h3 id="工具常用类-exchanger">工具常用类: Exchanger</h3>
+<blockquote>
+<p>Exchanger是用于线程协作的工具类, 主要用于两个线程之间的数据交换。它提供一个同步点，在这个同步点，两个线程可以交换彼此的数据。这两个线程通过exchange()方法交换数据，当一个线程先执行exchange()方法后，它会一直等待第二个线程也执行exchange()方法，当这两个线程到达同步点时，这两个线程就可以交换数据了。</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2018-04-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/juc/" data-title="JUC-并发编程利器"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/synchronized/" class="prev" rel="prev" title="synchronized 及它的四个状态：无锁、偏向锁、轻量级所、重量级锁"><i class="fas fa-angle-left fa-fw"></i>synchronized 及它的四个状态：无锁、偏向锁、轻量级所、重量级锁</a>
+            <a href="/concurrenthashmap/" class="next" rel="next" title="ConcurrentHashMap详解">ConcurrentHashMap详解<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2015 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":5,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
