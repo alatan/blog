@@ -68,7 +68,10 @@ toc:
 ##  Collections: 并发集合
 ![](/images/current/juc/juc-overview-collection.png "并发集合")
 
-## Atomic原子类 
+## CAS,Unsafe和原子类
+**JUC中多数类是通过volatile和CAS来实现的，CAS本质上提供的是一种无锁方案，而Synchronized和Lock是互斥锁方案; Java原子类本质上使用的是CAS，而CAS底层是通过Unsafe类实现的。**
+
+### Atomic原子类
 其基本的特性就是在多线程环境下，当有多个线程同时执行这些类的实例包含的方法时，具有排他性，即当某个线程进入方法，执行其中的指令时，不会被其他线程打断，而别的线程就像自旋锁一样，一直等到该方法执行完成，才由JVM从等待队列中选择一个另一个线程进入，这只是一种逻辑上的理解。实际上是借助硬件的相关指令来实现的，不会阻塞线程(或者说只是在硬件级别上阻塞了)。 
 
 ## Executors线程池

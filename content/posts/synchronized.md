@@ -1,5 +1,5 @@
 ---  
-title: "synchronized 及它的四个状态：无锁、偏向锁、轻量级所、重量级锁"  
+title: "synchronized(无锁→偏向锁→轻量级锁→重量级锁)"  
 date: 2018-04-03
 weight: 70  
 draft: false  
