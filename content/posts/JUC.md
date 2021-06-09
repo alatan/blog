@@ -65,6 +65,15 @@ toc:
 ### 工具常用类Exchanger 
 > Exchanger是用于线程协作的工具类, 主要用于两个线程之间的数据交换。它提供一个同步点，在这个同步点，两个线程可以交换彼此的数据。这两个线程通过exchange()方法交换数据，当一个线程先执行exchange()方法后，它会一直等待第二个线程也执行exchange()方法，当这两个线程到达同步点时，这两个线程就可以交换数据了。
 
+### 对比
+| 同步工具	| 同步工具与AQS的关联 |
+| :-----   | :---|
+|ReentrantLock	|  使用AQS保存锁重复持有的次数。当一个线程获取锁时，ReentrantLock记录当前获得锁的线程标识，用于检测是否重复获取，以及错误线程试图解锁操作时异常情况的处理。  |
+|Semaphore	|  使用AQS同步状态来保存信号量的当前计数。tryRelease会增加计数，acquireShared会减少计数。  |
+|CountDownLatch	|  使用AQS同步状态来表示计数。计数为0时，所有的Acquire操作（CountDownLatch的await方法）才可以通过。  |
+|ReentrantReadWriteLock	|   使用AQS同步状态中的16位保存写锁持有的次数，剩下的16位用于保存读锁的持有次数。  |
+|ThreadPoolExecutor	|  Worker利用AQS同步状态实现对独占线程变量的设置（tryAcquire和tryRelease）。  |
+
 ##  Collections: 并发集合
 ![](/images/current/juc/juc-overview-collection.png "并发集合")
 
@@ -102,4 +111,4 @@ toc:
 > ForkJoinPool 是JDK 7加入的一个线程池类。Fork/Join 技术是分治算法(Divide-and-Conquer)的并行实现，它是一项可以获得良好的并行性能的简单且高效的设计技术。目的是为了帮助我们更好地利用多处理器带来的好处，使用所有可用的运算能力来提升应用的性能。
 
 ### 工具类: Executors 
-> Executors是一个工具类，用其可以创建ExecutorService、ScheduledExecutorService、ThreadFactory、Callable等对象。它的使用融入到了ThreadPoolExecutor, ScheduledThreadExecutor和ForkJoinPool中。 ¶
+> Executors是一个工具类，用其可以创建ExecutorService、ScheduledExecutorService、ThreadFactory、Callable等对象。它的使用融入到了ThreadPoolExecutor, ScheduledThreadExecutor和ForkJoinPool中。 
