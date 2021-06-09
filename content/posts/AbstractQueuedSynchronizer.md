@@ -32,7 +32,6 @@ private volatile int state;//共享变量，使用volatile修饰保证线程可�
 
 ## AQS数据结构
 ![](/images/current/aqs/juc-aqs.png "AQS数据结构")
-先来看下AQS中最基本的数据结构——Node，Node即为上面CLH变体队列中的节点。
 
 ### 线程两种资源共享方式
 * Share(共享)：多个线程可同时执行，如Semaphore/CountDownLatch。Semaphore、CountDownLatCh、 CyclicBarrier、ReadWriteLock。
@@ -40,7 +39,7 @@ private volatile int state;//共享变量，使用volatile修饰保证线程可�
   * 公平锁：按照线程在队列中的排队顺序，先到者先拿到锁 
   * 非公平锁：当线程要获取锁时，无视队列顺序直接去抢锁，谁抢到就是谁的
 
-ReentrantReadWriteLock 可以看成是组合式，因为ReentrantReadWriteLock也就是读写锁允许多个线程同时对某一资源进行读。 
+ReentrantReadWriteLock可以看成是组合式，因为ReentrantReadWriteLock是读写锁允许多个线程同时对某一资源进行读。 
 
 不同的自定义同步器争用共享资源的方式也不同。自定义同步器在实现时只需要实现共享资源state的获取与释放方式即可，至于具体线程等待队列的维护(如获取资源失败入队/唤醒出队等)，AQS已经在上层已经帮我们实现好了。
 
@@ -52,7 +51,7 @@ ReentrantReadWriteLock 可以看成是组合式，因为ReentrantReadWriteLock�
 * nextWaiter	指向下一个处于CONDITION状态的节点（由于本篇文章不讲述Condition Queue队列，这个指针不多介绍）
 * next	后继指针
 
-### waitStatus有下面几个枚举值
+### waitStatus（节点状态）
 * 0，表示当前节点在sync queue中，等待着获取锁。
 * SIGNAL	为-1，表示线程已经准备好了，就等资源释放了,表示当前节点的后继节点包含的线程需要运行，需要进行unpark操作。
 * CANCELLED	为1，表示线程获取锁的请求已经取消了
@@ -163,21 +162,6 @@ private final boolean compareAndSetTail(Node expect, Node update) {
 2. Pred指针指向尾节点Tail。
 3. 将New中Node的Prev指针指向Pred。
 4. 通过compareAndSetTail方法，完成尾节点的设置。这个方法主要是对tailOffset和Expect进行比较，如果tailOffset的Node和Expect的Node地址是相同的，那么设置Tail的值为Update的值。
-```java
-// java.util.concurrent.locks.AbstractQueuedSynchronizer
-static {
-	try {
-		stateOffset = unsafe.objectFieldOffset(AbstractQueuedSynchronizer.class.getDeclaredField("state"));
-		headOffset = unsafe.objectFieldOffset(AbstractQueuedSynchronizer.class.getDeclaredField("head"));
-		tailOffset = unsafe.objectFieldOffset(AbstractQueuedSynchronizer.class.getDeclaredField("tail"));
-		waitStatusOffset = unsafe.objectFieldOffset(Node.class.getDeclaredField("waitStatus"));
-		nextOffset = unsafe.objectFieldOffset(Node.class.getDeclaredField("next"));
-	} catch (Exception ex) { 
-    throw new Error(ex); 
-  }
-```
-从AQS的静态代码块可以看出，都是获取一个对象的属性相对于该对象在内存当中的偏移量，这样我们就可以根据这个偏移量在对象内存当中找到这个属性。tailOffset指的是tail对应的偏移量，所以这个时候会将new出来的Node置为当前队列的尾节点。同时，由于是双向链表，也需要将前一个节点指向尾节点。
-
 5. 如果Pred指针是Null（说明等待队列中没有元素），或者当前Pred指针和Tail指向的位置不同（说明被别的线程已经修改），就需要看一下Enq的方法。
 ```java
 // java.util.concurrent.locks.AbstractQueuedSynchronizer
@@ -213,9 +197,11 @@ public final void acquire(int arg) {
 		selfInterrupt();
 }
 ```
-上文解释了addWaiter方法，这个方法其实就是把对应的线程以Node的数据结构形式加入到双端队列里，返回的是一个包含该线程的Node。而这个Node会作为参数，进入到acquireQueued方法中。acquireQueued方法可以对排队中的线程进行“获锁”操作。
+上文解释了addWaiter方法，这个方法其实就是把对应的线程以Node的数据结构形式加入到双端队列里，返回的是一个包含该线程的Node。
 
-总的来说，一个线程获取锁失败了，被放入等待队列，acquireQueued会把放入队列中的线程不断去获取锁，直到获取成功或者不再需要获取（中断）。
+**而这个Node会作为参数，进入到acquireQueued方法中。acquireQueued方法可以对排队中的线程进行“获锁”操作。**
+
+**总的来说，一个线程获取锁失败了，被放入等待队列，acquireQueued会把放入队列中的线程不断去获取锁，直到获取成功或者不再需要获取（中断）。**
 
 下面我们从“何时出队列？”和“如何出队列？”两个方向来分析一下acquireQueued源码：
 ```java
@@ -290,7 +276,7 @@ private final boolean parkAndCheckInterrupt() {
 上述方法的流程图如下：
 ![](/images/current/aqs/AQS-Lock-procedure-1.png "AQS加锁流程1")
 
-从上图可以看出，跳出当前循环的条件是当“前置节点是头结点，且当前线程获取锁成功”。为了防止因死循环导致CPU资源被浪费，我们会判断前置节点的状态来决定是否要将当前线程挂起，具体挂起流程用流程图表示如下（shouldParkAfterFailedAcquire流程）：
+**从上图可以看出，跳出当前循环的条件是当“前置节点是头结点，且当前线程获取锁成功”。为了防止因死循环导致CPU资源被浪费，我们会判断前置节点的状态来决定是否要将当前线程挂起，具体挂起流程用流程图表示如下（shouldParkAfterFailedAcquire流程）**：
 
 ![](/images/current/aqs/AQS-Lock-procedure-2.png "AQS加锁流程2")
 
