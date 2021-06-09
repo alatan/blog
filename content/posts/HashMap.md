@@ -306,3 +306,4 @@ static final int hash(Object key) {
 1. https://www.hollischuang.com/archives/2091
 2. https://yuanrengu.com/2020/ba184259.html
 3. https://zhuanlan.zhihu.com/p/21673805
+4. https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&mid=2649938471&idx=1&sn=2964df2adc4feaf87c11b4915b9a018e

@@ -39,13 +39,113 @@ toc:
 > AbstractQueuedSynchronizer为抽象类，其为实现依赖于先进先出 (FIFO) 等待队列的阻塞锁和相关同步器(信号量、事件，等等)提供一个框架。此类的设计目标是成为依靠单个原子int值来表示状态的大多数同步器的一个有用基础。
 
 ### 锁常用类LockSupport
-> LockSupport为常用类，用来创建锁和其他同步类的基本线程阻塞原语。LockSupport的功能和"Thread中的 Thread.suspend()和Thread.resume()有点类似"，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。
+> LockSupport为常用类，主要作用就是挂起线程，唤醒线程。LockSupport的功能和"Thread中的 Thread.suspend()和Thread.resume()有点类似"，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。
+
+该流程在购物APP上非常常见，当你准备支付时放弃，会有一个支付失效，在支付失效期内可以随时回来支付，过期后需要重新选取支付商品。
+
+这里基于LockSupport中park和unpark控制线程状态，实现的等待通知机制。
+
+```java
+public class LockAPI04 {
+    public static void main(String[] args) throws Exception {
+        OrderPay orderPay = new OrderPay("UnPaid") ;
+        Thread orderThread = new Thread(orderPay) ;
+        orderThread.start();
+        Thread.sleep(3000);
+        orderPay.changeState("Pay");
+        LockSupport.unpark(orderThread);
+    }
+}
+class OrderPay implements Runnable {
+    // 支付状态
+    private String orderState ;
+    public OrderPay (String orderState){
+        this.orderState = orderState ;
+    }
+    public synchronized void changeState (String orderState){
+        this.orderState = orderState ;
+    }
+    @Override
+    public void run() {
+        if (orderState.equals("UnPaid")){
+            System.out.println("订单待支付..."+orderState);
+            LockSupport.park(orderState);
+        }
+        System.out.println("orderState="+orderState);
+        System.out.println("订单准备发货...");
+    }
+}
+```
 
 ### 锁常用类ReentrantLock 
 > ReentrantLock为常用类，它是一个可重入的互斥锁 Lock，它具有与使用 synchronized 方法和语句所访问的隐式监视器锁相同的一些基本行为和语义，但功能更强大。
 
 ### 锁常用类ReentrantReadWriteLock 
 > ReentrantReadWriteLock是读写锁接口ReadWriteLock的实现类，它包括Lock子类ReadLock和WriteLock。ReadLock是共享锁，WriteLock是独占锁。
+
+**基于读锁时，其他线程可以进行读操作，基于写锁时，其他线程读、写操作都禁止。**
+
+```java
+public class LockAPI03 {
+    public static void main(String[] args) throws Exception {
+        DataMap dataMap = new DataMap() ;
+        Thread read = new Thread(new GetRun(dataMap)) ;
+        Thread write = new Thread(new PutRun(dataMap)) ;
+        write.start();
+        Thread.sleep(2000);
+        read.start();
+    }
+}
+class GetRun implements Runnable {
+    private DataMap dataMap ;
+    public GetRun (DataMap dataMap){
+        this.dataMap = dataMap ;
+    }
+    @Override
+    public void run() {
+        System.out.println("GetRun："+dataMap.get("myKey"));
+    }
+}
+class PutRun implements Runnable {
+    private DataMap dataMap ;
+    public PutRun (DataMap dataMap){
+        this.dataMap = dataMap ;
+    }
+    @Override
+    public void run() {
+        dataMap.put("myKey","myValue");
+    }
+}
+class DataMap {
+    Map<String,String> dataMap = new HashMap<>() ;
+    ReadWriteLock rwLock = new ReentrantReadWriteLock() ;
+    Lock readLock = rwLock.readLock() ;
+    Lock writeLock = rwLock.writeLock() ;
+
+    // 读取数据
+    public String get (String key){
+        readLock.lock();
+        try{
+            return dataMap.get(key) ;
+        } finally {
+            readLock.unlock();
+        }
+    }
+    // 写入数据
+    public void put (String key,String value){
+        writeLock.lock();
+        try{
+            dataMap.put(key,value) ;
+            System.out.println("执行写入结束...");
+            Thread.sleep(10000);
+        } catch (Exception e) {
+            System.out.println("Exception...");
+        } finally {
+            writeLock.unlock();
+        }
+    }
+}
+```
 
 ### 锁常用类StampedLock 
 > 它是java8在java.util.concurrent.locks新增的一个API。StampedLock控制锁有三种模式(写，读，乐观读)，一个StampedLock状态是由版本和模式两个部分组成，锁获取方法返回一个数字作为票据stamp，它用相应的锁状态表示并控制访问，数字0表示没有写锁被授权访问。在读锁上分为悲观锁和乐观锁。
