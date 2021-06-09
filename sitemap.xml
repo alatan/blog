@@ -7,6 +7,7 @@
             <loc>https://moge.fun/javaarchhistory/</loc><lastmod>2020-03-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/javaoutline/</loc><lastmod>2020-01-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/concurrenthashmap/</loc><lastmod>2018-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/abstractqueuedsynchronizer/</loc><lastmod>2018-04-05T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/locksupport/</loc><lastmod>2018-04-04T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/synchronized/</loc><lastmod>2018-04-03T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/juc/</loc><lastmod>2018-04-02T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -37,7 +38,7 @@
             <loc>https://moge.fun/</loc><lastmod>2020-01-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/categories/java%E5%9F%BA%E7%A1%80/</loc><lastmod>2018-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc><lastmod>2018-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</loc><lastmod>2018-04-04T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</loc><lastmod>2018-04-05T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/tags/java%E5%9F%BA%E7%A1%80/</loc><lastmod>2018-02-03T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc><lastmod>2017-02-03T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/tags/%E7%90%86%E8%B4%A2/</loc><lastmod>2016-01-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

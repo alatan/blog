@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/juc\/"
-        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  160 ,
+        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  172 ,
         "url": "https:\/\/moge.fun\/juc\/","datePublished": "2018-04-02T00:00:00+00:00","dateModified": "2018-04-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">JUC-并发编程利器</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-02">2018-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 160 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-02">2018-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 172 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -132,6 +132,7 @@
         <li><a href="#工具常用类phaser">工具常用类Phaser</a></li>
         <li><a href="#工具常用类semaphore">工具常用类Semaphore</a></li>
         <li><a href="#工具常用类exchanger">工具常用类Exchanger</a></li>
+        <li><a href="#对比">对比</a></li>
       </ul>
     </li>
     <li><a href="#collections-并发集合">Collections: 并发集合</a></li>
@@ -236,6 +237,37 @@
 <blockquote>
 <p>Exchanger是用于线程协作的工具类, 主要用于两个线程之间的数据交换。它提供一个同步点，在这个同步点，两个线程可以交换彼此的数据。这两个线程通过exchange()方法交换数据，当一个线程先执行exchange()方法后，它会一直等待第二个线程也执行exchange()方法，当这两个线程到达同步点时，这两个线程就可以交换数据了。</p>
 </blockquote>
+<h3 id="对比">对比</h3>
+<table>
+<thead>
+<tr>
+<th align="left">同步工具</th>
+<th align="left">同步工具与AQS的关联</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">ReentrantLock</td>
+<td align="left">使用AQS保存锁重复持有的次数。当一个线程获取锁时，ReentrantLock记录当前获得锁的线程标识，用于检测是否重复获取，以及错误线程试图解锁操作时异常情况的处理。</td>
+</tr>
+<tr>
+<td align="left">Semaphore</td>
+<td align="left">使用AQS同步状态来保存信号量的当前计数。tryRelease会增加计数，acquireShared会减少计数。</td>
+</tr>
+<tr>
+<td align="left">CountDownLatch</td>
+<td align="left">使用AQS同步状态来表示计数。计数为0时，所有的Acquire操作（CountDownLatch的await方法）才可以通过。</td>
+</tr>
+<tr>
+<td align="left">ReentrantReadWriteLock</td>
+<td align="left">使用AQS同步状态中的16位保存写锁持有的次数，剩下的16位用于保存读锁的持有次数。</td>
+</tr>
+<tr>
+<td align="left">ThreadPoolExecutor</td>
+<td align="left">Worker利用AQS同步状态实现对独占线程变量的设置（tryAcquire和tryRelease）。</td>
+</tr>
+</tbody>
+</table>
 <h2 id="collections-并发集合">Collections: 并发集合</h2>
 <p><figure><a class="lightgallery" href="/images/current/juc/juc-overview-collection.png" title="/images/current/juc/juc-overview-collection.png" data-thumbnail="/images/current/juc/juc-overview-collection.png" data-sub-html="<h2>并发集合</h2>">
         <img
@@ -296,7 +328,7 @@
 </blockquote>
 <h3 id="工具类-executors">工具类: Executors</h3>
 <blockquote>
-<p>Executors是一个工具类，用其可以创建ExecutorService、ScheduledExecutorService、ThreadFactory、Callable等对象。它的使用融入到了ThreadPoolExecutor, ScheduledThreadExecutor和ForkJoinPool中。 ¶</p>
+<p>Executors是一个工具类，用其可以创建ExecutorService、ScheduledExecutorService、ThreadFactory、Callable等对象。它的使用融入到了ThreadPoolExecutor, ScheduledThreadExecutor和ForkJoinPool中。</p>
 </blockquote>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
