@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/synchronized\/"
-        },"genre": "posts","keywords": "并发编程","wordcount":  291 ,
+        },"genre": "posts","keywords": "并发编程","wordcount":  293 ,
         "url": "https:\/\/moge.fun\/synchronized\/","datePublished": "2018-04-03T00:00:00+00:00","dateModified": "2018-04-03T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">synchronized(无锁→偏向锁→轻量级锁→重量级锁)</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-03">2018-04-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 291 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-03">2018-04-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 293 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -265,6 +265,16 @@
 <p><strong>流程：偏向锁通过对比Mark Word解决加锁问题，避免执行CAS操作。而轻量级锁是通过用CAS操作和自旋来解决加锁问题，避免线程阻塞和唤醒而影响性能。重量级锁是将除了拥有锁的线程以外的线程都阻塞。</strong></p>
 <p>下面是各个过程的详细介绍：</p>
 <h3 id="自旋锁与自适应自旋锁">自旋锁与自适应自旋锁</h3>
+<p><figure><a class="lightgallery" href="/images/current/synchronized/sync-zixuan.png" title="/images/current/synchronized/sync-zixuan.png" data-thumbnail="/images/current/synchronized/sync-zixuan.png" data-sub-html="<h2>自旋锁对比非自旋锁</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/current/synchronized/sync-zixuan.png"
+            data-srcset="/images/current/synchronized/sync-zixuan.png, /images/current/synchronized/sync-zixuan.png 1.5x, /images/current/synchronized/sync-zixuan.png 2x"
+            data-sizes="auto"
+            alt="/images/current/synchronized/sync-zixuan.png" />
+    </a><figcaption class="image-caption">自旋锁对比非自旋锁</figcaption>
+    </figure></p>
 <h4 id="自旋锁">自旋锁</h4>
 <blockquote>
 <p>引入背景：大家都知道，在没有加入锁优化时，Synchronized是一个非常“胖大”的家伙。在多线程竞争锁时，当一个线程获取锁时，它会阻塞所有正在竞争的线程，这样对性能带来了极大的影响。在挂起线程和恢复线程的操作都需要转入内核态中完成，这些操作对系统的并发性能带来了很大的压力。同时HotSpot团队注意到在很多情况下，共享数据的<strong>锁定状态只会持续很短的一段时间，为了这段时间去挂起和回复阻塞线程并不值得</strong>。在如今多处理器环境下，完全可以让另一个<strong>没有获取到锁的线程在门外等待一会(自旋)，但不放弃CPU的执行时间</strong>。等待持有锁的线程是否很快就会释放锁。<strong>为了让线程等待，我们只需要让线程执行一个忙循环(自旋)，这便是自旋锁由来的原因。</strong></p>

@@ -502,6 +502,6 @@ static void selfInterrupt() {
 * 当结点的状态为SIGNAL时，表示后面的结点需要运行。 
 
 ## 参考文章
-
 [从ReentrantLock的实现看AQS的原理及应用](https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html "从ReentrantLock的实现看AQS的原理及应用")
+
 [锁核心类AQS详解](https://www.pdai.tech/md/java/thread/java-thread-x-lock-AbstractQueuedSynchronizer.html "锁核心类AQS详解")
