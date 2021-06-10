@@ -38,8 +38,10 @@ Lock框架和Tools类 Lock框架和Tools类" Lock框架和Tools类
  抽象类AbstractOwnableSynchonizer  AbstractOwnableSynchonizer为抽象类，可以由线程以独占方式拥有的同步器。此类为创建锁和相关同步器(伴随着所有权的概念)提供了基础。AbstractOwnableSynchronizer 类本身不管理或使用此信息。但是，子类和工具可以使用适当维护的值帮助控制和监视访问以及提供诊断。
  抽象类AbstractQueuedLongSynchronizer(long)  AbstractQueuedLongSynchronizer为抽象类，以 long 形式维护同步状态的一个 AbstractQueuedSynchronizer 版本。此类具有的结构、属性和方法与 AbstractQueuedSynchronizer 完全相同，但所有与状态相关的参数和结果都定义为 long 而不是 int。当创建需要 64 位状态的多级别锁和屏障等同步器时，此类很有用。
  核心抽象类AbstractQueuedSynchronizer(int)  AbstractQueuedSynchronizer为抽象类，其为实现依赖于先进先出 (FIFO) 等待队列的阻塞锁和相关同步器(信号量、事件，等等)提供一个框架。此类的设计目标是成为依靠单个原子int值来表示状态的大多数同步器的一个有用基础。
- 锁常用类LockSupport  LockSupport为常用类，用来创建锁和其他同步类的基本线程阻塞原语。LockSupport的功能和&quot;Thread中的 Thread.suspend()和Thread.resume()有点类似&rdquo;，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。
- 锁常用类ReentrantLock  ReentrantLock为常用类，它是一个可重入的互斥锁 Lock，它具有与使用 synchronized 方法和语句所访问的隐式监视器锁相同的一些基本行为和语义，但功能更强大。]]></description>
+ 锁常用类LockSupport  LockSupport为常用类，主要作用就是挂起线程，唤醒线程。LockSupport的功能和&quot;Thread中的 Thread.suspend()和Thread.resume()有点类似&rdquo;，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。
+ 该流程在购物APP上非常常见，当你准备支付时放弃，会有一个支付失效，在支付失效期内可以随时回来支付，过期后需要重新选取支付商品。
+这里基于LockSupport中park和unpark控制线程状态，实现的等待通知机制。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29  public class LockAPI04 { public static void main(String[] args) throws Exception { OrderPay orderPay = new OrderPay(&#34;UnPaid&#34;) ; Thread orderThread = new Thread(orderPay) ; orderThread.]]></description>
 </item><item>
     <title>Java并发编程概览</title>
     <link>https://moge.fun/javacurrent/</link>

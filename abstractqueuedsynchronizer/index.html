@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/abstractqueuedsynchronizer\/"
-        },"genre": "posts","keywords": "并发编程","wordcount":  1382 ,
+        },"genre": "posts","keywords": "并发编程","wordcount":  1339 ,
         "url": "https:\/\/moge.fun\/abstractqueuedsynchronizer\/","datePublished": "2018-04-05T00:00:00+00:00","dateModified": "2018-04-05T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">AbstractQueuedSynchronizer详解</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-05">2018-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1382 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-05">2018-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1339 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -120,7 +120,7 @@
       <ul>
         <li><a href="#线程两种资源共享方式">线程两种资源共享方式</a></li>
         <li><a href="#属性值的含义">属性值的含义</a></li>
-        <li><a href="#waitstatus有下面几个枚举值">waitStatus有下面几个枚举值</a></li>
+        <li><a href="#waitstatus节点状态">waitStatus（节点状态）</a></li>
       </ul>
     </li>
     <li><a href="#aqs重要方法与reentrantlock的关联">AQS重要方法与ReentrantLock的关联</a>
@@ -187,8 +187,7 @@
             data-sizes="auto"
             alt="/images/current/aqs/juc-aqs.png" />
     </a><figcaption class="image-caption">AQS数据结构</figcaption>
-    </figure>
-先来看下AQS中最基本的数据结构——Node，Node即为上面CLH变体队列中的节点。</p>
+    </figure></p>
 <h3 id="线程两种资源共享方式">线程两种资源共享方式</h3>
 <ul>
 <li>Share(共享)：多个线程可同时执行，如Semaphore/CountDownLatch。Semaphore、CountDownLatCh、 CyclicBarrier、ReadWriteLock。</li>
@@ -199,7 +198,7 @@
 </ul>
 </li>
 </ul>
-<p>ReentrantReadWriteLock 可以看成是组合式，因为ReentrantReadWriteLock也就是读写锁允许多个线程同时对某一资源进行读。</p>
+<p>ReentrantReadWriteLock可以看成是组合式，因为ReentrantReadWriteLock是读写锁允许多个线程同时对某一资源进行读。</p>
 <p>不同的自定义同步器争用共享资源的方式也不同。自定义同步器在实现时只需要实现共享资源state的获取与释放方式即可，至于具体线程等待队列的维护(如获取资源失败入队/唤醒出队等)，AQS已经在上层已经帮我们实现好了。</p>
 <h3 id="属性值的含义">属性值的含义</h3>
 <ul>
@@ -210,7 +209,7 @@
 <li>nextWaiter	指向下一个处于CONDITION状态的节点（由于本篇文章不讲述Condition Queue队列，这个指针不多介绍）</li>
 <li>next	后继指针</li>
 </ul>
-<h3 id="waitstatus有下面几个枚举值">waitStatus有下面几个枚举值</h3>
+<h3 id="waitstatus节点状态">waitStatus（节点状态）</h3>
 <ul>
 <li>0，表示当前节点在sync queue中，等待着获取锁。</li>
 <li>SIGNAL	为-1，表示线程已经准备好了，就等资源释放了,表示当前节点的后继节点包含的线程需要运行，需要进行unpark操作。</li>
@@ -406,37 +405,6 @@
 <li>Pred指针指向尾节点Tail。</li>
 <li>将New中Node的Prev指针指向Pred。</li>
 <li>通过compareAndSetTail方法，完成尾节点的设置。这个方法主要是对tailOffset和Expect进行比较，如果tailOffset的Node和Expect的Node地址是相同的，那么设置Tail的值为Update的值。</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// java.util.concurrent.locks.AbstractQueuedSynchronizer
-</span><span class="c1"></span><span class="kd">static</span> <span class="o">{</span>
-	<span class="k">try</span> <span class="o">{</span>
-		<span class="n">stateOffset</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">objectFieldOffset</span><span class="o">(</span><span class="n">AbstractQueuedSynchronizer</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;state&#34;</span><span class="o">));</span>
-		<span class="n">headOffset</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">objectFieldOffset</span><span class="o">(</span><span class="n">AbstractQueuedSynchronizer</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;head&#34;</span><span class="o">));</span>
-		<span class="n">tailOffset</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">objectFieldOffset</span><span class="o">(</span><span class="n">AbstractQueuedSynchronizer</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;tail&#34;</span><span class="o">));</span>
-		<span class="n">waitStatusOffset</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">objectFieldOffset</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;waitStatus&#34;</span><span class="o">));</span>
-		<span class="n">nextOffset</span> <span class="o">=</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">objectFieldOffset</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;next&#34;</span><span class="o">));</span>
-	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span> 
-    <span class="k">throw</span> <span class="k">new</span> <span class="n">Error</span><span class="o">(</span><span class="n">ex</span><span class="o">);</span> 
-  <span class="o">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>从AQS的静态代码块可以看出，都是获取一个对象的属性相对于该对象在内存当中的偏移量，这样我们就可以根据这个偏移量在对象内存当中找到这个属性。tailOffset指的是tail对应的偏移量，所以这个时候会将new出来的Node置为当前队列的尾节点。同时，由于是双向链表，也需要将前一个节点指向尾节点。</p>
-<ol start="5">
 <li>如果Pred指针是Null（说明等待队列中没有元素），或者当前Pred指针和Tail指向的位置不同（说明被别的线程已经修改），就需要看一下Enq的方法。</li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -502,8 +470,9 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>上文解释了addWaiter方法，这个方法其实就是把对应的线程以Node的数据结构形式加入到双端队列里，返回的是一个包含该线程的Node。而这个Node会作为参数，进入到acquireQueued方法中。acquireQueued方法可以对排队中的线程进行“获锁”操作。</p>
-<p>总的来说，一个线程获取锁失败了，被放入等待队列，acquireQueued会把放入队列中的线程不断去获取锁，直到获取成功或者不再需要获取（中断）。</p>
+</div><p>上文解释了addWaiter方法，这个方法其实就是把对应的线程以Node的数据结构形式加入到双端队列里，返回的是一个包含该线程的Node。</p>
+<p><strong>而这个Node会作为参数，进入到acquireQueued方法中。acquireQueued方法可以对排队中的线程进行“获锁”操作。</strong></p>
+<p><strong>总的来说，一个线程获取锁失败了，被放入等待队列，acquireQueued会把放入队列中的线程不断去获取锁，直到获取成功或者不再需要获取（中断）。</strong></p>
 <p>下面我们从“何时出队列？”和“如何出队列？”两个方向来分析一下acquireQueued源码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -658,7 +627,7 @@
             alt="/images/current/aqs/AQS-Lock-procedure-1.png" />
     </a><figcaption class="image-caption">AQS加锁流程1</figcaption>
     </figure></p>
-<p>从上图可以看出，跳出当前循环的条件是当“前置节点是头结点，且当前线程获取锁成功”。为了防止因死循环导致CPU资源被浪费，我们会判断前置节点的状态来决定是否要将当前线程挂起，具体挂起流程用流程图表示如下（shouldParkAfterFailedAcquire流程）：</p>
+<p><strong>从上图可以看出，跳出当前循环的条件是当“前置节点是头结点，且当前线程获取锁成功”。为了防止因死循环导致CPU资源被浪费，我们会判断前置节点的状态来决定是否要将当前线程挂起，具体挂起流程用流程图表示如下（shouldParkAfterFailedAcquire流程）</strong>：</p>
 <p><figure><a class="lightgallery" href="/images/current/aqs/AQS-Lock-procedure-2.png" title="/images/current/aqs/AQS-Lock-procedure-2.png" data-thumbnail="/images/current/aqs/AQS-Lock-procedure-2.png" data-sub-html="<h2>AQS加锁流程2</h2>">
         <img
             class="lazyload"

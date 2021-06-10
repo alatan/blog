@@ -103,6 +103,25 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/hashtable/">哈希表</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-03">2017-02-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">定义 散列Hash是和顺序、链接和索引一样，是存储集合或者线性表的一种方法。
+散列的基本思想是：以集合或线性表中的每个元素的关键字K为自变量，通过一个散列函数 h(K) 得到的结果，将这个结果解释为一块连续的存储空间（如数组）的地址（如数组下标），将这个元素存储到这个空间中。
+h(K) 称为散列函数或者哈希函数，它实现了关键字到存储地址的映射，散列算法，变换成固定长度的输出，该输出就是散列值。h(K)的值 称为散列地址或者哈希地址。存储空间是线性表进行散列存储的空间，所以称之为散列表或者哈希表。
+释义 这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，所以不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
+所有散列函数都有如下一个基本特性：根据同一散列函数计算出的散列值如果不同，那么输入值肯定也不同。但是，根据同一散列函数计算出的散列值如果相同，输入值不一定相同。
+两个不同的输入值，根据同一散列函数计算出的散列值相同的现象叫做碰撞，衡量一个哈希函数的好坏的重要指标就是发生碰撞的概率以及发生碰撞的解决方案。
+常见的Hash函数  直接定址法：直接以关键字k或者k加上某个常数（k+c）作为哈希地址。 数字分析法：提取关键字中取值比较均匀的数字作为哈希地址。 除留余数法：用关键字k除以某个不大于哈希表长度m的数p，将所得余数作为哈希表地址。 分段叠加法：按照哈希表地址位数将关键字分成位数相等的几部分，其中最后一部分可以比较短。然后将这几部分相加，舍弃最高进位后的结果就是该关键字的哈希地址。 平方取中法：如果关键字各个部分分布都不均匀的话，可以先求出它的平方值，然后按照需求取中间的几位作为哈希地址。 伪随机数法：采用一个伪随机数当作哈希函数。  解决碰撞方法  开放定址法：开放定址法就是一旦发生了冲突，就去寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到，并将记录存入。 链地址法：将哈希表的每个单元作为链表的头结点，所有哈希地址为i的元素构成一个同义词链表。即发生冲突时就把该关键字链在以该单元为头结点的链表的尾部。 再哈希法：当哈希地址发生冲突用其他的函数计算另一个哈希函数地址，直到冲突不再产生为止。 建立公共溢出区：将哈希表分为基本表和溢出表两部分，发生冲突的元素都放入溢出表中。  散列存储的缺点  计算散列地址需要花费时间，关键字不是整数还先要转换为整数。 占用更多的存储空间，开放定址法的装载因子小于1，链接法则需要空间存储指针。 只能按关键字查找，无法按非关键字查找。  </div><div class="post-footer">
+        <a href="/hashtable/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/linkedlist/">链表</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-02">2017-02-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">定义 链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。
+详解  链表的存在就是为了解决数组的增删复杂耗时，内存占用较大的问题。它并不需要一块连续的内存空间，它通过指针将一组零散的内存块串联起来。 根据指针的不同，有单链表，双向链表，循环链表之分。 数组和链表是相互补充的一对数据结构。  优点：  操作指针即可删除该元素或者插入新元素，时间复杂度 O(1)。 链表因为元素不连续，而是靠指针指向下一个元素的位置，本身没有大小的限制，不存在数组的扩容问题，所以天然地支持动态扩容。  缺点：  因为存储空间不连续，你无法根据一个索引算出对应元素的地址，所以不能随机访问。 由于每个元素必须存储指向前后元素位置的指针，会消耗相对更多的储存空间。 同时内存不连续，容易造成内存碎片。  对比 数组 数组存储区间是连续的，占用内存严重，故空间复杂的很大。但数组的二分查找时间复杂度小，为O(1)；数组的特点是：寻址容易，插入和删除困难。
+链表 链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但时间复杂度很大，达O（N）。链表的特点是：寻址困难，插入和删除容易。
+哈希表 那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？这就是我们要提起的哈希表。</div><div class="post-footer">
+        <a href="/linkedlist/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/array/">数组</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-01">2017-02-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">定义 有限个相同数据类型的元素按顺序排列的集合为数组。
 特性  数组是相同数据类型的元素的集合。 数组中的各元素的存储是有先后顺序的，它们在内存中按照这个先后顺序连续存放在一起。  优点：  由于是紧凑连续存储,可以随机访问，通过索引快速找到对应元素，而且相对节约存储空间，查询修改元素的效率O(1)。  缺点：  正因为连续存储，内存空间必须一次性分配够，所以说数组如果要扩容，需要重新分配一块更大的空间，再把数据全部复制过去，时间复杂度 O(N)。 想在数组中间进行插入和删除，每次必须搬移后面的所有数据以保持连续，时间复杂度 O(N)  二维数组 二维数组也称为矩阵，因为是二维的，所以需要两个下标才能确定一个元素，即行下标和列下标。</div><div class="post-footer">
@@ -131,19 +150,6 @@
  列表 1 2 3  * 学习 * 思考 * 创造    学习 思考 创造  有序列表 1 2 3  1.</div><div class="post-footer">
         <a href="/mdgrammar/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/markdown/">Markdown</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/energy/">减缓焦虑，积聚生活正能量</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-01-01">2015-01-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8F%8D%E6%80%9D/"><i class="far fa-folder fa-fw"></i>反思</a></span></div><div class="content">面对不断袭来的压力和信息，我们要做的，就是找到自己的节奏，建立一套稳定的模式，用来应对和处理种种事务。尽可能让一切「平稳」下来。 这也许需要一些取舍，一些选择、牺牲和放弃 —— 但一旦这套模式能够建立起来，一切都是值得的。  思虑过载 变被动为主动，自己去决定「我要做什么」，重新找回「自主性」。
-前一天晚上做好安排  整理一遍任务清单，从收集/待办的池子中， 挑出5-6个最重要、最关键的任务，安排到第二天  留出一定的宽裕度  做出取舍。该舍弃的，就果断舍弃。 与其把所有事情做到60分，不如把最重要的事情做到100分。  聚焦在长期价值上  不妨这样问问自己：我可以做些什么，来摆脱目前这种忙碌的状态？
- 无论是设计一套流程，还是把部分工作委托出去，又或者是把细碎的任务合并起来，还是优化、压缩任务步骤和时间……这些，长期来看都是更具价值的，也是你应该着重去聚焦的。 把它们作为你每天「最重要的事项」，想办法让自己能够抽身出来。
- 被压榨感  什么是被压榨感？它是指：自己一直在劳动和付出，但却始终得不到反馈、认可和肯定，仿佛自己的付出都是无价值的。
-  去发现生活中微小的幸福感。   决策疲劳  不要在晚上作出重要的决定。 通过给自己设立规则，让规则帮助自己作出决策。规则覆盖不到的地方，则用随机来解决。   外在打扰  建立你的「第二大脑」，把思维外部化。
-  信息过载  我们不断去追逐新信息，不断获取新鲜感的刺激，这本身是一个高耗能的行为 —— 但我们的大脑，会受到新鲜感的蛊惑，从而忽略和掩盖住这种耗能。
-  意识地克制自己，去做好信息的「反刍」，而非追逐新的信息。 试着把你记录的不同笔记放到一起，看看它们之间能产生什么联系，能否创造出新的火花。 在闲暇的碎片时间里，去反刍、回想自己记下的旧内容，尽量控制对新信息的摄入。   tips  一定要睡好。   睡眠过程中的深度睡眠，能够有效促进腺苷到ATP的水合反应，为我们的机体储存能量、清除代谢垃圾。 请保证每天6小时以上不受干扰的睡眠，这极其重要。
- 多散步。   散步是最轻松有效的锻炼。不但能够促进血清素的合成，也能有效扩充大脑容量。波士顿大学的一项研究表明，每天步行1小时（约5000步），相当于大脑延缓衰老1年。
- 适当的运动。   每周 150 分钟一定强度的运动，能够有效提高心肺功能，从而提高每一天精力的上限。</div><div class="post-footer">
-        <a href="/energy/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%94%9F%E6%B4%BB/">生活</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -159,6 +165,10 @@
                 </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/4/">4</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

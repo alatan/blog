@@ -110,6 +110,26 @@ Collection List 对付顺序的好帮手： 存储的元素是有序的、可重
         <a href="/javacontainer/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/javaio/">Java IO知识体系详解 </a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-05">2018-02-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">IO大纲" IO大纲 
+IO 装饰者模式 以 InputStream 为例
+ InputStream 是抽象组件； FileInputStream 是 InputStream 的子类，属于具体组件，提供了字节流的输入操作； FilterInputStream 属于抽象装饰者，装饰者用于装饰组件，为组件提供额外的功能。例如 BufferedInputStream 为 FileInputStream 提供缓存的功能。  实例化一个具有缓存功能的字节流对象时，只需要在 FileInputStream 对象上再套一层 BufferedInputStream 对象即可。
+1 2  FileInputStream fileInputStream = new FileInputStream(filePath); BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);   IO常见类的使用 磁盘操作 File 类可以用于表示文件和目录的信息，但是它不表示文件的内容。
+1 2 3 4 5 6 7 8 9 10 11 12 13  //递归地列出一个目录下所有文件: public static void listAllFiles(File dir) { if (dir == null || !</div><div class="post-footer">
+        <a href="/javaio/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/byteopt/">java位运算 </a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-04">2018-02-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">一切的起源：二进制 位：二进制位，简称“位”。是二进制记数系统中表示小于2的整数的符号，一般用1或 0表示，是具有相等概率的两种状态中的一种。二进制位的位数可表示一个机器字的字长，一个二进制位包含的信息量称为一比特（bit）。
+1 2 3 4 5  举个栗子： int占4个字节（byte） 1byte = 8bit 换算下来，一个int类型即占32bit int i = 88; 这里的88为十进制，转换为二进制为：1011000，使用完整的32位表示即为：00000000 00000000 00000000 01011000   上文中的00000000 00000000 00000000 01011000即为十进制88转为二进制的 原码 ，与其相关的定义还有 反码 和 补码
+关于原码、反码和补码 在计算机内，有符号数有三种表示法：原码、反码以及补码。
+ 原码：就是二进制定点表示法，即最高位为符号位，“0”正负“1”，其余位表示数值的大小。 反码：正数的反码与其原码相同；负数的反码是对正数逐位取反，符号位保持为1。 补码：正数的补码与其原码相同；负数的补码是在其反码的末位加1。  为什么要使用补码 简单来说，就是计算机计算减法时有各种不方便，于是发明了反码，结果发现反码也有缺陷（有两个零存在：“+0”和“-0”），进而发明了补码解决这个问题。
+在计算机系统中，数值一律用补码来表示和存储。原因在于，使用补码，可以将符号位和数值域统一处理；同时，加法和减法也可以统一处理。此外，补码与原码相互转换，其运算过程是相同的，不需要额外的硬件电路。
+有关补码的意义及作用在上面的链接里讨论的非常详尽，我这里就不班门弄斧了，理解就好～ 对原码、反码以及补码有一个初步的认知后，我们接下来再看位运算就会清晰很多。
+位运算符的基本运算    操作符 描述 例子（A = 8, B = 9）     按位与&amp; 如果相对应位都是1，则结果为1，否则为0 A&amp;B=8，即1000   按位或 | 如果相对应位都是0，则结果为0，否则为1 A B=9，即1001   按位异或^ 如果相对应位值相同，则结果为0，否则为1 A^B=1，即0001   按位取反~ 按位取反运算符翻转操作数的每一位，即0变成1，1变成0 ~A=7，即0111   左移 &laquo; 按位左移运算符。左操作数按位左移右操作数指定的位数 A &laquo; 2 = 32，即1000 00   右移 &raquo; 按位右移运算符。左操作数按位右移右操作数指定的位数 A &raquo; 2 = 2，即0010    </div><div class="post-footer">
+        <a href="/byteopt/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/reflection/">框架的灵魂-反射</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-03">2018-02-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">什么是反射 简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未知的。
 反射的核心是 JVM 在运行时才动态加载类或调用方法/访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。
@@ -149,25 +169,6 @@ OOD（面向对象设计）七大戒律 开-闭原则 Open-Close Principle（OCP
 行走江湖的锦囊妙计和绝世武器 上面的法宝和戒律是心法，真正行走江湖还需要趁手的兵器和锦囊妙计。 而设计模式就是应用三大法宝和七大戒律下经过反复实践铸造出来锦囊妙计和武器，具体有哪些武器我们暂且不表，毕竟倚天屠龙出世，江湖必将血雨腥风，在这之前我们还需要做好准备工作。</div><div class="post-footer">
         <a href="/object-oriented/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/hashtable/">哈希表</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-03">2017-02-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">定义 散列Hash是和顺序、链接和索引一样，是存储集合或者线性表的一种方法。
-散列的基本思想是：以集合或线性表中的每个元素的关键字K为自变量，通过一个散列函数 h(K) 得到的结果，将这个结果解释为一块连续的存储空间（如数组）的地址（如数组下标），将这个元素存储到这个空间中。
-h(K) 称为散列函数或者哈希函数，它实现了关键字到存储地址的映射，散列算法，变换成固定长度的输出，该输出就是散列值。h(K)的值 称为散列地址或者哈希地址。存储空间是线性表进行散列存储的空间，所以称之为散列表或者哈希表。
-释义 这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，所以不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
-所有散列函数都有如下一个基本特性：根据同一散列函数计算出的散列值如果不同，那么输入值肯定也不同。但是，根据同一散列函数计算出的散列值如果相同，输入值不一定相同。
-两个不同的输入值，根据同一散列函数计算出的散列值相同的现象叫做碰撞，衡量一个哈希函数的好坏的重要指标就是发生碰撞的概率以及发生碰撞的解决方案。
-常见的Hash函数  直接定址法：直接以关键字k或者k加上某个常数（k+c）作为哈希地址。 数字分析法：提取关键字中取值比较均匀的数字作为哈希地址。 除留余数法：用关键字k除以某个不大于哈希表长度m的数p，将所得余数作为哈希表地址。 分段叠加法：按照哈希表地址位数将关键字分成位数相等的几部分，其中最后一部分可以比较短。然后将这几部分相加，舍弃最高进位后的结果就是该关键字的哈希地址。 平方取中法：如果关键字各个部分分布都不均匀的话，可以先求出它的平方值，然后按照需求取中间的几位作为哈希地址。 伪随机数法：采用一个伪随机数当作哈希函数。  解决碰撞方法  开放定址法：开放定址法就是一旦发生了冲突，就去寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到，并将记录存入。 链地址法：将哈希表的每个单元作为链表的头结点，所有哈希地址为i的元素构成一个同义词链表。即发生冲突时就把该关键字链在以该单元为头结点的链表的尾部。 再哈希法：当哈希地址发生冲突用其他的函数计算另一个哈希函数地址，直到冲突不再产生为止。 建立公共溢出区：将哈希表分为基本表和溢出表两部分，发生冲突的元素都放入溢出表中。  散列存储的缺点  计算散列地址需要花费时间，关键字不是整数还先要转换为整数。 占用更多的存储空间，开放定址法的装载因子小于1，链接法则需要空间存储指针。 只能按关键字查找，无法按非关键字查找。  </div><div class="post-footer">
-        <a href="/hashtable/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/linkedlist/">链表</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-02">2017-02-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">定义 链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。
-详解  链表的存在就是为了解决数组的增删复杂耗时，内存占用较大的问题。它并不需要一块连续的内存空间，它通过指针将一组零散的内存块串联起来。 根据指针的不同，有单链表，双向链表，循环链表之分。 数组和链表是相互补充的一对数据结构。  优点：  操作指针即可删除该元素或者插入新元素，时间复杂度 O(1)。 链表因为元素不连续，而是靠指针指向下一个元素的位置，本身没有大小的限制，不存在数组的扩容问题，所以天然地支持动态扩容。  缺点：  因为存储空间不连续，你无法根据一个索引算出对应元素的地址，所以不能随机访问。 由于每个元素必须存储指向前后元素位置的指针，会消耗相对更多的储存空间。 同时内存不连续，容易造成内存碎片。  对比 数组 数组存储区间是连续的，占用内存严重，故空间复杂的很大。但数组的二分查找时间复杂度小，为O(1)；数组的特点是：寻址容易，插入和删除困难。
-链表 链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但时间复杂度很大，达O（N）。链表的特点是：寻址困难，插入和删除容易。
-哈希表 那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？这就是我们要提起的哈希表。</div><div class="post-footer">
-        <a href="/linkedlist/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -183,6 +184,10 @@ h(K) 称为散列函数或者哈希函数，它实现了关键字到存储地址
                 </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/4/">4</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

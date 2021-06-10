@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/juc\/"
-        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  172 ,
+        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  497 ,
         "url": "https:\/\/moge.fun\/juc\/","datePublished": "2018-04-02T00:00:00+00:00","dateModified": "2018-04-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,8 +106,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">JUC-并发编程利器</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-02">2018-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 172 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-02">2018-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 497 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -203,9 +203,75 @@
 </blockquote>
 <h3 id="锁常用类locksupport">锁常用类LockSupport</h3>
 <blockquote>
-<p>LockSupport为常用类，用来创建锁和其他同步类的基本线程阻塞原语。LockSupport的功能和&quot;Thread中的 Thread.suspend()和Thread.resume()有点类似&rdquo;，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。</p>
+<p>LockSupport为常用类，主要作用就是挂起线程，唤醒线程。LockSupport的功能和&quot;Thread中的 Thread.suspend()和Thread.resume()有点类似&rdquo;，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。</p>
 </blockquote>
-<h3 id="锁常用类reentrantlock">锁常用类ReentrantLock</h3>
+<p>该流程在购物APP上非常常见，当你准备支付时放弃，会有一个支付失效，在支付失效期内可以随时回来支付，过期后需要重新选取支付商品。</p>
+<p>这里基于LockSupport中park和unpark控制线程状态，实现的等待通知机制。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockAPI04</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">OrderPay</span> <span class="n">orderPay</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OrderPay</span><span class="o">(</span><span class="s">&#34;UnPaid&#34;</span><span class="o">)</span> <span class="o">;</span>
+        <span class="n">Thread</span> <span class="n">orderThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">orderPay</span><span class="o">)</span> <span class="o">;</span>
+        <span class="n">orderThread</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">3000</span><span class="o">);</span>
+        <span class="n">orderPay</span><span class="o">.</span><span class="na">changeState</span><span class="o">(</span><span class="s">&#34;Pay&#34;</span><span class="o">);</span>
+        <span class="n">LockSupport</span><span class="o">.</span><span class="na">unpark</span><span class="o">(</span><span class="n">orderThread</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">OrderPay</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+    <span class="c1">// 支付状态
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">orderState</span> <span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">OrderPay</span> <span class="o">(</span><span class="n">String</span> <span class="n">orderState</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">orderState</span> <span class="o">=</span> <span class="n">orderState</span> <span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">changeState</span> <span class="o">(</span><span class="n">String</span> <span class="n">orderState</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">orderState</span> <span class="o">=</span> <span class="n">orderState</span> <span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">orderState</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;UnPaid&#34;</span><span class="o">)){</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;订单待支付...&#34;</span><span class="o">+</span><span class="n">orderState</span><span class="o">);</span>
+            <span class="n">LockSupport</span><span class="o">.</span><span class="na">park</span><span class="o">(</span><span class="n">orderState</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;orderState=&#34;</span><span class="o">+</span><span class="n">orderState</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;订单准备发货...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="锁常用类reentrantlock">锁常用类ReentrantLock</h3>
 <blockquote>
 <p>ReentrantLock为常用类，它是一个可重入的互斥锁 Lock，它具有与使用 synchronized 方法和语句所访问的隐式监视器锁相同的一些基本行为和语义，但功能更强大。</p>
 </blockquote>
@@ -213,7 +279,132 @@
 <blockquote>
 <p>ReentrantReadWriteLock是读写锁接口ReadWriteLock的实现类，它包括Lock子类ReadLock和WriteLock。ReadLock是共享锁，WriteLock是独占锁。</p>
 </blockquote>
-<h3 id="锁常用类stampedlock">锁常用类StampedLock</h3>
+<p><strong>基于读锁时，其他线程可以进行读操作，基于写锁时，其他线程读、写操作都禁止。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockAPI03</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="n">DataMap</span> <span class="n">dataMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataMap</span><span class="o">()</span> <span class="o">;</span>
+        <span class="n">Thread</span> <span class="n">read</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">GetRun</span><span class="o">(</span><span class="n">dataMap</span><span class="o">))</span> <span class="o">;</span>
+        <span class="n">Thread</span> <span class="n">write</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">PutRun</span><span class="o">(</span><span class="n">dataMap</span><span class="o">))</span> <span class="o">;</span>
+        <span class="n">write</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">2000</span><span class="o">);</span>
+        <span class="n">read</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">GetRun</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">DataMap</span> <span class="n">dataMap</span> <span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">GetRun</span> <span class="o">(</span><span class="n">DataMap</span> <span class="n">dataMap</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">dataMap</span> <span class="o">=</span> <span class="n">dataMap</span> <span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;GetRun：&#34;</span><span class="o">+</span><span class="n">dataMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&#34;myKey&#34;</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">PutRun</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">DataMap</span> <span class="n">dataMap</span> <span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">PutRun</span> <span class="o">(</span><span class="n">DataMap</span> <span class="n">dataMap</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">dataMap</span> <span class="o">=</span> <span class="n">dataMap</span> <span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">dataMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;myKey&#34;</span><span class="o">,</span><span class="s">&#34;myValue&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">class</span> <span class="nc">DataMap</span> <span class="o">{</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">dataMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;()</span> <span class="o">;</span>
+    <span class="n">ReadWriteLock</span> <span class="n">rwLock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantReadWriteLock</span><span class="o">()</span> <span class="o">;</span>
+    <span class="n">Lock</span> <span class="n">readLock</span> <span class="o">=</span> <span class="n">rwLock</span><span class="o">.</span><span class="na">readLock</span><span class="o">()</span> <span class="o">;</span>
+    <span class="n">Lock</span> <span class="n">writeLock</span> <span class="o">=</span> <span class="n">rwLock</span><span class="o">.</span><span class="na">writeLock</span><span class="o">()</span> <span class="o">;</span>
+
+    <span class="c1">// 读取数据
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">get</span> <span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">){</span>
+        <span class="n">readLock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="k">return</span> <span class="n">dataMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">)</span> <span class="o">;</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">readLock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="c1">// 写入数据
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span> <span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span><span class="n">String</span> <span class="n">value</span><span class="o">){</span>
+        <span class="n">writeLock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="n">dataMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span><span class="n">value</span><span class="o">)</span> <span class="o">;</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行写入结束...&#34;</span><span class="o">);</span>
+            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">10000</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Exception...&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">writeLock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="锁常用类stampedlock">锁常用类StampedLock</h3>
 <blockquote>
 <p>它是java8在java.util.concurrent.locks新增的一个API。StampedLock控制锁有三种模式(写，读，乐观读)，一个StampedLock状态是由版本和模式两个部分组成，锁获取方法返回一个数字作为票据stamp，它用相应的锁状态表示并控制访问，数字0表示没有写锁被授权访问。在读锁上分为悲观锁和乐观锁。</p>
 </blockquote>
