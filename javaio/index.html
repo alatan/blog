@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/javaio\/"
-        },"genre": "posts","keywords": "Java基础","wordcount":  1201 ,
+        },"genre": "posts","keywords": "Java基础","wordcount":  1197 ,
         "url": "https:\/\/moge.fun\/javaio\/","datePublished": "2018-02-05T00:00:00+00:00","dateModified": "2018-02-05T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Java IO知识体系详解 </h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-05">2018-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1201 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-05">2018-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1197 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -115,17 +115,13 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li><a href="#io-装饰者模式">IO 装饰者模式</a></li>
-      </ul>
-    </li>
+    <li><a href="#io装饰者模式">IO装饰者模式</a></li>
     <li><a href="#io常见类的使用">IO常见类的使用</a>
       <ul>
         <li><a href="#磁盘操作">磁盘操作</a></li>
         <li><a href="#字节操作inputstream-和-outputstream-">字节操作（InputStream 和 OutputStream ）</a></li>
         <li><a href="#字符操作reader-和-writer-">字符操作（Reader 和 Writer ）</a></li>
-        <li><a href="#对象操作--序列化-serializable--transient">对象操作 &amp; 序列化 Serializable &amp; transient</a></li>
+        <li><a href="#对象操作序列化serializable--transient">对象操作(序列化Serializable &amp; transient)</a></li>
         <li><a href="#网络操作">网络操作</a>
           <ul>
             <li><a href="#sockets">Sockets</a></li>
@@ -138,6 +134,8 @@
       <ul>
         <li><a href="#阻塞式-io">阻塞式 I/O</a></li>
         <li><a href="#非阻塞式-io">非阻塞式 I/O</a></li>
+        <li><a href="#信号驱动式-iosigio">信号驱动式 I/O(SIGIO)</a></li>
+        <li><a href="#异步-ioaio">异步 I/O(AIO)</a></li>
         <li><a href="#io-复用select-和-poll">I/O 复用(select 和 poll)</a>
           <ul>
             <li><a href="#io多路复用工作模式">IO多路复用工作模式</a>
@@ -148,8 +146,6 @@
             </li>
           </ul>
         </li>
-        <li><a href="#信号驱动式-iosigio">信号驱动式 I/O(SIGIO)</a></li>
-        <li><a href="#异步-ioaio">异步 I/O(AIO)</a></li>
         <li><a href="#io模型比较">I/O模型比较</a>
           <ul>
             <li><a href="#同步io与异步io">同步I/O与异步I/O</a></li>
@@ -197,7 +193,7 @@
             alt="/images/io/java-io-overview.jpg" />
     </a><figcaption class="image-caption">IO大纲</figcaption>
     </figure></p>
-<h3 id="io-装饰者模式">IO 装饰者模式</h3>
+<h2 id="io装饰者模式">IO装饰者模式</h2>
 <p>以 InputStream 为例</p>
 <ul>
 <li>InputStream 是抽象组件；</li>
@@ -324,7 +320,7 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="对象操作--序列化-serializable--transient">对象操作 &amp; 序列化 Serializable &amp; transient</h3>
+</div><h3 id="对象操作序列化serializable--transient">对象操作(序列化Serializable &amp; transient)</h3>
 <p>序列化就是将一个对象转换成字节序列，方便存储和传输。</p>
 <ul>
 <li>序列化: ObjectOutputStream.writeObject()</li>
@@ -506,25 +502,6 @@
             alt="/images/io/NIO.png" />
     </a><figcaption class="image-caption">非阻塞式IO</figcaption>
     </figure></p>
-<h3 id="io-复用select-和-poll">I/O 复用(select 和 poll)</h3>
-<p>使用 select 或者 poll 等待数据，并且可以等待多个套接字中的任何一个变为可读，这一过程会被阻塞，当某一个套接字可读时返回。之后再使用 recvfrom 把数据从内核复制到进程中。</p>
-<p>它可以让单个进程具有处理多个 I/O 事件的能力。又被称为 Event Driven I/O，即事件驱动 I/O。</p>
-<p>如果一个 Web 服务器没有 I/O 复用，那么每一个 Socket 连接都需要创建一个线程去处理。如果同时有几万个连接，那么就需要创建相同数量的线程。并且相比于多进程和多线程技术，I/O 复用不需要进程线程创建和切换的开销，系统开销更小。
-<figure><a class="lightgallery" href="/images/io/MIO.png" title="/images/io/MIO.png" data-thumbnail="/images/io/MIO.png" data-sub-html="<h2>复用IO</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/io/MIO.png"
-            data-srcset="/images/io/MIO.png, /images/io/MIO.png 1.5x, /images/io/MIO.png 2x"
-            data-sizes="auto"
-            alt="/images/io/MIO.png" />
-    </a><figcaption class="image-caption">复用IO</figcaption>
-    </figure></p>
-<h4 id="io多路复用工作模式">IO多路复用工作模式</h4>
-<h5 id="1-lt-模式">1. LT 模式</h5>
-<p>当 epoll_wait() 检测到描述符事件到达时，将此事件通知进程，进程可以不立即处理该事件，下次调用 epoll_wait() 会再次通知进程。是默认的一种模式，并且同时支持 Blocking 和 No-Blocking。</p>
-<h5 id="2-et-模式">2. ET 模式</h5>
-<p>和 LT 模式不同的是，通知之后进程必须立即处理事件，下次再调用 epoll_wait() 时不会再得到事件到达的通知。 很大程度上减少了 epoll 事件被重复触发的次数，因此效率要比 LT 模式高。只支持 No-Blocking，以避免由于一个文件句柄的阻塞读/阻塞写操作把处理多个文件描述符的任务饿死。</p>
 <h3 id="信号驱动式-iosigio">信号驱动式 I/O(SIGIO)</h3>
 <p>应用进程使用 sigaction 系统调用，内核立即返回，应用进程可以继续执行，也就是说等待数据阶段应用进程是非阻塞的。内核在数据到达时向应用进程发送 SIGIO 信号，应用进程收到之后在信号处理程序中调用 recvfrom 将数据从内核复制到应用进程中。</p>
 <p>相比于非阻塞式 I/O 的轮询方式，信号驱动 I/O 的 CPU 利用率更高。
@@ -551,6 +528,25 @@
             alt="/images/io/AIO.png" />
     </a><figcaption class="image-caption">异步IO</figcaption>
     </figure></p>
+<h3 id="io-复用select-和-poll">I/O 复用(select 和 poll)</h3>
+<p>使用 select 或者 poll 等待数据，并且可以等待多个套接字中的任何一个变为可读，这一过程会被阻塞，当某一个套接字可读时返回。之后再使用 recvfrom 把数据从内核复制到进程中。</p>
+<p>它可以让单个进程具有处理多个 I/O 事件的能力。又被称为 Event Driven I/O，即事件驱动 I/O。</p>
+<p>如果一个 Web 服务器没有 I/O 复用，那么每一个 Socket 连接都需要创建一个线程去处理。如果同时有几万个连接，那么就需要创建相同数量的线程。并且相比于多进程和多线程技术，I/O 复用不需要进程线程创建和切换的开销，系统开销更小。
+<figure><a class="lightgallery" href="/images/io/MIO.png" title="/images/io/MIO.png" data-thumbnail="/images/io/MIO.png" data-sub-html="<h2>复用IO</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/io/MIO.png"
+            data-srcset="/images/io/MIO.png, /images/io/MIO.png 1.5x, /images/io/MIO.png 2x"
+            data-sizes="auto"
+            alt="/images/io/MIO.png" />
+    </a><figcaption class="image-caption">复用IO</figcaption>
+    </figure></p>
+<h4 id="io多路复用工作模式">IO多路复用工作模式</h4>
+<h5 id="1-lt-模式">1. LT 模式</h5>
+<p>当 epoll_wait() 检测到描述符事件到达时，将此事件通知进程，进程可以不立即处理该事件，下次调用 epoll_wait() 会再次通知进程。是默认的一种模式，并且同时支持 Blocking 和 No-Blocking。</p>
+<h5 id="2-et-模式">2. ET 模式</h5>
+<p>和 LT 模式不同的是，通知之后进程必须立即处理事件，下次再调用 epoll_wait() 时不会再得到事件到达的通知。 很大程度上减少了 epoll 事件被重复触发的次数，因此效率要比 LT 模式高。只支持 No-Blocking，以避免由于一个文件句柄的阻塞读/阻塞写操作把处理多个文件描述符的任务饿死。</p>
 <h3 id="io模型比较">I/O模型比较</h3>
 <h4 id="同步io与异步io">同步I/O与异步I/O</h4>
 <ul>
@@ -874,8 +870,10 @@ NIO 常常被叫做非阻塞 IO，主要是因为 NIO 在网络通信中的非�
 <li>NIO 面向块，I/O 面向流</li>
 </ul>
 <h2 id="io多路复用详解">IO多路复用详解</h2>
-<p>查看文章：https://www.pdai.tech/md/java/io/java-io-nio-select-epoll.
-html</p>
+<ul>
+<li><a href="https://www.pdai.tech/md/java/io/java-io-nio-select-epoll">https://www.pdai.tech/md/java/io/java-io-nio-select-epoll</a>
+html</li>
+</ul>
 <h2 id="异步io">异步IO</h2>
 <p>阻塞式同步IO、非阻塞式同步IO、多路复用IO 这三种IO模型，以及JAVA对于这三种IO模型的支持。重点说明了IO模型是由操作系统提供支持，且这三种IO模型都是同步IO，都是<strong>采用的“应用程序不询问我，我绝不会主动通知”的方式。</strong></p>
 <p>异步IO则是采用“订阅-通知”模式: <strong>即应用程序向操作系统注册IO监听，然后继续做自己的事情。当操作系统发生IO事件，并且准备好数据后，在主动通知应用程序，触发相应的函数。</strong></p>

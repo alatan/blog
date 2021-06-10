@@ -119,7 +119,7 @@ Collection List 对付顺序的好帮手： 存储的元素是有序的、可重
     <author>作者</author>
     <guid>https://moge.fun/javaio/</guid>
     <description><![CDATA[IO大纲" IO大纲 
-IO 装饰者模式 以 InputStream 为例
+IO装饰者模式 以 InputStream 为例
  InputStream 是抽象组件； FileInputStream 是 InputStream 的子类，属于具体组件，提供了字节流的输入操作； FilterInputStream 属于抽象装饰者，装饰者用于装饰组件，为组件提供额外的功能。例如 BufferedInputStream 为 FileInputStream 提供缓存的功能。  实例化一个具有缓存功能的字节流对象时，只需要在 FileInputStream 对象上再套一层 BufferedInputStream 对象即可。
 1 2  FileInputStream fileInputStream = new FileInputStream(filePath); BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);   IO常见类的使用 磁盘操作 File 类可以用于表示文件和目录的信息，但是它不表示文件的内容。
 1 2 3 4 5 6 7 8 9 10 11 12 13  //递归地列出一个目录下所有文件: public static void listAllFiles(File dir) { if (dir == null || !]]></description>
