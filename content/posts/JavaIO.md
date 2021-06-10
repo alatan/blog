@@ -15,7 +15,7 @@ toc:
 
 ![](/images/io/java-io-overview.jpg "IO大纲")
 
-### IO 装饰者模式
+## IO装饰者模式
 以 InputStream 为例
 * InputStream 是抽象组件； 
 * FileInputStream 是 InputStream 的子类，属于具体组件，提供了字节流的输入操作； 
@@ -81,7 +81,7 @@ public static void readFileContent(String filePath) throws IOException {
     bufferedReader.close();
 }
 ```
-### 对象操作 & 序列化 Serializable & transient
+### 对象操作(序列化Serializable & transient)
 序列化就是将一个对象转换成字节序列，方便存储和传输。
 * 序列化: ObjectOutputStream.writeObject()
 * 反序列化: ObjectInputStream.readObject() 
@@ -178,6 +178,18 @@ public static void main(String[] args) throws IOException {
 由于 CPU 要处理更多的系统调用，因此这种模型是比较低效的。
 ![](/images/io/NIO.png "非阻塞式IO")
 
+### 信号驱动式 I/O(SIGIO)
+应用进程使用 sigaction 系统调用，内核立即返回，应用进程可以继续执行，也就是说等待数据阶段应用进程是非阻塞的。内核在数据到达时向应用进程发送 SIGIO 信号，应用进程收到之后在信号处理程序中调用 recvfrom 将数据从内核复制到应用进程中。 
+
+相比于非阻塞式 I/O 的轮询方式，信号驱动 I/O 的 CPU 利用率更高。
+![](/images/io/SIGIO.png "信号驱动式IO")
+
+### 异步 I/O(AIO)
+进行 aio_read 系统调用会立即返回，应用进程继续执行，不会被阻塞，内核会在所有操作完成之后向应用进程发送信号。 
+
+异步 I/O 与信号驱动 I/O 的区别在于，异步 I/O 的信号是通知应用进程 I/O 完成，而信号驱动 I/O 的信号是通知应用进程可以开始 I/O。
+![](/images/io/AIO.png "异步IO")
+
 ### I/O 复用(select 和 poll)
 使用 select 或者 poll 等待数据，并且可以等待多个套接字中的任何一个变为可读，这一过程会被阻塞，当某一个套接字可读时返回。之后再使用 recvfrom 把数据从内核复制到进程中。 
 
@@ -192,17 +204,6 @@ public static void main(String[] args) throws IOException {
 ##### 2. ET 模式 
 和 LT 模式不同的是，通知之后进程必须立即处理事件，下次再调用 epoll_wait() 时不会再得到事件到达的通知。 很大程度上减少了 epoll 事件被重复触发的次数，因此效率要比 LT 模式高。只支持 No-Blocking，以避免由于一个文件句柄的阻塞读/阻塞写操作把处理多个文件描述符的任务饿死。
 
-### 信号驱动式 I/O(SIGIO)
-应用进程使用 sigaction 系统调用，内核立即返回，应用进程可以继续执行，也就是说等待数据阶段应用进程是非阻塞的。内核在数据到达时向应用进程发送 SIGIO 信号，应用进程收到之后在信号处理程序中调用 recvfrom 将数据从内核复制到应用进程中。 
-
-相比于非阻塞式 I/O 的轮询方式，信号驱动 I/O 的 CPU 利用率更高。
-![](/images/io/SIGIO.png "信号驱动式IO")
-
-### 异步 I/O(AIO)
-进行 aio_read 系统调用会立即返回，应用进程继续执行，不会被阻塞，内核会在所有操作完成之后向应用进程发送信号。 
-
-异步 I/O 与信号驱动 I/O 的区别在于，异步 I/O 的信号是通知应用进程 I/O 完成，而信号驱动 I/O 的信号是通知应用进程可以开始 I/O。
-![](/images/io/AIO.png "异步IO")
 
 ### I/O模型比较
 ####  同步I/O与异步I/O
@@ -404,7 +405,7 @@ public class NIOClient {
 * NIO 面向块，I/O 面向流
 
 ##  IO多路复用详解
-查看文章：https://www.pdai.tech/md/java/io/java-io-nio-select-epoll.
+* https://www.pdai.tech/md/java/io/java-io-nio-select-epoll
 html
 
 ## 异步IO 
