@@ -5,37 +5,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Java世界的入场券-面向对象 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="面向对象的三大法宝和七大戒律"><meta property="og:title" content="Java世界的入场券-面向对象" />
-<meta property="og:description" content="面向对象的三大法宝和七大戒律" />
+        <title>JVM详解 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="JVM详解"><meta property="og:title" content="JVM详解" />
+<meta property="og:description" content="JVM详解" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://moge.fun/object-oriented/" />
+<meta property="og:url" content="https://moge.fun/jvm/" />
 <meta property="og:image" content="https://moge.fun/logo.png"/>
-<meta property="article:published_time" content="2018-02-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2018-02-01T00:00:00+00:00" />
+<meta property="article:published_time" content="2018-04-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-20T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://moge.fun/logo.png"/>
 
-<meta name="twitter:title" content="Java世界的入场券-面向对象"/>
-<meta name="twitter:description" content="面向对象的三大法宝和七大戒律"/>
+<meta name="twitter:title" content="JVM详解"/>
+<meta name="twitter:description" content="JVM详解"/>
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/object-oriented/" /><link rel="prev" href="https://moge.fun/byteopt/" /><link rel="next" href="https://moge.fun/generic/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/jvm/" /><link rel="prev" href="https://moge.fun/concurrenthashmap/" /><link rel="next" href="https://moge.fun/javaoutline/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Java世界的入场券-面向对象",
+        "headline": "JVM详解",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/moge.fun\/object-oriented\/"
-        },"genre": "posts","keywords": "Java基础","wordcount":  50 ,
-        "url": "https:\/\/moge.fun\/object-oriented\/","datePublished": "2018-02-01T00:00:00+00:00","dateModified": "2018-02-01T00:00:00+00:00","publisher": {
+            "@id": "https:\/\/moge.fun\/jvm\/"
+        },"genre": "posts","keywords": "JVM, 大纲","wordcount":  42 ,
+        "url": "https:\/\/moge.fun\/jvm\/","datePublished": "2018-04-20T00:00:00+00:00","dateModified": "2018-04-20T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "默哥"
-            },"description": "面向对象的三大法宝和七大戒律"
+            },"description": "JVM详解"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -104,9 +104,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content always-active" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">Java世界的入场券-面向对象</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">JVM详解</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-01">2018-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 50 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-20">2018-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 42 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -115,85 +115,125 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#class文件的结构属性">Class文件的结构属性</a></li>
+    <li><a href="#java类加载机制">Java类加载机制</a>
       <ul>
-        <li><a href="#oop面向对象编程的三大法宝">OOP（面向对象编程）的三大法宝</a>
-          <ul>
-            <li><a href="#封装">封装</a></li>
-            <li><a href="#继承">继承</a></li>
-            <li><a href="#多态">多态</a></li>
-          </ul>
-        </li>
-        <li><a href="#ood面向对象设计七大戒律">OOD（面向对象设计）七大戒律</a>
-          <ul>
-            <li><a href="#开-闭原则">开-闭原则</a></li>
-            <li><a href="#里氏替换原则">里氏替换原则</a></li>
-            <li><a href="#依赖倒置原则">依赖倒置原则</a></li>
-            <li><a href="#接口隔离原则">接口隔离原则</a></li>
-            <li><a href="#单一职责原则">单一职责原则</a></li>
-            <li><a href="#迪米特法则最少知道原则">迪米特法则/最少知道原则</a></li>
-            <li><a href="#合成聚合复用原则">合成/聚合复用原则</a></li>
-          </ul>
-        </li>
-        <li><a href="#行走江湖的锦囊妙计和绝世武器">行走江湖的锦囊妙计和绝世武器</a></li>
+        <li><a href="#类的生命周期">类的生命周期</a></li>
+        <li><a href="#类加载器">类加载器</a></li>
+        <li><a href="#jvm类加载机制">JVM类加载机制</a></li>
       </ul>
     </li>
+    <li><a href="#jvm-内存结构">JVM 内存结构</a>
+      <ul>
+        <li><a href="#程序计数器">程序计数器</a></li>
+        <li><a href="#虚拟机栈">虚拟机栈</a></li>
+        <li><a href="#本地方法栈">本地方法栈</a></li>
+        <li><a href="#堆内存">堆内存</a></li>
+      </ul>
+    </li>
+    <li><a href="#jvm内存模型jmm">JVM内存模型(JMM)</a></li>
+    <li><a href="#java垃圾回收">Java垃圾回收</a></li>
+    <li><a href="#jvm参调优">JVM参调优</a></li>
+    <li><a href="#jvm分析和问题排查">JVM分析和问题排查</a></li>
+    <li><a href="#参考文章">参考文章</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><blockquote>
-<p>面向对象程序设计（英语：Object-oriented programming，缩写：OOP）是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针。它可能包含数据、特性、代码与方法。对象则指的是类（class）的实例。它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的重用性、灵活性和扩展性，对象里的程序可以访问及经常修改对象相关连的数据。在面向对象程序编程里，计算机程序会被设计成彼此相关的对象。</p>
-</blockquote>
-<p><em><strong>面向对象就像是一张入场券，掌握了面向对象的思想，就可以在Java世界里尽情遨游，面向对象有三大法宝和七大戒律，并在其指导下萃取出了无数的锦囊妙计和绝世武器，下面我们揭开他们的神秘面纱。</strong></em></p>
-<h3 id="oop面向对象编程的三大法宝">OOP（面向对象编程）的三大法宝</h3>
-<h4 id="封装">封装</h4>
-<p>封装，也就是把客观事物封装成抽象的类，并且类可以把自己的属性和方法只让可信的类操作，对不可信的类进行信息隐藏。</p>
-<h4 id="继承">继承</h4>
-<p>继承是指这样一种能力，它可以使用现有的类的所有功能，并在无需重新编写原来类的情况下对这些功能进行扩展。</p>
-<h4 id="多态">多态</h4>
-<p>多态指一个类实例的相同方法在不同情形有不同的表现形式。具体来说就是不同实现类对公共接口有不同的实现方式，但这些操作可以通过相同的方式（公共接口）予以调用。</p>
-<h3 id="ood面向对象设计七大戒律">OOD（面向对象设计）七大戒律</h3>
-<h4 id="开-闭原则">开-闭原则</h4>
-<p>Open-Close Principle（OCP），即开-闭原则。开，指的是对扩展开放，即要支持方便地扩展；闭，指的是对修改关闭，即要严格限制对已有内容的修改。开-闭原则是最抽象也是最重要的OOD原则。简单工厂模式、工厂方法模式、抽象工厂模式中都提到了如何通过良好的设计遵循开-闭原则。</p>
-<h4 id="里氏替换原则">里氏替换原则</h4>
-<p>Liskov Substitution Principle（LSP），即里氏替换原则。该原则规定“子类必须能够替换其父类，否则不应当设计为其子类”。换句话说，父类出现的地方，都应该能由其子类代替。所以，子类只能去扩展基类，而不是隐藏或者覆盖基类。</p>
-<h4 id="依赖倒置原则">依赖倒置原则</h4>
-<p>Dependence Inversion Principle（DIP），依赖倒置原则。它讲的是“设计和实现要依赖于抽象而非具体”。一方面抽象化更符合人的思维习惯；另一方面，根据里氏替换原则，可以很容易将原来的抽象替换为扩展后的具体，这样可以很好的支持开-闭原则。</p>
-<h4 id="接口隔离原则">接口隔离原则</h4>
-<p>Interface Segration Principle（ISP），接口隔离原则，“将大的接口打散成多个小的独立的接口”。由于Java类支持实现多个接口，可以很容易的让类具有多种接口的特征，同时每个类可以选择性地只实现目标接口。</p>
-<h4 id="单一职责原则">单一职责原则</h4>
-<p>Single Responsibility Principle（SRP），单一职责原则。它讲的是，不要存在多于一个导致类变更的原因，是高内聚低耦合的一个体现。</p>
-<h4 id="迪米特法则最少知道原则">迪米特法则/最少知道原则</h4>
-<p>Law of Demeter or Least Knowledge Principle（LoD or LKP），迪米特法则或最少知道原则。它讲的是“一个对象就尽可能少的去了解其它对象”，从而实现松耦合。如果一个类的职责过多，由于多个职责耦合在了一起，任何一个职责的变更都可能引起其它职责的问题，严重影响了代码的可维护性和可重用性。</p>
-<h4 id="合成聚合复用原则">合成/聚合复用原则</h4>
-<p>Composite/Aggregate Reuse Principle（CARP / CRP），合成/聚合复用原则。如果新对象的某些功能在别的已经创建好的对象里面已经实现，那么应当尽量使用别的对象提供的功能，使之成为新对象的一部分，而不要再重新创建。新对象可通过向这些对象的委派达到复用已有功能的效果。简而言之，要尽量使用合成/聚合，而非使用继承。《Java设计模式（九） 桥接模式》中介绍的桥接模式即是对这一原则的典型应用。</p>
-<h3 id="行走江湖的锦囊妙计和绝世武器">行走江湖的锦囊妙计和绝世武器</h3>
-<p>上面的法宝和戒律是心法，真正行走江湖还需要趁手的兵器和锦囊妙计。
-而设计模式就是应用三大法宝和七大戒律下经过反复实践铸造出来锦囊妙计和武器，具体有哪些武器我们暂且不表，毕竟倚天屠龙出世，江湖必将血雨腥风，在这之前我们还需要做好准备工作。</p>
+            </div><div class="content" id="content"><p><figure><a class="lightgallery" href="/images/jvm/jvm-overview.png" title="/images/jvm/jvm-overview.png" data-thumbnail="/images/jvm/jvm-overview.png" data-sub-html="<h2>JVM概览</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/jvm-overview.png"
+            data-srcset="/images/jvm/jvm-overview.png, /images/jvm/jvm-overview.png 1.5x, /images/jvm/jvm-overview.png 2x"
+            data-sizes="auto"
+            alt="/images/jvm/jvm-overview.png" />
+    </a><figcaption class="image-caption">JVM概览</figcaption>
+    </figure></p>
+<h2 id="class文件的结构属性">Class文件的结构属性</h2>
+<p><figure><a class="lightgallery" href="/images/jvm/class-struct.png" title="/images/jvm/class-struct.png" data-thumbnail="/images/jvm/class-struct.png" data-sub-html="<h2>类的结构</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/class-struct.png"
+            data-srcset="/images/jvm/class-struct.png, /images/jvm/class-struct.png 1.5x, /images/jvm/class-struct.png 2x"
+            data-sizes="auto"
+            alt="/images/jvm/class-struct.png" />
+    </a><figcaption class="image-caption">类的结构</figcaption>
+    </figure></p>
+<h2 id="java类加载机制">Java类加载机制</h2>
+<h3 id="类的生命周期">类的生命周期</h3>
+<p><figure><a class="lightgallery" href="/images/jvm/class-life.png" title="/images/jvm/class-life.png" data-thumbnail="/images/jvm/class-life.png" data-sub-html="<h2>类的生命周期</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/class-life.png"
+            data-srcset="/images/jvm/class-life.png, /images/jvm/class-life.png 1.5x, /images/jvm/class-life.png 2x"
+            data-sizes="auto"
+            alt="/images/jvm/class-life.png" />
+    </a><figcaption class="image-caption">类的生命周期</figcaption>
+    </figure></p>
+<h3 id="类加载器">类加载器</h3>
+<ul>
+<li>启动类加载器: Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库(如rt.jar，所有的java.*开头的类均被Bootstrap ClassLoader加载)。启动类加载器是无法被Java程序直接引用的。</li>
+<li>扩展类加载器: Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载JDK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库(如javax.*开头的类)，开发者可以直接使用扩展类加载器。</li>
+<li>应用程序类加载器: Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径(ClassPath)所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</li>
+</ul>
+<h3 id="jvm类加载机制">JVM类加载机制</h3>
+<ul>
+<li>全盘负责，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入</li>
+<li>父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类</li>
+<li>缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效</li>
+<li>双亲委派机制, 如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</li>
+</ul>
+<h2 id="jvm-内存结构">JVM 内存结构</h2>
+<p><figure><a class="lightgallery" href="/images/jvm/jms.jpg" title="/images/jvm/jms.jpg" data-thumbnail="/images/jvm/jms.jpg" data-sub-html="<h2>JVM内存结构</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/jms.jpg"
+            data-srcset="/images/jvm/jms.jpg, /images/jvm/jms.jpg 1.5x, /images/jvm/jms.jpg 2x"
+            data-sizes="auto"
+            alt="/images/jvm/jms.jpg" />
+    </a><figcaption class="image-caption">JVM内存结构</figcaption>
+    </figure></p>
+<p><strong>栈是运行时的单位，而堆是存储的单位。（栈解决程序的运行问题，即程序如何执行，或者说如何处理数据。堆解决的是数据存储的问题，即数据怎么放、放在哪。）</strong></p>
+<p><strong>Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用。</strong></p>
+<h3 id="程序计数器">程序计数器</h3>
+<h3 id="虚拟机栈">虚拟机栈</h3>
+<h3 id="本地方法栈">本地方法栈</h3>
+<h3 id="堆内存">堆内存</h3>
+<h2 id="jvm内存模型jmm">JVM内存模型(JMM)</h2>
+<h2 id="java垃圾回收">Java垃圾回收</h2>
+<h2 id="jvm参调优">JVM参调优</h2>
+<h2 id="jvm分析和问题排查">JVM分析和问题排查</h2>
+<h2 id="参考文章">参考文章</h2>
+<ol>
+<li><a href="https://www.pdai.tech/md/java/jvm/java-jvm-jmm.html">https://www.pdai.tech/md/java/jvm/java-jvm-jmm.html</a></li>
+</ol>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2018-02-01</span>
+                <span>更新于 2018-04-20</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/object-oriented/" data-title="Java世界的入场券-面向对象"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/jvm/" data-title="JVM详解"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/jvm/">JVM</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/byteopt/" class="prev" rel="prev" title="Java位运算 "><i class="fas fa-angle-left fa-fw"></i>Java位运算 </a>
-            <a href="/generic/" class="next" rel="next" title="Java特性-泛型">Java特性-泛型<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/concurrenthashmap/" class="prev" rel="prev" title="ConcurrentHashMap详解"><i class="fas fa-angle-left fa-fw"></i>ConcurrentHashMap详解</a>
+            <a href="/javaoutline/" class="next" rel="next" title="Java知识大纲">Java知识大纲<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

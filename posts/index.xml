@@ -41,6 +41,19 @@
     <description><![CDATA[基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化  性能指标体系 JVM调优 Tomcat调优 MySQL调优  故障排除 最佳实践 重构 设计模式 开发框架  Spring体系 MyBatis  常见业务  支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。  应该保证互斥性（在任何时候只有一个客户端持有锁。使用setnx）。 不能死锁（设置过期时间）。 保证上锁和解锁是同一个客户端（设置不同的value值）。 业务时间太长。导致锁过期（设置看门狗。自动续锁）。 锁的重入性（使用redis的hset）。   分布式事务 分布式缓存  中间价 消息队列 缓存  本地缓存 分布式缓存  ELK 数据库  分库分表 数据同步 数据库连接池  分布式 分布式架构原理 分布式架构策略 分布式中间件 分布式架构实战
 四大理论  拜占庭将军问题 CAP 理论 ACID 理论 BASE 理论  八大协议/算法  Paxos 算法 Raft 算法 一致性 Hash 算法 Gossip 协议算法 Quorum NWR 算法 FBFT 算法 POW 算法 ZAB 协议  微服务 工具  版本管理 Git 项目管理 Maven/Gradle 代码质量管理 Sonar 持续集成部署 Jenkins&amp;GitLab CI/CD 监控系统 测试  Postman Jmeter VisualVM    ]]></description>
 </item><item>
+    <title>JVM详解</title>
+    <link>https://moge.fun/jvm/</link>
+    <pubDate>Fri, 20 Apr 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/jvm/</guid>
+    <description><![CDATA[JVM概览" JVM概览 
+Class文件的结构属性 类的结构" 类的结构 
+Java类加载机制 类的生命周期 类的生命周期" 类的生命周期 
+类加载器  启动类加载器: Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库(如rt.jar，所有的java.*开头的类均被Bootstrap ClassLoader加载)。启动类加载器是无法被Java程序直接引用的。 扩展类加载器: Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载JDK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库(如javax.*开头的类)，开发者可以直接使用扩展类加载器。 应用程序类加载器: Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径(ClassPath)所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。  JVM类加载机制  全盘负责，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入 父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效 双亲委派机制, 如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。  JVM 内存结构 JVM内存结构" JVM内存结构 
+栈是运行时的单位，而堆是存储的单位。（栈解决程序的运行问题，即程序如何执行，或者说如何处理数据。堆解决的是数据存储的问题，即数据怎么放、放在哪。）
+Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用。
+程序计数器 虚拟机栈 本地方法栈 堆内存 JVM内存模型(JMM) Java垃圾回收 JVM参调优 JVM分析和问题排查 参考文章  https://www.pdai.tech/md/java/jvm/java-jvm-jmm.html  ]]></description>
+</item><item>
     <title>ConcurrentHashMap详解</title>
     <link>https://moge.fun/concurrenthashmap/</link>
     <pubDate>Tue, 10 Apr 2018 00:00:00 &#43;0000</pubDate>
@@ -107,21 +120,5 @@ Lock框架和Tools类 Lock框架和Tools类" Lock框架和Tools类
  该流程在购物APP上非常常见，当你准备支付时放弃，会有一个支付失效，在支付失效期内可以随时回来支付，过期后需要重新选取支付商品。
 这里基于LockSupport中park和unpark控制线程状态，实现的等待通知机制。
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29  public class LockAPI04 { public static void main(String[] args) throws Exception { OrderPay orderPay = new OrderPay(&#34;UnPaid&#34;) ; Thread orderThread = new Thread(orderPay) ; orderThread.]]></description>
-</item><item>
-    <title>Java并发编程概览</title>
-    <link>https://moge.fun/javacurrent/</link>
-    <pubDate>Sun, 01 Apr 2018 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://moge.fun/javacurrent/</guid>
-    <description><![CDATA[Java并发编程概览Java并发编程概览
-" Java并发编程概览 
-并发三要素 可见性  一个线程对共享变量的修改，另外一个线程能够立刻看到。 CPU缓存引起：CPU增加了缓存，以均衡与内存的速度差异导致。  原子性  一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。 分时复用引起：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致。  1 2 3 4  x = 10; //语句1: 直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中  y = x; //语句2: 包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。  x++; //语句3： x++包括3个操作：读取x的值，进行加1操作，写入新的值。  x = x + 1; //语句4： 同语句3   有序性  程序执行的顺序按照代码的先后顺序执行。 重排序引起：由于编译程序指令重排序优化指令执行次序，使得缓存能够得到更加合理地利用导致。  线程安全的实现方法 互斥同步(阻塞同步) synchronized(JVM实现) Lock&amp;ReentrantLock(JDK实现) 互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。
-互斥同步属于一种悲观的并发策略，总是认为只要不去做正确的同步措施，那就肯定会出现问题。无论共享数据是否真的会出现竞争，它都要进行加锁(这里讨论的是概念模型，实际上虚拟机会优化掉很大一部分不必要的加锁)、用户态核心态转换、维护锁计数器和检查是否有被阻塞的线程需要唤醒等操作。
-非阻塞同步 CAS 随着硬件指令集的发展，我们可以使用基于冲突检测的乐观并发策略: 先进行操作，如果没有其它线程争用共享数据，那操作就成功了，否则采取补偿措施(不断地重试，直到成功为止)。
-这种乐观的并发策略的许多实现都不需要将线程阻塞，因此这种同步操作称为非阻塞同步。
-乐观锁需要操作和冲突检测这两个步骤具备原子性，这里就不能再使用互斥同步来保证了，只能靠硬件来完成。
-硬件支持的原子性操作最典型的是: 比较并交换(Compare-and-Swap，CAS)。
-CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新值B。当执行操作时，只有当V的值等于A，才将V的值更新为B。
-AtomicInteger J.U.C 包里面的整数原子类 AtomicInteger，其中的 compareAndSet() 和 getAndIncrement() 等方法都使用了 Unsafe 类的 CAS 操作。]]></description>
 </item></channel>
 </rss>

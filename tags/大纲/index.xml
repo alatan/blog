@@ -25,6 +25,19 @@
     <description><![CDATA[基础 数据结构与算法 操作系统 网络基础 数据库基础 编译原理 Java Java基础 并发编程 JVM 性能优化  性能指标体系 JVM调优 Tomcat调优 MySQL调优  故障排除 最佳实践 重构 设计模式 开发框架  Spring体系 MyBatis  常见业务  支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。  应该保证互斥性（在任何时候只有一个客户端持有锁。使用setnx）。 不能死锁（设置过期时间）。 保证上锁和解锁是同一个客户端（设置不同的value值）。 业务时间太长。导致锁过期（设置看门狗。自动续锁）。 锁的重入性（使用redis的hset）。   分布式事务 分布式缓存  中间价 消息队列 缓存  本地缓存 分布式缓存  ELK 数据库  分库分表 数据同步 数据库连接池  分布式 分布式架构原理 分布式架构策略 分布式中间件 分布式架构实战
 四大理论  拜占庭将军问题 CAP 理论 ACID 理论 BASE 理论  八大协议/算法  Paxos 算法 Raft 算法 一致性 Hash 算法 Gossip 协议算法 Quorum NWR 算法 FBFT 算法 POW 算法 ZAB 协议  微服务 工具  版本管理 Git 项目管理 Maven/Gradle 代码质量管理 Sonar 持续集成部署 Jenkins&amp;GitLab CI/CD 监控系统 测试  Postman Jmeter VisualVM    ]]></description>
 </item><item>
+    <title>JVM详解</title>
+    <link>https://moge.fun/jvm/</link>
+    <pubDate>Fri, 20 Apr 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/jvm/</guid>
+    <description><![CDATA[JVM概览" JVM概览 
+Class文件的结构属性 类的结构" 类的结构 
+Java类加载机制 类的生命周期 类的生命周期" 类的生命周期 
+类加载器  启动类加载器: Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库(如rt.jar，所有的java.*开头的类均被Bootstrap ClassLoader加载)。启动类加载器是无法被Java程序直接引用的。 扩展类加载器: Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载JDK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库(如javax.*开头的类)，开发者可以直接使用扩展类加载器。 应用程序类加载器: Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径(ClassPath)所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。  JVM类加载机制  全盘负责，当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入 父类委托，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类 缓存机制，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效 双亲委派机制, 如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。  JVM 内存结构 JVM内存结构" JVM内存结构 
+栈是运行时的单位，而堆是存储的单位。（栈解决程序的运行问题，即程序如何执行，或者说如何处理数据。堆解决的是数据存储的问题，即数据怎么放、放在哪。）
+Java虚拟机栈用于管理Java方法的调用，而本地方法栈用于管理本地方法的调用。
+程序计数器 虚拟机栈 本地方法栈 堆内存 JVM内存模型(JMM) Java垃圾回收 JVM参调优 JVM分析和问题排查 参考文章  https://www.pdai.tech/md/java/jvm/java-jvm-jmm.html  ]]></description>
+</item><item>
     <title>JUC-并发编程利器</title>
     <link>https://moge.fun/juc/</link>
     <pubDate>Mon, 02 Apr 2018 00:00:00 &#43;0000</pubDate>
@@ -67,5 +80,16 @@ AtomicInteger J.U.C 包里面的整数原子类 AtomicInteger，其中的 compar
     <description><![CDATA[概览 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。
 Collection List 对付顺序的好帮手： 存储的元素是有序的、可重复的。
  ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。 Vector：和ArrayList类似，但它是线程安全的。 LinkedList：基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList还可以用作栈、队列和双向队列。  Arraylist与 LinkedList 区别?  是否保证线程安全： ArrayList和LinkedList都是不同步的，也就是不保证线程安全； 底层数据结构： Arraylist底层使用的是Object数组；LinkedList底层使用的是双向链表数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。） 插入和删除是否受元素位置的影响：  ArrayList 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行add(E e)方法的时候， ArrayList 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（add(int index, E element)）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 LinkedList 采用链表存储，所以对于add(E e)方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O(1)，如果是要在指定位置 i 插入和删除元素的话（(add(int index, E element)） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。   是否支持快速随机访问： LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于get(int index)方法)。 内存空间占用： ArrayList的空间浪费主要体现在在list列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。  Set 注重独一无二的性质: 存储的元素是无序的、不可重复的。]]></description>
+</item><item>
+    <title>Java IO知识体系详解 </title>
+    <link>https://moge.fun/javaio/</link>
+    <pubDate>Mon, 05 Feb 2018 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/javaio/</guid>
+    <description><![CDATA[IO大纲" IO大纲 
+IO装饰者模式 以 InputStream 为例
+ InputStream 是抽象组件； FileInputStream 是 InputStream 的子类，属于具体组件，提供了字节流的输入操作； FilterInputStream 属于抽象装饰者，装饰者用于装饰组件，为组件提供额外的功能。例如 BufferedInputStream 为 FileInputStream 提供缓存的功能。  实例化一个具有缓存功能的字节流对象时，只需要在 FileInputStream 对象上再套一层 BufferedInputStream 对象即可。
+1 2  FileInputStream fileInputStream = new FileInputStream(filePath); BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);   IO常见类的使用 磁盘操作 File 类可以用于表示文件和目录的信息，但是它不表示文件的内容。
+1 2 3 4 5 6 7 8 9 10 11 12 13  //递归地列出一个目录下所有文件: public static void listAllFiles(File dir) { if (dir == null || !]]></description>
 </item></channel>
 </rss>
