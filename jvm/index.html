@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/jvm\/"
-        },"genre": "posts","keywords": "JVM, 大纲","wordcount":  587 ,
+        },"genre": "posts","keywords": "JVM, 大纲","wordcount":  627 ,
         "url": "https:\/\/moge.fun\/jvm\/","datePublished": "2018-04-20T00:00:00+00:00","dateModified": "2018-04-20T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">JVM详解</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-20">2018-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 587 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-20">2018-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 627 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -178,7 +178,15 @@
         </li>
       </ul>
     </li>
-    <li><a href="#jvm参调优">JVM参调优</a></li>
+    <li><a href="#jvm-调优参数">JVM 调优参数</a>
+      <ul>
+        <li><a href="#jvm参数">JVM参数</a>
+          <ul>
+            <li><a href="#最佳实践">最佳实践</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#jvm分析和问题排查">JVM分析和问题排查</a></li>
     <li><a href="#参考文章">参考文章</a></li>
   </ul>
@@ -516,7 +524,31 @@
 <li>动态对象年龄判定</li>
 <li>空间分配担保</li>
 </ol>
-<h2 id="jvm参调优">JVM参调优</h2>
+<h2 id="jvm-调优参数">JVM 调优参数</h2>
+<h3 id="jvm参数">JVM参数</h3>
+<ul>
+<li>-Xms 堆最小值</li>
+<li>-Xmx 堆最大堆值。-Xms与-Xmx 的单位默认字节都是以k、m做单位的。 通常这两个配置参数相等，避免每次空间不足，动态扩容带来的影响。</li>
+<li>-Xmn 新生代大小</li>
+<li>-Xss 每个线程池的堆栈大小。
+在jdk5以上的版本，每个线程堆栈大小为1m，jdk5以前的版本是每个线程池大小为256k。一般在相同物理内存下，如果减少－xss值会产生更大的线程数，但不同的操作系统对进程内线程数是有限制的，是不能无限生成。</li>
+<li>-XX:NewRatio 设置新生代与老年代比值，-XX:NewRatio=4 表示新生代与老年代所占比例为1:4 ，新生代占比整个堆的五分之一。如果设置了-Xmn的情况下，该参数是不需要在设置的。</li>
+<li>-XX:PermSize 设置持久代初始值，默认是物理内存的六十四分之一</li>
+<li>-XX:MaxPermSize 设置持久代最大值，默认是物理内存的四分之一</li>
+<li>-XX:MaxTenuringThreshold 新生代中对象存活次数，默认15。(若对象在eden区，经历一次MinorGC后还活着，则被移动到Survior区，年龄加1。以后，对象每次经历MinorGC，年龄都加1。达到阀值，则移入老年代)</li>
+<li>-XX:SurvivorRatio Eden区与Subrvivor区大小的比值，如果设置为8，两个Subrvivor区与一个Eden区的比值为2:8，一个Survivor区占整个新生代的十分之一</li>
+<li>-XX:+UseFastAccessorMethods 原始类型快速优化</li>
+<li>-XX:+AggressiveOpts 编译速度加快</li>
+<li>-XX:PretenureSizeThreshold 对象超过多大值时直接在老年代中分配</li>
+</ul>
+<h4 id="最佳实践">最佳实践</h4>
+<ol>
+<li>Xmn用于设置新生代的大小。过小会增加Minor GC频率，过大会减小老年代的大小。一般设为整个堆空间的1/4或1/3.</li>
+<li>XX:SurvivorRatio用于设置新生代中survivor空间(from/to)和eden空间的大小比例；XX:TargetSurvivorRatio表示，当经历Minor GC后，survivor空间占有量(百分比)超过它的时候，就会压缩进入老年代(当然，如果survivor空间不够，则直接进入老年代)。默认值为50%。</li>
+<li>为了性能考虑，一开始尽量将新生代对象留在新生代，避免新生的大对象直接进入老年代。因为新生对象大部分都是短期的，这就造成了老年代的内存浪费，并且回收代价也高(Full GC发生在老年代和方法区Perm)</li>
+<li>当Xms=Xmx，可以使得堆相对稳定，避免不停震荡</li>
+<li>一般来说，MaxPermSize设为64MB可以满足绝大多数的应用了。若依然出现方法区溢出，则可以设为128MB。若128MB还不能满足需求，那么就应该考虑程序优化了，减少动态类的产生。</li>
+</ol>
 <h2 id="jvm分析和问题排查">JVM分析和问题排查</h2>
 <h2 id="参考文章">参考文章</h2>
 <ol>
