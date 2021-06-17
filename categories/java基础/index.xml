@@ -20,7 +20,7 @@ Java类加载机制 类的生命周期 类的生命周期" 类的生命周期
     <pubDate>Tue, 10 Apr 2018 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/concurrenthashmap/</guid>
-    <description><![CDATA[https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&amp;mid=2649938471&amp;idx=1&amp;sn=2964df2adc4feaf87c11b4915b9a018e]]></description>
+    <description><![CDATA[ConcurrentHashMap详解]]></description>
 </item><item>
     <title>AbstractQueuedSynchronizer详解</title>
     <link>https://moge.fun/abstractqueuedsynchronizer/</link>

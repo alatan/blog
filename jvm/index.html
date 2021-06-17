@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/jvm\/"
-        },"genre": "posts","keywords": "JVM, 大纲","wordcount":  627 ,
+        },"genre": "posts","keywords": "JVM, 大纲","wordcount":  628 ,
         "url": "https:\/\/moge.fun\/jvm\/","datePublished": "2018-04-20T00:00:00+00:00","dateModified": "2018-04-20T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">JVM详解</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-20">2018-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 627 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-20">2018-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 628 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -180,11 +180,8 @@
     </li>
     <li><a href="#jvm-调优参数">JVM 调优参数</a>
       <ul>
-        <li><a href="#jvm参数">JVM参数</a>
-          <ul>
-            <li><a href="#最佳实践">最佳实践</a></li>
-          </ul>
-        </li>
+        <li><a href="#jvm参数">JVM参数</a></li>
+        <li><a href="#最佳实践">最佳实践</a></li>
       </ul>
     </li>
     <li><a href="#jvm分析和问题排查">JVM分析和问题排查</a></li>
@@ -366,6 +363,7 @@
 <li>若养老区执行了 Major GC  之后发现依然无法进行对象的保存，就会产生 OOM 异常</li>
 </ol>
 <h2 id="jvm内存模型jmm">JVM内存模型(JMM)</h2>
+<p>Java内存模型，其实是保证了Java程序在各种平台下对内存的访问都能够得到一致效果的机制及规范。目的是解决由于多线程通过共享内存进行通信时，存在的原子性、可见性（缓存一致性）以及有序性问题。</p>
 <h3 id="并发编程模型的分类">并发编程模型的分类</h3>
 <p>在并发编程中，我们需要处理两个关键问题：线程之间如何通信及线程之间如何同步（这里的线程是指并发执行的活动实体）。通信是指线程之间以何种机制来交换信息。在命令式编程中，线程之间的通信机制有两种：共享内存和消息传递。</p>
 <p>在共享内存的并发模型里，线程之间共享程序的公共状态，线程之间通过写 - 读内存中的公共状态来隐式进行通信。在消息传递的并发模型里，线程之间没有公共状态，线程之间必须通过明确的发送消息来显式进行通信。</p>
@@ -541,7 +539,7 @@
 <li>-XX:+AggressiveOpts 编译速度加快</li>
 <li>-XX:PretenureSizeThreshold 对象超过多大值时直接在老年代中分配</li>
 </ul>
-<h4 id="最佳实践">最佳实践</h4>
+<h3 id="最佳实践">最佳实践</h3>
 <ol>
 <li>Xmn用于设置新生代的大小。过小会增加Minor GC频率，过大会减小老年代的大小。一般设为整个堆空间的1/4或1/3.</li>
 <li>XX:SurvivorRatio用于设置新生代中survivor空间(from/to)和eden空间的大小比例；XX:TargetSurvivorRatio表示，当经历Minor GC后，survivor空间占有量(百分比)超过它的时候，就会压缩进入老年代(当然，如果survivor空间不够，则直接进入老年代)。默认值为50%。</li>
