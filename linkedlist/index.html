@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/linkedlist\/"
-        },"genre": "posts","keywords": "数据结构","wordcount":  21 ,
+        },"genre": "posts","keywords": "数据结构","wordcount":  31 ,
         "url": "https:\/\/moge.fun\/linkedlist\/","datePublished": "2017-02-02T00:00:00+00:00","dateModified": "2017-02-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">链表</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-02-02">2017-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 21 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-02-02">2017-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 31 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -126,6 +126,7 @@
         <li><a href="#哈希表">哈希表</a></li>
       </ul>
     </li>
+    <li><a href="#分类">分类</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="定义">定义</h2>
@@ -140,12 +141,15 @@
 <ul>
 <li>操作指针即可删除该元素或者插入新元素，时间复杂度 O(1)。</li>
 <li>链表因为元素不连续，而是靠指针指向下一个元素的位置，本身没有大小的限制，不存在数组的扩容问题，所以天然地支持动态扩容。</li>
+<li>空间没有限制</li>
+<li>插入删除元素很快</li>
 </ul>
 <h2 id="缺点">缺点：</h2>
 <ul>
 <li>因为存储空间不连续，你无法根据一个索引算出对应元素的地址，所以不能随机访问。</li>
 <li>由于每个元素必须存储指向前后元素位置的指针，会消耗相对更多的储存空间。</li>
 <li>同时内存不连续，容易造成内存碎片。</li>
+<li>存取速度很慢</li>
 </ul>
 <h2 id="对比">对比</h2>
 <h3 id="数组">数组</h3>
@@ -154,6 +158,12 @@
 <p>链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但时间复杂度很大，达O（N）。链表的特点是：寻址困难，插入和删除容易。</p>
 <h3 id="哈希表">哈希表</h3>
 <p>那么我们能不能综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构？这就是我们要提起的哈希表。</p>
+<h2 id="分类">分类</h2>
+<ul>
+<li>单向链表 一个节点指向下一个节点。</li>
+<li>双向链表 一个节点有两个指针域。</li>
+<li>循环链表 能通过任何一个节点找到其他所有的节点，将两种(双向/单向)链表的最后一个结点指向第一个结点从而实现循环。</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

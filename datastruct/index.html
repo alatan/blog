@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/datastruct\/"
-        },"genre": "posts","keywords": "数据结构, 大纲","wordcount":  37 ,
+        },"genre": "posts","keywords": "数据结构, 大纲","wordcount":  77 ,
         "url": "https:\/\/moge.fun\/datastruct\/","datePublished": "2017-01-15T00:00:00+00:00","dateModified": "2017-01-15T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">数据结构概览</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-01-15">2017-01-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 37 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-01-15">2017-01-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 77 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -125,11 +125,21 @@
         <li><a href="#数组和矩阵顺序表">数组和矩阵(顺序表)</a></li>
         <li><a href="#链表">链表</a></li>
         <li><a href="#哈希表散列">哈希表(散列)</a></li>
-        <li><a href="#栈和队列">栈和队列</a></li>
+        <li><a href="#栈和队列">栈和队列</a>
+          <ul>
+            <li><a href="#栈lifo">栈（LIFO）</a></li>
+            <li><a href="#栈fifo">栈（FIFO）</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#树存储结构">树存储结构</a></li>
-    <li><a href="#图存储结构">图存储结构</a></li>
+    <li><a href="#图存储结构">图存储结构</a>
+      <ul>
+        <li><a href="#和线性表树的差异">和线性表，树的差异:</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><blockquote>
@@ -173,34 +183,66 @@
 <p>散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。</p>
 <h3 id="栈和队列">栈和队列</h3>
 <p>数组和链表都是线性存储结构的基础，栈和队列都是线性存储结构的应用，<strong>栈和队列隶属于线性表，是特殊的线性表，因为它们对线性表中元素的进出做了明确的要求</strong>。</p>
+<h4 id="栈lifo">栈（LIFO）</h4>
+<ul>
+<li>使用数组实现的叫静态栈</li>
+<li>使用链表实现的叫动态栈</li>
+</ul>
+<h4 id="栈fifo">栈（FIFO）</h4>
+<ul>
+<li>使用数组实现的叫静态队列</li>
+<li>使用链表实现的叫动态队列</li>
+</ul>
 <h2 id="树存储结构">树存储结构</h2>
 <blockquote>
 <p>树存储结构适合存储具有“一对多”关系的数据。</p>
 </blockquote>
-<p><figure><a class="lightgallery" href="/images/ds/tree.jpg" title="/images/ds/tree.jpg" data-thumbnail="/images/ds/tree.jpg" data-sub-html="<h2>树</h2>">
+<p><figure><a class="lightgallery" href="/images/ds/tree.gif" title="/images/ds/tree.gif" data-thumbnail="/images/ds/tree.gif" data-sub-html="<h2>树</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
-            data-src="/images/ds/tree.jpg"
-            data-srcset="/images/ds/tree.jpg, /images/ds/tree.jpg 1.5x, /images/ds/tree.jpg 2x"
+            data-src="/images/ds/tree.gif"
+            data-srcset="/images/ds/tree.gif, /images/ds/tree.gif 1.5x, /images/ds/tree.gif 2x"
             data-sizes="auto"
-            alt="/images/ds/tree.jpg" />
+            alt="/images/ds/tree.gif" />
     </a><figcaption class="image-caption">树</figcaption>
     </figure></p>
 <h2 id="图存储结构">图存储结构</h2>
 <blockquote>
 <p>图存储结构适合存储具有“多对多”关系的数据。</p>
 </blockquote>
-<p><figure><a class="lightgallery" href="/images/ds/map.jpg" title="/images/ds/map.jpg" data-thumbnail="/images/ds/map.jpg" data-sub-html="<h2>图</h2>">
+<p><figure><a class="lightgallery" href="/images/ds/map.gif" title="/images/ds/map.gif" data-thumbnail="/images/ds/map.gif" data-sub-html="<h2>图</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
-            data-src="/images/ds/map.jpg"
-            data-srcset="/images/ds/map.jpg, /images/ds/map.jpg 1.5x, /images/ds/map.jpg 2x"
+            data-src="/images/ds/map.gif"
+            data-srcset="/images/ds/map.gif, /images/ds/map.gif 1.5x, /images/ds/map.gif 2x"
             data-sizes="auto"
-            alt="/images/ds/map.jpg" />
+            alt="/images/ds/map.gif" />
     </a><figcaption class="image-caption">图</figcaption>
     </figure></p>
+<h3 id="和线性表树的差异">和线性表，树的差异:</h3>
+<ul>
+<li>线性表中我们把数据元素叫元素，树中将数据元素叫结点，在图中数据元素，我们则称之为顶点(Vertex)。</li>
+<li>线性表可以没有元素，称为空表；树中可以没有节点，称为空树；但是，在图中不允许没有顶点(有穷非空性)。</li>
+<li>线性表中的各元素是线性关系，树中的各元素是层次关系，而图中各顶点的关系是用边来表示(边集可以为空)。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>我们知道，实际应用当中，我们经常使用的是查找和排序操作，这在我们的各种管理系统、数据库系统、操作系统等当中，十分常用。</p>
+<ul>
+<li>数组 的下标寻址十分迅速，但计算机的内存是有限的，故数组的长度也是有限的，实际应用当中的数据往往十分庞大；而且无序数组的查找最坏情况需要遍历整个数组；后来人们提出了二分查找，二分查找要求数组的构造一定有序，二分法查找解决了普通数组查找复杂度过高的问题。任和一种数组无法解决的问题就是插入、删除操作比较复杂，因此，在一个增删查改比较频繁的数据结构中，数组不会被优先考虑</li>
+<li>普通链表 由于它的结构特点被证明根本不适合进行查找</li>
+<li>哈希表 是数组和链表的折中，同时它的设计依赖散列函数的设计，数组不能无限长、链表也不适合查找，所以也不适合大规模的查找</li>
+<li>二叉查找树 因为可能退化成链表，同样不适合进行查找</li>
+<li>AVL树 是为了解决可能退化成链表问题，但是AVL树的旋转过程非常麻烦，因此插入和删除很慢，也就是构建AVL树比较麻烦</li>
+<li>红黑树 是平衡二叉树和AVL树的折中，因此是比较合适的。集合类中的Map、关联数组具有较高的查询效率，它们的底层实现就是红黑树。</li>
+<li>多路查找树 是大规模数据存储中，实现索引查询这样一个实际背景下，树节点存储的元素数量是有限的(如果元素数量非常多的话，查找就退化成节点内部的线性查找了)，这样导致二叉查找树结构由于树的深度过大而造成磁盘I/O读写过于频繁，进而导致查询效率低下。</li>
+<li>B树 与自平衡二叉查找树不同，B树适用于读写相对大的数据块的存储系统，例如磁盘。它的应用是文件系统及部分非关系型数据库索引。</li>
+<li>B+树 在B树基础上，为叶子结点增加链表指针(B树+叶子有序链表)，所有关键字都在叶子结点 中出现，非叶子结点作为叶子结点的索引；B+树总是到叶子结点才命中。通常用于关系型数据库(如Mysql)和操作系统的文件系统中。</li>
+<li>B*树 是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针, 在B+树基础上，为非叶子结点也增加链表指针，将结点的最低利用率从1/2提高到2/3。 R树是用来做空间数据存储的树状数据结构。例如给地理位置，矩形和多边形这类多维数据建立索引。</li>
+<li>Trie树 是自然语言处理中最常用的数据结构，很多字符串处理任务都会用到。Trie树本身是一种有限状态自动机，还有很多变体。什么模式匹配、正则表达式，都与这有关。</li>
+</ul>
+<p><em><em>针对大量数据，如果在内存中作业优先考虑红黑树(map,set之类多为RB-tree实现)，如果在硬盘中作业优先考虑B系列树(B+, B, B</em>)</em>*</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
