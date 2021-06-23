@@ -9,7 +9,8 @@ draft: false
 
 categories: ["数据库"]
 tags: ["数据库", "大纲"]  
-toc: auto: false
+toc: 
+    auto: false
 ---
 
 ![](/images/db/db.png "数据库总览")
