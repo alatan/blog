@@ -151,13 +151,13 @@
       </ul>
     </li>
     <li><a href="#高可用哨兵机制redis-sentinel">高可用：哨兵机制（Redis Sentinel.</a></li>
-    <li><a href="#高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster.</a></li>
+    <li><a href="#高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster)</a></li>
     <li><a href="#缓存问题">缓存问题</a>
       <ul>
         <li><a href="#缓存穿透">缓存穿透</a></li>
         <li><a href="#缓存击穿">缓存击穿</a></li>
         <li><a href="#缓存雪崩">缓存雪崩</a></li>
-        <li><a href="#缓存污染或满了">缓存污染（或满了.</a>
+        <li><a href="#缓存污染或满了">缓存污染（或满了)</a>
           <ul>
             <li><a href="#缓存淘汰策略">缓存淘汰策略</a></li>
           </ul>
@@ -309,26 +309,26 @@
 <h4 id="全量复制">全量复制</h4>
 <blockquote>
 <p>当我们启动多个 Redis 实例的时候，它们相互之间就可以通过 replicaof（Redis 5.0 之前使用 slaveof. 命令形成主库和从库的关系，之后会按照三个阶段完成数据的第一次同步。
-<figure><a class="lightgallery" href="/images/redis/redis-copy-all.png" title="/images/redis/redis-copy-all.png" data-thumbnail="/images/redis/redis-copy-all.png" data-sub-html="<h2>全量复制</h2>">
+<figure><a class="lightgallery" href="/images/redis/redis-copy-all.jpg" title="/images/redis/redis-copy-all.jpg" data-thumbnail="/images/redis/redis-copy-all.jpg" data-sub-html="<h2>全量复制</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
-            data-src="/images/redis/redis-copy-all.png"
-            data-srcset="/images/redis/redis-copy-all.png, /images/redis/redis-copy-all.png 1.5x, /images/redis/redis-copy-all.png 2x"
+            data-src="/images/redis/redis-copy-all.jpg"
+            data-srcset="/images/redis/redis-copy-all.jpg, /images/redis/redis-copy-all.jpg 1.5x, /images/redis/redis-copy-all.jpg 2x"
             data-sizes="auto"
-            alt="/images/redis/redis-copy-all.png" />
+            alt="/images/redis/redis-copy-all.jpg" />
     </a><figcaption class="image-caption">全量复制</figcaption>
     </figure></p>
 </blockquote>
 <h4 id="增量复制">增量复制</h4>
-<p><figure><a class="lightgallery" href="/images/redis/redis-copy-add.png" title="/images/redis/redis-copy-add.png" data-thumbnail="/images/redis/redis-copy-add.png" data-sub-html="<h2>增量复制</h2>">
+<p><figure><a class="lightgallery" href="/images/redis/redis-copy-add.jpg" title="/images/redis/redis-copy-add.jpg" data-thumbnail="/images/redis/redis-copy-add.jpg" data-sub-html="<h2>增量复制</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
-            data-src="/images/redis/redis-copy-add.png"
-            data-srcset="/images/redis/redis-copy-add.png, /images/redis/redis-copy-add.png 1.5x, /images/redis/redis-copy-add.png 2x"
+            data-src="/images/redis/redis-copy-add.jpg"
+            data-srcset="/images/redis/redis-copy-add.jpg, /images/redis/redis-copy-add.jpg 1.5x, /images/redis/redis-copy-add.jpg 2x"
             data-sizes="auto"
-            alt="/images/redis/redis-copy-add.png" />
+            alt="/images/redis/redis-copy-add.jpg" />
     </a><figcaption class="image-caption">增量复制</figcaption>
     </figure></p>
 <h2 id="高可用哨兵机制redis-sentinel">高可用：哨兵机制（Redis Sentinel.</h2>
@@ -342,7 +342,7 @@
 <li>配置提供者（Configuration provider. ：客户端在初始化时，通过连接哨兵来获得当前Redis服务的主节点地址。</li>
 <li>通知（Notification. ：哨兵可以将故障转移的结果发送给客户端。</li>
 </ul>
-<h2 id="高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster.</h2>
+<h2 id="高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster)</h2>
 <p>主从复制和哨兵机制保障了高可用，就读写分离而言虽然slave节点扩展了主从的读并发能力，但是写能力和存储能力是无法进行扩展，就只能是master节点能够承载的上限。如果面对海量数据那么必然需要构建master（主节点分片)之间的集群，同时必然需要吸收高可用（主从复制和哨兵机制. 能力，即每个master分片节点还需要有slave节点，这是分布式系统中典型的纵向扩展（集群的分片技术. 的体现；所以在Redis 3.0版本中对应的设计就是Redis Cluster。</p>
 <h2 id="缓存问题">缓存问题</h2>
 <blockquote>
@@ -373,7 +373,7 @@
 <li>如果缓存数据库是分布式部署，将热点数据均匀分布在不同的缓存数据库中。</li>
 <li>设置热点数据永远不过期。</li>
 </ol>
-<h3 id="缓存污染或满了">缓存污染（或满了.</h3>
+<h3 id="缓存污染或满了">缓存污染（或满了)</h3>
 <p><strong>缓存污染问题说的是缓存中一些只会被访问一次或者几次的的数据，被访问完后，再也不会被访问到，但这部分数据依然留存在缓存中，消耗缓存空间。</strong></p>
 <p>缓存污染会随着数据的持续增加而逐渐显露，随着服务的不断运行，缓存中会存在大量的永远不会再次被访问的数据。缓存空间是有限的，如果缓存空间满了，再往缓存里写数据时就会有额外开销，影响Redis性能。这部分额外开销主要是指写的时候判断淘汰策略，根据淘汰策略去选择要淘汰的数据，然后进行删除操作。</p>
 <h4 id="缓存淘汰策略">缓存淘汰策略</h4>
