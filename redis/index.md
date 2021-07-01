@@ -182,3 +182,4 @@ MySQL binlog增量订阅消费+消息队列+增量数据更新到redis
 1. [持久化](https://www.pdai.tech/md/db/nosql-redis/db-redis-x-rdb-aof.html "持久化")
 2. [高可用：主从复制](https://www.pdai.tech/md/db/nosql-redis/db-redis-x-copy.html "高可用：主从复制")
 3. [缓存问题](https://www.pdai.tech/md/db/nosql-redis/db-redis-x-cache.html "缓存问题")
+4. [3种常用的缓存读写策略](https://snailclimb.gitee.io/javaguide/#/docs/database/Redis/3%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BC%93%E5%AD%98%E8%AF%BB%E5%86%99%E7%AD%96%E7%95%A5  "3种常用的缓存读写策略")
