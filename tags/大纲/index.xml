@@ -102,12 +102,18 @@ IO装饰者模式 以 InputStream 为例
  RDB 持久化  RDB 就是 Redis DataBase 的缩写，中文名为快照/内存快照，RDB持久化是把当前进程数据生成快照保存到磁盘上的过程，由于是某一时刻的快照，那么快照中的值要早于或者等于内存中的值。
  触发方式 手动触发  save命令：阻塞当前Redis服务器，直到RDB过程完成为止，对于内存 比较大的实例会造成长时间阻塞，线上环境不建议使用 bgsave命令：Redis进程执行fork操作创建子进程，RDB持久化过程由子 进程负责，完成后自动结束。阻塞只发生在fork阶段，一般时间很短  bgsave命令具体流程如下：]]></description>
 </item><item>
-    <title>计算机网络基础</title>
+    <title>计算机网络</title>
     <link>https://moge.fun/network/</link>
     <pubDate>Sun, 05 Mar 2017 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/network/</guid>
-    <description><![CDATA[参考文章 https://www.pdai.tech/md/develop/protocol/dev-protocol-network-basic.html]]></description>
+    <description><![CDATA[ 一般网线传输的模拟信号需要通过猫(调制解调器)转换成数字信号，再经由路由器把信号发给PC端，如果PC端数量超过了路由器的连接上限就需要加装交换器。因此，家里有宽带就必须有猫，有多台电脑上网就必须要路由器，假如电脑很多，超过路由器的接口数就需要交换机扩展接口。
+ 传输示例" 传输示例 
+协议对照" 协议对照 
+各层协议对照" 各层协议对照 
+HTTP协议" HTTP协议 
+DNS协议" DNS协议 
+参考文章  7层协议 HTTP协议 DNS协议 知识点串联：输入URL到页面加载过程详解  ]]></description>
 </item><item>
     <title>MySQL知识体系</title>
     <link>https://moge.fun/mysql/</link>
