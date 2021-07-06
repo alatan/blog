@@ -2,7 +2,7 @@
 title: "Redis概览"
 description: "Redis概览"
 keywords: ["缓存"]
-date: 2017-03-05
+date: 2019-01-01
 author: "默哥"
 weight: 70
 draft: false
