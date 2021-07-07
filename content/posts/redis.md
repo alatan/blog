@@ -7,7 +7,7 @@ author: "默哥"
 weight: 70
 draft: false
 
-categories: ["数据库"]
+categories: ["缓存"]
 tags: ["缓存", "大纲"]  
 toc: 
     auto: false
