@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/spring\/"
-        },"genre": "posts","keywords": "Spring, 大纲","wordcount":  128 ,
+        },"genre": "posts","keywords": "Spring, 大纲","wordcount":  130 ,
         "url": "https:\/\/moge.fun\/spring\/","datePublished": "2019-03-01T00:00:00+00:00","dateModified": "2019-03-01T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Spring总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/spring/"><i class="far fa-folder fa-fw"></i>Spring</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-01">2019-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 128 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-01">2019-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 130 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -168,6 +168,7 @@
     </figure></p>
 <h2 id="ioc">IOC</h2>
 <h3 id="ioc容器初始化过程">IOC容器初始化过程</h3>
+<p>BeanFactory和ApplicationContext是Spring中两种很重要的容器，前者提供了最基本的依赖注入的支持，后者在继承前者的基础上进行了功能的拓展，增加了事件传播，资源访问，国际化的支持等功能。同时两者的生命周期也稍微有些不同。</p>
 <p>Spring IOC容器初始化过程分为Resource定位，载入解析，注册。<strong>IOC容器初始化过程中不包含Bean的依赖注入。Bean的依赖注入一般会发生在第一次通过getBean向容器索取Bean的时候。</strong></p>
 <p><figure><a class="lightgallery" href="/images/spring/iocInit.png" title="/images/spring/iocInit.png" data-thumbnail="/images/spring/iocInit.png" data-sub-html="<h2>IOC容器初始化过程</h2>">
         <img
@@ -206,7 +207,16 @@
 <li>Spring容器关闭，销毁各个Bean。</li>
 </ol>
 <h3 id="springbean生命周期">SpringBean生命周期</h3>
-<p>BeanFactory和ApplicationContext是Spring中两种很重要的容器，前者提供了最基本的依赖注入的支持，后者在继承前者的基础上进行了功能的拓展，增加了事件传播，资源访问，国际化的支持等功能。同时两者的生命周期也稍微有些不同。</p>
+<p><figure><a class="lightgallery" href="/images/spring/beanLife.png" title="/images/spring/beanLife.png" data-thumbnail="/images/spring/beanLife.png" data-sub-html="<h2>SpringBean生命周期</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/spring/beanLife.png"
+            data-srcset="/images/spring/beanLife.png, /images/spring/beanLife.png 1.5x, /images/spring/beanLife.png 2x"
+            data-sizes="auto"
+            alt="/images/spring/beanLife.png" />
+    </a><figcaption class="image-caption">SpringBean生命周期</figcaption>
+    </figure></p>
 <ol>
 <li>手动或者自动的触发获取一个Bean，使用BeanFactory的时候需要我们代码自己获取Bean，ApplicationContext则是在IOC启动的时候自动初始化一个Bean。</li>
 <li>IOC会根据BeanDefinition来实例化这个Bean，如果这个Bean还有依赖其他的Bean则会先初始化依赖的Bean，这里又涉及到了循环依赖的解决。实例化Bean的时候根据工厂方法、构造方法或者简单初始化等选择具体的实例来进行实例化，最终都是使用反射进行实例化。</li>

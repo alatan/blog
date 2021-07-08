@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>MySQL知识体系 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="MySQL知识体系"><meta property="og:title" content="MySQL知识体系" />
-<meta property="og:description" content="MySQL知识体系" />
+        <title>MySQL总结 - 追求卓越，幸福就会不期而遇</title><meta name="Description" content="MySQL总结"><meta property="og:title" content="MySQL总结" />
+<meta property="og:description" content="MySQL总结" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://moge.fun/mysql/" />
 <meta property="og:image" content="https://moge.fun/logo.png"/>
@@ -15,8 +15,8 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://moge.fun/logo.png"/>
 
-<meta name="twitter:title" content="MySQL知识体系"/>
-<meta name="twitter:description" content="MySQL知识体系"/>
+<meta name="twitter:title" content="MySQL总结"/>
+<meta name="twitter:description" content="MySQL总结"/>
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,18 +24,18 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "MySQL知识体系",
+        "headline": "MySQL总结",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/mysql\/"
-        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  0 ,
+        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  164 ,
         "url": "https:\/\/moge.fun\/mysql\/","datePublished": "2017-03-02T00:00:00+00:00","dateModified": "2017-03-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "默哥"
-            },"description": "MySQL知识体系"
+            },"description": "MySQL总结"
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -104,17 +104,155 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content always-active" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">MySQL知识体系</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">MySQL总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 0 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 0 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 164 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#存储引擎">存储引擎</a>
+      <ul>
+        <li><a href="#innodb">InnoDB</a></li>
+        <li><a href="#myisam">MyISAM</a></li>
+        <li><a href="#比较">比较</a></li>
+      </ul>
+    </li>
+    <li><a href="#索引">索引</a>
+      <ul>
+        <li><a href="#索引类型">索引类型</a>
+          <ul>
+            <li><a href="#btree-索引">B+Tree 索引</a></li>
+          </ul>
+        </li>
+        <li><a href="#哈希索引">哈希索引</a></li>
+        <li><a href="#btree的叶子节点存储内容不同分为聚簇索引和非聚簇索引">B+Tree的叶子节点存储内容不同分为聚簇索引和非聚簇索引</a></li>
+        <li><a href="#覆盖索引covering-index">覆盖索引（covering index）</a></li>
+        <li><a href="#联合索引最左前缀匹配">联合索引、最左前缀匹配</a></li>
+        <li><a href="#索引下推">索引下推</a></li>
+      </ul>
+    </li>
+    <li><a href="#主从复制">主从复制</a></li>
+    <li><a href="#参考文章">参考文章</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="存储引擎">存储引擎</h2>
+<h3 id="innodb">InnoDB</h3>
+<p>是 MySQL 默认的事务型存储引擎，只有在需要它不支持的特性时，才考虑使用其它存储引擎。</p>
+<p>实现了四个标准的隔离级别，默认级别是可重复读(REPEATABLE READ)。在可重复读隔离级别下，通过多版本并发控制(MVCC)+ 间隙锁(Next-Key Locking)防止幻影读。</p>
+<p>主索引是聚簇索引，在索引中保存了数据，从而避免直接读取磁盘，因此对查询性能有很大的提升。</p>
+<p>内部做了很多优化，包括从磁盘读取数据时采用的可预测性读、能够加快读操作并且自动创建的自适应哈希索引、能够加速插入操作的插入缓冲区等。</p>
+<p>支持真正的在线热备份。其它存储引擎不支持在线热备份，要获取一致性视图需要停止对所有表的写入，而在读写混合场景中，停止写入可能也意味着停止读取。</p>
+<h3 id="myisam">MyISAM</h3>
+<p>设计简单，数据以紧密格式存储。对于只读数据，或者表比较小、可以容忍修复操作，则依然可以使用它。</p>
+<p>提供了大量的特性，包括压缩表、空间数据索引等。
+不支持事务。
+不支持行级锁，只能对整张表加锁，读取时会对需要读到的所有表加共享锁，写入时则对表加排它锁。但在表有读取操作的同时，也可以往表中插入新的记录，这被称为并发插入(CONCURRENT INSERT)。</p>
+<p>可以手工或者自动执行检查和修复操作，但是和事务恢复以及崩溃恢复不同，可能导致一些数据丢失，而且修复操作是非常慢的。</p>
+<p>如果指定了 DELAY_KEY_WRITE 选项，在每次修改执行完成时，不会立即将修改的索引数据写入磁盘，而是会写到内存中的键缓冲区，只有在清理键缓冲区或者关闭表的时候才会将对应的索引块写入磁盘。这种方式可以极大的提升写入性能，但是在数据库或者主机崩溃时会造成索引损坏，需要执行修复操作。</p>
+<h3 id="比较">比较</h3>
+<ul>
+<li>事务: InnoDB 是事务型的，可以使用 Commit 和 Rollback 语句。</li>
+<li>并发: MyISAM 只支持表级锁，而 InnoDB 还支持行级锁。</li>
+<li>外键: InnoDB 支持外键。</li>
+<li>备份: InnoDB 支持在线热备份。</li>
+<li>崩溃恢复: MyISAM 崩溃后发生损坏的概率比 InnoDB 高很多，而且恢复的速度也更慢。</li>
+<li>其它特性: MyISAM 支持压缩表和空间数据索引。</li>
+</ul>
+<h2 id="索引">索引</h2>
+<blockquote>
+<p>索引其实是一种数据结构，能够帮助我们快速的检索数据库中的数据，索引是在存储引擎层实现的，而不是在服务器层实现的。</p>
+</blockquote>
+<h3 id="索引类型">索引类型</h3>
+<p>MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB引擎，默认的是B+树。</p>
+<p>B Tree 指的是 Balance Tree，也就是平衡树。平衡树是一颗查找树，并且所有叶子节点位于同一层。</p>
+<p>B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具有 B Tree 的平衡性，并且通过顺序访问指针来提高区间查询的性能。</p>
+<p>在 B+ Tree 中，一个节点中的 key 从左到右非递减排列，如果某个指针的左右相邻 key 分别是 keyi 和 keyi+1，且不为 null，则该指针指向节点的所有 key 大于等于 keyi 且小于等于 keyi+1。</p>
+<p>B+ Tree是一种多路平衡查询树，所以他的节点是天然有序的（左子节点小于父节点、父节点小于右子节点），所以对于范围查询的时候不需要做全表扫描。</p>
+<h4 id="btree-索引">B+Tree 索引</h4>
+<p>因为不再需要进行全表扫描，只需要对树进行搜索即可，因此查找速度快很多。</p>
+<p>除了用于查找，还可以用于排序和分组。 可以指定多个列作为索引列，多个索引列共同组成键。</p>
+<p>适用于全键值、键值范围和键前缀查找，其中键前缀查找只适用于最左前缀查找。如果不是按照索引列的顺序进行查找，则无法使用索引。</p>
+<p>InnoDB 的 B+Tree 索引分为主索引和辅助索引。</p>
+<p>Mysql选用B+树这种数据结构作为索引，可以提高查询索引时的磁盘IO效率，并且可以提高范围查询的效率，并且B+树里的元素也是有序的。</p>
+<h3 id="哈希索引">哈希索引</h3>
+<p>哈希索引能以 O(1) 时间进行查找，但是失去了有序性，它具有以下限制:</p>
+<ul>
+<li>无法用于排序与分组；</li>
+<li><strong>只支持等值精确查找，无法用于部分查找和范围查找。</strong></li>
+<li>哈希索引没办法利用索引完成排序</li>
+<li>哈希索引不支持多列联合索引的最左匹配规则</li>
+<li>如果有大量重复键值得情况下，哈希索引的效率会很低，因为存在哈希碰撞问题</li>
+</ul>
+<p>InnoDB 存储引擎有一个特殊的功能叫“自适应哈希索引”，当某个索引值被使用的非常频繁时，会在 B+Tree 索引之上再创建一个哈希索引，这样就让 B+Tree 索引具有哈希索引的一些优点，比如快速的哈希查找。</p>
+<h3 id="btree的叶子节点存储内容不同分为聚簇索引和非聚簇索引">B+Tree的叶子节点存储内容不同分为聚簇索引和非聚簇索引</h3>
+<p><strong>主键索引的叶子节点 data 域记录着完整的数据记录，这种索引方式被称为聚簇索引。因为无法把数据行存放在两个不同的地方，所以一个表只能有一个聚簇索引。</strong>
+<figure><a class="lightgallery" href="/images/db/rdb/PKIndex.jpg" title="/images/db/rdb/PKIndex.jpg" data-thumbnail="/images/db/rdb/PKIndex.jpg" data-sub-html="<h2>聚簇索引</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/db/rdb/PKIndex.jpg"
+            data-srcset="/images/db/rdb/PKIndex.jpg, /images/db/rdb/PKIndex.jpg 1.5x, /images/db/rdb/PKIndex.jpg 2x"
+            data-sizes="auto"
+            alt="/images/db/rdb/PKIndex.jpg" />
+    </a><figcaption class="image-caption">聚簇索引</figcaption>
+    </figure></p>
+<p><strong>辅助索引的叶子节点的 data 域记录着主键的值，因此在使用辅助索引进行查找时，需要先查找到主键值，然后再到主索引中进行回表查询，覆盖索引则无需再回表查询</strong>
+<figure><a class="lightgallery" href="/images/db/rdb/fuzhuIndex.jpg" title="/images/db/rdb/fuzhuIndex.jpg" data-thumbnail="/images/db/rdb/fuzhuIndex.jpg" data-sub-html="<h2>非聚簇索引</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/db/rdb/fuzhuIndex.jpg"
+            data-srcset="/images/db/rdb/fuzhuIndex.jpg, /images/db/rdb/fuzhuIndex.jpg 1.5x, /images/db/rdb/fuzhuIndex.jpg 2x"
+            data-sizes="auto"
+            alt="/images/db/rdb/fuzhuIndex.jpg" />
+    </a><figcaption class="image-caption">非聚簇索引</figcaption>
+    </figure></p>
+<h3 id="覆盖索引covering-index">覆盖索引（covering index）</h3>
+<p>指一个查询语句的执行只用从索引中就能够取得，不必从数据表中读取。也可以称之为实现了索引覆盖。</p>
+<p>当一条查询语句符合覆盖索引条件时，MySQL只需要通过索引就可以返回查询所需要的数据，这样避免了查到索引后再返回表操作，减少I/O提高效率。</p>
+<p>如，表covering_index_sample中有一个普通索引 idx_key1_key2(key1,key2)。当我们通过SQL语句：select key2 from covering_index_sample where key1 = &lsquo;keytest&rsquo;;的时候，就可以通过覆盖索引查询，无需回表。</p>
+<h3 id="联合索引最左前缀匹配">联合索引、最左前缀匹配</h3>
+<p>创建多列索引时，我们根据业务需求，where子句中使用最频繁的一列放在最左边，因为MySQL索引查询会遵循最左前缀匹配的原则，即最左优先，在检索数据时从联合索引的最左边开始匹配。</p>
+<p>所以当我们创建一个联合索引的时候，如(key1,key2,key3)，相当于创建了（key1）、(key1,key2)和(key1,key2,key3)三个索引，这就是最左匹配原则。</p>
+<h3 id="索引下推">索引下推</h3>
+<blockquote>
+<p>MySQL 5.6引入了索引下推优化，默认开启，使用SET optimizer_switch = &lsquo;index_condition_pushdown=off&rsquo;;可以将其关闭。</p>
+</blockquote>
+<p><strong>索引下推优化，可以在有like条件查询的情况下，减少回表次数。</strong></p>
+<h2 id="主从复制">主从复制</h2>
+<ul>
+<li>主数据库有个bin-log二进制文件，纪录了所有增删改Sql语句。（binlog线程）</li>
+<li>从数据库把主数据库的bin-log文件的sql语句复制过来。（io线程）</li>
+<li>从数据库的relay-log重做日志文件中再执行一次这些sql语句。（Sql执行线程）</li>
+</ul>
+<p><figure><a class="lightgallery" href="/images/db/rdb/dbCopy.png" title="/images/db/rdb/dbCopy.png" data-thumbnail="/images/db/rdb/dbCopy.png" data-sub-html="<h2>主从复制</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/db/rdb/dbCopy.png"
+            data-srcset="/images/db/rdb/dbCopy.png, /images/db/rdb/dbCopy.png 1.5x, /images/db/rdb/dbCopy.png 2x"
+            data-sizes="auto"
+            alt="/images/db/rdb/dbCopy.png" />
+    </a><figcaption class="image-caption">主从复制</figcaption>
+    </figure>
+上图主从复制分了五个步骤进行：</p>
+<ol>
+<li>步骤一：主库的更新事件(update、insert、delete)被写到binlog</li>
+<li>步骤二：从库发起连接，连接到主库。</li>
+<li>步骤三：此时主库创建一个binlog dump thread，把binlog的内容发送到从库。</li>
+<li>步骤四：从库启动之后，创建一个I/O线程，读取主库传过来的binlog内容并写入到relay log</li>
+<li>步骤五：还会创建一个SQL线程，从relay log里面读取内容，从Exec_Master_Log_Pos位置开始执行读取到的更新事件，将更新内容写入到slave的db</li>
+</ol>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://juejin.cn/post/6844904084886011911" title="MySQL索引数据结构详解" target="_blank" rel="noopener noreffer">MySQL索引数据结构详解</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -125,7 +263,7 @@
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/mysql/" data-title="MySQL知识体系"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/mysql/" data-title="MySQL总结"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
