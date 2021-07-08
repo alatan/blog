@@ -27,6 +27,8 @@ Spring 官网列出的 Spring 的 6 个特征:
 ![](/images/spring/spring-model.png "Spring模块")
 ## IOC
 ### IOC容器初始化过程
+BeanFactory和ApplicationContext是Spring中两种很重要的容器，前者提供了最基本的依赖注入的支持，后者在继承前者的基础上进行了功能的拓展，增加了事件传播，资源访问，国际化的支持等功能。同时两者的生命周期也稍微有些不同。
+
 Spring IOC容器初始化过程分为Resource定位，载入解析，注册。**IOC容器初始化过程中不包含Bean的依赖注入。Bean的依赖注入一般会发生在第一次通过getBean向容器索取Bean的时候。**
 
 ![](/images/spring/iocInit.png "IOC容器初始化过程")
@@ -59,7 +61,7 @@ Spring在初始化Bean的时候，会先初始化当前Bean所依赖的Bean，�
 7. Spring容器关闭，销毁各个Bean。
 
 ### SpringBean生命周期
-BeanFactory和ApplicationContext是Spring中两种很重要的容器，前者提供了最基本的依赖注入的支持，后者在继承前者的基础上进行了功能的拓展，增加了事件传播，资源访问，国际化的支持等功能。同时两者的生命周期也稍微有些不同。
+![](/images/spring/beanLife.png "SpringBean生命周期")
 
 1. 手动或者自动的触发获取一个Bean，使用BeanFactory的时候需要我们代码自己获取Bean，ApplicationContext则是在IOC启动的时候自动初始化一个Bean。
 2. IOC会根据BeanDefinition来实例化这个Bean，如果这个Bean还有依赖其他的Bean则会先初始化依赖的Bean，这里又涉及到了循环依赖的解决。实例化Bean的时候根据工厂方法、构造方法或者简单初始化等选择具体的实例来进行实例化，最终都是使用反射进行实例化。
