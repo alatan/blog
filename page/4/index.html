@@ -154,6 +154,13 @@ OOD（面向对象设计）七大戒律 开-闭原则 Open-Close Principle（OCP
         <a href="/byteopt/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/sqltuning/">MySQL调优</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-03">2017-03-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">影响mysql的性能因素  业务需求对MySQL的影响(合适合度) 存储定位对MySQL的影响  不适合放进MySQL的数据  二进制多媒体数据 流水队列数据 超大文本数据   需要放进缓存的数据  系统各种配置及规则数据 活跃用户的基本信息数据 活跃用户的个性化定制信息数据 准实时的统计信息数据 其他一些访问频繁但变更较少的数据     Schema设计对系统的性能影响  尽量减少对数据库访问的请求 尽量减少无用数据的查询请求   硬件环境对系统性能的影响  性能分析 MySQL常见瓶颈  CPU：CPU在饱和的时候一般发生在数据装入内存或从磁盘上读取数据时候 IO：磁盘I/O瓶颈发生在装入数据远大于内存容量的时候 服务器硬件的性能瓶颈：top，free，iostat 和 vmstat来查看系统的性能状态  性能下降SQL慢 执行时间长 等待时间长 原因分析  查询语句写的烂 索引失效（单值、复合） 关联查询太多join（设计缺陷或不得已的需求） 服务器调优及各个参数设置（缓冲、线程数等）  MySQL常见性能分析手段  在优化MySQL时，通常需要对数据库进行分析，常见的分析手段有慢查询日志，EXPLAIN 分析查询，profiling分析以及show命令查询系统状态及系统变量，通过定位分析性能的瓶颈，才能更好的优化数据库系统的性能。
+ 性能瓶颈定位 我们可以通过 show 命令查看 MySQL 状态及变量，找到系统的瓶颈：
+1 2 3 4 5 6  Mysql&gt; show status ——显示状态信息（扩展show status like ‘XXX’） Mysql&gt; show variables ——显示系统变量（扩展show variables like ‘XXX’） Mysql&gt; show innodb status ——显示InnoDB存储引擎的状态 Mysql&gt; show processlist ——查看当前SQL执行，包括执行状态、是否锁表等 Shell&gt; mysqladmin variables -u username -p password——显示系统变量 Shell&gt; mysqladmin extended-status -u username -p password——显示状态信息   Explain(执行计划)  使用 Explain 关键字可以模拟优化器执行SQL查询语句，从而知道 MySQL 是如何处理你的 SQL 语句的。分析你的查询语句或是表结构的性能瓶颈</div><div class="post-footer">
+        <a href="/sqltuning/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/mysql/">MySQL总结</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-02">2017-03-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">MySQL结构" MySQL结构 
 简述一条SQL的执行流程  客户端请求 连接器（验证用户身份，给予权限） 查询缓存（存在缓存则直接返回，不存在则执行后续操作） 分析器（对SQL进行词法分析和语法分析操作） 优化器（主要对执行的sql优化选择最优的执行方案方法） 执行器（执行时会先看用户是否有执行权限，有才去使用这个引擎提供的接口） 去引擎层获取数据返回（如果开启查询缓存则会缓存查询结果）  一条SQL的执行流程" 一条SQL的执行流程 
@@ -167,15 +174,6 @@ MyISAM 设计简单，数据以紧密格式存储。对于只读数据，或者�
 不支持事务。 不支持行级锁，只能对整张表加锁，读取时会对需要读到的所有表加共享锁，写入时则对表加排它锁。但在表有读取操作的同时，也可以往表中插入新的记录，这被称为并发插入(CONCURRENT INSERT)。
 比较    对比项 MyISAM InnoDB     主外键 不支持 支持   事务 不支持 支持   行表锁 表锁，即使操作一条记录也会锁住整个表，不适合高并发的操作 行锁,操作时只锁某一行，不对其它行有影响，适合高并发的操作   缓存 只缓存索引，不缓存真实数据 不仅缓存索引还要缓存真实数据，对内存要求较高，而且内存大小对性能有决定性的影响   表空间 小 小   关注点 性能 事务    索引  索引其实是一种数据结构，能够帮助我们快速的检索数据库中的数据，索引是在存储引擎层实现的，而不是在服务器层实现的。可以简单的理解为“排好序的快速查找数据结构”，数据本身之外，数据库还维护者一个满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。下图是一种可能的索引方式示例。</div><div class="post-footer">
         <a href="/mysql/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/relationaldatabase/">关系型数据库概览</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-01">2017-03-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">数据库总览" 数据库总览 
-SQL数据库原理" SQL数据库原理 
-数据库组件 SQL数据库概览" SQL数据库概览 
-核心组件  进程管理器（process manager）：很多数据库具备一个需要妥善管理的进程/线程池。再者，为了实现纳秒级操作，一些现代数据库使用自己的线程而不是操作系统线程。 网络管理器（network manager）：网路I/O是个大问题，尤其是对于分布式数据库。所以一些数据库具备自己的网络管理器。 文件系统管理器（File system manager）：磁盘I/O是数据库的首要瓶颈。具备一个文件系统管理器来完美地处理OS文件系统甚至取代OS文件系统，是非常重要的。 内存管理器（memory manager）：为了避免磁盘I/O带来的性能损失，需要大量的内存。但是如果你要处理大容量内存你需要高效的内存管理器，尤其是你有很多查询同时使用内存的时候。 安全管理器（Security Manager）：用于对用户的验证和授权。 客户端管理器（Client manager）：用于管理客户端连接。  工具  备份管理器（Backup manager）：用于保存和恢复数据。 恢复管理器（Recovery manager）：用于崩溃后重启数据库到一个一致状态。 监控管理器（Monitor manager）：用于记录数据库活动信息和提供监控数据库的工具。 管理员管理器（Administration manager）：用于保存元数据（比如表的名称和结构），提供管理数据库、模式、表空间的工具。  查询管理器  查询解析器（Query parser）：用于检查查询是否合法 查询重写器（Query rewriter）：用于预优化查询 查询优化器（Query optimizer）：用于优化查询 查询执行器（Query executor）：用于编译和执行查询  数据管理器：  事务管理器（Transaction manager）：用于处理事务 缓存管理器（Cache manager）：数据被使用之前置于内存，或者数据写入磁盘之前置于内存 数据访问管理器（Data access manager）：访问磁盘中的数据  数据查询的流程 本章集中探讨数据库如何通过如下进程管理SQL查询的：
- 客户端管理器 查询管理器 数据管理器（含恢复管理器） 客户端管理器  客户端管理器  客户端管理器是处理客户端通信的。客户端可以是一个（网站）服务器或者一个最终用户或最终应用。客户端管理器通过一系列知名的API（JDBC, ODBC, OLE-DB …）提供不同的方式来访问数据库。客户端管理器也提供专有的数据库访问API。</div><div class="post-footer">
-        <a href="/relationaldatabase/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">

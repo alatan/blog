@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/mysql/" /><link rel="prev" href="https://moge.fun/relationaldatabase/" /><link rel="next" href="https://moge.fun/byteopt/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/mysql/" /><link rel="prev" href="https://moge.fun/relationaldatabase/" /><link rel="next" href="https://moge.fun/sqltuning/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/mysql\/"
-        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  202 ,
+        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  695 ,
         "url": "https:\/\/moge.fun\/mysql\/","datePublished": "2017-03-02T00:00:00+00:00","dateModified": "2017-03-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,8 +106,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">MySQL总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 202 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 695 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -151,7 +151,111 @@
         <li><a href="#哪些情况不要创建索引">哪些情况不要创建索引</a></li>
       </ul>
     </li>
-    <li><a href="#主从复制">主从复制</a></li>
+    <li><a href="#事务">事务</a>
+      <ul>
+        <li><a href="#acid特性">ACID特性</a>
+          <ul>
+            <li><a href="#原子性atomicity">原子性(Atomicity)</a>
+              <ul>
+                <li><a href="#一致性consistency">一致性(Consistency)</a></li>
+              </ul>
+            </li>
+            <li><a href="#隔离性isolation">隔离性(Isolation)</a></li>
+            <li><a href="#持久性durability">持久性(Durability)</a></li>
+            <li><a href="#acid特性的相互关系">ACID特性的相互关系</a></li>
+          </ul>
+        </li>
+        <li><a href="#并发一致性问题">并发一致性问题</a>
+          <ul>
+            <li><a href="#丢失修改">丢失修改</a></li>
+            <li><a href="#读脏数据">读脏数据</a></li>
+            <li><a href="#不可重复读">不可重复读</a></li>
+            <li><a href="#幻影读">幻影读</a></li>
+            <li><a href="#幻读和不可重复读的区别">幻读和不可重复读的区别：</a></li>
+          </ul>
+        </li>
+        <li><a href="#并发一致性的解决方案引出隔离级别等">并发一致性的解决方案（引出隔离级别等）</a></li>
+        <li><a href="#隔离级别">隔离级别</a>
+          <ul>
+            <li><a href="#未提交读read-uncommitted">未提交读(READ UNCOMMITTED)</a></li>
+            <li><a href="#提交读read-committed">提交读(READ COMMITTED)</a></li>
+            <li><a href="#可重复读repeatable-read">可重复读(REPEATABLE READ)</a></li>
+            <li><a href="#可串行化serializable">可串行化(SERIALIZABLE)</a></li>
+          </ul>
+        </li>
+        <li><a href="#多版本并发控制">多版本并发控制</a>
+          <ul>
+            <li><a href="#版本号">版本号</a></li>
+            <li><a href="#隐藏的列">隐藏的列</a></li>
+            <li><a href="#undo-日志">Undo 日志</a></li>
+            <li><a href="#实现过程">实现过程</a></li>
+            <li><a href="#快照读与当前读">快照读与当前读</a>
+              <ul>
+                <li><a href="#快照读">快照读</a></li>
+                <li><a href="#当前读">当前读</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#事务的实现">事务的实现</a>
+          <ul>
+            <li><a href="#redo-log重做日志-实现持久化和原子性">redo log（重做日志） 实现持久化和原子性</a></li>
+            <li><a href="#undo-log回滚日志--实现一致性">undo log（回滚日志）  实现一致性</a></li>
+          </ul>
+        </li>
+        <li><a href="#mysql-有多少种日志">MySQL 有多少种日志</a></li>
+        <li><a href="#mysql对分布式事务的支持">MySQL对分布式事务的支持</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql锁机制">MySQL锁机制</a>
+      <ul>
+        <li><a href="#封锁">封锁</a>
+          <ul>
+            <li><a href="#封锁粒度">封锁粒度</a></li>
+            <li><a href="#封锁类型">封锁类型</a>
+              <ul>
+                <li><a href="#读写锁">读写锁</a></li>
+                <li><a href="#意向锁">意向锁</a></li>
+              </ul>
+            </li>
+            <li><a href="#封锁协议">封锁协议</a>
+              <ul>
+                <li><a href="#三级封锁协议">三级封锁协议</a>
+                  <ul>
+                    <li><a href="#一级封锁协议">一级封锁协议</a></li>
+                    <li><a href="#二级封锁协议">二级封锁协议</a></li>
+                    <li><a href="#三级封锁协议-1">三级封锁协议</a></li>
+                  </ul>
+                </li>
+                <li><a href="#两段锁协议">两段锁协议</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#锁模式innodb有三种行锁的算法">锁模式(InnoDB有三种行锁的算法)</a>
+          <ul>
+            <li><a href="#record-locks记录锁行锁">Record Locks（记录锁，行锁）</a></li>
+            <li><a href="#gap-locks间隙锁">Gap Locks（间隙锁）</a></li>
+            <li><a href="#next-key-locks临键锁">Next-Key Locks（临键锁）</a></li>
+          </ul>
+        </li>
+        <li><a href="#锁行锁表">锁行锁表</a></li>
+      </ul>
+    </li>
+    <li><a href="#分区分表分库">分区、分表、分库</a></li>
+    <li><a href="#主从复制">主从复制</a>
+      <ul>
+        <li><a href="#基本原理">基本原理</a></li>
+        <li><a href="#三个步骤">三个步骤</a></li>
+        <li><a href="#复制的基本原则">复制的基本原则</a></li>
+        <li><a href="#复制的最大问题">复制的最大问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#其他问题">其他问题</a>
+      <ul>
+        <li><a href="#百万级别或以上的数据如何删除">百万级别或以上的数据如何删除</a></li>
+      </ul>
+    </li>
     <li><a href="#参考文章">参考文章</a></li>
   </ul>
 </nav></div>
@@ -387,11 +491,297 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
 <li>频繁更新的字段不适合创建索引（会加重IO负担）</li>
 <li>where条件里用不到的字段不创建索引</li>
 </ul>
-<h2 id="主从复制">主从复制</h2>
+<h2 id="事务">事务</h2>
+<blockquote>
+<p>事务指的是满足 ACID 特性的一组操作，可以通过 Commit 提交一个事务，也可以使用 Rollback 进行回滚。</p>
+</blockquote>
+<h3 id="acid特性">ACID特性</h3>
+<h4 id="原子性atomicity">原子性(Atomicity)</h4>
+<p>事务被视为不可分割的最小单元，事务的所有操作要么全部提交成功，要么全部失败回滚。 回滚可以用日志来实现，日志记录着事务所执行的修改操作，在回滚时反向执行这些修改操作即可。</p>
+<h5 id="一致性consistency">一致性(Consistency)</h5>
+<p>数据库在事务执行前后都保持一致性状态。在一致性状态下，所有事务对一个数据的读取结果都是相同的。</p>
+<h4 id="隔离性isolation">隔离性(Isolation)</h4>
+<p>一个事务所做的修改在最终提交以前，对其它事务是不可见的。</p>
+<h4 id="持久性durability">持久性(Durability)</h4>
+<p>一旦事务提交，则其所做的修改将会永远保存到数据库中。即使系统发生崩溃，事务执行的结果也不能丢失。 可以通过数据库备份和恢复来实现，在系统发生崩溃时，使用备份的数据库进行数据恢复。</p>
+<h4 id="acid特性的相互关系">ACID特性的相互关系</h4>
+<p>事务的 ACID 特性概念简单，但不是很好理解，主要是因为这几个特性不是一种平级关系:</p>
 <ul>
-<li>主数据库有个bin-log二进制文件，纪录了所有增删改Sql语句。（binlog线程）</li>
-<li>从数据库把主数据库的bin-log文件的sql语句复制过来。（io线程）</li>
-<li>从数据库的relay-log重做日志文件中再执行一次这些sql语句。（Sql执行线程）</li>
+<li>只有满足一致性，事务的执行结果才是正确的。</li>
+<li>在无并发的情况下，事务串行执行，隔离性一定能够满足。此时只要能满足原子性，就一定能满足一致性。</li>
+<li>在并发的情况下，多个事务并行执行，事务不仅要满足原子性，还需要满足隔离性，才能满足一致性。</li>
+<li>事务满足持久化是为了能应对数据库崩溃的情况。</li>
+</ul>
+<p><figure><a class="lightgallery" href="/images/db/rdb/dbc.png" title="/images/db/rdb/dbc.png" data-thumbnail="/images/db/rdb/dbc.png" data-sub-html="<h2>ACID</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/db/rdb/dbc.png"
+            data-srcset="/images/db/rdb/dbc.png, /images/db/rdb/dbc.png 1.5x, /images/db/rdb/dbc.png 2x"
+            data-sizes="auto"
+            alt="/images/db/rdb/dbc.png" />
+    </a><figcaption class="image-caption">ACID</figcaption>
+    </figure></p>
+<h3 id="并发一致性问题">并发一致性问题</h3>
+<p>在并发环境下，<strong>事务的隔离性很难保证，因此会出现很多并发一致性问题。</strong></p>
+<h4 id="丢失修改">丢失修改</h4>
+<p>T1和T2两个事务都对一个数据进行修改，T1先修改，T2随后修改，<strong>T2的修改覆盖了T1的修改</strong>。</p>
+<h4 id="读脏数据">读脏数据</h4>
+<p>T1修改一个数据，T2随后读取这个数据。如果<strong>T1撤销了这次修改，那么T2读取的数据是脏数据。</strong></p>
+<h4 id="不可重复读">不可重复读</h4>
+<p><strong>T2读取一个数据，T1对该数据做了修改</strong>。如果T2再次读取这个数据，此时读取的结果和第一次读取的结果不同。</p>
+<h4 id="幻影读">幻影读</h4>
+<p><strong>T1读取某个范围的数据，T2在这个范围内插入新的数据，T1再次读取这个范围的数据</strong>，此时读取的结果和和第一次读取的结果不同。</p>
+<h4 id="幻读和不可重复读的区别">幻读和不可重复读的区别：</h4>
+<ul>
+<li>不可重复读的重点是修改：在同一事务中，同样的条件，第一次读的数据和第二次读的数据不一样。（因为中间有其他事务提交了修改）</li>
+<li>幻读的重点在于新增或者删除：在同一事务中，同样的条件，第一次和第二次读出来的记录数不一样。（因为中间有其他事务提交了插入/删除）</li>
+</ul>
+<h3 id="并发一致性的解决方案引出隔离级别等">并发一致性的解决方案（引出隔离级别等）</h3>
+<p><strong>产生并发不一致性问题主要原因是破坏了事务的隔离性，解决方法是通过并发控制来保证隔离性</strong>。并发控制可以通过封锁来实现，但是<strong>封锁操作</strong>需要用户自己控制，相当复杂。</p>
+<p><strong>数据库管理系统提供了事务的隔离级别，让用户以一种更轻松的方式处理并发一致性问题。</strong></p>
+<h3 id="隔离级别">隔离级别</h3>
+<blockquote>
+<p>使用select @@tx_isolation;查询数据库的隔离级别。Mysql默认的级别是可重复读，优先考虑把数据库系统的隔离级别设为读已提交。</p>
+</blockquote>
+<h4 id="未提交读read-uncommitted">未提交读(READ UNCOMMITTED)</h4>
+<p>读未提交，一个事务可以读到另一个事务未提交的数据！</p>
+<h4 id="提交读read-committed">提交读(READ COMMITTED)</h4>
+<p>读已提交，一个事务可以读到另一个事务已提交的数据!
+一个事务只能读取已经提交的事务所做的修改。换句话说，一个事务所做的修改在提交之前对其它事务是不可见的。</p>
+<h4 id="可重复读repeatable-read">可重复读(REPEATABLE READ)</h4>
+<p>可重复读，加入间隙锁保证在同一个事务中多次读取同样数据的结果是一样的。</p>
+<h4 id="可串行化serializable">可串行化(SERIALIZABLE)</h4>
+<p>串行化，该级别下读写串行化，且所有的select语句后都自动加上lock in share mode，即使用了共享锁。因此在该隔离级别下，使用的是当前读，而不是快照读。</p>
+<p><strong>多版本并发控制是MySQL的InnoDB存储引擎实现隔离级别的一种具体方式</strong>，用于实现<strong>提交读和可重复读这两种隔离级别</strong>。</p>
+<p><strong>而未提交读隔离级别总是读取最新的数据行，无需使用 MVCC。可串行化隔离级别需要对所有读取的行都加锁，单纯使用 MVCC 无法实现。</strong></p>
+<p>MySQL的InnoDB存储引擎<strong>采用两段锁协议，会根据隔离级别在需要的时候自动加锁，并且所有的锁都是在同一时刻被释放</strong>，这被称为隐式锁定。</p>
+<p><figure><a class="lightgallery" href="/images/db/rdb/geli.png" title="/images/db/rdb/geli.png" data-thumbnail="/images/db/rdb/geli.png" data-sub-html="<h2>隔离级别</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/db/rdb/geli.png"
+            data-srcset="/images/db/rdb/geli.png, /images/db/rdb/geli.png 1.5x, /images/db/rdb/geli.png 2x"
+            data-sizes="auto"
+            alt="/images/db/rdb/geli.png" />
+    </a><figcaption class="image-caption">隔离级别</figcaption>
+    </figure></p>
+<h3 id="多版本并发控制">多版本并发控制</h3>
+<blockquote>
+<p>多版本并发控制(Multi-Version Concurrency Control, MVCC)是 MySQL 的 InnoDB 存储引擎实现隔离级别的一种具体方式，用于实现提交读和可重复读这两种隔离级别。而未提交读隔离级别总是读取最新的数据行，无需使用 MVCC。可串行化隔离级别需要对所有读取的行都加锁，单纯使用 MVCC 无法实现。</p>
+</blockquote>
+<h4 id="版本号">版本号</h4>
+<ul>
+<li>系统版本号: 是一个递增的数字，每开始一个新的事务，系统版本号就会自动递增。</li>
+<li>事务版本号: 事务开始时的系统版本号。</li>
+</ul>
+<h4 id="隐藏的列">隐藏的列</h4>
+<p>MVCC 在每行记录后面都保存着两个隐藏的列，用来存储两个版本号:</p>
+<ul>
+<li>创建版本号: 指示创建一个数据行的快照时的系统版本号；</li>
+<li>删除版本号: 如果该快照的删除版本号大于当前事务版本号表示该快照有效，否则表示该快照已经被删除了。</li>
+</ul>
+<h4 id="undo-日志">Undo 日志</h4>
+<p>MVCC 使用到的快照存储在 Undo 日志中，该日志通过回滚指针把一个数据行(Record)的所有快照连接起来。</p>
+<h4 id="实现过程">实现过程</h4>
+<p>以下实现过程针对可重复读隔离级别。</p>
+<p>当开始新一个事务时，该事务的版本号肯定会大于当前所有数据行快照的创建版本号，理解这一点很关键。</p>
+<ol>
+<li>SELECT</li>
+</ol>
+<blockquote>
+<p>多个事务必须读取到同一个数据行的快照，并且这个快照是距离现在最近的一个有效快照。但是也有例外，如果有一个事务正在修改该数据行，那么它可以读取事务本身所做的修改，而不用和其它事务的读取结果一致。 把没有对一个数据行做修改的事务称为 T，T 所要读取的数据行快照的创建版本号必须小于 T 的版本号，因为如果大于或者等于 T 的版本号，那么表示该数据行快照是其它事务的最新修改，因此不能去读取它。除此之外，T 所要读取的数据行快照的删除版本号必须大于 T 的版本号，因为如果小于等于 T 的版本号，那么表示该数据行快照是已经被删除的，不应该去读取它。</p>
+</blockquote>
+<ol start="2">
+<li>INSERT</li>
+</ol>
+<blockquote>
+<p>将当前系统版本号作为数据行快照的创建版本号。</p>
+</blockquote>
+<ol start="3">
+<li>DELETE</li>
+</ol>
+<blockquote>
+<p>将当前系统版本号作为数据行快照的删除版本号。</p>
+</blockquote>
+<ol start="4">
+<li>UPDATE</li>
+</ol>
+<blockquote>
+<p>将当前系统版本号作为更新前的数据行快照的删除版本号，并将当前系统版本号作为更新后的数据行快照的创建版本号。可以理解为先执行 DELETE 后执行 INSERT。</p>
+</blockquote>
+<h4 id="快照读与当前读">快照读与当前读</h4>
+<h5 id="快照读">快照读</h5>
+<p>使用 MVCC 读取的是快照中的数据，这样可以减少加锁所带来的开销。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table</span> <span class="p">...;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h5 id="当前读">当前读</h5>
+<p>读取的是最新的数据，需要加锁。以下第一个语句需要加 S 锁，其它都需要加 X 锁。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table</span> <span class="k">where</span> <span class="o">?</span> <span class="k">lock</span> <span class="k">in</span> <span class="k">share</span> <span class="k">mode</span><span class="p">;</span> <span class="o">//</span><span class="n">S锁</span> <span class="p">(</span><span class="err">共享锁</span><span class="p">)</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table</span> <span class="k">where</span> <span class="o">?</span> <span class="k">for</span> <span class="k">update</span><span class="p">;</span>         <span class="o">//</span><span class="err">加</span><span class="n">X锁</span> <span class="p">(</span><span class="err">排他锁</span><span class="p">)</span>
+<span class="k">insert</span><span class="p">;</span>
+<span class="k">update</span><span class="p">;</span>
+<span class="k">delete</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="事务的实现">事务的实现</h3>
+<p>事务的实现是基于数据库的存储引擎。不同的存储引擎对事务的支持程度不一样。MySQL 中支持事务的存储引擎有 InnoDB 和 NDB。</p>
+<p>事务的实现就是如何实现ACID特性。<strong>事务的隔离性是通过锁实现，而事务的原子性、一致性和持久性则是通过事务日志实现。</strong></p>
+<p>事务日志包括：重做日志redo和回滚日志undo</p>
+<h4 id="redo-log重做日志-实现持久化和原子性">redo log（重做日志） 实现持久化和原子性</h4>
+<p>在innoDB的存储引擎中，事务日志通过重做(redo)日志和innoDB存储引擎的日志缓冲(InnoDB Log Buffer)实现。事务开启时，事务中的操作，都会先写入存储引擎的日志缓冲中，在事务提交之前，这些缓冲的日志都需要提前刷新到磁盘上持久化，这就是DBA们口中常说的“日志先行”(Write-Ahead Logging)。当事务提交之后，在Buffer Pool中映射的数据文件才会慢慢刷新到磁盘。此时如果数据库崩溃或者宕机，那么当系统重启进行恢复时，就可以根据redo log中记录的日志，把数据库恢复到崩溃前的一个状态。未完成的事务，可以继续提交，也可以选择回滚，这基于恢复的策略而定。</p>
+<p>在系统启动的时候，就已经为redo log分配了一块连续的存储空间，以顺序追加的方式记录Redo Log，通过顺序IO来改善性能。所有的事务共享redo log的存储空间，它们的Redo Log按语句的执行顺序，依次交替的记录在一起。</p>
+<h4 id="undo-log回滚日志--实现一致性">undo log（回滚日志）  实现一致性</h4>
+<p>undo log 主要为事务的回滚服务。在事务执行的过程中，除了记录redo log，还会记录一定量的undo log。undo log记录了数据在每个操作前的状态，如果事务执行过程中需要回滚，就可以根据undo log进行回滚操作。单个事务的回滚，只会回滚当前事务做的操作，并不会影响到其他的事务做的操作。</p>
+<p>Undo记录的是已部分完成并且写入硬盘的未完成的事务，默认情况下回滚日志是记录下表空间中的（共享表空间或者独享表空间）</p>
+<p>二种日志均可以视为一种恢复操作，redo_log是恢复提交事务修改的页操作，而undo_log是回滚行记录到特定版本。二者记录的内容也不同，redo_log是物理日志，记录页的物理修改操作，而undo_log是逻辑日志，根据每行记录进行记录。</p>
+<h3 id="mysql-有多少种日志">MySQL 有多少种日志</h3>
+<ul>
+<li>错误日志：记录出错信息，也记录一些警告信息或者正确的信息。</li>
+<li>查询日志：记录所有对数据库请求的信息，不论这些请求是否得到了正确的执行。</li>
+<li>慢查询日志：设置一个阈值，将运行时间超过该值的所有SQL语句都记录到慢查询的日志文件中。</li>
+<li>二进制日志：记录对数据库执行更改的所有操作。</li>
+<li>中继日志：中继日志也是二进制日志，用来给slave 库恢复</li>
+<li>事务日志：重做日志redo和回滚日志undo</li>
+</ul>
+<h3 id="mysql对分布式事务的支持">MySQL对分布式事务的支持</h3>
+<blockquote>
+<p>下面是简单描述，详细请参考分布式事务。
+分布式事务的实现方式有很多，既可以采用 InnoDB 提供的原生的事务支持，也可以采用消息队列来实现分布式事务的最终一致性。这里我们主要聊一下 InnoDB 对分布式事务的支持。</p>
+</blockquote>
+<p>MySQL 从 5.0.3  InnoDB 存储引擎开始支持XA协议的分布式事务。一个分布式事务会涉及多个行动，这些行动本身是事务性的。所有行动都必须一起成功完成，或者一起被回滚。</p>
+<h2 id="mysql锁机制">MySQL锁机制</h2>
+<h3 id="封锁">封锁</h3>
+<h4 id="封锁粒度">封锁粒度</h4>
+<p>MySQL 中提供了两种封锁粒度: 行级锁以及表级锁。
+<figure><a class="lightgallery" href="/images/db/rdb/dblock.jpg" title="/images/db/rdb/dblock.jpg" data-thumbnail="/images/db/rdb/dblock.jpg" data-sub-html="<h2>封锁粒度</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/db/rdb/dblock.jpg"
+            data-srcset="/images/db/rdb/dblock.jpg, /images/db/rdb/dblock.jpg 1.5x, /images/db/rdb/dblock.jpg 2x"
+            data-sizes="auto"
+            alt="/images/db/rdb/dblock.jpg" />
+    </a><figcaption class="image-caption">封锁粒度</figcaption>
+    </figure></p>
+<h4 id="封锁类型">封锁类型</h4>
+<h5 id="读写锁">读写锁</h5>
+<ul>
+<li>排它锁(Exclusive)，简写为 X 锁，又称写锁。</li>
+<li>共享锁(Shared)，简写为 S 锁，又称读锁。</li>
+</ul>
+<p>有以下两个规定:</p>
+<ul>
+<li>一个事务对数据对象 A 加了 X 锁，就可以对 A 进行读取和更新。加锁期间其它事务不能对 A 加任何锁。</li>
+<li>一个事务对数据对象 A 加了 S 锁，可以对 A 进行读取操作，但是不能进行更新操作。加锁期间其它事务能对 A 加 S 锁，但是不能加 X 锁。</li>
+</ul>
+<h5 id="意向锁">意向锁</h5>
+<p>使用意向锁(Intention Locks)可以更容易地支持多粒度封锁。</p>
+<p>在存在行级锁和表级锁的情况下，事务T想要对表A加X锁，就需要先检测是否有其它事务对表A或者表A中的任意一行加了锁，那么就需要<strong>对表A的每一行都检测一次，这是非常耗时的</strong>。</p>
+<p>意向锁在原来的 X/S 锁之上引入了 IX/IS，IX/IS 都是表锁，用来表示一个事务想要在表中的某个数据行上加 X 锁或 S 锁。</p>
+<ul>
+<li>一个事务在获得某个数据行对象的 S 锁之前，必须先获得表的 IS 锁或者更强的锁；</li>
+<li>一个事务在获得某个数据行对象的 X 锁之前，必须先获得表的 IX 锁。</li>
+<li>任意 IS/IX 锁之间都是兼容的，因为它们只是表示想要对表加锁，而不是真正加锁；</li>
+<li>S 锁只与 S 锁和 IS 锁兼容，也就是说事务 T 想要对数据行加 S 锁，其它事务可以已经获得对表或者表中的行的 S 锁。</li>
+</ul>
+<p><strong>通过引入意向锁，事务 T 想要对表 A 加 X 锁，只需要先检测是否有其它事务对表A加了 X/IX/S/IS 锁，如果加了就表示有其它事务正在使用这个表或者表中某一行的锁，因此事务T加X锁失败。</strong></p>
+<h4 id="封锁协议">封锁协议</h4>
+<h5 id="三级封锁协议">三级封锁协议</h5>
+<h6 id="一级封锁协议">一级封锁协议</h6>
+<p>事务 T 要修改数据 A 时必须加 X 锁，直到 T 结束才释放锁。</p>
+<p>可以解决丢失修改问题，因为不能同时有两个事务对同一个数据进行修改，那么事务的修改就不会被覆盖。</p>
+<h6 id="二级封锁协议">二级封锁协议</h6>
+<p>在一级的基础上，要求读取数据 A 时必须加 S 锁，读取完马上释放 S 锁。</p>
+<p>可以解决读脏数据问题，因为如果一个事务在对数据 A 进行修改，根据 1 级封锁协议，会加 X 锁，那么就不能再加 S 锁了，也就是不会读入数据。</p>
+<h6 id="三级封锁协议-1">三级封锁协议</h6>
+<p>在二级的基础上，要求读取数据 A 时必须加 S 锁，直到事务结束了才能释放 S 锁。</p>
+<p>可以解决不可重复读的问题，因为读 A 时，其它事务不能对 A 加 X 锁，从而避免了在读的期间数据发生改变。</p>
+<h5 id="两段锁协议">两段锁协议</h5>
+<p>加锁和解锁分为两个阶段进行。</p>
+<p>可串行化调度是指，通过并发控制，使得并发执行的事务结果与某个串行执行的事务结果相同。</p>
+<p>事务遵循两段锁协议是保证可串行化调度的充分条件。例如以下操作满足两段锁协议，它是可串行化调度。</p>
+<p>MySQL 的 InnoDB 存储引擎采用两段锁协议，会根据隔离级别在需要的时候自动加锁，并且所有的锁都是在同一时刻被释放，这被称为隐式锁定。</p>
+<h3 id="锁模式innodb有三种行锁的算法">锁模式(InnoDB有三种行锁的算法)</h3>
+<h4 id="record-locks记录锁行锁">Record Locks（记录锁，行锁）</h4>
+<p>单个行记录上的锁。对索引项加锁，锁定符合条件的行。其他事务不能修改和删除加锁项。</p>
+<p>该锁是对索引记录进行加锁！锁是在加索引上而不是行上的。注意了，innodb一定存在聚簇索引，因此行锁最终都会落到聚簇索引上！</p>
+<p>如果表没有设置索引，InnoDB 会自动在主键上创建隐藏的聚簇索引，因此 Record Locks 依然可以使用。</p>
+<h4 id="gap-locks间隙锁">Gap Locks（间隙锁）</h4>
+<blockquote>
+<p>当我们使用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据记录的索引项加锁。对于键值在条件范围内但并不存在的记录，叫做“间隙”，InnoDB 也会对这个“间隙”加锁，这种锁机制就是所谓的间隙锁。</p>
+</blockquote>
+<p>锁定索引之间的间隙，但是不包含索引本身。其目的只有一个，防止其他事物插入数据。</p>
+<p><strong>间隙锁基于非唯一索引，它锁定一段范围内的索引记录。间隙锁基于下面将会提到的Next-Key Locking 算法，请务必牢记：使用间隙锁锁住的是一个区间，而不仅仅是这个区间中的每一条数据。</strong></p>
+<p>隔离级别比Read Committed低的情况下，不会使用间隙锁，如隔离级别为Read Uncommited时，也不存在间隙锁。当隔离级别为Repeatable Read和Serializable时，就会存在间隙锁。</p>
+<p>例如当一个事务执行以下语句，其它事务就不能在 t.c 中插入 15。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">c</span> <span class="k">FROM</span> <span class="n">t</span> <span class="k">WHERE</span> <span class="k">c</span> <span class="k">BETWEEN</span> <span class="mi">10</span> <span class="k">and</span> <span class="mi">20</span> <span class="k">FOR</span> <span class="k">UPDATE</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="next-key-locks临键锁">Next-Key Locks（临键锁）</h4>
+<p>临键锁，是记录锁与间隙锁的组合，它的封锁范围，既包含索引记录，又包含索引区间。</p>
+<p>MVCC不能解决幻读的问题，Next-Key Locks 就是为了解决这个问题而存在的。<strong>在可重复读(REPEATABLE READ)隔离级别下，使用 MVCC + Next-Key Locks 可以解决幻读问题。</strong></p>
+<p>例如一个索引包含以下值: 10, 11, 13, and 20，那么就需要锁定以下区间:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="p">(</span><span class="n">negative</span> <span class="n">infinity</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+<span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">positive</span> <span class="n">infinity</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="锁行锁表">锁行锁表</h3>
+<p>InnoDB行锁是通过给索引上的索引项加锁来实现，只有通过索引条件检索数据，InnoDB才使用行级锁，否则表锁（注意下面的解释）。</p>
+<p>这里的表锁并不是用表锁来实现锁表的操作，而是利用了Next-Key Locks，也可以理解为是用了行锁+间隙锁来实现锁表的操作!</p>
+<p>之所以能够锁表，是通过行锁+间隙锁来实现的。那么，RU和RC都不存在间隙锁，这种说法在RU和RC中还能成立么？ 因此，该说法只在RR和Serializable中是成立的。
+<strong>如果隔离级别为RU和RC，无论条件列上是否有索引，都不会锁表，只锁行！</strong></p>
+<h2 id="分区分表分库">分区、分表、分库</h2>
+<h2 id="主从复制">主从复制</h2>
+<h3 id="基本原理">基本原理</h3>
+<p>slave 会从 master 读取 binlog 来进行数据同步</p>
+<h3 id="三个步骤">三个步骤</h3>
+<ul>
+<li>master将改变记录到二进制日志（binary log）。这些记录过程叫做二进制日志事件，binary log events；</li>
+<li>salve 将 master 的 binary log events 拷贝到它的中继日志（relay log）;</li>
+<li>slave 重做中继日志中的事件，将改变应用到自己的数据库中。MySQL 复制是异步且是串行化的。</li>
+</ul>
+<h3 id="复制的基本原则">复制的基本原则</h3>
+<ul>
+<li>每个 slave只有一个 master</li>
+<li>每个 salve只能有一个唯一的服务器 ID</li>
+<li>每个master可以有多个salve</li>
+</ul>
+<h3 id="复制的最大问题">复制的最大问题</h3>
+<ul>
+<li>延时</li>
 </ul>
 <p><figure><a class="lightgallery" href="/images/db/rdb/dbCopy.png" title="/images/db/rdb/dbCopy.png" data-thumbnail="/images/db/rdb/dbCopy.png" data-sub-html="<h2>主从复制</h2>">
         <img
@@ -411,10 +801,23 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
 <li>步骤四：从库启动之后，创建一个I/O线程，读取主库传过来的binlog内容并写入到relay log</li>
 <li>步骤五：还会创建一个SQL线程，从relay log里面读取内容，从Exec_Master_Log_Pos位置开始执行读取到的更新事件，将更新内容写入到slave的db</li>
 </ol>
+<h2 id="其他问题">其他问题</h2>
+<h3 id="百万级别或以上的数据如何删除">百万级别或以上的数据如何删除</h3>
+<p>关于索引：由于索引需要额外的维护成本，因为索引文件是单独存在的文件,所以当我们对数据的增加,修改,删除,都会产生额外的对索引文件的操作,这些操作需要消耗额外的IO,会降低增/改/删的执行效率。所以，在我们删除数据库百万级别数据的时候，查询MySQL官方手册得知删除数据的速度和创建的索引数量是成正比的。</p>
+<ol>
+<li>所以我们想要删除百万数据的时候可以先删除索引（此时大概耗时三分多钟）</li>
+<li>然后删除其中无用数据（此过程需要不到两分钟）</li>
+<li>删除完成后重新创建索引(此时数据较少了)创建索引也非常快，约十分钟左右。</li>
+<li>与之前的直接删除绝对是要快速很多，更别说万一删除中断,一切删除会回滚。那更是坑了。</li>
+</ol>
 <h2 id="参考文章">参考文章</h2>
 <ul>
-<li><a href="https://juejin.cn/post/6844904084886011911" title="MySQL索引数据结构详解" target="_blank" rel="noopener noreffer">MySQL索引数据结构详解</a></li>
 <li><a href="https://juejin.cn/post/6850037271233331208" title="MySQL总结" target="_blank" rel="noopener noreffer">MySQL总结</a></li>
+<li><a href="https://www.pdai.tech/md/db/sql/sql-db-theory.html" title="数据库系统核心知识点" target="_blank" rel="noopener noreffer">数据库系统核心知识点</a></li>
+<li><a href="https://juejin.cn/post/6844904084886011911" title="MySQL索引数据结构详解" target="_blank" rel="noopener noreffer">MySQL索引数据结构详解</a></li>
+<li><a href="https://juejin.cn/post/6844903919387148296" title="select加锁分析" target="_blank" rel="noopener noreffer">select加锁分析</a></li>
+<li><a href="https://www.pdai.tech/md/db/sql-mysql/sql-mysql-mvcc.html" title="MySQL InnoDB的MVCC实现机制" target="_blank" rel="noopener noreffer">MySQL InnoDB的MVCC实现机制</a></li>
+<li><a href="https://www.pdai.tech/md/db/sql-mysql/sql-mysql-execute.html" title="一条SQL的执行过程详解" target="_blank" rel="noopener noreffer">一条SQL的执行过程详解</a></li>
 </ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -440,7 +843,7 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
     </div>
 
     <div class="post-nav"><a href="/relationaldatabase/" class="prev" rel="prev" title="关系型数据库概览"><i class="fas fa-angle-left fa-fw"></i>关系型数据库概览</a>
-            <a href="/byteopt/" class="next" rel="next" title="Java位运算 ">Java位运算 <i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/sqltuning/" class="next" rel="next" title="MySQL调优">MySQL调优<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

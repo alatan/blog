@@ -103,6 +103,24 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/datastruct/">数据结构概览</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-15">2017-01-15</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">概览" 概览 
+ 数据结构研究的是数据的存储方式，算法研究的是解决问题的思路。数据结构与算法是相辅相成的。
+ 常用存储结构  线性表，还可细分为顺序表(数组)、链表、栈和队列。 树结构，包括普通树，二叉树，二叉查找树等。 图存储结构。  线性表  线性表并不是一种具体的存储结构，它包含顺序存储结构和链式存储结构，是顺序表和链表的统称。
+  线性表是一种线性结构，它是由零个或多个数据元素构成的有限序列。 线性表的特征是在一个序列中，除了头尾元素，每个元素都有且只有一个直接前驱，有且只有一个直接后继，而序列头元素没有直接前驱，序列尾元素没有直接后继。 数据结构中常见的线性结构有数组、单链表、双链表、循环链表等。线性表中的元素为某种相同的抽象数据类型。  线性表" 线性表 
+ 如图 3a) 所示，将数据依次存储在连续的整块物理空间中，这种存储结构称为顺序存储结构（简称顺序表，数组）； 如图 3b) 所示，数据分散的存储在物理空间中，通过一根线保存着它们之间的逻辑关系，这种存储结构称为链式存储结构（简称链表）。  数组和矩阵(顺序表) 数组是一种连续存储线性结构，元素类型相同，大小相等，数组是多维的，通过使用整型索引值来访问他们的元素，数组尺寸不能改变。
+链表 我们知道，使用顺序表（底层实现靠数组）时，需要提前申请一定大小的存储空间，这块存储空间的物理地址是连续的，链表则完全不同，使用链表存储数据时，是随用随申请，因此数据的存储位置是相互分离的，换句话说，数据的存储位置是随机的。
+n个节点离散分配，彼此通过指针相连，每个节点只有一个前驱节点，每个节点只有一个后续节点，首节点没有前驱节点，尾节点没有后续节点。确定一个链表我们只需要头指针，通过头指针就可以把整个链表都能推出来。
+哈希表(散列) 散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
+栈和队列 数组和链表都是线性存储结构的基础，栈和队列都是线性存储结构的应用，栈和队列隶属于线性表，是特殊的线性表，因为它们对线性表中元素的进出做了明确的要求。
+栈（LIFO）  使用数组实现的叫静态栈 使用链表实现的叫动态栈  栈（FIFO）  使用数组实现的叫静态队列 使用链表实现的叫动态队列  树存储结构  树存储结构适合存储具有“一对多”关系的数据。
+ 树" 树 
+图存储结构  图存储结构适合存储具有“多对多”关系的数据。
+ 图" 图 
+和线性表，树的差异:  线性表中我们把数据元素叫元素，树中将数据元素叫结点，在图中数据元素，我们则称之为顶点(Vertex)。 线性表可以没有元素，称为空表；树中可以没有节点，称为空树；但是，在图中不允许没有顶点(有穷非空性)。 线性表中的各元素是线性关系，树中的各元素是层次关系，而图中各顶点的关系是用边来表示(边集可以为空)。  总结 我们知道，实际应用当中，我们经常使用的是查找和排序操作，这在我们的各种管理系统、数据库系统、操作系统等当中，十分常用。</div><div class="post-footer">
+        <a href="/datastruct/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/network/">计算机网络</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-05">2017-01-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>网络</a></span></div><div class="content"> 一般网线传输的模拟信号需要通过猫(调制解调器)转换成数字信号，再经由路由器把信号发给PC端，如果PC端数量超过了路由器的连接上限就需要加装交换器。因此，家里有宽带就必须有猫，有多台电脑上网就必须要路由器，假如电脑很多，超过路由器的接口数就需要交换机扩展接口。
  传输示例" 传输示例 

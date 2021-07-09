@@ -13,6 +13,15 @@
 接口层-和数据库交互的方式 MyBatis和数据库的交互有两种方式：
  使用传统的MyBatis提供的API； 使用Mapper接口；  ]]></description>
 </item><item>
+    <title>MySQL调优</title>
+    <link>https://moge.fun/sqltuning/</link>
+    <pubDate>Fri, 03 Mar 2017 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/sqltuning/</guid>
+    <description><![CDATA[影响mysql的性能因素  业务需求对MySQL的影响(合适合度) 存储定位对MySQL的影响  不适合放进MySQL的数据  二进制多媒体数据 流水队列数据 超大文本数据   需要放进缓存的数据  系统各种配置及规则数据 活跃用户的基本信息数据 活跃用户的个性化定制信息数据 准实时的统计信息数据 其他一些访问频繁但变更较少的数据     Schema设计对系统的性能影响  尽量减少对数据库访问的请求 尽量减少无用数据的查询请求   硬件环境对系统性能的影响  性能分析 MySQL常见瓶颈  CPU：CPU在饱和的时候一般发生在数据装入内存或从磁盘上读取数据时候 IO：磁盘I/O瓶颈发生在装入数据远大于内存容量的时候 服务器硬件的性能瓶颈：top，free，iostat 和 vmstat来查看系统的性能状态  性能下降SQL慢 执行时间长 等待时间长 原因分析  查询语句写的烂 索引失效（单值、复合） 关联查询太多join（设计缺陷或不得已的需求） 服务器调优及各个参数设置（缓冲、线程数等）  MySQL常见性能分析手段  在优化MySQL时，通常需要对数据库进行分析，常见的分析手段有慢查询日志，EXPLAIN 分析查询，profiling分析以及show命令查询系统状态及系统变量，通过定位分析性能的瓶颈，才能更好的优化数据库系统的性能。
+ 性能瓶颈定位 我们可以通过 show 命令查看 MySQL 状态及变量，找到系统的瓶颈：
+1 2 3 4 5 6  Mysql&gt; show status ——显示状态信息（扩展show status like ‘XXX’） Mysql&gt; show variables ——显示系统变量（扩展show variables like ‘XXX’） Mysql&gt; show innodb status ——显示InnoDB存储引擎的状态 Mysql&gt; show processlist ——查看当前SQL执行，包括执行状态、是否锁表等 Shell&gt; mysqladmin variables -u username -p password——显示系统变量 Shell&gt; mysqladmin extended-status -u username -p password——显示状态信息   Explain(执行计划)  使用 Explain 关键字可以模拟优化器执行SQL查询语句，从而知道 MySQL 是如何处理你的 SQL 语句的。分析你的查询语句或是表结构的性能瓶颈]]></description>
+</item><item>
     <title>MySQL总结</title>
     <link>https://moge.fun/mysql/</link>
     <pubDate>Thu, 02 Mar 2017 00:00:00 &#43;0000</pubDate>
