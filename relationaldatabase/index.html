@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/relationaldatabase\/"
-        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  499 ,
+        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  500 ,
         "url": "https:\/\/moge.fun\/relationaldatabase\/","datePublished": "2017-03-01T00:00:00+00:00","dateModified": "2017-03-01T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">关系型数据库概览</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-01">2017-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 499 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-01">2017-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 500 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -346,10 +346,21 @@
 </ul>
 <h4 id="缓冲区">缓冲区</h4>
 <ul>
-<li>缓冲池(buffer pool)是一种常见的降低磁盘访问的机制；</li>
-<li>缓冲池通常以页(page)为单位缓存数据；</li>
-<li>缓冲池的常见管理算法是LRU，memcache，OS，InnoDB都使用了这种算法；</li>
-<li>InnoDB对普通LRU进行了优化：将缓冲池分为老生代和新生代，入缓冲池的页，优先进入老生代，页被访问，才进入新生代，以解决预读失效的问题页被访问，且在老生代停留时间超过配置阈值的，才进入新生代，以解决批量数据访问，大量热数据淘汰的问题</li>
+<li>
+<p>缓冲池(buffer pool)是一种常见的降低磁盘访问的机制；</p>
+</li>
+<li>
+<p>缓冲池通常以页(page)为单位缓存数据；</p>
+</li>
+<li>
+<p>缓冲池的常见管理算法是LRU，memcache，OS，InnoDB都使用了这种算法；</p>
+</li>
+<li>
+<p>InnoDB对普通LRU进行了优化：将缓冲池分为老生代和新生代，入缓冲池的页，优先进入老生代，页被访问，才进入新生代，以解决预读失效的问题页被访问，且在老生代停留时间超过配置阈值的，才进入新生代，以解决批量数据访问，大量热数据淘汰的问题</p>
+</li>
+<li>
+<p><a href="https://juejin.cn/post/6844903874172551181" title="缓冲区详解" target="_blank" rel="noopener noreffer">缓冲区详解</a></p>
+</li>
 </ul>
 <h2 id="核心知识点">核心知识点</h2>
 <h3 id="事务">事务</h3>
