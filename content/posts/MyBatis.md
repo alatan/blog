@@ -8,7 +8,7 @@ weight: 70
 draft: false
 
 categories: ["数据库"]
-tags: ["ORM", "大纲"]  
+tags: ["数据库", "MyBatis", "框架", "大纲"]  
 toc: 
     auto: false
 ---
