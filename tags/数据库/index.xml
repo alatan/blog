@@ -3,7 +3,16 @@
         <title>数据库 - 标签 - 追求卓越，幸福就会不期而遇</title>
         <link>https://moge.fun/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
         <description>数据库 - 标签 - 追求卓越，幸福就会不期而遇</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Mar 2017 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 02 Jan 2019 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+    <title> MyBatis总结</title>
+    <link>https://moge.fun/mybatis/</link>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/mybatis/</guid>
+    <description><![CDATA[MyBatis框架整体设计" MyBatis框架整体设计 
+接口层-和数据库交互的方式 MyBatis和数据库的交互有两种方式：
+ 使用传统的MyBatis提供的API； 使用Mapper接口；  ]]></description>
+</item><item>
     <title>MySQL调优</title>
     <link>https://moge.fun/sqltuning/</link>
     <pubDate>Fri, 03 Mar 2017 00:00:00 &#43;0000</pubDate>

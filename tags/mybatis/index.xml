@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>MyBatis - 标签 - 追求卓越，幸福就会不期而遇</title>
+        <link>https://moge.fun/tags/mybatis/</link>
+        <description>MyBatis - 标签 - 追求卓越，幸福就会不期而遇</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 02 Jan 2019 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/mybatis/" rel="self" type="application/rss+xml" /><item>
+    <title> MyBatis总结</title>
+    <link>https://moge.fun/mybatis/</link>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/mybatis/</guid>
+    <description><![CDATA[MyBatis框架整体设计" MyBatis框架整体设计 
+接口层-和数据库交互的方式 MyBatis和数据库的交互有两种方式：
+ 使用传统的MyBatis提供的API； 使用Mapper接口；  ]]></description>
+</item></channel>
+</rss>
