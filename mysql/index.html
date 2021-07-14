@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/mysql/" /><link rel="prev" href="https://moge.fun/relationaldatabase/" /><link rel="next" href="https://moge.fun/sqltuning/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/mysql/" /><link rel="prev" href="https://moge.fun/relationaldatabase/" /><link rel="next" href="https://moge.fun/dbsharding/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/mysql\/"
-        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  695 ,
+        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  694 ,
         "url": "https:\/\/moge.fun\/mysql\/","datePublished": "2017-03-02T00:00:00+00:00","dateModified": "2017-03-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">MySQL总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 695 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 694 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -246,7 +246,6 @@
         <li><a href="#锁行锁表">锁行锁表</a></li>
       </ul>
     </li>
-    <li><a href="#分区分表分库">分区、分表、分库</a></li>
     <li><a href="#主从复制">主从复制</a>
       <ul>
         <li><a href="#基本原理">基本原理</a></li>
@@ -767,7 +766,6 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
 <p>这里的表锁并不是用表锁来实现锁表的操作，而是利用了Next-Key Locks，也可以理解为是用了行锁+间隙锁来实现锁表的操作!</p>
 <p>之所以能够锁表，是通过行锁+间隙锁来实现的。那么，RU和RC都不存在间隙锁，这种说法在RU和RC中还能成立么？ 因此，该说法只在RR和Serializable中是成立的。
 <strong>如果隔离级别为RU和RC，无论条件列上是否有索引，都不会锁表，只锁行！</strong></p>
-<h2 id="分区分表分库">分区、分表、分库</h2>
 <h2 id="主从复制">主从复制</h2>
 <h3 id="基本原理">基本原理</h3>
 <p>slave 会从 master 读取 binlog 来进行数据同步</p>
@@ -847,7 +845,7 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
     </div>
 
     <div class="post-nav"><a href="/relationaldatabase/" class="prev" rel="prev" title="关系型数据库概览"><i class="fas fa-angle-left fa-fw"></i>关系型数据库概览</a>
-            <a href="/sqltuning/" class="next" rel="next" title="MySQL调优">MySQL调优<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/dbsharding/" class="next" rel="next" title="数据切分（分库分表）总结">数据切分（分库分表）总结<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
