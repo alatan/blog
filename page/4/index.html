@@ -103,6 +103,15 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/javaio/">Java IO知识体系详解 </a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-05">2018-02-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">IO大纲" IO大纲 
+IO装饰者模式 以 InputStream 为例
+ InputStream 是抽象组件； FileInputStream 是 InputStream 的子类，属于具体组件，提供了字节流的输入操作； FilterInputStream 属于抽象装饰者，装饰者用于装饰组件，为组件提供额外的功能。例如 BufferedInputStream 为 FileInputStream 提供缓存的功能。  实例化一个具有缓存功能的字节流对象时，只需要在 FileInputStream 对象上再套一层 BufferedInputStream 对象即可。
+1 2  FileInputStream fileInputStream = new FileInputStream(filePath); BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);   IO常见类的使用 磁盘操作 File 类可以用于表示文件和目录的信息，但是它不表示文件的内容。
+1 2 3 4 5 6 7 8 9 10 11 12 13  //递归地列出一个目录下所有文件: public static void listAllFiles(File dir) { if (dir == null || !</div><div class="post-footer">
+        <a href="/javaio/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/reflection/">框架的灵魂-反射</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-03">2018-02-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">什么是反射 简而言之，通过反射，我们可以在运行时获得程序中每一个类型的成员和成员的信息。 程序中一般的对象的类型都是在编译期就确定下来的，而 Java 反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。 所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未知的。
 反射的核心是 JVM 在运行时才动态加载类或调用方法/访问属性，它不需要事先（写代码的时候或编译期）知道运行对象是谁。
@@ -160,15 +169,6 @@ OOD（面向对象设计）七大戒律 开-闭原则 Open-Close Principle（OCP
 1 2 3 4 5 6  Mysql&gt; show status ——显示状态信息（扩展show status like ‘XXX’） Mysql&gt; show variables ——显示系统变量（扩展show variables like ‘XXX’） Mysql&gt; show innodb status ——显示InnoDB存储引擎的状态 Mysql&gt; show processlist ——查看当前SQL执行，包括执行状态、是否锁表等 Shell&gt; mysqladmin variables -u username -p password——显示系统变量 Shell&gt; mysqladmin extended-status -u username -p password——显示状态信息   Explain(执行计划)  使用 Explain 关键字可以模拟优化器执行SQL查询语句，从而知道 MySQL 是如何处理你的 SQL 语句的。分析你的查询语句或是表结构的性能瓶颈</div><div class="post-footer">
         <a href="/mysqltuning/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/mysqlhighavailability/">MySQL高可用方案</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-03">2017-03-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">MySQL主从复制架构 MySQL主从架构" MySQL主从架构 
-基本原理 slave 会从 master 读取 binlog 来进行数据同步
-三个步骤  master将改变记录到二进制日志（binary log）。这些记录过程叫做二进制日志事件，binary log events； salve 将 master 的 binary log events 拷贝到它的中继日志（relay log）; slave 重做中继日志中的事件，将改变应用到自己的数据库中。MySQL 复制是异步且是串行化的。  复制的基本原则  每个 slave只有一个 master 每个 salve只能有一个唯一的服务器 ID 每个master可以有多个salve  主从复制" 主从复制  上图主从复制分了五个步骤进行：
- 步骤一：主库的更新事件(update、insert、delete)被写到binlog 步骤二：从库发起连接，连接到主库。 步骤三：此时主库创建一个binlog dump thread，把binlog的内容发送到从库。 步骤四：从库启动之后，创建一个I/O线程，读取主库传过来的binlog内容并写入到relay log 步骤五：还会创建一个SQL线程，从relay log里面读取内容，从Exec_Master_Log_Pos位置开始执行读取到的更新事件，将更新内容写入到slave的db  此架构特点  成本低，布署快速、方便 读写分离 还能通过及时增加从库来减少读库压力 主库单点故障 数据一致性问题（同步延迟造成）  MySQL+MHA架构  MHA目前在Mysql高可用方案中应该也是比较成熟和常见的方案，它由日本人开发出来，在mysql故障切换过程中，MHA能做到快速自动切换操作，而且还能最大限度保持数据的一致性。
- MySQL&#43;MHA架构" MySQL+MHA架构</div><div class="post-footer">
-        <a href="/mysqlhighavailability/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

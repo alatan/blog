@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>MQ - 分类 - 追求卓越，幸福就会不期而遇</title>
+        <link>https://moge.fun/categories/mq/</link>
+        <description>MQ - 分类 - 追求卓越，幸福就会不期而遇</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 01 Feb 2019 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/mq/" rel="self" type="application/rss+xml" /><item>
+    <title>消息队列</title>
+    <link>https://moge.fun/mq/</link>
+    <pubDate>Fri, 01 Feb 2019 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/mq/</guid>
+    <description><![CDATA[概述 消息队列（Message Queue，简称 MQ）是构建分布式互联网应用的基础设施，通过 MQ 实现的松耦合架构设计可以提高系统可用性以及可扩展性，是适用于现代应用的最佳设计方案。
+消息队列应用" 消息队列应用 
+使用场景  应用耦合：多应用间通过消息队列对同一消息进行处理，避免调用接口失败导致整个过程失败； 异步处理：多应用对消息队列中同一消息进行处理，应用间并发处理消息，相比串行处理，减少处理时间； 限流削峰：广泛应用于秒杀或抢购活动中，避免流量过大导致应用系统挂掉的情况； 消息驱动的系统：系统分为消息队列、消息生产者、消息消费者，生产者负责产生消息，消费者(可能有多个)负责对消息进行处理；  消息队列的两种模式 点对点模式（point to point， queue）  每个消息只有一个接收者（Consumer）(即一旦被消费，消息就不再在消息队列中)； 发送者和接收者间没有依赖性，发送者发送消息之后，不管有没有接收者在运行，都不会影响到发送者下次发送消息； 接收者在成功接收消息之后需向队列应答成功，以便消息队列删除当前接收的消息；  发布/订阅模式（publish/subscribe，topic）  每个消息可以有多个订阅者； 发布者和订阅者之间有时间上的依赖性。针对某个主题（Topic）的订阅者，它必须创建一个订阅者之后，才能消费发布者的消息。 为了消费消息，订阅者需要提前订阅该角色主题，并保持在线运行；  常用消息队列 ActiveMQ RabbitMQ RocketMQ  支持顺序消息  顺序消息" 顺序消息 
+ 支持事务  事务" 事务 
+Kafka 对比 消息队列对比" 消息队列对比]]></description>
+</item></channel>
+</rss>
