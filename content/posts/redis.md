@@ -17,6 +17,11 @@ toc:
 
 > Redis是一款内存高速缓存数据库。Redis全称为：Remote Dictionary Server（远程数据服务. ，Redis是一种支持key-value等多种数据结构的存储系统。可用于缓存，事件发布或订阅，高速队列等场景。支持网络，提供字符串，哈希，列表，队列，集合结构直接存取，基于内存，可持久化。
 
+## 单线程的redis为什么这么快
+1. 纯内存操作
+2. 单线程操作，避免了频繁的上下文切换
+3. 采用了非阻塞I/O多路复用机制
+
 ## 基础数据类型
 > Redis所有的key（键. 都是字符串。我们在谈基础数据结构时，讨论的是存储值的数据类型，主要包括常见的5种数据类型，分别是：String、List、Set、Zset、Hash
 
@@ -190,8 +195,15 @@ MySQL binlog增量订阅消费+消息队列+增量数据更新到redis
 
 当然，这里的消息推送工具你也可以采用别的第三方：kafka、rabbitMQ等来实现推送更新Redis。 
 
+## 方案
+* 事前：Redis 高可用，主从+哨兵，Redis cluster，避免全盘崩溃。
+* 事中：本地 ehcache 缓存 + Hystrix 限流+降级，避免MySQL被打死。
+* 事后：Redis 持久化 RDB+AOF，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。
+
+
 ## 参考文章
 1. [持久化](https://www.pdai.tech/md/db/nosql-redis/db-redis-x-rdb-aof.html "持久化")
 2. [高可用：主从复制](https://www.pdai.tech/md/db/nosql-redis/db-redis-x-copy.html "高可用：主从复制")
 3. [缓存问题](https://www.pdai.tech/md/db/nosql-redis/db-redis-x-cache.html "缓存问题")
 4. [3种常用的缓存读写策略](https://snailclimb.gitee.io/javaguide/#/docs/database/Redis/3%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BC%93%E5%AD%98%E8%AF%BB%E5%86%99%E7%AD%96%E7%95%A5  "3种常用的缓存读写策略")
+5. [缓存那些事](https://tech.meituan.com/2017/03/17/cache-about.html "缓存那些事")
