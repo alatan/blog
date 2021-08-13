@@ -103,6 +103,13 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/javacontainer/">Java容器概览</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-03-01">2018-03-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">概览 容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。
+Collection List 对付顺序的好帮手： 存储的元素是有序的、可重复的。
+ ArrayList：基于动态数组实现，支持随机访问，适用于频繁的查找工作。 Vector：和ArrayList类似，但它是线程安全的。 LinkedList：基于双向链表实现，只能顺序访问，但是可以快速地在链表中间插入和删除元素。不仅如此，LinkedList还可以用作栈、队列和双向队列。  Arraylist与 LinkedList 区别?  是否保证线程安全： ArrayList和LinkedList都是不同步的，也就是不保证线程安全； 底层数据结构： Arraylist底层使用的是Object数组；LinkedList底层使用的是双向链表数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。） 插入和删除是否受元素位置的影响：  ArrayList 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行add(E e)方法的时候， ArrayList 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（add(int index, E element)）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 LinkedList 采用链表存储，所以对于add(E e)方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O(1)，如果是要在指定位置 i 插入和删除元素的话（(add(int index, E element)） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。   是否支持快速随机访问： LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于get(int index)方法)。 内存空间占用： ArrayList的空间浪费主要体现在在list列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。  Set 注重独一无二的性质: 存储的元素是无序的、不可重复的。</div><div class="post-footer">
+        <a href="/javacontainer/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/javaio/">Java IO知识体系详解 </a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-05">2018-02-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">IO大纲" IO大纲 
 IO装饰者模式 以 InputStream 为例
@@ -162,13 +169,6 @@ OOD（面向对象设计）七大戒律 开-闭原则 Open-Close Principle（OCP
 位运算符的基本运算    操作符 描述 例子（A = 8, B = 9）     按位与&amp; 如果相对应位都是1，则结果为1，否则为0 A&amp;B=8，即1000   按位或 | 如果相对应位都是0，则结果为0，否则为1 A B=9，即1001   按位异或^ 如果相对应位值相同，则结果为0，否则为1 A^B=1，即0001   按位取反~ 按位取反运算符翻转操作数的每一位，即0变成1，1变成0 ~A=7，即0111   左移 &laquo; 按位左移运算符。左操作数按位左移右操作数指定的位数 A &laquo; 2 = 32，即1000 00   右移 &raquo; 按位右移运算符。左操作数按位右移右操作数指定的位数 A &raquo; 2 = 2，即0010    </div><div class="post-footer">
         <a href="/byteopt/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/mysqltuning/">MySQL调优</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-03">2017-03-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">影响mysql的性能因素  业务需求对MySQL的影响(合适合度) 存储定位对MySQL的影响  不适合放进MySQL的数据  二进制多媒体数据 流水队列数据 超大文本数据   需要放进缓存的数据  系统各种配置及规则数据 活跃用户的基本信息数据 活跃用户的个性化定制信息数据 准实时的统计信息数据 其他一些访问频繁但变更较少的数据     Schema设计对系统的性能影响  尽量减少对数据库访问的请求 尽量减少无用数据的查询请求   硬件环境对系统性能的影响  性能分析 MySQL常见瓶颈  CPU：CPU在饱和的时候一般发生在数据装入内存或从磁盘上读取数据时候 IO：磁盘I/O瓶颈发生在装入数据远大于内存容量的时候 服务器硬件的性能瓶颈：top，free，iostat 和 vmstat来查看系统的性能状态  性能下降SQL慢 执行时间长 等待时间长 原因分析  查询语句写的烂 索引失效（单值、复合） 关联查询太多join（设计缺陷或不得已的需求） 服务器调优及各个参数设置（缓冲、线程数等）  MySQL常见性能分析手段  在优化MySQL时，通常需要对数据库进行分析，常见的分析手段有慢查询日志，EXPLAIN 分析查询，profiling分析以及show命令查询系统状态及系统变量，通过定位分析性能的瓶颈，才能更好的优化数据库系统的性能。
- 性能瓶颈定位 我们可以通过 show 命令查看 MySQL 状态及变量，找到系统的瓶颈：
-1 2 3 4 5 6  Mysql&gt; show status ——显示状态信息（扩展show status like ‘XXX’） Mysql&gt; show variables ——显示系统变量（扩展show variables like ‘XXX’） Mysql&gt; show innodb status ——显示InnoDB存储引擎的状态 Mysql&gt; show processlist ——查看当前SQL执行，包括执行状态、是否锁表等 Shell&gt; mysqladmin variables -u username -p password——显示系统变量 Shell&gt; mysqladmin extended-status -u username -p password——显示状态信息   Explain(执行计划)  使用 Explain 关键字可以模拟优化器执行SQL查询语句，从而知道 MySQL 是如何处理你的 SQL 语句的。分析你的查询语句或是表结构的性能瓶颈</div><div class="post-footer">
-        <a href="/mysqltuning/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

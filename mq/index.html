@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/mq\/"
-        },"genre": "posts","keywords": "MQ, 大纲","wordcount":  39 ,
+        },"genre": "posts","keywords": "MQ, 大纲","wordcount":  42 ,
         "url": "https:\/\/moge.fun\/mq\/","datePublished": "2019-02-01T00:00:00+00:00","dateModified": "2019-02-01T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">消息队列</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/mq/"><i class="far fa-folder fa-fw"></i>MQ</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-01">2019-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 39 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-01">2019-02-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 42 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -117,10 +117,12 @@
   <ul>
     <li><a href="#概述">概述</a></li>
     <li><a href="#使用场景">使用场景</a></li>
-    <li><a href="#消息队列的两种模式">消息队列的两种模式</a>
+    <li><a href="#投递模式">投递模式</a>
       <ul>
-        <li><a href="#点对点模式point-to-point-queue">点对点模式（point to point， queue）</a></li>
+        <li><a href="#点对点模式point-to-point-queue">点对点模式（Point-to-Point， Queue）</a></li>
         <li><a href="#发布订阅模式publishsubscribetopic">发布/订阅模式（publish/subscribe，topic）</a></li>
+        <li><a href="#partition模型">Partition模型</a></li>
+        <li><a href="#transfer模型">Transfer模型</a></li>
       </ul>
     </li>
     <li><a href="#常用消息队列">常用消息队列</a>
@@ -153,19 +155,21 @@
 <li>限流削峰：广泛应用于秒杀或抢购活动中，避免流量过大导致应用系统挂掉的情况；</li>
 <li>消息驱动的系统：系统分为消息队列、消息生产者、消息消费者，生产者负责产生消息，消费者(可能有多个)负责对消息进行处理；</li>
 </ul>
-<h2 id="消息队列的两种模式">消息队列的两种模式</h2>
-<h3 id="点对点模式point-to-point-queue">点对点模式（point to point， queue）</h3>
-<ul>
-<li>每个消息只有一个接收者（Consumer）(即一旦被消费，消息就不再在消息队列中)；</li>
-<li>发送者和接收者间没有依赖性，发送者发送消息之后，不管有没有接收者在运行，都不会影响到发送者下次发送消息；</li>
-<li>接收者在成功接收消息之后需向队列应答成功，以便消息队列删除当前接收的消息；</li>
-</ul>
+<h2 id="投递模式">投递模式</h2>
+<h3 id="点对点模式point-to-point-queue">点对点模式（Point-to-Point， Queue）</h3>
+<p>Point-to-Point，点对点通信模型。PTP是基于队列(Queue)的，一个队列可以有多个生产者，和多个消费者。消息服务器按照收到消息的先后顺序，将消息放到队列中。队列中的每一条消息，只能由一个消费者进行消费，消费之后就会从队列中移除。</p>
 <h3 id="发布订阅模式publishsubscribetopic">发布/订阅模式（publish/subscribe，topic）</h3>
 <ul>
 <li>每个消息可以有多个订阅者；</li>
 <li>发布者和订阅者之间有时间上的依赖性。针对某个主题（Topic）的订阅者，它必须创建一个订阅者之后，才能消费发布者的消息。</li>
 <li>为了消费消息，订阅者需要提前订阅该角色主题，并保持在线运行；</li>
 </ul>
+<h3 id="partition模型">Partition模型</h3>
+<p>生产者发送消息到某个Topic中时，最终选择其中一个Partition进行发送。你可以将Parition模型中的分区，理解为PTP模型的队列，不同的是，PTP模型中的队列存储的是所有的消息，而每个Partition只会存储部分数据。
+对于消息者，此时多了一个消费者组的概念，Paritition会在同一个消费者组下的消费者中进行分配，每个消费者只消费分配给自己的Paritition。上图演示了不同的消费者可能会分配到不同数量的Paritition。
+Paritition模式巧妙的将PTP模型和Pub/Sub模型结合在了一起：</p>
+<h3 id="transfer模型">Transfer模型</h3>
+<p>Paritition模型中的消费者组概念很有用，同一个Topic下的消息可以由多个不同业务方进行消费，只要使用不同的消费者组即可，不同消费者组消费到的位置单独记录，互不影响。 但是，Paritition模型还是限制了消费者数量不能多于分区数。</p>
 <h2 id="常用消息队列">常用消息队列</h2>
 <h3 id="activemq">ActiveMQ</h3>
 <h3 id="rabbitmq">RabbitMQ</h3>
