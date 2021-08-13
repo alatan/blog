@@ -125,8 +125,8 @@
         <li><a href="#elasticsearch">ElasticSearch</a></li>
       </ul>
     </li>
-    <li><a href="#高可用">高可用</a></li>
     <li><a href="#高性能">高性能</a></li>
+    <li><a href="#高可用">高可用</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>软件开发通常会提到一个名词 “三高”，即高并发、高性能、高可用。</p>
@@ -167,17 +167,6 @@
 <p>MQ，必须得用 MQ。可能你还是会出现高并发写的场景，比如说一个业务操作里要频繁搞数据库几十次，增删改增删改，疯了。那高并发绝对搞挂你的系统，你要是用 redis 来承载写那肯定不行，人家是缓存，数据随时就被 LRU 了，数据格式还无比简单，没有事务支持。所以该用 mysql 还得用 mysql 啊。那你咋办？用 MQ 吧，大量的写请求灌入 MQ 里，排队慢慢玩儿，后边系统消费后慢慢写，控制在 mysql 承载范围之内。所以你得考虑考虑你的项目里，那些承载复杂写业务逻辑的场景里，如何用 MQ 来异步写，提升并发性。MQ 单机抗几万并发也是 ok 的，这个之前还特意说过。</p>
 <h3 id="elasticsearch">ElasticSearch</h3>
 <p>Elasticsearch，简称 es。es 是分布式的，可以随便扩容，分布式天然就可以支撑高并发，因为动不动就可以扩容加机器来扛更高的并发。那么一些比较简单的查询、统计类的操作，可以考虑用 es 来承载，还有一些全文搜索类的操作，也可以考虑用 es 来承载。</p>
-<h2 id="高可用">高可用</h2>
-<p><figure><a class="lightgallery" href="/images/3h/ha.png" title="/images/3h/ha.png" data-thumbnail="/images/3h/ha.png" data-sub-html="<h2>高可用</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/3h/ha.png"
-            data-srcset="/images/3h/ha.png, /images/3h/ha.png 1.5x, /images/3h/ha.png 2x"
-            data-sizes="auto"
-            alt="/images/3h/ha.png" />
-    </a><figcaption class="image-caption">高可用</figcaption>
-    </figure></p>
 <h2 id="高性能">高性能</h2>
 <p><figure><a class="lightgallery" href="/images/3h/hp.png" title="/images/3h/hp.png" data-thumbnail="/images/3h/hp.png" data-sub-html="<h2>高性能</h2>">
         <img
@@ -188,6 +177,17 @@
             data-sizes="auto"
             alt="/images/3h/hp.png" />
     </a><figcaption class="image-caption">高性能</figcaption>
+    </figure></p>
+<h2 id="高可用">高可用</h2>
+<p><figure><a class="lightgallery" href="/images/3h/ha.png" title="/images/3h/ha.png" data-thumbnail="/images/3h/ha.png" data-sub-html="<h2>高可用</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/3h/ha.png"
+            data-srcset="/images/3h/ha.png, /images/3h/ha.png 1.5x, /images/3h/ha.png 2x"
+            data-sizes="auto"
+            alt="/images/3h/ha.png" />
+    </a><figcaption class="image-caption">高可用</figcaption>
     </figure></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
