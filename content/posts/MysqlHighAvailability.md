@@ -69,3 +69,4 @@ slave 会从 master 读取 binlog 来进行数据同步
 * [浅谈MySQL集群高可用架构](https://segmentfault.com/a/1190000020200096 "浅谈MySQL集群高可用架构")
 * [MySQL 同步复制及高可用方案总结](https://segmentfault.com/a/1190000022313462 "MySQL同步复制及高可用方案总结")
 * [MySQL应用架构演变](https://segmentfault.com/a/1190000039693053 " MySQL应用架构演变")
+* [Mysql高可用架构之keepalived and MHA ](https://kim1024.github.io/2018/11/20/mysql-keepalived-mha.html " Mysql高可用架构之keepalived and MHA ")
