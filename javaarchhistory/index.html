@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/javaarchhistory/" /><link rel="prev" href="https://moge.fun/javaoutline/" /><link rel="next" href="https://moge.fun/th/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/javaarchhistory/" /><link rel="prev" href="https://moge.fun/zookeeper/" /><link rel="next" href="https://moge.fun/th/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -123,7 +123,7 @@
             <li><a href="#单体架构缺点">单体架构缺点</a></li>
           </ul>
         </li>
-        <li><a href="#集群架构">集群架构</a>
+        <li><a href="#集群架构cluster">集群架构（cluster）</a>
           <ul>
             <li><a href="#集群架构相关技术点">集群架构相关技术点</a></li>
           </ul>
@@ -165,7 +165,7 @@
         data-sizes="auto"
         alt="/images/archHistory/single.jpg"
         title="单体架构" /></p>
-<h3 id="集群架构">集群架构</h3>
+<h3 id="集群架构cluster">集群架构（cluster）</h3>
 <blockquote>
 <p>不同服务器部署同一套应用程序对外提供服务，实现服务的负载均衡或者互备(热备，主从)。同一种组件的多个实例，形成逻辑上的整体。单个节点可以提供完整服务，集群是物理形态。</p>
 </blockquote>
@@ -192,8 +192,8 @@
 <h4 id="分布式相关技术点">分布式相关技术点</h4>
 <ol>
 <li>业务分库分表</li>
-<li>NoSQL和搜索引擎对可伸缩的分布式特性具有更好的支持，应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。</li>
 <li>业务模块拆分成子项目</li>
+<li>NoSQL和搜索引擎对可伸缩的分布式特性具有更好的支持，应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。</li>
 </ol>
 <p><img
         class="lazyload"
@@ -208,8 +208,8 @@
 <p>面向服务的设计架构，其中包含多个服务，服务之间通过相互依赖最终提供一系列的功能。一个服务通常以独立的形式存在于操作系统进程中。各个服务之间通过网络调用。</p>
 </blockquote>
 <ul>
-<li>中心化实现：ESB(企业服务总线)，各服务通过ESB进行交互，解决异构系统之间的连通性，通过协议转换，消息解析，消息路由把服务提供者的数据传送到服务消费者。</li>
-<li>去中心化实现：微服务</li>
+<li>中心化实现：<strong>ESB(企业服务总线)</strong>，各服务通过ESB进行交互，解决异构系统之间的连通性，通过协议转换，消息解析，消息路由把服务提供者的数据传送到服务消费者。</li>
+<li><strong>去中心化实现：微服务</strong></li>
 </ul>
 <p><img
         class="lazyload"
@@ -254,7 +254,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/javaoutline/" class="prev" rel="prev" title="Java知识大纲"><i class="fas fa-angle-left fa-fw"></i>Java知识大纲</a>
+    <div class="post-nav"><a href="/zookeeper/" class="prev" rel="prev" title="ZooKeeper"><i class="fas fa-angle-left fa-fw"></i>ZooKeeper</a>
             <a href="/th/" class="next" rel="next" title="互联网三高">互联网三高<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>

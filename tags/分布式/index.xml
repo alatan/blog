@@ -12,6 +12,13 @@
     <description><![CDATA[分布式理论基础 CAP 理论是分布式中基础理论，有三个重要指标：一致性、可用性、分区容错性。
  一致性（Consistency） 可用性（Availability） 分区容错性（Partition Tolerance）  ]]></description>
 </item><item>
+    <title>ZooKeeper</title>
+    <link>https://moge.fun/zookeeper/</link>
+    <pubDate>Sat, 01 Feb 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/zookeeper/</guid>
+    <description><![CDATA[ ZooKeeper主要服务于分布式系统，可以用ZooKeeper来做：统一配置管理、统一命名服务、分布式锁、集群管理。 使用分布式系统就无法避免对节点管理的问题(需要实时感知节点的状态、对节点进行统一管理等等)，而由于这些问题处理起来可能相对麻烦和提高了系统的复杂性，ZooKeeper作为一个能够通用解决这些问题的中间件就应运而生了。  参考文章  https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&amp;mid=2453140996&amp;idx=1&amp;sn=b2391f3eb780529020ace3a4c4357bda&amp;chksm=8cf2d487bb855d916bca80d709ed8e22457af52d1746e093fe8d4e3d4d095dbcc767e68dd1c1&amp;scene=21  ]]></description>
+</item><item>
     <title>数据切分（分库分表）总结</title>
     <link>https://moge.fun/dbsharding/</link>
     <pubDate>Fri, 03 Mar 2017 00:00:00 &#43;0000</pubDate>
