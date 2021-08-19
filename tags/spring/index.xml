@@ -4,6 +4,20 @@
         <link>https://moge.fun/tags/spring/</link>
         <description>Spring - 标签 - 追求卓越，幸福就会不期而遇</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/spring/" rel="self" type="application/rss+xml" /><item>
+    <title>SpringBoot总结</title>
+    <link>https://moge.fun/springboot/</link>
+    <pubDate>Tue, 02 Apr 2019 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/springboot/</guid>
+    <description><![CDATA[用来简化新 Spring 应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。简单理解，就是 Spring Boot 其实不是什么新的框架，它默认配置了很多框架的使用方式，就像 Maven 整合了所有的 Jar 包，Spring Boot 整合了所有的框架。
+ SpringBoot自动配置的原理 需要先了解一下Spring的@Import注解和@Enable注解的实现原理，以及SpringFactoriesLoader的实现，再来看SpringBoot的自动配置原理就基本上会明白了。
+SpringBoot应用一般都会在主类上注解@SpringBootApplication，这个注解上有@EnableAutoConfiguration注解，一般@Enable注解上都会有@Import注解，这里也不例外，有个@Import(EnableAutoConfigurationImportSelector.class)。
+EnableAutoConfigurationImportSelector是一个ImportSelector，Spring在初始化的时候会调用invokeBeanFactoryPostProcessor，这里会调用实现了接口BeanDefinitionRegistryPostProcessor的postProcessBeanDefinitionRegistry方法，ConfigurationClassPostProcessor也实现了此接口，在该方法postProcessBeanDefinitionRegistry中会处理@Configuration相关注解，这里就进行了@Import注解的处理。对于ImportSelector，会调用它的selectImports方法进行处理。
+EnableAutoConfigurationImportSelector的selectImports方法中会先使用SpringFactoriesLoader在classpath下的spring.factories文件中来加载@EnableAutoConfiguration类型的各种实现类，也包括各种starter中和我们自定义的starter中的对应实现类。SpringBoot中预先配置的EnableAutoConfiguration可以在spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories中查询，配置了很多很多个自动配置类。
+加载完这些配置类的名字后，经过一系列的校验等操作，就会把所有的EnableAutoConfiguration实现类的名字都返回给Spring，Spring会继续的处理这些配置类，也就是处理这些配置类中的@Configuration、@Import这些注解，继续递归处理这些注解，最后把相关的Bean都注册到容器中。
+总结 @SpringBootApplication等同于下面三个注解：
+ @SpringBootConfiguration @EnableAutoConfiguration @ComponentScan  其中@EnableAutoConfiguration是关键(启用自动配置)，内部实际上就去加载META-INF/spring.factories文件的信息，然后筛选出以EnableAutoConfiguration为key的数据，加载到IOC容器中，实现自动配置功能！]]></description>
+</item><item>
     <title>Spring总结</title>
     <link>https://moge.fun/spring/</link>
     <pubDate>Mon, 01 Apr 2019 00:00:00 &#43;0000</pubDate>

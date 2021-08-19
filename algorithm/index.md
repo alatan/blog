@@ -43,7 +43,5 @@ Backtracking(回溯)属于 DFS, 本文主要介绍算法中Backtracking算法的
 
 ## 领域算法
 
-
-
 ## 参考文章
-* [关系型数据库是如何工作的](https://www.pdai.tech/md/db/sql/sql-db-howitworks.html "关系型数据库是如何工作")
+* [算法](https://www.pdai.tech/md/algorithm/alg-basic-overview.html "算法")

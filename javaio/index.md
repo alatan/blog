@@ -411,7 +411,5 @@ html
 * 这个问题在JDK 1.7版本中还没有被完全解决: http://bugs.java.com/bugdatabase/view_bug.do?bug_id=2147719。虽然Netty 4.0中也是基于JAVA NIO框架进行封装的(上文中已经给出了Netty中NioServerSocketChannel类的介绍)，但是Netty已经将这个bug进行了处理。
 
 ## 参考文章
-1. https://www.pdai.tech/md/java/io/java-io-bio.html
-2. https://www.pdai.tech/md/java/io/java-io-nio.html
-3. https://www.pdai.tech/md/java/io/java-io-nio-select-epoll.html
-4. https://www.pdai.tech/md/java/io/java-io-aio.html
+1. https://www.pdai.tech/md/java/io/java-io-nio.html
+2. https://www.pdai.tech/md/java/io/java-io-nio-select-epoll.html
