@@ -173,7 +173,7 @@ loadFactoryNames() 中关键的三步：
 2. 将上面获取到的信息封装成一个 Map 返回。
 3. 从返回的 Map 中通过刚才传入的 EnableAutoConfiguration.class 参数，获取该 key 下的所有值。
 
-![](/images/spring/springboot/loadFactoryNames.png "loadFactoryNames")
+![](/images/spring/springboot/loadFactoryNames.jpg "loadFactoryNames")
 
 一般每导入一个第三方的依赖，除了本身的jar包以外，还会有一个 xxx-spring-boot-autoConfigure，这个就是第三方依赖自己编写的自动配置类
 
