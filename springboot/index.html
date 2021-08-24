@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/springboot\/"
-        },"genre": "posts","keywords": "Spring, 大纲","wordcount":  24 ,
+        },"genre": "posts","keywords": "Spring, 大纲","wordcount":  652 ,
         "url": "https:\/\/moge.fun\/springboot\/","datePublished": "2019-04-02T00:00:00+00:00","dateModified": "2019-04-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,8 +106,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">SpringBoot总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/spring/"><i class="far fa-folder fa-fw"></i>Spring</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-04-02">2019-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 24 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-04-02">2019-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 652 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -115,30 +115,434 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#springboot自动配置的原理">SpringBoot自动配置的原理</a>
+    <li><a href="#springboot-的启动过程">SpringBoot 的启动过程</a>
       <ul>
+        <li><a href="#创建-springapplication-对象">创建 SpringApplication 对象</a></li>
+        <li><a href="#运行-run-方法">运行 run() 方法</a></li>
         <li><a href="#总结">总结</a></li>
       </ul>
     </li>
+    <li><a href="#springboot-自动配置的原理">SpringBoot 自动配置的原理</a>
+      <ul>
+        <li><a href="#springbootapplication">@SpringBootApplication</a></li>
+        <li><a href="#enableautoconfiguration-详解">@EnableAutoConfiguration 详解</a>
+          <ul>
+            <li><a href="#autoconfigurationpackage-详解">AutoConfigurationPackage 详解</a>
+              <ul>
+                <li><a href="#autoconfigurationimportselector">AutoConfigurationImportSelector</a></li>
+              </ul>
+            </li>
+            <li><a href="#httpencodingautoconfiguration">HttpEncodingAutoConfiguration</a>
+              <ul>
+                <li><a href="#httpproperties">HttpProperties</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#总结-1">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文章">参考文章</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><blockquote>
-<p>用来简化新 Spring 应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。简单理解，就是 Spring Boot 其实不是什么新的框架，它默认配置了很多框架的使用方式，就像 Maven 整合了所有的 Jar 包，Spring Boot 整合了所有的框架。</p>
+<p>使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置，简化Spring应用的初始搭建以及开发过程。简单理解，就是SpringBoot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像Maven整合了所有的Jar包，Spring Boot整合了所有的框架。</p>
 </blockquote>
-<h2 id="springboot自动配置的原理">SpringBoot自动配置的原理</h2>
-<p>需要先了解一下Spring的@Import注解和@Enable注解的实现原理，以及SpringFactoriesLoader的实现，再来看SpringBoot的自动配置原理就基本上会明白了。</p>
-<p>SpringBoot应用一般都会在主类上注解@SpringBootApplication，这个注解上有@EnableAutoConfiguration注解，一般@Enable注解上都会有@Import注解，这里也不例外，有个@Import(EnableAutoConfigurationImportSelector.class)。</p>
-<p>EnableAutoConfigurationImportSelector是一个ImportSelector，Spring在初始化的时候会调用invokeBeanFactoryPostProcessor，这里会调用实现了接口BeanDefinitionRegistryPostProcessor的postProcessBeanDefinitionRegistry方法，ConfigurationClassPostProcessor也实现了此接口，在该方法postProcessBeanDefinitionRegistry中会处理@Configuration相关注解，这里就进行了@Import注解的处理。对于ImportSelector，会调用它的selectImports方法进行处理。</p>
-<p>EnableAutoConfigurationImportSelector的selectImports方法中会先使用SpringFactoriesLoader在classpath下的spring.factories文件中来加载@EnableAutoConfiguration类型的各种实现类，也包括各种starter中和我们自定义的starter中的对应实现类。SpringBoot中预先配置的EnableAutoConfiguration可以在spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories中查询，配置了很多很多个自动配置类。</p>
-<p>加载完这些配置类的名字后，经过一系列的校验等操作，就会把所有的EnableAutoConfiguration实现类的名字都返回给Spring，Spring会继续的处理这些配置类，也就是处理这些配置类中的@Configuration、@Import这些注解，继续递归处理这些注解，最后把相关的Bean都注册到容器中。</p>
-<h3 id="总结">总结</h3>
-<p>@SpringBootApplication等同于下面三个注解：</p>
-<ul>
-<li>@SpringBootConfiguration</li>
-<li>@EnableAutoConfiguration</li>
-<li>@ComponentScan</li>
+<h2 id="springboot-的启动过程">SpringBoot 的启动过程</h2>
+<p>开始源码分析，先从 SpringBoot 的启动类的 run() 方法开始看，以下是调用链：SpringApplication.run() -&gt; run(new Class[]{primarySource}, args) -&gt; new SpringApplication(primarySources)).run(args)。</p>
+<p>一直在run，终于到重点了，我们直接看 new SpringApplication(primarySources)).run(args) 这个方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="n">ConfigurableApplicationContext</span> <span class="nf">run</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;[]</span> <span class="n">primarySources</span><span class="o">,</span>	<span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">SpringApplication</span><span class="o">(</span><span class="n">primarySources</span><span class="o">).</span><span class="na">run</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的方法主要包括两大步骤：</p>
+<ol>
+<li>创建 SpringApplication 对象。</li>
+<li>运行 run() 方法。</li>
+</ol>
+<h3 id="创建-springapplication-对象">创建 SpringApplication 对象</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">SpringApplication</span><span class="o">(</span><span class="n">ResourceLoader</span> <span class="n">resourceLoader</span><span class="o">,</span> <span class="n">Class</span><span class="o">...</span> <span class="n">primarySources</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">sources</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">();</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">bannerMode</span> <span class="o">=</span> <span class="n">Mode</span><span class="o">.</span><span class="na">CONSOLE</span><span class="o">;</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">logStartupInfo</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">addCommandLineProperties</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">addConversionService</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">headless</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">registerShutdownHook</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">additionalProfiles</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">();</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">isCustomEnvironment</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">resourceLoader</span> <span class="o">=</span> <span class="n">resourceLoader</span><span class="o">;</span> 
+    <span class="n">Assert</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">primarySources</span><span class="o">,</span> <span class="s">&#34;PrimarySources must not be null&#34;</span><span class="o">);</span> 
+    <span class="c1">// 保存主配置类（这里是一个数组，说明可以有多个主配置类） 
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">.</span><span class="na">primarySources</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">primarySources</span><span class="o">));</span> 
+    <span class="c1">// 判断当前是否是一个 Web 应用 
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">.</span><span class="na">webApplicationType</span> <span class="o">=</span> <span class="n">WebApplicationType</span><span class="o">.</span><span class="na">deduceFromClasspath</span><span class="o">();</span> 
+    <span class="c1">// 从类路径下找到 META/INF/Spring.factories 配置的所有 ApplicationContextInitializer，然后保存起来 
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">.</span><span class="na">setInitializers</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getSpringFactoriesInstances</span><span class="o">(</span><span class="n">ApplicationContextInitializer</span><span class="o">.</span><span class="na">class</span><span class="o">));</span> 
+    <span class="c1">// 从类路径下找到 META/INF/Spring.factories 配置的所有 ApplicationListener，然后保存起来 
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">.</span><span class="na">setListeners</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getSpringFactoriesInstances</span><span class="o">(</span><span class="n">ApplicationListener</span><span class="o">.</span><span class="na">class</span><span class="o">));</span> 
+    <span class="c1">// 从多个配置类中找到有 main 方法的主配置类（只有一个） 
+</span><span class="c1"></span>    <span class="k">this</span><span class="o">.</span><span class="na">mainApplicationClass</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">deduceMainApplicationClass</span><span class="o">();</span> 
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="运行-run-方法">运行 run() 方法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">ConfigurableApplicationContext</span> <span class="nf">run</span><span class="o">(</span><span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="c1">// 创建计时器 
+</span><span class="c1"></span>    <span class="n">StopWatch</span> <span class="n">stopWatch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StopWatch</span><span class="o">();</span> 
+    <span class="n">stopWatch</span><span class="o">.</span><span class="na">start</span><span class="o">();</span> 
+    <span class="c1">// 声明 IOC 容器 
+</span><span class="c1"></span>    <span class="n">ConfigurableApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> 
+    <span class="n">Collection</span><span class="o">&lt;</span><span class="n">SpringBootExceptionReporter</span><span class="o">&gt;</span> <span class="n">exceptionReporters</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">();</span> 
+    <span class="k">this</span><span class="o">.</span><span class="na">configureHeadlessProperty</span><span class="o">();</span> 
+    <span class="c1">// 从类路径下找到 META/INF/Spring.factories 获取 SpringApplicationRunListeners 
+</span><span class="c1"></span>    <span class="n">SpringApplicationRunListeners</span> <span class="n">listeners</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getRunListeners</span><span class="o">(</span><span class="n">args</span><span class="o">);</span> 
+    <span class="c1">// 回调所有 SpringApplicationRunListeners 的 starting() 方法 
+</span><span class="c1"></span>    <span class="n">listeners</span><span class="o">.</span><span class="na">starting</span><span class="o">();</span> 
+    <span class="n">Collection</span> <span class="n">exceptionReporters</span><span class="o">;</span> 
+    <span class="k">try</span> <span class="o">{</span> 
+        <span class="c1">// 封装命令行参数 
+</span><span class="c1"></span>        <span class="n">ApplicationArguments</span> <span class="n">applicationArguments</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultApplicationArguments</span><span class="o">(</span><span class="n">args</span><span class="o">);</span> 
+        <span class="c1">// 准备环境，包括创建环境，创建环境完成后回调 SpringApplicationRunListeners#environmentPrepared()方法，表示环境准备完成 
+</span><span class="c1"></span>        <span class="n">ConfigurableEnvironment</span> <span class="n">environment</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">prepareEnvironment</span><span class="o">(</span><span class="n">listeners</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">);</span> 
+        <span class="k">this</span><span class="o">.</span><span class="na">configureIgnoreBeanInfo</span><span class="o">(</span><span class="n">environment</span><span class="o">);</span> 
+        <span class="c1">// 打印 Banner 
+</span><span class="c1"></span>        <span class="n">Banner</span> <span class="n">printedBanner</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">printBanner</span><span class="o">(</span><span class="n">environment</span><span class="o">);</span> 
+        <span class="c1">// 创建 IOC 容器（决定创建 web 的 IOC 容器还是普通的 IOC 容器） 
+</span><span class="c1"></span>        <span class="n">context</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">createApplicationContext</span><span class="o">();</span> 
+        <span class="n">exceptionReporters</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getSpringFactoriesInstances</span><span class="o">(</span><span class="n">SpringBootExceptionReporter</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="k">new</span> <span class="n">Class</span><span class="o">[]{</span><span class="n">ConfigurableApplicationContext</span><span class="o">.</span><span class="na">class</span><span class="o">},</span> <span class="n">context</span><span class="o">);</span> 
+        <span class="cm">/*
+</span><span class="cm">        * 准备上下文环境，将 environment 保存到 IOC 容器中，并且调用 applyInitializers() 方法
+</span><span class="cm">        * applyInitializers() 方法回调之前保存的所有的 ApplicationContextInitializer 的 initialize() 方法
+</span><span class="cm">        * 然后回调所有的 SpringApplicationRunListener#contextPrepared() 方法 
+</span><span class="cm">        * 最后回调所有的 SpringApplicationRunListener#contextLoaded() 方法 
+</span><span class="cm">        */</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">prepareContext</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">environment</span><span class="o">,</span> <span class="n">listeners</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">,</span> <span class="n">printedBanner</span><span class="o">);</span> 
+        <span class="c1">// 刷新容器，IOC 容器初始化（如果是 Web 应用还会创建嵌入式的 Tomcat），扫描、创建、加载所有组件的地方 
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">refreshContext</span><span class="o">(</span><span class="n">context</span><span class="o">);</span> 
+        <span class="c1">// 从 IOC 容器中获取所有的 ApplicationRunner 和 CommandLineRunner 进行回调 
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">afterRefresh</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">);</span> 
+        <span class="n">stopWatch</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span> 
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">logStartupInfo</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="o">(</span><span class="k">new</span> <span class="n">StartupInfoLogger</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mainApplicationClass</span><span class="o">)).</span><span class="na">logStarted</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getApplicationLog</span><span class="o">(),</span> <span class="n">stopWatch</span><span class="o">);</span> 
+        <span class="o">}</span> 
+        <span class="c1">// 调用 所有 SpringApplicationRunListeners#started()方法 
+</span><span class="c1"></span>        <span class="n">listeners</span><span class="o">.</span><span class="na">started</span><span class="o">(</span><span class="n">context</span><span class="o">);</span> 
+        <span class="k">this</span><span class="o">.</span><span class="na">callRunners</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">);</span> 
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">var10</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="k">this</span><span class="o">.</span><span class="na">handleRunFailure</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">var10</span><span class="o">,</span> <span class="n">exceptionReporters</span><span class="o">,</span> <span class="n">listeners</span><span class="o">);</span> 
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="n">var10</span><span class="o">);</span> 
+    <span class="o">}</span> 
+
+    <span class="k">try</span> <span class="o">{</span> 
+        <span class="n">listeners</span><span class="o">.</span><span class="na">running</span><span class="o">(</span><span class="n">context</span><span class="o">);</span> 
+        <span class="k">return</span> <span class="n">context</span><span class="o">;</span> 
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">var9</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="k">this</span><span class="o">.</span><span class="na">handleRunFailure</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">var9</span><span class="o">,</span> <span class="n">exceptionReporters</span><span class="o">,</span> <span class="o">(</span><span class="n">SpringApplicationRunListeners</span><span class="o">)</span><span class="kc">null</span><span class="o">);</span> 
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="n">var9</span><span class="o">);</span> 
+    <span class="o">}</span> 
+<span class="o">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="总结">总结</h3>
+<p>run() 阶段主要就是回调本节开头提到过的4个监听器中的方法与加载项目中组件到 IOC 容器中，而所有需要回调的监听器都是从类路径下的 META/INF/Spring.factories 中获取，从而达到启动前后的各种定制操作。</p>
+<h2 id="springboot-自动配置的原理">SpringBoot 自动配置的原理</h2>
+<h3 id="springbootapplication">@SpringBootApplication</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">})</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Inherited</span>
+<span class="nd">@SpringBootConfiguration</span>
+<span class="nd">@EnableAutoConfiguration</span>
+<span class="nd">@ComponentScan</span><span class="o">(</span><span class="n">excludeFilters</span> <span class="o">=</span> <span class="o">{</span><span class="nd">@Filter</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">.</span><span class="na">CUSTOM</span><span class="o">,</span><span class="n">classes</span> <span class="o">=</span> <span class="o">{</span><span class="n">TypeExcludeFilter</span><span class="o">.</span><span class="na">class</span><span class="o">}</span>
+<span class="o">),</span> <span class="nd">@Filter</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="n">FilterType</span><span class="o">.</span><span class="na">CUSTOM</span><span class="o">,</span> <span class="n">classes</span> <span class="o">=</span> <span class="o">{</span><span class="n">AutoConfigurationExcludeFilter</span><span class="o">.</span><span class="na">class</span><span class="o">})})</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">SpringBootApplication</span> <span class="o">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>@SpringBootConfiguration：我们点进去以后可以发现底层是Configuration注解，说白了就是支持JavaConfig的方式来进行配置(使用Configuration配置类等同于XML文件)。</li>
+<li>@ComponentScan：就是扫描注解，默认是扫描当前类下的package。将@Controller/@Service/@Component/@Repository等注解加载到IOC容器中。</li>
+<li>@EnableAutoConfiguration ：开启自动配置功能</li>
+</ol>
+<h3 id="enableautoconfiguration-详解">@EnableAutoConfiguration 详解</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">})</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Inherited</span>
+<span class="nd">@AutoConfigurationPackage</span>
+<span class="nd">@Import</span><span class="o">({</span><span class="n">AutoConfigurationImportSelector</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">EnableAutoConfiguration</span> <span class="o">{</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>@AutoConfigurationPackage：自动配置包</li>
+<li>@Import：给IOC容器导入组件</li>
+</ol>
+<h4 id="autoconfigurationpackage-详解">AutoConfigurationPackage 详解</h4>
+<blockquote>
+<p>从字面意思理解就是自动配置包。点进去可以看到就是一个 @Import 注解：@Import({Registrar.class})，导入了一个 Registrar 的组件。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Target</span><span class="o">({</span><span class="n">ElementType</span><span class="o">.</span><span class="na">TYPE</span><span class="o">})</span>
+<span class="nd">@Retention</span><span class="o">(</span><span class="n">RetentionPolicy</span><span class="o">.</span><span class="na">RUNTIME</span><span class="o">)</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Inherited</span>
+<span class="nd">@Import</span><span class="o">({</span><span class="n">Registrar</span><span class="o">.</span><span class="na">class</span><span class="o">})</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">AutoConfigurationPackage</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以发现，依靠的还是 @Import注解，再点进去查看，我们发现重要的就是以下的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">registerBeanDefinitions</span><span class="o">(</span><span class="n">AnnotationMetadata</span> <span class="n">metadata</span><span class="o">,</span> <span class="n">BeanDefinitionRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">AutoConfigurationPackages</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">registry</span><span class="o">,</span> <span class="o">(</span><span class="k">new</span> <span class="n">AutoConfigurationPackages</span><span class="o">.</span><span class="na">PackageImport</span><span class="o">(</span><span class="n">metadata</span><span class="o">)).</span><span class="na">getPackageName</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>@AutoConfigurationPackage 注解就是将主配置类（@SpringBootConfiguration标注的类）的所在包及下面所有子包里面的所有组件扫描到Spring容器中。所以说，默认情况下主配置类包及子包以外的组件，Spring 容器是扫描不到的。</p>
+<p>在默认的情况下就是将：主配置类(@SpringBootApplication)的所在包及其子包里边的组件扫描到Spring容器中，看完这句话，会不会觉得，这不就是ComponentScan的功能吗？这俩不就重复了吗？</p>
+<p>比如说，你用了Spring Data JPA，可能会在实体类上写@Entity注解。这个@Entity注解由 @AutoConfigurationPackage 扫描并加载，而我们平时开发用的@Controller/@Service/@Component/@Repository这些注解是由ComponentScan来扫描并加载的。简单理解：<strong>这二者扫描的对象是不一样的。</strong></p>
+<h5 id="autoconfigurationimportselector">AutoConfigurationImportSelector</h5>
+<p><figure><a class="lightgallery" href="/images/spring/springboot/AutoConfigurationImportSelector.png" title="/images/spring/springboot/AutoConfigurationImportSelector.png" data-thumbnail="/images/spring/springboot/AutoConfigurationImportSelector.png" data-sub-html="<h2>AutoConfigurationImportSelector</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/spring/springboot/AutoConfigurationImportSelector.png"
+            data-srcset="/images/spring/springboot/AutoConfigurationImportSelector.png, /images/spring/springboot/AutoConfigurationImportSelector.png 1.5x, /images/spring/springboot/AutoConfigurationImportSelector.png 2x"
+            data-sizes="auto"
+            alt="/images/spring/springboot/AutoConfigurationImportSelector.png" />
+    </a><figcaption class="image-caption">AutoConfigurationImportSelector</figcaption>
+    </figure></p>
+<p>调用链：在 getAutoConfigurationEntry() -&gt; getCandidateConfigurations() -&gt; loadFactoryNames(), 在这里 loadFactoryNames() 方法传入了 EnableAutoConfiguration.class 这个参数。</p>
+<p>loadFactoryNames() 中关键的三步：</p>
+<ol>
+<li>从当前项目的类路径中获取所有 META-INF/spring.factories 这个文件下的信息。</li>
+<li>将上面获取到的信息封装成一个 Map 返回。</li>
+<li>从返回的 Map 中通过刚才传入的 EnableAutoConfiguration.class 参数，获取该 key 下的所有值。</li>
+</ol>
+<p><figure><a class="lightgallery" href="/images/spring/springboot/loadFactoryNames.png" title="/images/spring/springboot/loadFactoryNames.png" data-thumbnail="/images/spring/springboot/loadFactoryNames.png" data-sub-html="<h2>loadFactoryNames</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/spring/springboot/loadFactoryNames.png"
+            data-srcset="/images/spring/springboot/loadFactoryNames.png, /images/spring/springboot/loadFactoryNames.png 1.5x, /images/spring/springboot/loadFactoryNames.png 2x"
+            data-sizes="auto"
+            alt="/images/spring/springboot/loadFactoryNames.png" />
+    </a><figcaption class="image-caption">loadFactoryNames</figcaption>
+    </figure></p>
+<p>一般每导入一个第三方的依赖，除了本身的jar包以外，还会有一个 xxx-spring-boot-autoConfigure，这个就是第三方依赖自己编写的自动配置类</p>
+<p><figure><a class="lightgallery" href="/images/spring/springboot/spring.factories.png" title="/images/spring/springboot/spring.factories.png" data-thumbnail="/images/spring/springboot/spring.factories.png" data-sub-html="<h2>spring.factories</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/spring/springboot/spring.factories.png"
+            data-srcset="/images/spring/springboot/spring.factories.png, /images/spring/springboot/spring.factories.png 1.5x, /images/spring/springboot/spring.factories.png 2x"
+            data-sizes="auto"
+            alt="/images/spring/springboot/spring.factories.png" />
+    </a><figcaption class="image-caption">spring.factories</figcaption>
+    </figure></p>
+<p>可以看到 EnableAutoConfiguration 下面有很多类，这些就是我们项目进行自动配置的类。</p>
+<ol>
+<li>将类路径下 META-INF/spring.factories 里面配置的所有 EnableAutoConfiguration 的值加入到 Spring 容器中。</li>
+<li>Spring会继续的处理这些自动配置类，也就是处理这些配置类中的@Configuration、@Import这些注解，继续递归处理这些注解，最后把相关的Bean都注册到容器中。</li>
+</ol>
+<h4 id="httpencodingautoconfiguration">HttpEncodingAutoConfiguration</h4>
+<blockquote>
+<p>通过上面方式，所有的自动配置类就被导进主配置类中了。以 HttpEncodingAutoConfiguration为例来看一个自动配置类是怎么工作的。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Configuration</span> 
+<span class="nd">@EnableConfigurationProperties</span><span class="o">({</span><span class="n">HttpProperties</span><span class="o">.</span><span class="na">class</span><span class="o">})</span> 
+<span class="nd">@ConditionalOnWebApplication</span><span class="o">(</span> 
+<span class="n">type</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="na">SERVLET</span> 
+<span class="o">)</span> 
+<span class="nd">@ConditionalOnClass</span><span class="o">({</span><span class="n">CharacterEncodingFilter</span><span class="o">.</span><span class="na">class</span><span class="o">})</span> 
+<span class="nd">@ConditionalOnProperty</span><span class="o">(</span> 
+<span class="n">prefix</span> <span class="o">=</span> <span class="s">&#34;spring.http.encoding&#34;</span><span class="o">,</span> 
+<span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">&#34;enabled&#34;</span><span class="o">},</span> 
+<span class="n">matchIfMissing</span> <span class="o">=</span> <span class="kc">true</span> 
+<span class="o">)</span> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HttpEncodingAutoConfiguration</span> <span class="o">{</span> 
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>@Configuration：标记为配置类。</li>
+<li>@ConditionalOnWebApplication：web应用下才生效。</li>
+<li>@ConditionalOnClass：指定的类（依赖）存在才生效。</li>
+<li>@ConditionalOnProperty：主配置文件中存在指定的属性才生效。</li>
+<li>@EnableConfigurationProperties({HttpProperties.class})：启动指定类的ConfigurationProperties功能；将配置文件中对应的值和 HttpProperties 绑定起来；并把 HttpProperties 加入到 IOC 容器中。</li>
 </ul>
-<p>其中@EnableAutoConfiguration是关键(启用自动配置)，内部实际上就去加载META-INF/spring.factories文件的信息，然后筛选出以EnableAutoConfiguration为key的数据，加载到IOC容器中，实现自动配置功能！</p>
+<p>因为 @EnableConfigurationProperties({HttpProperties.class}) 把配置文件中的配置项与当前 HttpProperties 类绑定上了。然后在 HttpEncodingAutoConfiguration 中又引用了 HttpProperties ，所以最后就能在 HttpEncodingAutoConfiguration 中使用配置文件中的值了。最终通过 @Bean 和一些条件判断往容器中添加组件，实现自动配置。（当然该Bean中属性值是从 HttpProperties 中获取）</p>
+<h5 id="httpproperties">HttpProperties</h5>
+<p>HttpProperties 通过 @ConfigurationProperties 注解将配置文件与自身属性绑定。</p>
+<p>所有在配置文件中能配置的属性都是在 xxxProperties 类中封装着；配置文件能配置什么就可以参照某个功能对应的这个属性类。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@ConfigurationProperties</span><span class="o">(</span> 
+<span class="n">prefix</span> <span class="o">=</span> <span class="s">&#34;spring.http&#34;</span> 
+<span class="o">)</span><span class="c1">// 从配置文件中获取指定的值和bean的属性进行绑定 
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HttpProperties</span> <span class="o">{</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="总结-1">总结</h3>
+<p>@SpringBootApplication 上有三个注解： @SpringBootConfiguration ，@EnableAutoConfiguration ，@ComponentScan ，@EnableAutoConfiguration 是关键(启用自动配置)，内部实际上就去加载 META-INF/spring.factories 文件的信息，然后筛选出以 EnableAutoConfiguration 为key的数据，加载到IOC容器中，实现自动配置功能。</p>
+<h2 id="参考文章">参考文章</h2>
+<p>*. <a href="https://juejin.cn/post/6844903849178873870" title="Spring Boot 总结" target="_blank" rel="noopener noreffer">Spring Boot 总结</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
