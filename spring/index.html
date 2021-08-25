@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/spring/" /><link rel="prev" href="https://moge.fun/redis/" /><link rel="next" href="https://moge.fun/springboot/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/spring/" /><link rel="prev" href="https://moge.fun/redis/" /><link rel="next" href="https://moge.fun/springmvc/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/spring\/"
-        },"genre": "posts","keywords": "Spring, 大纲","wordcount":  118 ,
+        },"genre": "posts","keywords": "Spring, 大纲","wordcount":  108 ,
         "url": "https:\/\/moge.fun\/spring\/","datePublished": "2019-04-01T00:00:00+00:00","dateModified": "2019-04-01T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Spring总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/spring/"><i class="far fa-folder fa-fw"></i>Spring</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-04-01">2019-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 118 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-04-01">2019-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 108 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -135,7 +135,6 @@
         <li><a href="#代理的使用">代理的使用</a></li>
       </ul>
     </li>
-    <li><a href="#springmvc执行流程">SpringMVC执行流程</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><blockquote>
@@ -249,18 +248,6 @@
 <li>上面的处理中还有对目标对象的自我方法调用实施增强的处理，比如平时遇到的问题：在同一个类中一个方法调用另外一个带事务注解的方法，事务不会生效；在同一个类中一个方法调用另外一个带缓存注解的方法，缓存不会生效。</li>
 </ol>
 <p>以上就是大概的流程，总结一下就是：<strong>AOP实现使用的是动态代理和拦截器链。</strong></p>
-<h2 id="springmvc执行流程">SpringMVC执行流程</h2>
-<ol>
-<li>用户请求发送到前端控制器DispatcherServlet。</li>
-<li>前端控制器DispatcherServlet接收到请求后，DispatcherServlet会使用HandlerMapping来处理，HandlerMapping会查找到具体进行处理请求的Handler对象。</li>
-<li>HandlerMapping找到对应的Handler之后，并不是返回一个Handler原始对象，而是一个Handler执行链，在这个执行链中包括了拦截器和处理请求的Handler。HandlerMapping返回一个执行链给DispatcherServlet。</li>
-<li>DispatcherServlet接收到执行链之后，会调用Handler适配器去执行Handler。</li>
-<li>Handler适配器执行完成Handler（也就是我们写的Controller）之后会得到一个ModelAndView，并返回给DispatcherServlet。</li>
-<li>DispatcherServlet接收到Handler适配器返回的ModelAndView之后，会根据其中的视图名调用视图解析器。</li>
-<li>视图解析器根据逻辑视图名解析成一个真正的View视图，并返回给DispatcherServlet。</li>
-<li>DispatcherServlet接收到视图之后，会根据上面的ModelAndView中的model来进行视图中数据的填充，也就是所谓的视图渲染。</li>
-<li>渲染完成之后，DispatcherServlet就可以将结果返回给用户了。</li>
-</ol>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -285,7 +272,7 @@
     </div>
 
     <div class="post-nav"><a href="/redis/" class="prev" rel="prev" title="Redis概览"><i class="fas fa-angle-left fa-fw"></i>Redis概览</a>
-            <a href="/springboot/" class="next" rel="next" title="SpringBoot总结">SpringBoot总结<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/springmvc/" class="next" rel="next" title="SpringMVC总结">SpringMVC总结<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
