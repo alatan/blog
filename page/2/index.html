@@ -103,6 +103,16 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/springcloud/">SpringCloud总结</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-04-04">2019-04-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/spring/"><i class="far fa-folder fa-fw"></i>Spring</a></span></div><div class="content">Spring Cloud" Spring Cloud 
+Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
+SpringCloud的基础功能  服务治理： Spring Cloud Eureka 客户端负载均衡： Spring Cloud Ribbon 服务容错保护： Spring Cloud Hystrix 声明式服务调用： Spring Cloud Feign API网关服务：Spring Cloud Zuul 分布式配置中心： Spring Cloud Config  服务治理-Eureka  为了解决微服务架构中的服务实例维护问题(ip地址)， 产生了大量的服务治理框架和产品。 这些框架和产品的实现都围绕着服务注册与服务发现机制来完成对微服务应用实例的自动化管理。
+   服务提供者
+ 服务注册：启动的时候会通过发送REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息。 服务续约：在注册完服务之后，服务提供者会维护一个心跳用来持续告诉Eureka Server: &ldquo;我还活着 ” 、 服务下线：当服务实例进行正常的关闭操作时，它会触发一个服务下线的REST请求给Eureka Server, 告诉服务注册中心：“我要下线了 ”。    服务消费者
+ 获取服务：当我们启动服务消费者的时候，它会发送一个REST请求给服务注册中心，来获取上面注册的服务清单 服务调用：服务消费者在获取服务清单后，通过服务名可以获得具体提供服务的实例名和该实例的元数据信息。在进行服务调用的时候，优先访问同处一个Zone中的服务提供方。    Eureka Server(服务注册中心)：</div><div class="post-footer">
+        <a href="/springcloud/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/spring/">Spring</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/springboot/">SpringBoot总结</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-04-03">2019-04-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/spring/"><i class="far fa-folder fa-fw"></i>Spring</a></span></div><div class="content">使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置，简化Spring应用的初始搭建以及开发过程。简单理解，就是SpringBoot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像Maven整合了所有的Jar包，Spring Boot整合了所有的框架。
  SpringBoot 的启动过程 开始源码分析，先从 SpringBoot 的启动类的 run() 方法开始看，以下是调用链：SpringApplication.run() -&gt; run(new Class[]{primarySource}, args) -&gt; new SpringApplication(primarySources)).run(args)。
@@ -151,12 +161,6 @@ IOC容器初始化过程" IOC容器初始化过程
  Kafka会将数据写到partition，单个partition的写入是有顺序的。如果要保证全局有序，那只能写入一个partition中。如果要消费也有序，消费者也只能有一个。
 Kafka术语  Producer：生产者，消息产生和发送端。 Broker：Kafka 实例，多个 broker 组成一个 Kafka 集群，通常一台机器部署一个 Kafka 实例，一个实例挂了不影响其他实例。 Consumer：消费者，拉取消息进行消费。 一个 topic 可以让若干个消费者进行消费，若干个消费者组成一个 Consumer Group 即消费组，一条消息只能被消费组中一个 Consumer 消费。 Topic：主题，服务端消息的逻辑存储单元。一个 topic 通常包含若干个 Partition 分区。 Partition：topic 的分区，分布式存储在各个 broker 中， 实现发布与订阅的负载均衡。若干个分区可以被若干个 Consumer 同时消费，达到消费者高吞吐量。一个分区拥有多个副本（Replica），这是Kafka在可靠性和可用性方面的设计，后面会重点介绍。 message：消息，或称日志消息，是 Kafka 服务端实际存储的数据，每一条消息都由一个 key、一个 value 以及消息时间戳 timestamp 组成。 offset：偏移量，分区中的消息位置，由 Kafka 自身维护，Consumer 消费时也要保存一份 offset 以维护消费过的消息位置。  Kafka特点  高吞吐、低延时：这是 Kafka 显著的特点，Kafka 能够达到百万级的消息吞吐量，延迟可达毫秒级； 持久化存储：Kafka 的消息最终持久化保存在磁盘之上，提供了顺序读写以保证性能，并且通过 Kafka 的副本机制提高了数据可靠性。 分布式可扩展：Kafka 的数据是分布式存储在不同 broker 节点的，以 topic 组织数据并且按 partition 进行分布式存储，整体的扩展性都非常好。 高容错性：集群中任意一个 broker 节点宕机，Kafka 仍能对外提供服务。  Kafka消息发送机制 异步发送 Kafka 自从 0.</div><div class="post-footer">
         <a href="/mq-kafka/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mq/">MQ</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/mq-rocket/">RocketMQ</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-02-02">2019-02-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/mq/"><i class="far fa-folder fa-fw"></i>MQ</a></span></div><div class="content">特性  支持顺序消息  顺序消息" 顺序消息 
- 支持事务  事务" 事务</div><div class="post-footer">
-        <a href="/mq-rocket/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mq/">MQ</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
