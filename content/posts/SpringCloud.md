@@ -13,9 +13,19 @@ toc:
     auto: false
 ---
 
-![](/images/spring/springcloud/springcloud.png "Spring Cloud")
+![](/images/spring/springcloud/springcloud.jpg "Spring Cloud")
 
 Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
+
+### 版本对应
+| Spring Cloud Version  | 	Spring Boot Version | 	Spring Cloud Alibaba Version | 
+| :---   | :--- | :---  |
+| Spring Cloud 2020.0.1  | 	2.4.x | 	2021.1 |
+| Spring Cloud Hoxton 	 | 2.2.x, 2.3.x   |	2.2.x |
+| Spring Cloud Greenwich |	2.1.x  |	2.1.x |
+| Spring Cloud Finchley  |	2.0.x  |	2.0.x(停止维护，建议升级) |
+| Spring Cloud Edgware   |	1.5.x  |	1.5.x(停止维护，建议升级) |
+| Spring Cloud Dalston   |	1.5.x  |	1.5.x(停止维护，建议升级) |
 
 ## SpringCloud的基础功能
 * 服务治理： Spring  Cloud Eureka
@@ -40,6 +50,12 @@ Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便
 * Eureka Server(服务注册中心)：
     * 失效剔除：默认每隔一段时间（默认为60秒） 将当前清单中超时（默认为90秒）没有续约的服务剔除出去。
     * 自我保护：。EurekaServer 在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%(通常由于网络不稳定导致)。 Eureka Server会将当前的实例注册信息保护起来， 让这些实例不会过期，尽可能保护这些注册信息。
+
+## 熔断 和 降级
+> 在分布式环境中，不可避免地会有许多服务依赖项中的某些失败。Hystrix是一个库，可通过添加等待时间容限和容错逻辑来帮助您控制这些分布式服务之间的交互。Hystrix通过隔离服务之间的访问点，停止服务之间的级联故障并提供后备选项来实现此目的，所有这些都可以提高系统的整体弹性。
+
+### 熔断 
+是服务雪崩的一种有效解决方案。当指定时间窗内的请求失败率达到设定阈值时，系统将通过 断路器 直接将此请求链路断开。
 
 ## 服务网关
 1. 反向代理

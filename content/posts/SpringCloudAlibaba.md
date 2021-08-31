@@ -1,5 +1,5 @@
 ---  
-title: "微服务方案SpringCloudAlibaba"  
+title: "Spring Cloud Alibaba"  
 date: 2020-03-15
 weight: 70  
 markup: mmark  
@@ -16,6 +16,7 @@ author: "默哥"
 * Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
 * Sentinel：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。
 * Seata：阿里巴巴开源产品，一个易于使用的高性能微服务分布式事务解决方案。
+* RocketMQ：一款开源的分布式消息系统，基于高可用分布式集群技术，提供低延时的、高可靠的消息发布与订阅服务。
 
 ### 微服务最佳实践
 * Spring Cloud - Gateway API网关
@@ -26,3 +27,5 @@ author: "默哥"
 * Spring Cloud Alibaba - Nacos 实现配置中心
 * Spring Cloud Alibaba - Sentinel  实现服务容错
 * Spring Cloud Alibaba - Seata 实现分布式事务
+
+![](/images/spring/springcloud/springcloudNew.png "Spring Cloud")
