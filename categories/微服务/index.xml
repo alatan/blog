@@ -4,12 +4,12 @@
         <link>https://moge.fun/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
         <description>微服务 - 分类 - 追求卓越，幸福就会不期而遇</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 15 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="self" type="application/rss+xml" /><item>
-    <title>微服务方案SpringCloudAlibaba</title>
+    <title>Spring Cloud Alibaba</title>
     <link>https://moge.fun/springcloudalibaba/</link>
     <pubDate>Sun, 15 Mar 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/springcloudalibaba/</guid>
-    <description><![CDATA[Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案
-组件  Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。 Sentinel：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。 Seata：阿里巴巴开源产品，一个易于使用的高性能微服务分布式事务解决方案。  微服务最佳实践  Spring Cloud - Gateway API网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心 Spring Cloud Alibaba - Nacos 实现配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错 Spring Cloud Alibaba - Seata 实现分布式事务  ]]></description>
+    <description><![CDATA[Spring Cloud Alibaba
+组件  Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。 Sentinel：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。 Seata：阿里巴巴开源产品，一个易于使用的高性能微服务分布式事务解决方案。 RocketMQ：一款开源的分布式消息系统，基于高可用分布式集群技术，提供低延时的、高可靠的消息发布与订阅服务。  微服务最佳实践  Spring Cloud - Gateway API网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心 Spring Cloud Alibaba - Nacos 实现配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错 Spring Cloud Alibaba - Seata 实现分布式事务  Spring Cloud Alibaba 组件]]></description>
 </item></channel>
 </rss>

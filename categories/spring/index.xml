@@ -9,12 +9,9 @@
     <pubDate>Thu, 04 Apr 2019 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/springcloud/</guid>
-    <description><![CDATA[Spring Cloud" Spring Cloud 
+    <description><![CDATA[Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能。 Spring Cloud 以 Service（服务） 为中心，提供服务的注册与发现、服务的调用与负载均衡等功能。  Spring Cloud" Spring Cloud 
 Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
-SpringCloud的基础功能  服务治理： Spring Cloud Eureka 客户端负载均衡： Spring Cloud Ribbon 服务容错保护： Spring Cloud Hystrix 声明式服务调用： Spring Cloud Feign API网关服务：Spring Cloud Zuul 分布式配置中心： Spring Cloud Config  服务治理-Eureka  为了解决微服务架构中的服务实例维护问题(ip地址)， 产生了大量的服务治理框架和产品。 这些框架和产品的实现都围绕着服务注册与服务发现机制来完成对微服务应用实例的自动化管理。
-   服务提供者
- 服务注册：启动的时候会通过发送REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息。 服务续约：在注册完服务之后，服务提供者会维护一个心跳用来持续告诉Eureka Server: &ldquo;我还活着 ” 、 服务下线：当服务实例进行正常的关闭操作时，它会触发一个服务下线的REST请求给Eureka Server, 告诉服务注册中心：“我要下线了 ”。    服务消费者
- 获取服务：当我们启动服务消费者的时候，它会发送一个REST请求给服务注册中心，来获取上面注册的服务清单 服务调用：服务消费者在获取服务清单后，通过服务名可以获得具体提供服务的实例名和该实例的元数据信息。在进行服务调用的时候，优先访问同处一个Zone中的服务提供方。    Eureka Server(服务注册中心)：]]></description>
+版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.]]></description>
 </item><item>
     <title>SpringBoot总结</title>
     <link>https://moge.fun/springboot/</link>
