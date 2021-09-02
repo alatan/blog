@@ -12,6 +12,9 @@ tags: ["Spring", "大纲"]
 toc: 
     auto: false
 ---
+* Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。
+* Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能。
+* Spring Cloud 以 Service（服务） 为中心，提供服务的注册与发现、服务的调用与负载均衡等功能。
 
 ![](/images/spring/springcloud/springcloud.jpg "Spring Cloud")
 

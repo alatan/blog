@@ -10,7 +10,8 @@ tags: [ "SpringCloud"]
 categories: ["微服务"]  
 author: "默哥"  
 ---  
-**Spring Cloud Alibaba 致力于提供微服务开发的一站式解决方案**
+
+![](/images/spring/springcloud/SpringCloudAlibabaAll.png "Spring Cloud Alibaba")
 
 ### 组件
 * Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
@@ -28,4 +29,4 @@ author: "默哥"
 * Spring Cloud Alibaba - Sentinel  实现服务容错
 * Spring Cloud Alibaba - Seata 实现分布式事务
 
-![](/images/spring/springcloud/springcloudNew.png "Spring Cloud")
+![](/images/spring/springcloud/SpringCloudAlibaba.png "Spring Cloud Alibaba 组件")
