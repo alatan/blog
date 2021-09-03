@@ -3,10 +3,10 @@
         <title>Dubbo - 标签 - 追求卓越，幸福就会不期而遇</title>
         <link>https://moge.fun/tags/dubbo/</link>
         <description>Dubbo - 标签 - 追求卓越，幸福就会不期而遇</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 05 Apr 2019 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/dubbo/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/dubbo/" rel="self" type="application/rss+xml" /><item>
     <title>Dubbo总结</title>
     <link>https://moge.fun/dubbo/</link>
-    <pubDate>Fri, 05 Apr 2019 00:00:00 &#43;0000</pubDate>
+    <pubDate>Wed, 01 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/dubbo/</guid>
     <description><![CDATA[Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
