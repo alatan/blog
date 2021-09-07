@@ -12,16 +12,18 @@
     <author>作者</author>
     <guid>https://moge.fun/springcloudalibaba/</guid>
     <description><![CDATA[Spring Cloud Alibaba
-组件  Nacos：一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。 Sentinel：把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性。 Seata：阿里巴巴开源产品，一个易于使用的高性能微服务分布式事务解决方案。 RocketMQ：一款开源的分布式消息系统，基于高可用分布式集群技术，提供低延时的、高可靠的消息发布与订阅服务。  微服务最佳实践  Spring Cloud - Gateway API网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心 Spring Cloud Alibaba - Nacos 实现配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错 Spring Cloud Alibaba - Seata 实现分布式事务  Spring Cloud Alibaba 组件]]></description>
+组件  Spring Cloud - Gateway API网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心/配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错(限流，降级) Spring Cloud Alibaba - Seata 实现分布式事务  Spring Cloud Alibaba 组件
+Nacos  Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+ Nacos Discovery  使用 Spring Cloud Alibaba Nacos Discovery，可基于 Spring Cloud 的编程模型快速接入 Nacos 服务注册功能。
+ 配置中心 Nacos Config  使用 Spring Cloud Alibaba Nacos Config，可基于 Spring Cloud 的编程模型快速接入 Nacos 配置管理功能。]]></description>
 </item><item>
-    <title>SpringCloud总结</title>
+    <title>Spring Cloud</title>
     <link>https://moge.fun/springcloud/</link>
     <pubDate>Thu, 02 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/springcloud/</guid>
-    <description><![CDATA[Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能。 Spring Cloud 以 Service（服务） 为中心，提供服务的注册与发现、服务的调用与负载均衡等功能。  Spring Cloud" Spring Cloud 
-Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
-版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.]]></description>
+    <description><![CDATA[Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能。 Spring Cloud 以 Service（服务） 为中心，提供服务的注册与发现、服务的调用与负载均衡等功能。  Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
+版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.0.x 2.0.x(停止维护，建议升级)   Spring Cloud Edgware 1.]]></description>
 </item><item>
     <title>Dubbo总结</title>
     <link>https://moge.fun/dubbo/</link>

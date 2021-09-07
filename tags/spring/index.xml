@@ -4,14 +4,13 @@
         <link>https://moge.fun/tags/spring/</link>
         <description>Spring - 标签 - 追求卓越，幸福就会不期而遇</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 03 Apr 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/spring/" rel="self" type="application/rss+xml" /><item>
-    <title>SpringCloud总结</title>
+    <title>Spring Cloud</title>
     <link>https://moge.fun/springcloud/</link>
     <pubDate>Thu, 02 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/springcloud/</guid>
-    <description><![CDATA[Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能。 Spring Cloud 以 Service（服务） 为中心，提供服务的注册与发现、服务的调用与负载均衡等功能。  Spring Cloud" Spring Cloud 
-Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
-版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.]]></description>
+    <description><![CDATA[Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能。 Spring Cloud 以 Service（服务） 为中心，提供服务的注册与发现、服务的调用与负载均衡等功能。  Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
+版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.0.x 2.0.x(停止维护，建议升级)   Spring Cloud Edgware 1.]]></description>
 </item><item>
     <title>SpringBoot总结</title>
     <link>https://moge.fun/springboot/</link>

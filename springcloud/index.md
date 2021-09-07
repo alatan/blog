@@ -1,10 +1,9 @@
-# SpringCloud总结
+# Spring Cloud
+
 
 * Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。
 * Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能。
 * Spring Cloud 以 Service（服务） 为中心，提供服务的注册与发现、服务的调用与负载均衡等功能。
-
-![](/images/spring/springcloud/springcloud.jpg "Spring Cloud")
 
 Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
 
@@ -25,6 +24,8 @@ Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便
 * 声明式服务调用： Spring  Cloud Feign
 * API网关服务：Spring Cloud Zuul
 * 分布式配置中心： Spring Cloud Config
+
+![](/images/spring/springcloud/springcloud.jpg "Spring Cloud")
 
 ## 服务治理-Eureka
 > 为了解决微服务架构中的服务实例维护问题(ip地址)， 产生了大量的服务治理框架和产品。 这些框架和产品的实现都围绕着服务注册与服务发现机制来完成对微服务应用实例的自动化管理。
