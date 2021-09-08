@@ -13,7 +13,7 @@ author: "默哥"
 ![](/images/spring/springcloud/SpringCloudAlibabaAll.png "Spring Cloud Alibaba")
 
 ## 组件
-* Spring Cloud - Gateway API网关
+* Spring Cloud - Gateway 网关
 * Spring Cloud - Ribbon 实现负载均衡
 * Spring Cloud - Feign 实现远程调用
 * Spring Cloud - Sleuth 实现调用链监控
@@ -25,6 +25,8 @@ author: "默哥"
 
 ## Nacos
 > Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+
+Nacos 这个名字怎么读呢？它的音标为 /nɑ:kəʊs/。这个名字不是一个标准的单词，而是以下单词的首字母缩写：Name and Config Service。
 
 ### Nacos Discovery
 > 使用 Spring Cloud Alibaba Nacos Discovery，可基于 Spring Cloud 的编程模型快速接入 Nacos 服务注册功能。
