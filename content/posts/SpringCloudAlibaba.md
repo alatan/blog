@@ -2,14 +2,17 @@
 title: "Spring Cloud Alibaba"  
 date: 2020-04-03
 weight: 70  
-markup: mmark  
 draft: false  
-keywords: ["SpringCloud"]  
+keywords: ["Spring"]  
 description: "微服务最佳实践方案"  
-tags: [ "SpringCloud"]  
-categories: ["微服务"]  
 author: "默哥"  
+
+categories: ["Spring"]
+tags: ["SpringCloud", "大纲"]  
+toc: 
+    auto: false
 ---  
+
 ![](/images/spring/springcloud/SpringCloudAlibabaAll.png "Spring Cloud Alibaba")
 
 ## 组件
