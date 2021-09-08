@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/javaarchhistory\/"
-        },"genre": "posts","keywords": "大纲","wordcount":  36 ,
+        },"genre": "posts","keywords": "大纲","wordcount":  55 ,
         "url": "https:\/\/moge.fun\/javaarchhistory\/","datePublished": "2020-03-01T00:00:00+00:00","dateModified": "2020-03-01T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Java架构演变历史</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/"><i class="far fa-folder fa-fw"></i>知识体系</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-01">2020-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 36 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-01">2020-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 55 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -126,6 +126,7 @@
         <li><a href="#集群架构cluster">集群架构（cluster）</a>
           <ul>
             <li><a href="#集群架构相关技术点">集群架构相关技术点</a></li>
+            <li><a href="#负载平衡">负载平衡</a></li>
           </ul>
         </li>
         <li><a href="#分布式架构">分布式架构</a>
@@ -134,7 +135,12 @@
           </ul>
         </li>
         <li><a href="#soa架构">SOA架构</a></li>
-        <li><a href="#微服务架构">微服务架构</a></li>
+        <li><a href="#微服务架构在soa上做的升华">微服务架构(在SOA上做的升华)</a>
+          <ul>
+            <li><a href="#优点">优点</a></li>
+            <li><a href="#缺点">缺点</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -185,6 +191,8 @@
         data-sizes="auto"
         alt="/images/archHistory/cluster.jpg"
         title="集群架构" /></p>
+<h4 id="负载平衡">负载平衡</h4>
+<p>集群就是把一个的事情交给多个人去做，假如要做1000个产品给一个人做要10天，我叫10个人做就是一天，这就是集群，负载均衡的话就是用来控制集群，他把做的最多的人让他慢慢做休息会，把做的最少的人让他加量让他做多点。</p>
 <h3 id="分布式架构">分布式架构</h3>
 <blockquote>
 <p>服务的不同模块部署在不同的机器上，单个节点不能提供完整服务，需要多节点协调提供服务(相同组件部署在不同节点，节点间通过交互信息协作提供服务)，分布式强调的是工作方式。</p>
@@ -219,10 +227,30 @@
         data-sizes="auto"
         alt="/images/archHistory/soa.png"
         title="SOA架构" /></p>
-<h3 id="微服务架构">微服务架构</h3>
+<h3 id="微服务架构在soa上做的升华">微服务架构(在SOA上做的升华)</h3>
 <blockquote>
-<p>在SOA上做的升华，微服务架构强调业务需要彻底组件化和服务化，原有的单个业务系统会拆分为多个可独立开发，设计，运行的小应用。这些小应用通过服务完成交互和集成。</p>
+<p>微服务就是一个独立的职责单一的服务应用程序，微服务架构强调业务需要彻底组件化和服务化，原有的单个业务系统会拆分为多个可独立开发，设计，运行的小应用。这些小应用通过服务完成交互和集成。</p>
 </blockquote>
+<h4 id="优点">优点</h4>
+<ul>
+<li>每个服务直接足够内聚，代码容易理解</li>
+<li>开发效率高，一个服务只做一件事，适合小团队开发</li>
+<li>松耦合，有功能意义的服务。</li>
+<li>可以用不同语言开发，面向接口编程。</li>
+<li>易于第三方集成</li>
+<li>微服务只是业务逻辑的代码，不会和HTML,CSS或其他界</li>
+<li>可以灵活搭配，连接公共库/连接独立库</li>
+</ul>
+<h4 id="缺点">缺点</h4>
+<ul>
+<li>分布式系统的责任性</li>
+<li>多服务运维难度加大。</li>
+<li>系统部署依赖，服务间通信成本，数据一致 ，系统集成测试，性能监控。</li>
+<li>服务间通信成本</li>
+<li>数据一致性</li>
+<li>系统集成测试</li>
+<li>性能监控</li>
+</ul>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
