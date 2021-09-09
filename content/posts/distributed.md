@@ -1,14 +1,14 @@
 ---  
-title: "分布式介绍"  
+title: "分布式概览"  
+description: "分布式基础介绍"  
+keywords: ["分布式"]  
 date: 2020-03-10
+author: "默哥"  
 weight: 70  
 draft: false  
-keywords: ["分布式"]  
-description: "分布式基础介绍"  
-tags: [ "分布式"]  
-categories: ["分布式"]  
-author: "默哥"  
 
+categories: ["分布式"]  
+tags: [ "分布式", "大纲"]  
 toc:
   auto: false
 ---  
