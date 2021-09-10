@@ -2,7 +2,7 @@
 title: "Java架构演变历史"
 description: "Java架构演变历史"
 keywords: ["MQ"]
-date: 2020-03-01
+date: 2020-01-02
 author: "默哥"
 weight: 70
 draft: false
