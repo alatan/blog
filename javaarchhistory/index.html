@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/javaarchhistory/" /><link rel="prev" href="https://moge.fun/zookeeper/" /><link rel="next" href="https://moge.fun/th/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/javaarchhistory/" /><link rel="prev" href="https://moge.fun/zookeeper/" /><link rel="next" href="https://moge.fun/3h/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/javaarchhistory\/"
-        },"genre": "posts","keywords": "大纲","wordcount":  55 ,
+        },"genre": "posts","keywords": "大纲","wordcount":  101 ,
         "url": "https:\/\/moge.fun\/javaarchhistory\/","datePublished": "2020-03-01T00:00:00+00:00","dateModified": "2020-03-01T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Java架构演变历史</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/"><i class="far fa-folder fa-fw"></i>知识体系</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-01">2020-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 55 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-01">2020-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 101 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -139,6 +139,11 @@
           <ul>
             <li><a href="#优点">优点</a></li>
             <li><a href="#缺点">缺点</a></li>
+          </ul>
+        </li>
+        <li><a href="#service-mesh-架构集中管理微服务中非业务相关内容让微服务更加专注于业务处理">Service Mesh 架构（集中管理微服务中非业务相关内容，让微服务更加专注于业务处理）</a>
+          <ul>
+            <li><a href="#小结">小结</a></li>
           </ul>
         </li>
       </ul>
@@ -259,6 +264,32 @@
         data-sizes="auto"
         alt="/images/archHistory/microservice.jpg"
         title="微服务架构" /></p>
+<h3 id="service-mesh-架构集中管理微服务中非业务相关内容让微服务更加专注于业务处理">Service Mesh 架构（集中管理微服务中非业务相关内容，让微服务更加专注于业务处理）</h3>
+<ul>
+<li>最初，流量管理和控制能力（比如图例中的熔断、服务发现）是和业务逻辑耦合在一起，即便以引用包的方式被调用，依然解决不了异构系统无法重用的问题。</li>
+<li>流控功能和业务耦合相当不美好，于是出现了提供这些功能的公共库和框架。但这些库通常比较复杂，无论是学习使用，与业务系统整合、维护都会带来很大的成本。</li>
+<li>为避免花费太多时间开发和维护这些通用库，人们希望流量控制能力可以下沉到网络通讯栈的层面，但几乎无法实现。</li>
+<li>于是另一种思路出现，就是将这些功能独立成一个代理，由它先接管业务服务的流量，处理完成后再转发给业务服务本身，这就是 Sidecar 模式。</li>
+<li>为统一管理 Sidecar，该模式进一步进化，形成网络拓扑，增加了控制平面，演变成 Service Mesh（最后的网格图中，绿色代表业务服务，蓝色代表 sidecar 服务）。</li>
+</ul>
+<p>业务系统的核心价值应该是业务本身，而不是服务，微服务只是一种实现手段，实现业务才是目标。现有的微服务架构下，为解决可能出现的网络通信问题，提升系统的弹性，开发人员不得不花费大量时间和精力去实现流量控制相关的非业务需求，不能聚焦在业务本身。</p>
+<p>而 Service Mesh 的出现解决了这一问题，带来了下面 2 个变革：</p>
+<ul>
+<li>解决了微服务框架中的服务流量管理的痛点，使开发人员专注于业务本身；</li>
+<li>将服务通信及相关管控功能从业务程序中分离并下层到基础设施层，使其和业务系统完全解耦。</li>
+</ul>
+<h4 id="小结">小结</h4>
+<blockquote>
+<p>解耦是软件开发中永恒的主题，开发人员对消除重复的偏执是推动软件、以及架构模式演进的主要动力。而 Service Mesh 的核心价值就是将服务通信功能从业务逻辑中解耦，并下沉为基础设施，由控制平面统一管理。</p>
+</blockquote>
+<p>有人将 Service Mesh、Kubernetes 和 Serverless 技术称为<strong>云原生应用开发</strong>的三驾马车。</p>
+<ul>
+<li>Kubernetes 是云应用实际意义上的操作系统；</li>
+<li>Service Mesh 将服务通信功能剥离，实现了与业务的解耦；</li>
+<li>Serverless 让你不用关心应用的服务器。</li>
+<li>这三项技术让我们有能力实现应用开发的终极目标，那就是：只关注业务本身。而它们，也会引领我们通向未来云原生应用的诗和远方。</li>
+</ul>
+<p>详细介绍：<a href="https://www.infoq.cn/article/xveohtcortxrspcf2ldd" title="Service Mesh 浅析：从概念、产品到实践" target="_blank" rel="noopener noreffer">Service Mesh 浅析：从概念、产品到实践</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -283,7 +314,7 @@
     </div>
 
     <div class="post-nav"><a href="/zookeeper/" class="prev" rel="prev" title="ZooKeeper"><i class="fas fa-angle-left fa-fw"></i>ZooKeeper</a>
-            <a href="/th/" class="next" rel="next" title="互联网三高">互联网三高<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/3h/" class="next" rel="next" title="高并发系统设计">高并发系统设计<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
