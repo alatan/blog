@@ -3,10 +3,10 @@
         <title>高并发 - 分类 - 追求卓越，幸福就会不期而遇</title>
         <link>https://moge.fun/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/</link>
         <description>高并发 - 分类 - 追求卓越，幸福就会不期而遇</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 12 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
     <title>幂等</title>
     <link>https://moge.fun/idempotence/</link>
-    <pubDate>Thu, 12 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <pubDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/idempotence/</guid>
     <description><![CDATA[幂等就是：一个操作不论执行多少次，产生的效果和返回的结果都是一样的。

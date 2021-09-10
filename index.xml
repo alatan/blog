@@ -47,9 +47,16 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置
 1 2 3 4  # application.propertiesdubboregistryaddress:zookeeper://127.0.0.1:2181  服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： 流量管理"]]></description>
 </item><item>
+    <title>ZooKeeper</title>
+    <link>https://moge.fun/zookeeper/</link>
+    <pubDate>Sun, 15 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/zookeeper/</guid>
+    <description><![CDATA[ ZooKeeper主要服务于分布式系统，可以用ZooKeeper来做：统一配置管理、统一命名服务、分布式锁、集群管理。 使用分布式系统就无法避免对节点管理的问题(需要实时感知节点的状态、对节点进行统一管理等等)，而由于这些问题处理起来可能相对麻烦和提高了系统的复杂性，ZooKeeper作为一个能够通用解决这些问题的中间件就应运而生了。  参考文章  https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&amp;mid=2453140996&amp;idx=1&amp;sn=b2391f3eb780529020ace3a4c4357bda&amp;chksm=8cf2d487bb855d916bca80d709ed8e22457af52d1746e093fe8d4e3d4d095dbcc767e68dd1c1&amp;scene=21  ]]></description>
+</item><item>
     <title>幂等</title>
     <link>https://moge.fun/idempotence/</link>
-    <pubDate>Thu, 12 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <pubDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/idempotence/</guid>
     <description><![CDATA[幂等就是：一个操作不论执行多少次，产生的效果和返回的结果都是一样的。
@@ -66,7 +73,7 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 </item><item>
     <title>分布式概览</title>
     <link>https://moge.fun/distributed/</link>
-    <pubDate>Tue, 03 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <pubDate>Mon, 03 Feb 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/distributed/</guid>
     <description><![CDATA[分布式理论基础 CAP 理论是分布式中基础理论，有三个重要指标：一致性、可用性、分区容错性。
@@ -74,7 +81,7 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 </item><item>
     <title>微服务介绍</title>
     <link>https://moge.fun/microservices/</link>
-    <pubDate>Mon, 02 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <pubDate>Sun, 02 Feb 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/microservices/</guid>
     <description><![CDATA[微服务架构（MicroServices Architecture，MSA）：微服务架构可以看做是面向服务架构和分布式服务架构的拓展，使用更细粒度的服务（所以叫微服务）和一组设计准则来考虑大规模的复杂系统架构设计。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力。
@@ -82,7 +89,7 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 </item><item>
     <title>高并发系统设计</title>
     <link>https://moge.fun/3h/</link>
-    <pubDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <pubDate>Sat, 01 Feb 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/3h/</guid>
     <description><![CDATA[软件开发通常会提到一个名词 “三高”，即高并发、高性能、高可用。
@@ -98,13 +105,6 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 消息队列 MQ，必须得用 MQ。可能你还是会出现高并发写的场景，比如说一个业务操作里要频繁搞数据库几十次，增删改增删改，疯了。那高并发绝对搞挂你的系统，你要是用 redis 来承载写那肯定不行，人家是缓存，数据随时就被 LRU 了，数据格式还无比简单，没有事务支持。所以该用 mysql 还得用 mysql 啊。那你咋办？用 MQ 吧，大量的写请求灌入 MQ 里，排队慢慢玩儿，后边系统消费后慢慢写，控制在 mysql 承载范围之内。所以你得考虑考虑你的项目里，那些承载复杂写业务逻辑的场景里，如何用 MQ 来异步写，提升并发性。MQ 单机抗几万并发也是 ok 的，这个之前还特意说过。
 ElasticSearch Elasticsearch，简称 es。es 是分布式的，可以随便扩容，分布式天然就可以支撑高并发，因为动不动就可以扩容加机器来扛更高的并发。那么一些比较简单的查询、统计类的操作，可以考虑用 es 来承载，还有一些全文搜索类的操作，也可以考虑用 es 来承载。
 高性能  性能体现了系统的并行处理能力，在有限的硬件投入下，提高性能意味着节省成本。同时，性能也反映了用户体验，响应时间分别是100毫秒和1秒，给用户的感受是完全不同的。 高性能"]]></description>
-</item><item>
-    <title>ZooKeeper</title>
-    <link>https://moge.fun/zookeeper/</link>
-    <pubDate>Sat, 01 Feb 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://moge.fun/zookeeper/</guid>
-    <description><![CDATA[ ZooKeeper主要服务于分布式系统，可以用ZooKeeper来做：统一配置管理、统一命名服务、分布式锁、集群管理。 使用分布式系统就无法避免对节点管理的问题(需要实时感知节点的状态、对节点进行统一管理等等)，而由于这些问题处理起来可能相对麻烦和提高了系统的复杂性，ZooKeeper作为一个能够通用解决这些问题的中间件就应运而生了。  参考文章  https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&amp;mid=2453140996&amp;idx=1&amp;sn=b2391f3eb780529020ace3a4c4357bda&amp;chksm=8cf2d487bb855d916bca80d709ed8e22457af52d1746e093fe8d4e3d4d095dbcc767e68dd1c1&amp;scene=21  ]]></description>
 </item><item>
     <title>Java架构演变历史</title>
     <link>https://moge.fun/javaarchhistory/</link>
