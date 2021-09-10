@@ -10,8 +10,8 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://moge.fun/redis/" />
 <meta property="og:image" content="https://moge.fun/logo.png"/>
-<meta property="article:published_time" content="2019-03-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2019-03-01T00:00:00+00:00" />
+<meta property="article:published_time" content="2019-03-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-03-02T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://moge.fun/logo.png"/>
 
@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/redis/" /><link rel="prev" href="https://moge.fun/mq-kafka/" /><link rel="next" href="https://moge.fun/spring/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/redis/" /><link rel="prev" href="https://moge.fun/cache/" /><link rel="next" href="https://moge.fun/spring/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/redis\/"
-        },"genre": "posts","keywords": "缓存, 大纲","wordcount":  250 ,
-        "url": "https:\/\/moge.fun\/redis\/","datePublished": "2019-03-01T00:00:00+00:00","dateModified": "2019-03-01T00:00:00+00:00","publisher": {
+        },"genre": "posts","keywords": "缓存, 大纲","wordcount":  168 ,
+        "url": "https:\/\/moge.fun\/redis\/","datePublished": "2019-03-02T00:00:00+00:00","dateModified": "2019-03-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Redis概览</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%93%E5%AD%98/"><i class="far fa-folder fa-fw"></i>缓存</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-01">2019-03-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 250 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-02">2019-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 168 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -153,24 +153,6 @@
     </li>
     <li><a href="#高可用哨兵机制redis-sentinel">高可用：哨兵机制（Redis Sentinel.</a></li>
     <li><a href="#高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster)</a></li>
-    <li><a href="#缓存问题">缓存问题</a>
-      <ul>
-        <li><a href="#缓存穿透">缓存穿透</a></li>
-        <li><a href="#缓存击穿">缓存击穿</a></li>
-        <li><a href="#缓存雪崩">缓存雪崩</a></li>
-        <li><a href="#缓存污染或满了">缓存污染（或满了)</a>
-          <ul>
-            <li><a href="#缓存淘汰策略">缓存淘汰策略</a></li>
-          </ul>
-        </li>
-        <li><a href="#数据库和缓存一致性">数据库和缓存一致性</a>
-          <ul>
-            <li><a href="#方案队列--重试机制">方案：队列 + 重试机制</a></li>
-            <li><a href="#方案异步更新缓存基于订阅binlog的同步机制">方案：异步更新缓存(基于订阅binlog的同步机制)</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
     <li><a href="#方案">方案</a></li>
     <li><a href="#参考文章">参考文章</a></li>
   </ul>
@@ -352,84 +334,6 @@
 </ul>
 <h2 id="高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster)</h2>
 <p>主从复制和哨兵机制保障了高可用，就读写分离而言虽然slave节点扩展了主从的读并发能力，但是写能力和存储能力是无法进行扩展，就只能是master节点能够承载的上限。如果面对海量数据那么必然需要构建master（主节点分片)之间的集群，同时必然需要吸收高可用（主从复制和哨兵机制. 能力，即每个master分片节点还需要有slave节点，这是分布式系统中典型的纵向扩展（集群的分片技术. 的体现；所以在Redis 3.0版本中对应的设计就是Redis Cluster。</p>
-<h2 id="缓存问题">缓存问题</h2>
-<blockquote>
-<p>Redis最常用的一个场景就是作为缓存，在实践中可能会有哪些问题？比如一致性, 穿击, 穿透, 雪崩, 污染等。</p>
-</blockquote>
-<h3 id="缓存穿透">缓存穿透</h3>
-<p><strong>缓存穿透是指缓存和数据库中都没有的数据</strong>，而用户不断发起请求。由于缓存是不命中时被动写的，并且出于容错考虑，如果从存储层查不到数据则不写入缓存，这将导致这个不存在的数据每次请求都要到存储层去查询，失去了缓存的意义。</p>
-<p>在流量大时，可能DB就挂掉了，要是有人利用不存在的key频繁攻击我们的应用，这就是漏洞。如发起为id为“-1”的数据或id为特别大不存在的数据。这时的用户很可能是攻击者，攻击会导致数据库压力过大。</p>
-<p>解决方案：</p>
-<ol>
-<li>接口层增加校验，如用户鉴权校验，id做基础校验，id&lt;=0的直接拦截；</li>
-<li>从缓存取不到的数据，在数据库中也没有取到，这时也可以将key-value对写为key-null，缓存有效时间可以设置短点，如30秒（设置太长会导致正常情况也没法使用. 。这样可以防止攻击用户反复用同一个id暴力攻击</li>
-<li>布隆过滤器。bloomfilter就类似于一个hash set，用于快速判某个元素是否存在于集合中，其典型的应用场景就是快速判断一个key是否存在于某容器，不存在就直接返回。布隆过滤器的关键就在于hash算法和容器大小。</li>
-</ol>
-<h3 id="缓存击穿">缓存击穿</h3>
-<p><strong>缓存击穿是指缓存中没有但数据库中有的数据（一般是缓存时间到期)</strong>，这时由于并发用户特别多，同时读缓存没读到数据，又同时去数据库去取数据，引起数据库压力瞬间增大，造成过大压力。</p>
-<p>解决方案</p>
-<ol>
-<li>设置热点数据永远不过期。</li>
-<li>接口限流与熔断，降级。重要的接口一定要做好限流策略，防止用户恶意刷接口，同时要降级准备，当接口中的某些服务不可用时候，进行熔断，失败快速返回机制。</li>
-<li>加互斥锁.</li>
-</ol>
-<h3 id="缓存雪崩">缓存雪崩</h3>
-<p><strong>缓存雪崩是指缓存中数据大批量到过期时间，而查询数据量巨大，引起数据库压力过大甚至down机</strong>。和缓存击穿不同的是，<strong>缓存击穿指并发查同一条数据，缓存雪崩是不同数据都过期了</strong>，很多数据都查不到从而查数据库。</p>
-<p>解决方案：</p>
-<ol>
-<li>缓存数据的过期时间设置随机，防止同一时间大量数据过期现象发生。</li>
-<li>如果缓存数据库是分布式部署，将热点数据均匀分布在不同的缓存数据库中。</li>
-<li>设置热点数据永远不过期。</li>
-</ol>
-<h3 id="缓存污染或满了">缓存污染（或满了)</h3>
-<p><strong>缓存污染问题说的是缓存中一些只会被访问一次或者几次的的数据，被访问完后，再也不会被访问到，但这部分数据依然留存在缓存中，消耗缓存空间。</strong></p>
-<p>缓存污染会随着数据的持续增加而逐渐显露，随着服务的不断运行，缓存中会存在大量的永远不会再次被访问的数据。缓存空间是有限的，如果缓存空间满了，再往缓存里写数据时就会有额外开销，影响Redis性能。这部分额外开销主要是指写的时候判断淘汰策略，根据淘汰策略去选择要淘汰的数据，然后进行删除操作。</p>
-<h4 id="缓存淘汰策略">缓存淘汰策略</h4>
-<ul>
-<li>不淘汰
-<ul>
-<li>noevictionv4.0后默认的。</li>
-</ul>
-</li>
-<li>对设置了过期时间的数据中进行淘汰
-<ul>
-<li>随机：volatile-random</li>
-<li>ttl：volatile-ttl 越早过期的数据越优先被选择。</li>
-<li>lru：volatile-lru LRU算法：LRU 算法的全称是 Least Recently Used，按照最近最少使用的原则来筛选数据。这种模式下会使用 LRU 算法筛选设置了过期时间的键值对。</li>
-<li>lfu：volatile-lfu LFU 算法：LFU 缓存策略是在 LRU 策略基础上，为每个数据增加了一个计数器，来统计这个数据的访问次数。当使用 LFU 策略筛选淘汰数据时，首先会根据数据的访问次数进行筛选，把访问次数最低的数据淘汰出缓存。如果两个数据的访问次数相同，LFU 策略再比较这两个数据的访问时效性，把距离上一次访问时间更久的数据淘汰出缓存。</li>
-</ul>
-</li>
-<li>全部数据进行淘汰
-<ul>
-<li>随机：allkeys-random</li>
-<li>lru：allkeys-lru</li>
-<li>lfu：allkeys-lfu</li>
-</ul>
-</li>
-</ul>
-<h3 id="数据库和缓存一致性">数据库和缓存一致性</h3>
-<h4 id="方案队列--重试机制">方案：队列 + 重试机制</h4>
-<p>流程如下所示</p>
-<ul>
-<li>更新数据库数据；</li>
-<li>缓存因为种种问题删除失败</li>
-<li>将需要删除的key发送至消息队列</li>
-<li>自己消费消息，获得需要删除的key</li>
-<li>继续重试删除操作，直到成功</li>
-</ul>
-<p>然而，该方案有一个缺点，对业务线代码造成大量的侵入。于是有了方案二，在方案二中，启动一个订阅程序去订阅数据库的binlog，获得需要操作的数据。在应用程序中，另起一段程序，获得这个订阅程序传来的信息，进行删除缓存操作。</p>
-<h4 id="方案异步更新缓存基于订阅binlog的同步机制">方案：异步更新缓存(基于订阅binlog的同步机制)</h4>
-<p>MySQL binlog增量订阅消费+消息队列+增量数据更新到redis</p>
-<ol>
-<li>读Redis：热数据基本都在Redis</li>
-<li>写MySQL: 增删改都是操作MySQL</li>
-<li>更新Redis数据：MySQL的数据操作binlog，来更新到Redis</li>
-</ol>
-<p>读取binlog后分析 ，利用消息队列,推送更新各台的redis缓存数据。</p>
-<p>这样一旦MySQL中产生了新的写入、更新、删除等操作，就可以把binlog相关的消息推送至Redis，Redis再根据binlog中的记录，对Redis进行更新。</p>
-<p>其实这种机制，很类似MySQL的主从备份机制，因为MySQL的主备也是通过binlog来实现的数据一致性。</p>
-<p>这里可以结合使用canal(阿里的一款开源框架)，通过该框架可以对MySQL的binlog进行订阅，而canal正是模仿了mysql的slave数据库的备份请求，使得Redis的数据更新达到了相同的效果。</p>
-<p>当然，这里的消息推送工具你也可以采用别的第三方：kafka、rabbitMQ等来实现推送更新Redis。</p>
 <h2 id="方案">方案</h2>
 <ul>
 <li>事前：Redis 高可用，主从+哨兵，Redis cluster，避免全盘崩溃。</li>
@@ -448,7 +352,7 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2019-03-01</span>
+                <span>更新于 2019-03-02</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -467,7 +371,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/mq-kafka/" class="prev" rel="prev" title="Kafka"><i class="fas fa-angle-left fa-fw"></i>Kafka</a>
+    <div class="post-nav"><a href="/cache/" class="prev" rel="prev" title="缓存概览"><i class="fas fa-angle-left fa-fw"></i>缓存概览</a>
             <a href="/spring/" class="next" rel="next" title="Spring总结">Spring总结<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
