@@ -2,7 +2,7 @@
 title: "幂等"  
 description: "高并发和分布式中的幂等处理"  
 keywords: ["幂等处理"]  
-date: 2020-03-12
+date: 2020-03-01
 author: "默哥"  
 weight: 70  
 draft: false  
