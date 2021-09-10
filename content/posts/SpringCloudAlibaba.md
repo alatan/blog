@@ -1,13 +1,13 @@
 ---  
 title: "Spring Cloud Alibaba"  
-date: 2020-04-03
+date: 2020-04-10
 weight: 70  
 draft: false  
-keywords: ["Spring"]  
+keywords: ["SpringCloud"]  
 description: "微服务最佳实践方案"  
 author: "默哥"  
 
-categories: ["Spring"]
+categories: ["SpringCloud"]
 tags: ["SpringCloud", "大纲"]  
 toc: 
     auto: false

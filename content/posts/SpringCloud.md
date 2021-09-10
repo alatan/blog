@@ -1,13 +1,13 @@
 ---  
 title: "Spring Cloud"
 description: "Spring Cloud "
-keywords: ["Spring"]
+keywords: ["SpringCloud"]
 date: 2020-04-02
 author: "默哥"
 weight: 70
 draft: false
 
-categories: ["Spring"]
+categories: ["SpringCloud"]
 tags: ["SpringCloud", "大纲"]  
 toc: 
     auto: false
