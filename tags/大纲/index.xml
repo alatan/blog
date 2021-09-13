@@ -50,8 +50,11 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
     <pubDate>Mon, 03 Feb 2020 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/distributed/</guid>
-    <description><![CDATA[分布式理论基础 CAP 理论是分布式中基础理论，有三个重要指标：一致性、可用性、分区容错性。
- 一致性（Consistency） 可用性（Availability） 分区容错性（Partition Tolerance）  ]]></description>
+    <description><![CDATA[分布式理论基础 CAP CAP 理论是分布式中基础理论，有三个重要指标：一致性、可用性、分区容错性。
+ 一致性（Consistency） 可用性（Availability） 分区容错性（Partition Tolerance）  弱一致性BASE  BASE是对CAP 理论中强一致性和可用性权衡的结果，其来源于对大规模互联网系统分布式实践的总结，是基于CAP定理逐步演化而来的，其核心思想是即使无法做到强一致性(Strong consistency)，每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性(Eventual consistency)。
+ 多数情况下，其实我们也并非一定要求强一致性，部分业务可以容忍一定程度的延迟一致，所以为了兼顾效率，发展出来了最终一致性理论BASE
+ BA-基本可用(Basically Available)：基本可用是指分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用。 S-软状态(Soft State)：软状态是指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据至少会有三个副本，允许不同节点间副本同步的延时就是软状态的体现。 E-最终一致性(Eventual Consistency)：最终一致性是指系统中的所有数据副本经过一定时间后，最终能够达到一致的状态。弱一致性和强一致性相反，最终一致性是弱一致性的一种特殊情况。  一致性算法  分布式架构的核心就在一致性的实现和妥协，那么如何设计一套算法来保证不同节点之间的通信和数据达到无限趋向一致性，就非常重要了。
+ 参考文章  分布式架构知识体系 通过一个订单查看微服务整个流程  ]]></description>
 </item><item>
     <title>微服务介绍</title>
     <link>https://moge.fun/microservices/</link>
