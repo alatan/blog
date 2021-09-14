@@ -8,6 +8,8 @@
             <loc>https://moge.fun/dubbo/</loc><lastmod>2020-04-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/zookeeper/</loc><lastmod>2020-03-15T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/idempotence/</loc><lastmod>2020-03-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/distributedtransaction/</loc><lastmod>2020-02-05T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/distributedlock/</loc><lastmod>2020-02-04T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/distributed/</loc><lastmod>2020-02-03T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/microservices/</loc><lastmod>2020-02-02T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/3h/</loc><lastmod>2020-02-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
