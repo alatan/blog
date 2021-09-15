@@ -11,6 +11,23 @@
     <guid>https://moge.fun/zookeeper/</guid>
     <description><![CDATA[ ZooKeeper主要服务于分布式系统，可以用ZooKeeper来做：统一配置管理、统一命名服务、分布式锁、集群管理。 使用分布式系统就无法避免对节点管理的问题(需要实时感知节点的状态、对节点进行统一管理等等)，而由于这些问题处理起来可能相对麻烦和提高了系统的复杂性，ZooKeeper作为一个能够通用解决这些问题的中间件就应运而生了。  参考文章  https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&amp;mid=2453140996&amp;idx=1&amp;sn=b2391f3eb780529020ace3a4c4357bda&amp;chksm=8cf2d487bb855d916bca80d709ed8e22457af52d1746e093fe8d4e3d4d095dbcc767e68dd1c1&amp;scene=21  ]]></description>
 </item><item>
+    <title>分布式ID</title>
+    <link>https://moge.fun/distributedid/</link>
+    <pubDate>Thu, 06 Feb 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://moge.fun/distributedid/</guid>
+    <description><![CDATA[在复杂分布式系统中，往往需要对大量的数据和消息进行唯一标识。
+ 概括下来，那业务系统对ID号的要求有哪些呢？
+ 全局唯一：不能出现重复的ID号，既然是唯一标识，这是最基本的要求。 趋势递增：在MySQL InnoDB引擎中使用的是聚集索引，由于多数RDBMS使用B-tree的数据结构来存储索引数据，在主键的选择上面我们应该尽量使用有序的主键保证写入性能。 单调递增：保证下一个ID一定大于上一个ID，例如事务版本号、IM增量消息、排序等特殊需求。 信息安全：如果ID是连续的，恶意用户的扒取工作就非常容易做了，直接按照顺序下载指定URL即可；如果是订单号就更危险了，竞对可以直接知道我们一天的单量。所以在一些应用场景下，会需要ID无规则、不规则。 高可用：平均延迟和TP999延迟都要尽可能低；可用性5个9； 高QPS。  UUID  UUID是通用唯一识别码（Universally Unique Identifier)的缩写，开放软件基金会(OSF)规范定义了包括网卡MAC地址、时间戳、名字空间（Namespace）、随机或伪随机数、时序等元素。利用这些元素来生成UUID。
+ UUID是由128位二进制组成，一般转换成十六进制，然后用String表示。在java中有个UUID类,在他的注释中我们看见这里有4种不同的UUID的生成策略:
+ randomly 基于随机数生成UUID，由于Java中的随机数是伪随机数，其重复的概率是可以被计算出来的。这个一般我们用下面的代码获取基于随机数的UUID: time-based 基于时间的UUID,这个一般是通过当前时间，随机数，和本地Mac地址来计算出来，自带的JDK包并没有这个算法的我们在一些UUIDUtil中，比如我们的log4j.core.util，会重新定义UUID的高位和低位。 DCE security:DCE安全的UUID。 name-based：基于名字的UUID，通过计算名字和名字空间的MD5来计算UUID。  UUID的优点  通过本地生成，没有经过网络I/O，性能较快 无序，无法预测他的生成顺序。(当然这个也是他的缺点之一)  UUID的缺点  128位二进制一般转换成36位的16进制，太长了只能用String存储，空间占用较多。 不能生成递增有序的数字  适用场景 UUID的适用场景为不担心过多的空间占用，以及不需要生成有递增趋势的数字。在Log4j里面他在UuidPatternConverter中加入了UUID来标识每一条日志。
+数据库主键自增  大家对于唯一标识最容易想到的就是主键自增，这个也是我们最常用的方法。例如我们有个订单服务，那么把订单id设置为主键自增即可。
+ 优点 简单方便，有序递增，方便排序和分页
+缺点  分库分表会带来问题，需要进行改造。 并发性能不高，受限于数据库的性能。 简单递增容易被其他人猜测利用，比如你有一个用户服务用的递增，那么其他人可以根据分析注册的用户ID来得到当天你的服务有多少人注册，从而就能猜测出你这个服务当前的一个大概状况。 数据库宕机服务不可用。  适用场景 根据上面可以总结出来，当数据量不多，并发性能不高的时候这个很适合，比如一些to B的业务，商家注册这些，商家注册和用户注册不是一个数量级的，所以可以数据库主键递增。如果对顺序递增强依赖，那么也可以使用数据库主键自增。
+Redis  Redis中有两个命令Incr，IncrBy,因为Redis是单线程的所以能保证原子性。
+ 优点 性能比数据库好，能满足有序递增。
+缺点  由于redis是内存的KV数据库，即使有AOF和RDB，但是依然会存在数据丢失，有可能会造成ID重复。 依赖于redis，redis要是不稳定，会影响ID生成。  适用 由于其性能比数据库好，但是有可能会出现ID重复和不稳定，这一块如果可以接受那么就可以使用。也适用于到了某个时间，比如每天都刷新ID，那么这个ID就需要重置，通过(Incr Today)，每天都会从0开始加。]]></description>
+</item><item>
     <title>分布式事务</title>
     <link>https://moge.fun/distributedtransaction/</link>
     <pubDate>Wed, 05 Feb 2020 00:00:00 &#43;0000</pubDate>

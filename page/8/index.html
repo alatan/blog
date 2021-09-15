@@ -103,6 +103,15 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/relationaldatabase/">关系型数据库概览</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-01">2017-03-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">数据库总览" 数据库总览 
+SQL数据库原理" SQL数据库原理 
+数据库组件 SQL数据库概览" SQL数据库概览 
+核心组件  进程管理器（process manager）：很多数据库具备一个需要妥善管理的进程/线程池。再者，为了实现纳秒级操作，一些现代数据库使用自己的线程而不是操作系统线程。 网络管理器（network manager）：网路I/O是个大问题，尤其是对于分布式数据库。所以一些数据库具备自己的网络管理器。 文件系统管理器（File system manager）：磁盘I/O是数据库的首要瓶颈。具备一个文件系统管理器来完美地处理OS文件系统甚至取代OS文件系统，是非常重要的。 内存管理器（memory manager）：为了避免磁盘I/O带来的性能损失，需要大量的内存。但是如果你要处理大容量内存你需要高效的内存管理器，尤其是你有很多查询同时使用内存的时候。 安全管理器（Security Manager）：用于对用户的验证和授权。 客户端管理器（Client manager）：用于管理客户端连接。  工具  备份管理器（Backup manager）：用于保存和恢复数据。 恢复管理器（Recovery manager）：用于崩溃后重启数据库到一个一致状态。 监控管理器（Monitor manager）：用于记录数据库活动信息和提供监控数据库的工具。 管理员管理器（Administration manager）：用于保存元数据（比如表的名称和结构），提供管理数据库、模式、表空间的工具。  查询管理器  查询解析器（Query parser）：用于检查查询是否合法 查询重写器（Query rewriter）：用于预优化查询 查询优化器（Query optimizer）：用于优化查询 查询执行器（Query executor）：用于编译和执行查询  数据管理器：  事务管理器（Transaction manager）：用于处理事务 缓存管理器（Cache manager）：数据被使用之前置于内存，或者数据写入磁盘之前置于内存 数据访问管理器（Data access manager）：访问磁盘中的数据  数据查询的流程 本章集中探讨数据库如何通过如下进程管理SQL查询的：
+ 客户端管理器 查询管理器 数据管理器（含恢复管理器） 客户端管理器  客户端管理器  客户端管理器是处理客户端通信的。客户端可以是一个（网站）服务器或者一个最终用户或最终应用。客户端管理器通过一系列知名的API（JDBC, ODBC, OLE-DB …）提供不同的方式来访问数据库。客户端管理器也提供专有的数据库访问API。</div><div class="post-footer">
+        <a href="/relationaldatabase/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/algorithm/">算法概览</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-05">2017-02-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div><div class="content">概览" 概览 
  数据结构研究的是数据的存储方式，算法研究的是解决问题的思路。数据结构与算法是相辅相成的。
@@ -165,24 +174,6 @@ h(K) 称为散列函数或者哈希函数，它实现了关键字到存储地址
 特性  数组是相同数据类型的元素的集合。 数组中的各元素的存储是有先后顺序的，它们在内存中按照这个先后顺序连续存放在一起。  优点：  由于是紧凑连续存储,可以随机访问，通过索引快速找到对应元素，而且相对节约存储空间，查询修改元素的效率O(1)。  缺点：  正因为连续存储，内存空间必须一次性分配够，所以说数组如果要扩容，需要重新分配一块更大的空间，再把数据全部复制过去，时间复杂度 O(N)。 想在数组中间进行插入和删除，每次必须搬移后面的所有数据以保持连续，时间复杂度 O(N)  二维数组 二维数组也称为矩阵，因为是二维的，所以需要两个下标才能确定一个元素，即行下标和列下标。</div><div class="post-footer">
         <a href="/array/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/datastruct/">数据结构概览</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-15">2017-01-15</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">概览" 概览 
- 数据结构研究的是数据的存储方式，算法研究的是解决问题的思路。数据结构与算法是相辅相成的。
- 常用存储结构  线性表，还可细分为顺序表(数组)、链表、栈和队列。 树结构，包括普通树，二叉树，二叉查找树等。 图存储结构。  线性表  线性表并不是一种具体的存储结构，它包含顺序存储结构和链式存储结构，是顺序表和链表的统称。
-  线性表是一种线性结构，它是由零个或多个数据元素构成的有限序列。 线性表的特征是在一个序列中，除了头尾元素，每个元素都有且只有一个直接前驱，有且只有一个直接后继，而序列头元素没有直接前驱，序列尾元素没有直接后继。 数据结构中常见的线性结构有数组、单链表、双链表、循环链表等。线性表中的元素为某种相同的抽象数据类型。  线性表" 线性表 
- 如图 3a) 所示，将数据依次存储在连续的整块物理空间中，这种存储结构称为顺序存储结构（简称顺序表，数组）； 如图 3b) 所示，数据分散的存储在物理空间中，通过一根线保存着它们之间的逻辑关系，这种存储结构称为链式存储结构（简称链表）。  数组和矩阵(顺序表) 数组是一种连续存储线性结构，元素类型相同，大小相等，数组是多维的，通过使用整型索引值来访问他们的元素，数组尺寸不能改变。
-链表 我们知道，使用顺序表（底层实现靠数组）时，需要提前申请一定大小的存储空间，这块存储空间的物理地址是连续的，链表则完全不同，使用链表存储数据时，是随用随申请，因此数据的存储位置是相互分离的，换句话说，数据的存储位置是随机的。
-n个节点离散分配，彼此通过指针相连，每个节点只有一个前驱节点，每个节点只有一个后续节点，首节点没有前驱节点，尾节点没有后续节点。确定一个链表我们只需要头指针，通过头指针就可以把整个链表都能推出来。
-哈希表(散列) 散列表（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
-栈和队列 数组和链表都是线性存储结构的基础，栈和队列都是线性存储结构的应用，栈和队列隶属于线性表，是特殊的线性表，因为它们对线性表中元素的进出做了明确的要求。
-栈（LIFO）  使用数组实现的叫静态栈 使用链表实现的叫动态栈  栈（FIFO）  使用数组实现的叫静态队列 使用链表实现的叫动态队列  树存储结构  树存储结构适合存储具有“一对多”关系的数据。
- 树" 树 
-图存储结构  图存储结构适合存储具有“多对多”关系的数据。
- 图" 图 
-和线性表，树的差异:  线性表中我们把数据元素叫元素，树中将数据元素叫结点，在图中数据元素，我们则称之为顶点(Vertex)。 线性表可以没有元素，称为空表；树中可以没有节点，称为空树；但是，在图中不允许没有顶点(有穷非空性)。 线性表中的各元素是线性关系，树中的各元素是层次关系，而图中各顶点的关系是用边来表示(边集可以为空)。  总结 我们知道，实际应用当中，我们经常使用的是查找和排序操作，这在我们的各种管理系统、数据库系统、操作系统等当中，十分常用。</div><div class="post-footer">
-        <a href="/datastruct/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -205,10 +196,15 @@ n个节点离散分配，彼此通过指针相连，每个节点只有一个前�
                     <span class="page-link">
                         <a href="/page/9/">9</a>
                     </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/10/">10</a>
+                    </span>
                 </li></ul></div></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2015 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2015 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp">豫ICP备2021012209号-1</span></div>
         </div>
     </footer></div>
 

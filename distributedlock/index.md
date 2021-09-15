@@ -49,7 +49,7 @@ zk官方提供的客户端并不支持分布式锁的直接实现，我们需要
 
 
 ## 参考文章
-* [分布式锁，是选择AP还是选择CP ](https://juejin.cn/post/6844903936718012430#heading-12 "分布式锁，是选择AP还是选择CP")
+* [分布式锁，是选择AP还是选择CP](https://juejin.cn/post/6844903936718012430#heading-12 "分布式锁，是选择AP还是选择CP")
 * [分布式锁总结](https://juejin.cn/post/6844903726268809224 "分布式锁总结")
 * [基于 Redis 的分布式锁](https://juejin.cn/post/6844904126288150542 "基于 Redis 的分布式锁")
 * [Redis分布式锁如何续期](https://juejin.cn/post/6844903874675867656 "Redis分布式锁如何续期")
