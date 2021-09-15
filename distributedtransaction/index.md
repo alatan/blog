@@ -119,7 +119,7 @@ TCC 需要事务接口提供 try, confirm, cancel 三个接口，提高了编程
 
 ## 参考文章
 * [分布式事务，这一篇就够了](https://xiaomi-info.github.io/2020/01/02/distributed-transaction/ "分布式事务，这一篇就够了")
-* [分布式事务，是怎么从ACID解脱，投身CAP/BASE](https://juejin.cn/post/6844903936718012430#heading-20 "分布式事务，是怎么从ACID解脱，投身CAP/BASE")
-* [分布式事务](https://xiaomi-info.github.io/2020/01/02/distributed-transaction/ "分布式事务")
+* [详解分布式事务](https://mp.weixin.qq.com/s/DnxqHodRJ1Y3x276wGsfJw "详解分布式事务")
 * [分布式事务基础篇](https://juejin.cn/post/6844904077646626823 "分布式事务基础篇")
 * [蚂蚁金服分布式事务实践解析](https://mp.weixin.qq.com/s/Xh2jfZgD7Qallh_DAUbeVg "蚂蚁金服分布式事务实践解析")
+
