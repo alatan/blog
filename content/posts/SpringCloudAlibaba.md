@@ -13,7 +13,7 @@ toc:
     auto: false
 ---  
 
-![](/images/spring/springcloud/SpringCloudAlibabaAll.png "Spring Cloud Alibaba")
+![](/images/spring/springcloudalibaba/SpringCloudAlibabaAll.png "Spring Cloud Alibaba")
 
 ## 组件
 * Spring Cloud - Gateway 网关
@@ -24,7 +24,7 @@ toc:
 * Spring Cloud Alibaba - Sentinel  实现服务容错(限流，降级)
 * Spring Cloud Alibaba - Seata 实现分布式事务
 
-![](/images/spring/springcloud/SpringCloudAlibaba.png "Spring Cloud Alibaba 组件")
+![](/images/spring/springcloudalibaba/SpringCloudAlibaba.png "Spring Cloud Alibaba 组件")
 
 ## Nacos
 > Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
