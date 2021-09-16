@@ -154,3 +154,6 @@ OpenFeign 是SpringCloud在Feign的基础上支持了Spring MVC的注解，并�
     * 比如，某个“业务”的访问趋势，运营数据，QPS峰值，同比、环比等。
 
 7. 路由转发
+
+## 参考文章
+* [Spring Cloud底层原理](https://juejin.cn/post/6844903705553174541)
