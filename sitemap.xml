@@ -2,6 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://moge.fun/nacos/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/springcloudalibaba/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/springcloud-eureka/</loc><lastmod>2020-04-03T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/springcloud/</loc><lastmod>2020-04-02T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
@@ -57,13 +58,14 @@
             <loc>https://moge.fun/studyandthink/</loc><lastmod>2015-01-02T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/mdgrammar/</loc><lastmod>2015-01-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/energy/</loc><lastmod>2015-01-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/categories/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/posts/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/tags/spring/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/categories/spring/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/tags/springcloud/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/categories/springcloud/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://moge.fun/tags/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/categories/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/posts/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/tags/spring/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/categories/spring/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/tags/springcloud/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/categories/springcloud/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/tags/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/tags/dubbo/</loc><lastmod>2020-04-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/categories/dubbo/</loc><lastmod>2020-04-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

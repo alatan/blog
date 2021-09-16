@@ -96,4 +96,5 @@ ZAB协议包括两种基本的模式，分别是**崩溃恢复和消息广播**�
 ## 参考文章
 * [zookepper概览](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247484868&idx=1&sn=af1e49c5f7dc89355255a4d46bafc005)
 * [zookepper介绍](https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=2453140996&idx=1&sn=b2391f3eb780529020ace3a4c4357bda)
+* [阿里巴巴为什么不用 ZooKeeper 做服务发现](https://www.infoq.cn/article/why-doesnot-alibaba-use-zookeeper)
 
