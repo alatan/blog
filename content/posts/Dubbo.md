@@ -52,5 +52,6 @@ Dubbo将整个流量管理分成VirtualService和DestinationRule两部分。当C
 这种设计理念很好的解决流量分流和目标地址之间的耦合问题。不仅将配置规则进行了简化有效避免配置冗余的问题，还支持VirtualService和DestinationRule的任意组合，可以非常灵活的支持各种业务使用场景。
 
 ## 参考文章
-* https://dubbo.apache.org/zh/docs/
-* [一文带你搞懂RPC核心原理]( https://mp.weixin.qq.com/s/3-i9aYyEb4z58fXxDwDpuA "一文带你搞懂RPC核心原理")
+* [Dubbo 文档](https://dubbo.apache.org/zh/docs/)
+* [一文带你搞懂RPC核心原理](https://mp.weixin.qq.com/s/3-i9aYyEb4z58fXxDwDpuA "一文带你搞懂RPC核心原理")
+* [Dubbo技术详细介绍 ](https://mp.weixin.qq.com/s?__biz=MzI1NDQ3MjQxNA==&mid=2247483791&idx=1&sn=49345f1a022734e81e9257f2b8d38a52)
