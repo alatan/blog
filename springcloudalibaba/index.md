@@ -35,4 +35,8 @@ Sentinel 具有以下特征:
 * 广泛的开源生态： Sentinel 提供开箱即用的与其它开源框架/库的整合模块，例如与 Spring Cloud、Dubbo、gRPC 的整合。您只需要引入相应的依赖并进行简单的配置即可快速地接入 Sentinel。
 * 完善的 SPI 扩展点： Sentinel 提供简单易用、完善的 SPI 扩展点。您可以通过实现扩展点，快速的定制逻辑。例如定制规则管理、适配数据源等。
 
-
+## 学习资料
+* [Spring Cloud Alibaba 参考文档](https://spring-cloud-alibaba-group.github.io/github-pages/hoxton/zh-cn/index.html)
+* [Nacos](https://nacos.io/zh-cn/docs/what-is-nacos.html)
+* [Sentinel](https://sentinelguard.io/zh-cn/docs/quick-start.html)
+* [SkyWalking 分布式追踪](https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/)

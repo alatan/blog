@@ -154,3 +154,7 @@ OpenFeign 是SpringCloud在Feign的基础上支持了Spring MVC的注解，并�
 
 ## 参考文章
 * [Spring Cloud底层原理](https://juejin.cn/post/6844903705553174541)
+
+## 学习资料
+* [Spring Cloud中文网](https://www.springcloud.cc/)
+* [spring-cloud 教程](https://www.fangzhipeng.com/spring-cloud.html)
