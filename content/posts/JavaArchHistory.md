@@ -110,3 +110,7 @@ toc:
 * 这三项技术让我们有能力实现应用开发的终极目标，那就是：只关注业务本身。而它们，也会引领我们通向未来云原生应用的诗和远方。
 
 详细介绍：[Service Mesh 浅析：从概念、产品到实践](https://www.infoq.cn/article/xveohtcortxrspcf2ldd "Service Mesh 浅析：从概念、产品到实践")
+
+## 参考文章
+* [大型互联网架构演化简史](https://www.geekhalo.com/2019/09/01/architecture/evolution/)
+* [亿级流量高并发是怎么抗住的](https://juejin.cn/post/6844903991336402958)

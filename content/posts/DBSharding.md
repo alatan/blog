@@ -136,3 +136,4 @@ Twitter的snowflake算法解决了分布式系统生成全局ID的需求，生�
 * [数据库分库分表思路](https://www.cnblogs.com/butterfly100/p/9034281.html "数据库分库分表思路")
 * [大众点评订单系统分库分表实践](https://tech.meituan.com/2016/11/18/dianping-order-db-sharding.html "大众点评订单系统分库分表实践")
 * [ShardingSphere-JDBC](https://shardingsphere.apache.org/document/current/cn/features/sharding/ "ShardingSphere-JDBC")
+* 分库分表技术演进&最佳实践[](https://mp.weixin.qq.com/s/3ZxGq9ZpgdjQFeD2BIJ1MA)
