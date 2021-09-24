@@ -41,5 +41,6 @@ Dubbo将整个流量管理分成VirtualService和DestinationRule两部分。当C
 
 ## 参考文章
 * [Dubbo 文档](https://dubbo.apache.org/zh/docs/)
-* [一文带你搞懂RPC核心原理](https://mp.weixin.qq.com/s/3-i9aYyEb4z58fXxDwDpuA "一文带你搞懂RPC核心原理")
+* [一文带你搞懂RPC核心原理](https://mp.weixin.qq.com/s/3-i9aYyEb4z58fXxDwDpuA)
 * [Dubbo技术详细介绍 ](https://mp.weixin.qq.com/s?__biz=MzI1NDQ3MjQxNA==&mid=2247483791&idx=1&sn=49345f1a022734e81e9257f2b8d38a52)
+* [Dubbo技术详细介绍 ](http://www.buildupchao.cn/arch/2019/02/01/design-a-distributed-RPC-structure.html)
