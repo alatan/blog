@@ -103,6 +103,17 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/flashsale/">秒杀(限时抢购)系统设计</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-05-07">2020-05-07</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/"><i class="far fa-folder fa-fw"></i>业务场景</a></span></div><div class="content">参考文章  高性能秒杀系统设计 秒杀架构实践 百万级用户的抽奖系统  </div><div class="post-footer">
+        <a href="/flashsale/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/sso/">单点登录</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-05-06">2020-05-06</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/"><i class="far fa-folder fa-fw"></i>业务场景</a></span></div><div class="content"> 单点登录（Single Sign On），简称为 SSO，是比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。
+ 参考文章  单点登录 单点登录总结  </div><div class="post-footer">
+        <a href="/sso/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/nacos/">Nacos解析</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-04-11">2020-04-11</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/springcloud/"><i class="far fa-folder fa-fw"></i>SpringCloud</a></span></div><div class="content">临时实例和持久化实例。  在定义上区分临时实例和持久化实例的关键是健康检查的方式。 临时实例使用客户端上报模式，而持久化实例使用服务端反向探测模式。 临时实例需要能够自动摘除不健康实例，而且无需持久化存储实例，那么这种实例就适用于类 Gossip 的协议。 右边的持久化实例使用服务端探测的健康检查方式，因为客户端不会上报心跳，那么自然就不能去自动摘除下线的实例。  实现对比  Zookeeper：保证CP，放弃可用性；一旦zookeeper集群中master节点宕了，则会重新选举leader，这个过程可能非常漫长，在这过程中服务不可用。 Eureka：保证AP，放弃一致性；Eureka集群中的各个节点都是平等的，一旦某个节点宕了，其他节点正常服务（一旦客户端发现注册失败，则将会连接集群中其他节点），虽然保证了可用性，但是每个节点的数据可能不是最新的。 Nacos：同时支持CP和AP，默认是AP，可以切换；AP模式下以临时实例注册，CP模式下服务永久实例注册。  健康检查 客户端健康检查 客户端健康检查主要关注客户端上报心跳的方式、服务端摘除不健康客户端的机制。
 服务端健康检查 而服务端健康检查，则关注探测客户端的方式、灵敏度及设置客户端健康状态的机制。
@@ -132,34 +143,6 @@ Nacos  Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态�
  版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.</div><div class="post-footer">
         <a href="/springcloud/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/dubbo/">Dubbo总结</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-04-01">2020-04-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/dubbo/"><i class="far fa-folder fa-fw"></i>Dubbo</a></span></div><div class="content">Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
- 服务是 Dubbo 中的核心概念，一个服务代表一组 RPC 方法的集合，服务是面向用户编程、服务发现机制等的基本单位。
-Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置 方式将 RPC 声明为 Dubbo 服务，然后就可以基于服务 API 进行编程了。对服务提供者来说是提供 RPC 服务的具体实现，而对服务消费者来说则是使用特定数据发起服务调用。
-服务发现  服务发现，即消费端自动发现服务地址列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。
- 实现服务发现的方式有很多种，Dubbo 提供的是一种 Client-Based 的服务发现机制，通常还需要部署额外的第三方注册中心组件来协调服务发现过程，如常用的 Nacos、Consul、Zookeeper 等，Dubbo 自身也提供了对多种注册中心组件的对接，用户可以灵活选择。
-服务发现" 服务发现 
-服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：
-以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置
-1 2 3 4  # application.propertiesdubboregistryaddress:zookeeper://127.0.0.1:2181  服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： 流量管理"</div><div class="post-footer">
-        <a href="/dubbo/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dubbo/">Dubbo</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/zookeeper/">ZooKeeper</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-03-15">2020-03-15</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"><i class="far fa-folder fa-fw"></i>分布式</a></span></div><div class="content">简介  ZooKeeper主要服务于分布式系统，可以用ZooKeeper来做：统一配置管理、统一命名服务、分布式锁、集群管理。 使用分布式系统就无法避免对节点管理的问题(需要实时感知节点的状态、对节点进行统一管理等等)，而由于这些问题处理起来可能相对麻烦和提高了系统的复杂性，ZooKeeper作为一个能够通用解决这些问题的中间件就应运而生了。  ZooKeeper数据结构 ZooKeeper的数据结构，跟Unix文件系统非常类似，可以看做是一颗树，每个节点叫做ZNode。每一个节点可以通过路径来标识，结构图如下： ZooKeeper" ZooKeeper  那ZooKeeper这颗&quot;树&quot;有什么特点呢？？ZooKeeper的节点我们称之为Znode，Znode分为两种类型：
- 短暂/临时(Ephemeral)：当客户端和服务端断开连接后，所创建的Znode(节点)会自动删除 持久(Persistent)：当客户端和服务端断开连接后，所创建的Znode(节点)不会删除  监听器 在上面我们已经简单知道了ZooKeeper的数据结构了，ZooKeeper还配合了监听器才能够做那么多事的。 常见的监听场景有以下两项：
- 监听Znode节点的数据变化 监听子节点的增减变化  zookeeperWatch" zookeeperWatch  通过监听+Znode节点(持久/短暂[临时])，ZooKeeper就可以玩出这么多花样了。
-统一配置管理 我们可以将common.yml这份配置放在ZooKeeper的Znode节点中，系统A、B、C监听着这个Znode节点有无变更，如果变更了，及时响应。 zookeeperConfig" zookeeperConfig 
-统一命名服务 zookeeperNaming" zookeeperNaming 
-集群管理。 还是以我们三个系统A、B、C为例，在ZooKeeper中创建临时节点即可： zookeeperCluster2" zookeeperCluster2 
-只要系统A挂了，那/groupMember/A这个节点就会删除，通过监听groupMember下的子节点，系统B和C就能够感知到系统A已经挂了。(新增也是同理)
-除了能够感知节点的上下线变化，ZooKeeper还可以实现动态选举Master的功能。(如果集群是主从架构模式下)
-原理也很简单，如果想要实现动态选举Master的功能，Znode节点的类型是带顺序号的临时节点(EPHEMERAL_SEQUENTIAL)就好了。
- Zookeeper会每次选举最小编号的作为Master，如果Master挂了，自然对应的Znode节点就会删除。然后让新的最小编号作为Master，这样就可以实现动态选举的功能了。  分布式锁 参考分布式锁
-ZooKeeper 的一些重要概念  ZooKeeper 本身就是一个分布式程序（只要半数以上节点存活，ZooKeeper 就能正常服务）。 为了保证高可用，最好是以集群形态来部署 ZooKeeper，这样只要集群中大部分机器是可用的（能够容忍一定的机器故障），那么 ZooKeeper 本身仍然是可用的。 ZooKeeper 将数据保存在内存中，这也就保证了 高吞吐量和低延迟（但是内存限制了能够存储的容量不太大，此限制也是保持znode中存储的数据量较小的进一步原因）。 ZooKeeper 是高性能的。 在“读”多于“写”的应用程序中尤其地高性能，因为“写”会导致所有的服务器间同步状态。（“读”多于“写”是协调服务的典型场景。） ZooKeeper有临时节点的概念。 当创建临时节点的客户端会话一直保持活动，瞬时节点就一直存在。而当会话终结时，瞬时节点被删除。持久节点是指一旦这个ZNode被创建了，除非主动进行ZN 移除操作，否则这个ZNode将一直保存在Zookeeper上。 ZooKeeper 底层其实只提供了两个功能：  管理（存储、读取）用户程序提交的数据； 为用户程序提交数据节点监听服务。    可构建集群 为了保证高可用，最好是以集群形态来部署 ZooKeeper，这样只要集群中大部分机器是可用的（能够容忍一定的机器故障），那么zookeeper本身仍然是可用的。 客户端在使用 ZooKeeper 时，需要知道集群机器列表，通过与集群中的某一台机器建立 TCP 连接来使用服务，客户端使用这个TCP链接来发送请求、获取结果、获取监听事件以及发送心跳包。如果这个连接异常断开了，客户端可以连接到另外的机器上。</div><div class="post-footer">
-        <a href="/zookeeper/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
