@@ -7,7 +7,7 @@ author: "默哥"
 weight: 70  
 draft: false  
 
-categories: ["分布式"]  
+categories: ["分布式"]
 tags: [ "分布式", "大纲"]  
 toc:
   auto: false
@@ -42,6 +42,7 @@ BASE是基本可用，柔性状态，最终一致性三个短语的缩写，核�
 * [分布式架构知识体系](https://mp.weixin.qq.com/s/9xINMH9tJlmsjH6QdUPFxQ "分布式架构知识体系")
 * [通过一个订单查看微服务整个流程](https://juejin.cn/post/6844903846548865032 "通过一个订单查看微服务整个流程")
 * [分布式整体概览从CAP说起](https://juejin.cn/post/6844903936718012430 "分布式整体概览从CAP说起")
+
 
 ## 学习资料
 * [分布式系统合集](https://mp.weixin.qq.com/s?__biz=MzU2NzEwMDc4OQ==&mid=2247484527&idx=1&sn=d00e7991078e46af96b662eb0b57de65)

@@ -19,3 +19,6 @@ toc:
 MyBatis和数据库的交互有两种方式：
 * 使用传统的MyBatis提供的API；
 * 使用Mapper接口；
+
+## 参考文章
+* [常见问题](https://juejin.cn/post/6932682542025965575)
