@@ -1,6 +1,6 @@
 --- 
 title: "业务架构合集"  
-date: 2020-05-07
+date: 2020-01-03
 weight: 70  
 draft: false  
 keywords: ["SpringCloud"]  
@@ -20,7 +20,6 @@ toc:
 * [高效的风控规则引擎 ](https://mp.weixin.qq.com/s/JPpG8OSoJ3YW_eeBFrHe6w)
 
 ## 最佳实践
-![](/images/project/projectLifecycle.png "敏捷开发流程")
 * [最佳实践](https://mp.weixin.qq.com/s/UJ2yy7pb8EXZSlQVJIymBg)
 * [服务化](https://mp.weixin.qq.com/s/PDrzITSgkDgvnm01APOixQ)
 
@@ -34,12 +33,9 @@ toc:
 * [互联网分层架构的本质 ](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651960455&idx=1&sn=02cb2345ae9862edad11113726c49512)
 * [项目应该如何正确分层 ](https://mp.weixin.qq.com/s/AWtjGqiIgIWXTdOsx4UZEQ)
 * [分层架构](https://mp.weixin.qq.com/s/Eyikn_k3uaMdg-MLn_nHAA)
-* []()
 
 ## 技术选型
 * [技术选型](https://mp.weixin.qq.com/s/gz3UWwNmMjoJf2TQVR_0Dw)
 
 ## DevOps
-* []()
-* []()
 * []()
