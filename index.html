@@ -103,6 +103,12 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/businessdesign/">业务架构合集</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-05-07">2020-05-07</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/"><i class="far fa-folder fa-fw"></i>业务场景</a></span></div><div class="content">业务场景  对账系统 有赞零售财务中台架构设计与实践 百万TPS支付账务系统的设计与实现 高效的风控规则引擎   最佳实践 敏捷开发流程" 敏捷开发流程 
+ 最佳实践 服务化  架构设计  如何进行系统分析与设计 系统架构 领域驱动分层架构与对象模型 常见的软件架构套路  项目结构  互联网分层架构的本质  项目应该如何正确分层  分层架构   技术选型  技术选型  DevOps      </div><div class="post-footer">
+        <a href="/businessdesign/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/flashsale/">秒杀(限时抢购)系统设计</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-05-07">2020-05-07</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/"><i class="far fa-folder fa-fw"></i>业务场景</a></span></div><div class="content">参考文章  高性能秒杀系统设计 秒杀架构实践 百万级用户的抽奖系统  </div><div class="post-footer">
         <a href="/flashsale/">阅读全文</a><div class="post-tags">
@@ -136,12 +142,6 @@ Nacos  Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态�
  Eureka注册中心使用什么样的方式来储存各个服务注册时发送过来的机器地址和端口号？ 各个服务找Eureka Server拉取注册表的时候，是什么样的频率？ 各个服务是如何拉取注册表的？ 对于一个有几百个服务，部署上千台机器的大型分布式系统来说，这套系统会对Eureka Server造成多大的访问压力？ Eureka Server从技术层面是如何抗住日千万级访问量的？   基本知识点，各个服务内的Eureka Client组件，默认情况下，每隔30秒会发送一个请求到Eureka Server，来拉取最近有变化的服务信息
  Eureka Server设计精妙的注册表存储结构  维护注册表、拉取注册表、更新心跳时间，全部发生在内存里！这是Eureka Server非常核心的一个点。  Eureka Server端优秀的多级缓存机制  尽可能保证了内存注册表数据不会出现频繁的读写冲突问题。 并且进一步保证对Eureka Server的大量请求，都是快速从纯内存走，性能极高。  总结  通过上面的分析可以看到，Eureka通过设置适当的请求频率拉取注册表30秒间隔，发送心跳30秒间隔），可以保证一个大规模的系统每秒请求Eureka Server的次数在几百次。 同时通过纯内存的注册表，保证了所有的请求都可以在内存处理，确保了极高的性能 另外,多级缓存机制，确保了不会针对内存数据结构发生频繁的读写并发冲突操作，进一步提升性能。  参考文章  微服务注册中心如何承载大型系统的千万级访问  </div><div class="post-footer">
         <a href="/springcloud-eureka/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/springcloud/">Spring Cloud</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-04-02">2020-04-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/springcloud/"><i class="far fa-folder fa-fw"></i>SpringCloud</a></span></div><div class="content">Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能，专注于快速方便的开发单个微服务。 Spring Cloud 以 Service（服务） 为中心，关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等集成服务SpringBoot可以离开SpringCloud独立使用开发项目， 但是SpringCloud离不开SpringBoot ，属于依赖的关系。   Spring Cloud是目前最常用的微服务开发框架，Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
- 版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.</div><div class="post-footer">
-        <a href="/springcloud/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

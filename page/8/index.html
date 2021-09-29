@@ -103,6 +103,13 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/mysqltuning/">MySQL调优</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-03">2017-03-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">影响mysql的性能因素  业务需求对MySQL的影响(合适合度) 存储定位对MySQL的影响  不适合放进MySQL的数据  二进制多媒体数据 流水队列数据 超大文本数据   需要放进缓存的数据  系统各种配置及规则数据 活跃用户的基本信息数据 活跃用户的个性化定制信息数据 准实时的统计信息数据 其他一些访问频繁但变更较少的数据     Schema设计对系统的性能影响  尽量减少对数据库访问的请求 尽量减少无用数据的查询请求   硬件环境对系统性能的影响  性能分析 MySQL常见瓶颈  CPU：CPU在饱和的时候一般发生在数据装入内存或从磁盘上读取数据时候 IO：磁盘I/O瓶颈发生在装入数据远大于内存容量的时候 服务器硬件的性能瓶颈：top，free，iostat 和 vmstat来查看系统的性能状态  性能下降SQL慢 执行时间长 等待时间长 原因分析  查询语句写的烂 索引失效（单值、复合） 关联查询太多join（设计缺陷或不得已的需求） 服务器调优及各个参数设置（缓冲、线程数等）  MySQL常见性能分析手段  在优化MySQL时，通常需要对数据库进行分析，常见的分析手段有慢查询日志，EXPLAIN 分析查询，profiling分析以及show命令查询系统状态及系统变量，通过定位分析性能的瓶颈，才能更好的优化数据库系统的性能。
+ 性能瓶颈定位 我们可以通过 show 命令查看 MySQL 状态及变量，找到系统的瓶颈：
+1 2 3 4 5 6  Mysql&gt; show status ——显示状态信息（扩展show status like ‘XXX’） Mysql&gt; show variables ——显示系统变量（扩展show variables like ‘XXX’） Mysql&gt; show innodb status ——显示InnoDB存储引擎的状态 Mysql&gt; show processlist ——查看当前SQL执行，包括执行状态、是否锁表等 Shell&gt; mysqladmin variables -u username -p password——显示系统变量 Shell&gt; mysqladmin extended-status -u username -p password——显示状态信息   Explain(执行计划)  使用 Explain 关键字可以模拟优化器执行SQL查询语句，从而知道 MySQL 是如何处理你的 SQL 语句的。分析你的查询语句或是表结构的性能瓶颈</div><div class="post-footer">
+        <a href="/mysqltuning/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/mysqlhighavailability/">MySQL高可用方案</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-03-03">2017-03-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">MySQL主从复制架构 MySQL主从架构" MySQL主从架构 
 基本原理 slave 会从 master 读取 binlog 来进行数据同步
@@ -177,20 +184,6 @@ Shell排序(Shell Sort) 希尔排序实质上是一种分组插入方法。它�
 领域算法 参考文章  算法  </div><div class="post-footer">
         <a href="/algorithm/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/tree/">树</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-04">2017-02-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw"></i>数据结构</a></span></div><div class="content">树" 树 
- 树是一种数据结构，它是n(n&gt;=0)个节点的有限集。n=0时称为空树。n&gt;0时，有限集的元素构成一个具有层次感的数据结构。
- 区别于线性表一对一的元素关系，树中的节点是一对多的关系。树具有以下特点:
- n&gt;0时，根节点是唯一的，不可能存在多个根节点。 每个节点有零个至多个子节点；除了根节点外，每个节点有且仅有一个父节点。根节点没有父节点。  树的相关概念 树例" 树例 
- 子树: 除了根节点外，每个子节点都可以分为多个不相交的子树。 孩子与双亲: 若一个结点有子树，那么该结点称为子树根的&quot;双亲&rdquo;，子树的根是该结点的&quot;孩子&rdquo;。 在图一中，B、H是A的孩子，A是B、H的双亲。 兄弟: 具有相同双亲的节点互为兄弟，例如B与H互为兄弟。 节点的度: 一个节点拥有子树的数目。例如A的度为2，B的度为1，C的度为3. 叶子: 没有子树，也即是度为0的节点。 分支节点: 除了叶子节点之外的节点，也即是度不为0的节点。 内部节点: 除了根节点之外的分支节点。 层次: 根节点为第一层，其余节点的层次等于其双亲节点的层次加1. 树的高度: 也称为树的深度，树中节点的最大层次。 有序树: 树中节点各子树之间的次序是重要的，不可以随意交换位置。 无序树: 树种节点各子树之间的次序是不重要的。可以随意交换位置。 森林: 0或多棵互不相交的树的集合。例如图二中的两棵树为森林。  二叉树  二叉树: 最多有两棵子树的树被称为二叉树。
- 二叉树" 二叉树 
-斜树: 所有节点都只有左子树的二叉树叫做左斜树，所有节点都只有右子树的二叉树叫做右斜树。(本质就是链表) 斜树" 斜树 
-满二叉树: 二叉树中所有非叶子结点的度都是2，且叶子结点都在同一层次上 满二叉树" 满二叉树 
-完全二叉树: 如果一个二叉树与满二叉树前m个节点的结构相同，这样的二叉树被称为完全二叉树 完全二叉树" 完全二叉树 
-二叉查找树 - BST 二叉查找树(Binary Search Tree)是指一棵空树或者具有下列性质的二叉树:</div><div class="post-footer">
-        <a href="/tree/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

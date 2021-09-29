@@ -103,6 +103,12 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/mq-rocket/">RocketMQ</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-02-02">2019-02-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/mq/"><i class="far fa-folder fa-fw"></i>MQ</a></span></div><div class="content">特性  支持顺序消息  顺序消息" 顺序消息 
+ 支持事务  事务" 事务</div><div class="post-footer">
+        <a href="/mq-rocket/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mq/">MQ</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/mq/">消息队列</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-02-01">2019-02-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/mq/"><i class="far fa-folder fa-fw"></i>MQ</a></span></div><div class="content">概述 消息队列（Message Queue，简称 MQ）是构建分布式互联网应用的基础设施，消息队列已经逐渐成为企业IT系统内部通信的核心手段。它具有低耦合、可靠投递、广播、流量控制、最终一致性等一系列功能，成为异步RPC的主要手段之一。
 消息队列应用" 消息队列应用 
@@ -125,7 +131,7 @@ RPC通信协议 刚才讲到，所谓消息队列，无外乎两次RPC加一次�
         <a href="/mybatis/"> MyBatis总结</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-01-01">2019-01-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div><div class="content">MyBatis框架整体设计" MyBatis框架整体设计 
 接口层-和数据库交互的方式 MyBatis和数据库的交互有两种方式：
- 使用传统的MyBatis提供的API； 使用Mapper接口；  </div><div class="post-footer">
+ 使用传统的MyBatis提供的API； 使用Mapper接口；  参考文章  常见问题  </div><div class="post-footer">
         <a href="/mybatis/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>,&nbsp;<a href="/tags/mybatis/">MyBatis</a>,&nbsp;<a href="/tags/%E6%A1%86%E6%9E%B6/">框架</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
@@ -153,16 +159,6 @@ Java类加载机制 类的生命周期 类的生命周期" 类的生命周期
 不同的自定义同步器争用共享资源的方式也不同。自定义同步器在实现时只需要实现共享资源state的获取与释放方式即可，至于具体线程等待队列的维护(如获取资源失败入队/唤醒出队等)，AQS已经在上层已经帮我们实现好了。
 属性值的含义  waitStatus	当前节点在队列中的状态 thread	表示处于该节点的线程 prev	前驱指针 predecessor	返回前驱节点，没有的话抛出npe nextWaiter	指向下一个处于CONDITION状态的节点（由于本篇文章不讲述Condition Queue队列，这个指针不多介绍） next	后继指针  waitStatus（节点状态）  0，表示当前节点在sync queue中，等待着获取锁。 SIGNAL	为-1，表示线程已经准备好了，就等资源释放了,表示当前节点的后继节点包含的线程需要运行，需要进行unpark操作。 CANCELLED	为1，表示线程获取锁的请求已经取消了 CONDITION	为-2，表示当前节点在等待condition，也就是在condition queue中，节点线程等待唤醒 PROPAGATE	为-3，表示当前场景下后续的acquireShared能够得以执行。  AQS独占模式加锁"</div><div class="post-footer">
         <a href="/abstractqueuedsynchronizer/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/locksupport/">LockSupport详解</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-04-04">2018-04-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div><div class="content">LockSupport简介 LockSupport用来创建锁和其他同步类的基本线程阻塞原语。简而言之，当调用LockSupport.park时，表示当前线程将会等待，直至获得许可，当调用LockSupport.unpark时，必须把等待获得许可的线程作为参数进行传递，好让此线程继续运行。
-核心函数分析 在分析LockSupport函数之前，先引入sun.misc.Unsafe类中的park和unpark函数，因为LockSupport的核心函数都是基于Unsafe类中定义的park和unpark函数，下面给出两个函数的定义:
-1 2  public native void park(boolean isAbsolute, long time); public native void unpark(Thread thread);   说明: 对两个函数的说明如下:
- park函数，阻塞线程，并且该线程在下列情况发生之前都会被阻塞: ① 调用unpark函数，释放该线程的许可。② 该线程被中断。③ 设置的时间到了。并且，当time为绝对时间时，isAbsolute为true，否则，isAbsolute为false。当time为0时，表示无限等待，直到unpark发生。 unpark函数，释放线程的许可，即激活调用park后阻塞的线程。这个函数不是安全的，调用这个函数时要确保线程依旧存活。  park函数 park函数有两个重载版本，方法摘要如下
-1 2  public static void park()； public static void park(Object blocker)；   说明: 两个函数的区别在于park()函数没有没有blocker，即没有设置线程的parkBlocker字段。park(Object)型函数如下。
-1 2 3 4 5 6 7 8 9 10  public static void park(Object blocker) { // 获取当前线程  Thread t = Thread.</div><div class="post-footer">
-        <a href="/locksupport/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
