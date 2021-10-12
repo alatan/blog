@@ -145,6 +145,8 @@ Kafka 的消息是保存或缓存在磁盘上的，一般认为在磁盘上读�
 它把所有的消息都变成一个批量的文件，并且进行合理的批量压缩，减少网络 IO 损耗，通过 mmap 提高 I/O 速度。写入数据的时候由于单个 Partion 是末尾添加，所以速度最优；读取数据的时候配合 Sendfile 直接暴力输出。
 
 ## 参考链接
-* https://mp.weixin.qq.com/s/9fJchPJa_raHSkvo29bkEA
-* https://mp.weixin.qq.com/s/-IPfWPS1WQMEgcIu0Ak2VQ
-* https://mp.weixin.qq.com/s/ejZBAGI7qLE_QYSe-AqipA
+* [深入浅出Kafka](https://mp.weixin.qq.com/s/-IPfWPS1WQMEgcIu0Ak2VQ)
+* [Kafka总结](https://mp.weixin.qq.com/s/Voz-ZngT-IO9t_YMxLckdg)
+* [Kafka整理](https://mp.weixin.qq.com/s/9fJchPJa_raHSkvo29bkEA)
+* [Kafka为什么快](https://mp.weixin.qq.com/s/ejZBAGI7qLE_QYSe-AqipA)
+
