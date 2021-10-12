@@ -10,8 +10,8 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://moge.fun/dbsharding/" />
 <meta property="og:image" content="https://moge.fun/logo.png"/>
-<meta property="article:published_time" content="2017-03-03T00:00:00+00:00" />
-<meta property="article:modified_time" content="2017-03-03T00:00:00+00:00" />
+<meta property="article:published_time" content="2017-03-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-03-05T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://moge.fun/logo.png"/>
 
@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/dbsharding/" /><link rel="prev" href="https://moge.fun/mysql/" /><link rel="next" href="https://moge.fun/mysqlhighavailability/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/dbsharding/" /><link rel="prev" href="https://moge.fun/mysqlhighavailability/" /><link rel="next" href="https://moge.fun/byteopt/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/dbsharding\/"
-        },"genre": "posts","keywords": "数据库, 性能优化, 分布式","wordcount":  106 ,
-        "url": "https:\/\/moge.fun\/dbsharding\/","datePublished": "2017-03-03T00:00:00+00:00","dateModified": "2017-03-03T00:00:00+00:00","publisher": {
+        },"genre": "posts","keywords": "数据库, 性能优化, 分布式","wordcount":  105 ,
+        "url": "https:\/\/moge.fun\/dbsharding\/","datePublished": "2017-03-05T00:00:00+00:00","dateModified": "2017-03-05T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">数据切分（分库分表）总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-03">2017-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 106 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-05">2017-03-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 105 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -175,7 +175,6 @@
 <p>关系型数据库本身比较容易成为系统瓶颈，单机存储容量、连接数、处理能力都有限。当单表的数据量达到1000W或100G以后，由于查询维度较多，即使添加从库、优化索引，做很多操作时性能仍下降严重。此时就要考虑对其进行切分了，切分的目的就在于减少数据库的负担，缩短查询时间。</p>
 </blockquote>
 <p>数据库分布式核心内容无非就是数据切分（Sharding），以及切分后对数据的定位、整合。数据切分就是将数据分散存储到多个数据库中，使得单一数据库中的数据量变小，通过扩充主机的数量缓解单一数据库的性能问题，从而达到提升数据库操作性能的目的。</p>
-<p>一般公司的流程</p>
 <h2 id="mysql分区可忽略">MySQL分区（可忽略）</h2>
 <blockquote>
 <p>一般情况下我们创建的表对应一组存储文件，使用MyISAM存储引擎时是一个.MYI和.MYD文件，<strong>使用Innodb存储引擎时是一个.ibd和.frm（表结构）文件。</strong></p>
@@ -229,7 +228,7 @@
 <ul>
 <li>解决业务系统层面的耦合，业务清晰</li>
 <li>与微服务的治理类似，也能对不同业务的数据进行分级管理、维护、监控、扩展等</li>
-<li>高并发场景下，垂直切分一定程度的提升IO、数据库连接数、单机硬件资源的瓶颈</li>
+<li>高并发场景下，垂直切分能一定程度的提升IO、数据库连接数、单机硬件资源的瓶颈</li>
 </ul>
 <h3 id="垂直切分的缺点">垂直切分的缺点：</h3>
 <ul>
@@ -337,7 +336,7 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2017-03-03</span>
+                <span>更新于 2017-03-05</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -356,8 +355,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/mysql/" class="prev" rel="prev" title="MySQL总结"><i class="fas fa-angle-left fa-fw"></i>MySQL总结</a>
-            <a href="/mysqlhighavailability/" class="next" rel="next" title="MySQL高可用方案">MySQL高可用方案<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/mysqlhighavailability/" class="prev" rel="prev" title="MySQL高可用方案"><i class="fas fa-angle-left fa-fw"></i>MySQL高可用方案</a>
+            <a href="/byteopt/" class="next" rel="next" title="Java位运算 ">Java位运算 <i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

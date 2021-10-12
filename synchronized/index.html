@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/synchronized\/"
-        },"genre": "posts","keywords": "并发编程","wordcount":  293 ,
+        },"genre": "posts","keywords": "并发编程","wordcount":  294 ,
         "url": "https:\/\/moge.fun\/synchronized\/","datePublished": "2018-04-03T00:00:00+00:00","dateModified": "2018-04-03T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">synchronized(无锁→偏向锁→轻量级锁→重量级锁)</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-03">2018-04-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 293 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-03">2018-04-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 294 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -177,7 +177,7 @@
 <h3 id="注意点">注意点</h3>
 <ul>
 <li>一把锁只能同时被一个线程获取，没有获得锁的线程只能等待。</li>
-<li>每个实例都对应有自己的一把锁(this),不同实例之间互不影响；例外：锁对象是*.class以及synchronized修饰的是static方法的时候，所有对象共用同一把锁 。</li>
+<li>每个实例都对应有自己的一把锁(this),不同实例之间互不影响；例外：当锁对象是*.class以及synchronized修饰的是static方法的时候，所有对象共用同一把锁 。</li>
 <li>synchronized修饰的方法，无论方法正常执行完毕还是抛出异常，都会释放锁。</li>
 </ul>
 <h2 id="synchronized原理分析">synchronized原理分析</h2>
@@ -188,7 +188,7 @@
 <li>如果这个monitor已经拿到了这个锁的所有权，又重入了这把锁，那锁计数器就会累加，变成2，并且随着重入的次数，会一直累加</li>
 <li>这把锁已经被别的线程获取了，等待锁释放</li>
 </ul>
-<p>monitorexit指令：释放对于monitor的所有权，释放过程很简单，就是讲monitor的计数器减1，如果减完以后，计数器不是0，则代表刚才是重入进来的，当前线程还继续持有这把锁的所有权，如果计数器变成0，则代表当前线程不再拥有该monitor的所有权，即释放锁。</p>
+<p>monitorexit指令：释放对于monitor的所有权，释放过程很简单，就是将monitor的计数器减1，如果减完以后，计数器不是0，则代表刚才是重入进来的，当前线程还继续持有这把锁的所有权，如果计数器变成0，则代表当前线程不再拥有该monitor的所有权，即释放锁。</p>
 <p><figure><a class="lightgallery" href="/images/current/synchronized/schronized-moniter.png" title="/images/current/synchronized/schronized-moniter.png" data-thumbnail="/images/current/synchronized/schronized-moniter.png" data-sub-html="<h2>schronized-moniter</h2>">
         <img
             class="lazyload"
@@ -277,7 +277,7 @@
     </figure></p>
 <h4 id="自旋锁">自旋锁</h4>
 <blockquote>
-<p>引入背景：大家都知道，在没有加入锁优化时，Synchronized是一个非常“胖大”的家伙。在多线程竞争锁时，当一个线程获取锁时，它会阻塞所有正在竞争的线程，这样对性能带来了极大的影响。在挂起线程和恢复线程的操作都需要转入内核态中完成，这些操作对系统的并发性能带来了很大的压力。同时HotSpot团队注意到在很多情况下，共享数据的<strong>锁定状态只会持续很短的一段时间，为了这段时间去挂起和回复阻塞线程并不值得</strong>。在如今多处理器环境下，完全可以让另一个<strong>没有获取到锁的线程在门外等待一会(自旋)，但不放弃CPU的执行时间</strong>。等待持有锁的线程是否很快就会释放锁。<strong>为了让线程等待，我们只需要让线程执行一个忙循环(自旋)，这便是自旋锁由来的原因。</strong></p>
+<p>引入背景：大家都知道，在没有加入锁优化时，Synchronized是一个非常“胖大”的家伙。在多线程竞争锁时，当一个线程获取锁时，它会阻塞所有正在竞争的线程，这样对性能带来了极大的影响。在挂起线程和恢复线程的操作都需要转入内核态中完成，这些操作对系统的并发性能带来了很大的压力。同时HotSpot团队注意到在很多情况下，共享数据的<strong>锁定状态只会持续很短的一段时间，为了这段时间去挂起和恢复阻塞线程并不值得</strong>。在如今多处理器环境下，完全可以让另一个<strong>没有获取到锁的线程在门外等待一会(自旋)，但不放弃CPU的执行时间</strong>。等待持有锁的线程是否很快就会释放锁。<strong>为了让线程等待，我们只需要让线程执行一个忙循环(自旋)，这便是自旋锁由来的原因。</strong></p>
 </blockquote>
 <p>自旋锁早在JDK1.4 中就引入了，只是当时默认时关闭的。在JDK 1.6后默认为开启状态。</p>
 <p>自旋锁本质上与阻塞并不相同，先不考虑其对多处理器的要求，如果锁占用的时间非常的短，那么自旋锁的性能会非常的好，相反，其会带来更多的性能开销(因为在线程自旋时，始终会占用CPU的时间片，如果锁占用的时间太长，那么自旋的线程会白白消耗掉CPU资源)。</p>
@@ -290,7 +290,7 @@
 <p>有了<strong>自适应自旋，JVM对程序的锁的状态预测会越来越准备，JVM也会越来越聪明</strong>。</p>
 <h3 id="锁消除">锁消除</h3>
 <p>锁消除时指虚拟机即时编译器再运行时，对一些代码上要求同步，但是被检测到不可能存在共享数据竞争的锁进行消除。</p>
-<p>锁消除的主要判定依据来源于逃逸分析的数据支持。意思就是：JVM会判断再一段程序中的同步明显不会逃逸出去从而被其他线程访问到，那JVM就把它们当作栈上数据对待，认为这些数据时线程独有的，不需要加同步。此时就会进行锁消除。 ​</p>
+<p>锁消除的主要判定依据来源于逃逸分析的数据支持。意思就是：JVM会判断在一段程序中的同步明显不会逃逸出去从而被其他线程访问到，那JVM就把它们当作栈上数据对待，认为这些数据时线程独有的，不需要加同步。此时就会进行锁消除。 ​</p>
 <p>当然在实际开发中，我们很清楚的知道那些地方时线程独有的，不需要加同步锁，但是在Java API中有很多方法都是加了同步的，那么此时JVM会判断这段代码是否需要加锁。如果数据并不会逃逸，则会进行锁消除。比如如下操作：在操作String类型数据时，由于String是一个不可变类，对字符串的连接操作总是通过生成的新的String对象来进行的。因此Javac编译器会对String连接做自动优化。在JDK 1.5之前会使用StringBuffer对象的连续append()操作，在JDK 1.5及以后的版本中，会转化为StringBuidler对象的连续append()操作。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -340,7 +340,7 @@
 <h4 id="偏向锁的撤销">偏向锁的撤销</h4>
 <p><strong>偏向锁使用了一种等待竞争出现才会释放锁的机制，所以当其他线程尝试获取偏向锁时，持有偏向锁的线程才会释放锁。</strong></p>
 <p>但是偏向锁的撤销需要等到全局安全点(就是当前线程没有正在执行的字节码)。</p>
-<p>它会首先暂停拥有偏向锁的线程，让你后检查持有偏向锁的线程是否活着。</p>
+<p>它会首先暂停拥有偏向锁的线程，然后检查持有偏向锁的线程是否活着。</p>
 <p>如果线程不处于活动状态，直接将对象头设置为无锁状态。</p>
 <p>如果线程活着，JVM会遍历栈帧中的锁记录，栈帧中的锁记录和对象头要么偏向于其他线程，要么恢复到无锁状态或者标记对象不适合作为偏向锁。</p>
 <p><figure><a class="lightgallery" href="/images/current/synchronized/pianxiang2.png" title="/images/current/synchronized/pianxiang2.png" data-thumbnail="/images/current/synchronized/pianxiang2.png" data-sub-html="<h2>偏向锁2</h2>">
@@ -359,7 +359,7 @@
 </blockquote>
 <p>​在JDK 1.6之后引入的轻量级锁，需要注意的是轻量级锁并不是替代重量级锁的，而是对在大多数情况下同步块并不会有竞争出现提出的一种优化。
 <strong>它可以减少重量级锁对线程的阻塞带来地线程开销，从而提高并发性能。</strong></p>
-<p>​如果要理解轻量级锁，那么必须先要了解HotSpot虚拟机中对象头地内存布局。</p>
+<p>​如果要理解轻量级锁，那么必须先要了解HotSpot虚拟机中对象头的内存布局。</p>
 <p>在对象头中(Object Header)存在两部分：</p>
 <ul>
 <li>第一部分用于存储对象自身的运行时数据，HashCode、GCAge、锁标记位、是否为偏向锁等。一般为32位或者64位(视操作系统位数定)。官方称之为Mark Word，它是实现轻量级锁和偏向锁的关键。</li>
@@ -389,7 +389,8 @@
             alt="/images/current/synchronized/Lightweight-2.png" />
     </a><figcaption class="image-caption">轻量级锁加锁2</figcaption>
     </figure></p>
-<p>如果这个更新操作失败，JVM会检查当前的Mark Word中是否存在指向当前线程的栈帧的指针，如果有，说明该锁已经被获取，可以直接调用。如果没有，则说明该锁被其他线程抢占了，如果**有两条以上的线程竞争同一个锁，那轻量级锁就不再有效，直接膨胀位重量级锁，没有获得锁的线程会被阻塞。**此时，锁的标志位为10，Mark Word中存储的时指向重量级锁的指针。 ​</p>
+<p>如果这个更新操作失败，JVM会检查当前的Mark Word中是否存在指向当前线程的栈帧的指针，如果有，说明该锁已经被获取，可以直接调用。如果没有，则说明该锁被其他线程抢占了。</p>
+<p><strong>如果有两条以上的线程竞争同一个锁，那轻量级锁就不再有效，直接膨胀位重量级锁，没有获得锁的线程会被阻塞</strong>。此时，锁的标志位为10，Mark Word中存储的是指向重量级锁的指针。 ​</p>
 <p>轻量级解锁时，会使用原子的CAS操作将Displaced Mark Word替换回到对象头中，如果成功，则表示没有发生竞争关系。如果失败，表示当前锁存在竞争关系。锁就会膨胀成重量级锁。两个线程同时争夺锁，导致锁膨胀的流程图如下：</p>
 <p><figure><a class="lightgallery" href="/images/current/synchronized/Lightweight-3.png" title="/images/current/synchronized/Lightweight-3.png" data-thumbnail="/images/current/synchronized/Lightweight-3.png" data-sub-html="<h2>轻量级锁加锁3</h2>">
         <img

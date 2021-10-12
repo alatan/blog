@@ -50,10 +50,8 @@ Kafka 自从 0.8.2 版本就引入了新版本 Producer API，新版 Producer �
 ### Kafka 副本作用
 
 Kafka 默认只会给分区设置一个副本，由 broker 端参数 default.replication.factor 控制，默认值为 1，通常我们会修改该默认值，或者命令行创建 topic 时指定 replication-factor 参数，生产建议设置 3 副本。副本作用主要有两方面：
-
-    消息冗余存储，提高 Kafka 数据的可靠性；
-
-    提高 Kafka 服务的可用性，follower 副本能够在 leader 副本挂掉或者 broker 宕机的时候参与 leader 选举，继续对外提供读写服务。
+* 消息冗余存储，提高 Kafka 数据的可靠性；
+* 提高 Kafka 服务的可用性，follower 副本能够在 leader 副本挂掉或者 broker 宕机的时候参与 leader 选举，继续对外提供读写服务。
 
 ### 关于读写分离
 

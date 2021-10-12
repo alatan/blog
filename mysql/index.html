@@ -20,7 +20,7 @@
 <meta name="application-name" content="Journey to the Life">
 <meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/mysql/" /><link rel="prev" href="https://moge.fun/relationaldatabase/" /><link rel="next" href="https://moge.fun/dbsharding/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/mysql/" /><link rel="prev" href="https://moge.fun/relationaldatabase/" /><link rel="next" href="https://moge.fun/mysqltuning/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/mysql\/"
-        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  658 ,
+        },"genre": "posts","keywords": "数据库, 大纲","wordcount":  659 ,
         "url": "https:\/\/moge.fun\/mysql\/","datePublished": "2017-03-02T00:00:00+00:00","dateModified": "2017-03-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">MySQL总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 658 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-03-02">2017-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 659 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -609,7 +609,7 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table</span> <span class="p">...;</span>
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="k">table</span> <span class="p">;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h5 id="当前读">当前读</h5>
@@ -633,15 +633,15 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
 </div><h3 id="事务的实现">事务的实现</h3>
 <p>事务的实现是基于数据库的存储引擎。不同的存储引擎对事务的支持程度不一样。MySQL 中支持事务的存储引擎有 InnoDB 和 NDB。</p>
 <p>事务的实现就是如何实现ACID特性。<strong>事务的隔离性是通过锁实现，而事务的原子性、一致性和持久性则是通过事务日志实现。</strong></p>
-<p>nnodb事务日志包括redo log和undo log。</p>
+<p>InnoDB事务日志包括redo log和undo log。</p>
 <h4 id="redo-log重做日志">redo log（重做日志）</h4>
 <p>redo log通常是物理日志，记录的是数据页的物理修改，而不是某一行或某几行修改成怎样，它用来恢复提交后的物理数据页。</p>
-<p>在innoDB的存储引擎中，事务日志通过重做(redo)日志和innoDB存储引擎的日志缓冲(InnoDB Log Buffer)实现。事务开启时，事务中的操作，都会先写入存储引擎的日志缓冲中，在事务提交之前，这些缓冲的日志都需要提前刷新到磁盘上持久化，这就是DBA们口中常说的“日志先行”(Write-Ahead Logging)。当事务提交之后，在Buffer Pool中映射的数据文件才会慢慢刷新到磁盘。此时如果数据库崩溃或者宕机，那么当系统重启进行恢复时，就可以根据redo log中记录的日志，把数据库恢复到崩溃前的一个状态。未完成的事务，可以继续提交，也可以选择回滚，这基于恢复的策略而定。</p>
+<p>在InnoDB的存储引擎中，事务日志通过重做(redo)日志和InnoDB存储引擎的日志缓冲(InnoDB Log Buffer)实现。事务开启时，事务中的操作，都会先写入存储引擎的日志缓冲中，在事务提交之前，这些缓冲的日志都需要提前刷新到磁盘上持久化，这就是DBA们口中常说的“日志先行”(Write-Ahead Logging)。当事务提交之后，在Buffer Pool中映射的数据文件才会慢慢刷新到磁盘。此时如果数据库崩溃或者宕机，那么当系统重启进行恢复时，就可以根据redo log中记录的日志，把数据库恢复到崩溃前的一个状态。未完成的事务，可以继续提交，也可以选择回滚，这基于恢复的策略而定。</p>
 <p>在系统启动的时候，就已经为redo log分配了一块连续的存储空间，以顺序追加的方式记录Redo Log，通过顺序IO来改善性能。所有的事务共享redo log的存储空间，它们的Redo Log按语句的执行顺序，依次交替的记录在一起。</p>
 <h4 id="undo-log回滚日志">undo log（回滚日志）</h4>
 <p>undo log是逻辑日志，和redo log记录物理日志的不一样。可以这样认为，当delete一条记录时，undo log中会记录一条对应的insert记录，当update一条记录时，它记录一条对应相反的update记录。</p>
 <p>undo log 主要为事务的回滚服务。在事务执行的过程中，除了记录redo log，还会记录一定量的undo log。undo log记录了数据在每个操作前的状态，如果事务执行过程中需要回滚，就可以根据undo log进行回滚操作。单个事务的回滚，只会回滚当前事务做的操作，并不会影响到其他的事务做的操作。</p>
-<p>Undo记录的是已部分完成并且写入硬盘的未完成的事务，默认情况下回滚日志是记录下表空间中的（共享表空间或者独享表空间）</p>
+<p>Undo记录的是已部分完成并且写入硬盘的未完成的事务，默认情况下回滚日志是记录在表空间中的（共享表空间或者独享表空间）</p>
 <p>二种日志均可以视为一种恢复操作，redo_log是恢复提交事务修改的页操作，而undo_log是回滚行记录到特定版本。二者记录的内容也不同，redo_log是物理日志，记录页的物理修改操作，而undo_log是逻辑日志，根据每行记录进行记录。</p>
 <h4 id="事务acid特性的实现思想">事务ACID特性的实现思想</h4>
 <ul>
@@ -720,7 +720,7 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
 <h3 id="锁模式innodb有三种行锁的算法">锁模式(InnoDB有三种行锁的算法)</h3>
 <h4 id="record-locks记录锁行锁">Record Locks（记录锁，行锁）</h4>
 <p>单个行记录上的锁。对索引项加锁，锁定符合条件的行。其他事务不能修改和删除加锁项。</p>
-<p>该锁是对索引记录进行加锁！锁是在加索引上而不是行上的。注意了，innodb一定存在聚簇索引，因此行锁最终都会落到聚簇索引上！</p>
+<p>该锁是对索引记录进行加锁！锁是在加索引上而不是行上的。注意了，InnoDB 一定存在聚簇索引，因此行锁最终都会落到聚簇索引上！</p>
 <p>如果表没有设置索引，InnoDB 会自动在主键上创建隐藏的聚簇索引，因此 Record Locks 依然可以使用。</p>
 <h4 id="gap-locks间隙锁">Gap Locks（间隙锁）</h4>
 <blockquote>
@@ -796,7 +796,7 @@ MySQL主要有两种结构Hash索引和B+Tree索引，我们使用的是InnoDB�
     </div>
 
     <div class="post-nav"><a href="/relationaldatabase/" class="prev" rel="prev" title="关系型数据库概览"><i class="fas fa-angle-left fa-fw"></i>关系型数据库概览</a>
-            <a href="/dbsharding/" class="next" rel="next" title="数据切分（分库分表）总结">数据切分（分库分表）总结<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/mysqltuning/" class="next" rel="next" title="MySQL调优">MySQL调优<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

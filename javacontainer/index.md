@@ -2,7 +2,7 @@
 
   
 ## 概览
-容器主要包括Collection和Map 两种，Collection存储着对象的集合，而Map存储着键值对（两个对象）的映射表。
+容器主要包括Collection和Map 两种，Collection是存储着对象的集合，而Map存储着键值对（两个对象）的映射表。
 
 ![java_container](/images/container/java_container.png)
 

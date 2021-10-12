@@ -63,7 +63,7 @@ OOD（面向对象设计）七大戒律 开-闭原则 Open-Close Principle（OCP
 </item><item>
     <title>Java位运算 </title>
     <link>https://moge.fun/byteopt/</link>
-    <pubDate>Thu, 01 Feb 2018 00:00:00 &#43;0000</pubDate>
+    <pubDate>Wed, 31 Jan 2018 00:00:00 &#43;0000</pubDate>
     <author>作者</author>
     <guid>https://moge.fun/byteopt/</guid>
     <description><![CDATA[一切的起源：二进制 位：二进制位，简称“位”。是二进制记数系统中表示小于2的整数的符号，一般用1或 0表示，是具有相等概率的两种状态中的一种。二进制位的位数可表示一个机器字的字长，一个二进制位包含的信息量称为一比特（bit）。

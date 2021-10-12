@@ -200,10 +200,10 @@
 </blockquote>
 <h3 id="kafka-副本作用">Kafka 副本作用</h3>
 <p>Kafka 默认只会给分区设置一个副本，由 broker 端参数 default.replication.factor 控制，默认值为 1，通常我们会修改该默认值，或者命令行创建 topic 时指定 replication-factor 参数，生产建议设置 3 副本。副本作用主要有两方面：</p>
-<pre><code>消息冗余存储，提高 Kafka 数据的可靠性；
-
-提高 Kafka 服务的可用性，follower 副本能够在 leader 副本挂掉或者 broker 宕机的时候参与 leader 选举，继续对外提供读写服务。
-</code></pre>
+<ul>
+<li>消息冗余存储，提高 Kafka 数据的可靠性；</li>
+<li>提高 Kafka 服务的可用性，follower 副本能够在 leader 副本挂掉或者 broker 宕机的时候参与 leader 选举，继续对外提供读写服务。</li>
+</ul>
 <h3 id="关于读写分离">关于读写分离</h3>
 <p>这里要说明的是 Kafka 并不支持读写分区，生产消费端所有的读写请求都是由 leader 副本处理的，follower 副本的主要工作就是从 leader 副本处异步拉取消息，进行消息数据的同步，并不对外提供读写服务。</p>
 <p>Kafka 之所以这样设计，主要是为了保证读写一致性，因为副本同步是一个异步的过程，如果当 follower 副本还没完全和 leader 同步时，从 follower 副本读取数据可能会读不到最新的消息。</p>
