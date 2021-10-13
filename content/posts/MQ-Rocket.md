@@ -2,7 +2,7 @@
 title: "RocketMQ"
 description: "RocketMQ"
 keywords: ["MQ"]
-date: 2019-02-02
+date: 2019-02-03
 author: "默哥"
 weight: 70
 draft: false
@@ -21,3 +21,5 @@ toc:
 * 支持事务
 
 ![](/images/mq/tx.png "事务")
+## 参考链接
+* [RocketMQ 入门教程](https://mp.weixin.qq.com/s/fwvOddHUL8RhbaCnuchT8w)
