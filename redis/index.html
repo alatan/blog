@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/redis\/"
-        },"genre": "posts","keywords": "缓存, 大纲","wordcount":  168 ,
+        },"genre": "posts","keywords": "缓存, 大纲","wordcount":  161 ,
         "url": "https:\/\/moge.fun\/redis\/","datePublished": "2019-03-02T00:00:00+00:00","dateModified": "2019-03-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Redis概览</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%93%E5%AD%98/"><i class="far fa-folder fa-fw"></i>缓存</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-02">2019-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 168 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-02">2019-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 161 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -151,7 +151,7 @@
         </li>
       </ul>
     </li>
-    <li><a href="#高可用哨兵机制redis-sentinel">高可用：哨兵机制（Redis Sentinel.</a></li>
+    <li><a href="#高可用哨兵机制redis-sentinel">高可用：哨兵机制（Redis Sentinel）</a></li>
     <li><a href="#高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster)</a></li>
     <li><a href="#方案">方案</a></li>
     <li><a href="#参考文章">参考文章</a></li>
@@ -228,7 +228,7 @@
 <h5 id="手动触发">手动触发</h5>
 <ul>
 <li>save命令：阻塞当前Redis服务器，直到RDB过程完成为止，对于内存 比较大的实例会造成长时间阻塞，线上环境不建议使用</li>
-<li>bgsave命令：Redis进程执行fork操作创建子进程，RDB持久化过程由子 进程负责，完成后自动结束。阻塞只发生在fork阶段，一般时间很短</li>
+<li>bgsave命令：Redis进程执行fork操作创建子进程，RDB持久化过程由子进程负责，完成后自动结束。阻塞只发生在fork阶段，一般时间很短</li>
 </ul>
 <p>bgsave命令具体流程如下：</p>
 <ul>
@@ -321,19 +321,19 @@
             alt="/images/redis/redis-copy-add.jpg" />
     </a><figcaption class="image-caption">增量复制</figcaption>
     </figure></p>
-<h2 id="高可用哨兵机制redis-sentinel">高可用：哨兵机制（Redis Sentinel.</h2>
+<h2 id="高可用哨兵机制redis-sentinel">高可用：哨兵机制（Redis Sentinel）</h2>
 <blockquote>
 <p>如果主节点出现故障该怎么办呢？ 在 Redis 主从集群中，哨兵机制是实现主从库自动切换的关键机制，它有效地解决了主从复制模式下故障转移的问题。</p>
 </blockquote>
 <p>主要功能：</p>
 <ul>
-<li>监控（Monitoring. ：哨兵会不断地检查主节点和从节点是否运作正常。</li>
-<li>自动故障转移（Automatic failover. ：当主节点不能正常工作时，哨兵会开始自动故障转移操作，它会将失效主节点的其中一个从节点升级为新的主节点，并让其他从节点改为复制新的主节点。</li>
-<li>配置提供者（Configuration provider. ：客户端在初始化时，通过连接哨兵来获得当前Redis服务的主节点地址。</li>
-<li>通知（Notification. ：哨兵可以将故障转移的结果发送给客户端。</li>
+<li>监控（Monitoring）：哨兵会不断地检查主节点和从节点是否运作正常。</li>
+<li>自动故障转移（Automatic failover）：当主节点不能正常工作时，哨兵会开始自动故障转移操作，它会将失效主节点的其中一个从节点升级为新的主节点，并让其他从节点改为复制新的主节点。</li>
+<li>配置提供者（Configuration provider）：客户端在初始化时，通过连接哨兵来获得当前Redis服务的主节点地址。</li>
+<li>通知（Notification）：哨兵可以将故障转移的结果发送给客户端。</li>
 </ul>
 <h2 id="高可拓展分片技术redis-cluster">高可拓展：分片技术（Redis Cluster)</h2>
-<p>主从复制和哨兵机制保障了高可用，就读写分离而言虽然slave节点扩展了主从的读并发能力，但是写能力和存储能力是无法进行扩展，就只能是master节点能够承载的上限。如果面对海量数据那么必然需要构建master（主节点分片)之间的集群，同时必然需要吸收高可用（主从复制和哨兵机制. 能力，即每个master分片节点还需要有slave节点，这是分布式系统中典型的纵向扩展（集群的分片技术. 的体现；所以在Redis 3.0版本中对应的设计就是Redis Cluster。</p>
+<p>主从复制和哨兵机制保障了高可用，就读写分离而言虽然slave节点扩展了主从的读并发能力，但是写能力和存储能力是无法进行扩展，就只能是master节点能够承载的上限。如果面对海量数据那么必然需要构建master（主节点分片)之间的集群，同时必然需要牺牲高可用（主从复制和哨兵机制）能力，即每个master分片节点还需要有slave节点，这是分布式系统中典型的纵向扩展（集群的分片技术）的体现；所以在Redis 3.0版本中对应的设计就是Redis Cluster。</p>
 <h2 id="方案">方案</h2>
 <ul>
 <li>事前：Redis 高可用，主从+哨兵，Redis cluster，避免全盘崩溃。</li>

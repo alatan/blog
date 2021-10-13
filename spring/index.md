@@ -91,5 +91,12 @@ Spring AOP流程大致上可以分为三个阶段：标签解析和AutoProxyCrea
 
 以上就是大概的流程，总结一下就是：**AOP实现使用的是动态代理和拦截器链。**
 
+### 动态代理实现步骤  
+具体步骤是： 
+1. 实现InvocationHandler接口创建自己的调用处理器 
+1. 给Proxy类提供ClassLoader和代理接口类型数组创建动态代理类 
+1. 以调用处理器类型为参数，利用反射机制得到动态代理类的构造函数 
+1. 以调用处理器对象为参数，利用动态代理类的构造函数创建动态代理类对象 
+
 ## 学习资料
 * [AOP介绍](https://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&mid=2665513187&idx=1&sn=f603eee3e798e79ce010c9d58cd2ecf3)
