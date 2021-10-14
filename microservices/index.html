@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/microservices\/"
-        },"genre": "posts","keywords": "大纲","wordcount":  115 ,
+        },"genre": "posts","keywords": "大纲","wordcount":  98 ,
         "url": "https:\/\/moge.fun\/microservices\/","datePublished": "2020-02-02T00:00:00+00:00","dateModified": "2020-02-02T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">微服务介绍</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/"><i class="far fa-folder fa-fw"></i>知识体系</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-02-02">2020-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 115 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-02-02">2020-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 98 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -160,13 +160,13 @@
 </ul>
 <h2 id="微服务架构的缺点">微服务架构的缺点</h2>
 <ul>
-<li>微服务强调了服务大小，但实际上这并没有一个统一的标准：业务逻辑应该按照什么规则划分为微服务，这本身就是一个经验工程。有些开发者主张 10-100 行代码就应该建立一个微服务。虽然建立* 型服务是微服务架构崇尚的，但要记住，微服务是达到目的的手段，而不是目标。微服务的目标是充分分解应用程序，以促进敏捷开发和持续集成部署。</li>
+<li>微服务强调了服务大小，但实际上这并没有一个统一的标准：业务逻辑应该按照什么规则划分为微服务，这本身就是一个经验工程。有些开发者主张 10-100 行代码就应该建立一个微服务。微服务的目标是充分分解应用程序，以促进敏捷开发和持续集成部署。</li>
 <li>微服务的分布式特点带来的复杂性：开发人员需要基于 RPC 或者消息实现微服务之间的调用和通信，而这就使得服务之间的发现、服务调用链的跟踪和质量问题变得的相当棘手。</li>
-<li>分区的数据库体系和分布式事务：更新多个业务实体的业务交易相当普遍，不同服务可能拥有不同的数据库。CAP 原理的约束，使得我们不得不放弃传统的强一致性，而转而追求最终一致性，这个对* 发人员来说是一个挑战。</li>
+<li>分区的数据库体系和分布式事务：更新多个业务实体的业务交易相当普遍，不同服务可能拥有不同的数据库。CAP 原理的约束，使得我们不得不放弃传统的强一致性，而转而追求最终一致性，这个对开发人员来说是一个挑战。</li>
 <li>测试挑战：传统的单体WEB应用只需测试单一的 REST API 即可，而对微服务进行测试，需要启动它依赖的所有其他服务。这种复杂性不可低估。</li>
 <li>跨多个服务的更改：比如在传统单体应用中，若有 A、B、C 三个服务需要更改，A 依赖 B，B 依赖 C。我们只需更改相应的模块，然后一次性部署即可。但是在微服务架构中，我们需要仔细规划和* 调每个服务的变更部署。我们需要先更新 C，然后更新 B，最后更新 A。</li>
 <li>部署复杂：微服务由不同的大量服务构成。每种服务可能拥有自己的配置、应用实例数量以及基础服务地址。这里就需要不同的配置、部署、扩展和监控组件。此外，我们还需要服务发现机制，以便服* 可以发现与其通信的其他服务的地址。因此，成功部署微服务应用需要开发人员有更好地部署策略和高度自动化的水平。</li>
-<li>总的来说（问题和挑战）：API Gateway、服务间调用、服务发现、服务容错、服务部署、数据调用。</li>
+<li>总结（问题和挑战）：API Gateway、服务间调用、服务发现、服务容错、服务部署、数据调用。</li>
 </ul>
 <p>不过，现在很多微服务的框架（比如 Spring Cloud、Dubbo）已经很好的解决了上面的问题。</p>
 <h2 id="微服务常见问题">微服务常见问题</h2>
@@ -184,33 +184,12 @@
 <p>服务熔断：当下游的服务因为某种原因突然变得不可用或响应过慢，上游服务为了保证自己整体服务的可用性，不再继续调用目标服务，直接返回，快速释放资源。如果目标服务情况好转则恢复调用。</p>
 </blockquote>
 <p>是在服务降级的基础上更直接的一种保护方式，需要说明的是熔断其实是一个框架级的处理，那么这套熔断机制的设计，基本上业内用的是断路器模式</p>
-<p>在Hystrix中，对应配置如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//滑动窗口的大小（当在一个统计时间范围内的请求失败数量达到设定值），默认为20
-</span><span class="c1"></span><span class="n">circuitBreaker</span><span class="o">.</span><span class="na">requestVolumeThreshold</span> 
-<span class="c1">//错误率，默认50%（当前的请求错误率达到设定的错误率阈值）
-</span><span class="c1"></span><span class="n">circuitBreaker</span><span class="o">.</span><span class="na">errorThresholdPercentage</span>
-<span class="c1">//过多长时间，熔断器再次检测是否开启，默认为5000，即5s钟（在设定时间（sleepWindowInMilliseconds）后尝试恢复。）
-</span><span class="c1"></span><span class="n">circuitBreaker</span><span class="o">.</span><span class="na">sleepWindowInMilliseconds</span> 
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>每当20个请求中，有50%失败时，熔断器就会打开，此时再调用此服务，将会直接返回失败，不再调远程服务。直到5s钟之后，重新检测该触发条件，判断是否把熔断器关闭，或者继续打开。</strong></p>
-<p>这些属于框架层级的实现，我们只要实现对应接口就好！</p>
 <h4 id="服务雪崩解决方案-3服务隔离">服务雪崩解决方案-3.服务隔离</h4>
 <p>是Hystrix为隔离的服务开启一个独立的线程池，这样在高并发的情况下不会影响其他服务。服务隔离有线程池和信号量两种实现方式，一般使用线程池方式。</p>
 <h2 id="微服务的三个阶段">微服务的三个阶段</h2>
 <ol>
 <li>仅使用注册发现，基于SpringCloud或者Dubbo进行开发。</li>
-<li>使用了熔断、限流、降级等服务治理策略，并配备完整服务工具和平台。</li>
+<li>使用了限流、降级、熔断等服务治理策略，并配备完整服务工具和平台。</li>
 <li>Service Mesh将服务治理作为通用组件，下沉到平台层实现，应用层仅仅关注业务逻辑，平台层可以根据业务监控自动调度和参数调整，实现AIOps和智能调度。
 <ul>
 <li>微服务更像是一个服务之间的生态，专注于服务治理等方面，而服务网格更专注于服务之间的通信，以及和 DevOps 更好的结合。</li>
