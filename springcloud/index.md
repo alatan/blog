@@ -84,13 +84,13 @@ OpenFeign 是SpringCloud在Feign的基础上支持了Spring MVC的注解，并�
 * 当程序启动之后，会进行包扫描，扫描所有@FeignClient注解的接口，并将这些信息注入到IOC容器中。当定义的Feign接口被调用时，通过JDK的代理的方式生成具体的RequestTemplate。Feign会为每个接口方法创建一个RequestTemplate对象。该对象封装了HTTP请求需要的所有信息，例如请求参数名、请求方法等信息。
 * 然后由RequestTemplate生成Request，把Request交给Client去处理，这里的Client可以是JDK原生的URLConnection、HttpClient或Okhttp。最后Client被封装到LoadBalanceClient类，看这个类的名字既可以知道是结合Ribbon负载均衡发起服务之间的调用，因为在OpenFeign中默认是已经整合了Ribbon了。
 
-## Ribbon和Feign的区别
+#### Ribbon和Feign的区别
 * Ribbon都是调用其他服务的，但方式不同。
 * 启动类注解不同，Ribbon是@RibbonClient feign的是@EnableFeignClients
 * 服务指定的位置不同，Ribbon是在@RibbonClient注解上声明，Feign则是在定义抽象方法的接口中使用@FeignClient声明。
 * 调用方式不同，Ribbon需要自己构建http请求，模拟http请求然后使用RestTemplate发送给其他服务，步骤相当繁琐。Feign需要将调用的方法定义成抽象方法即可。
 
-## Ribbon是和Feign以及Eureka紧密协作
+#### Ribbon是和Feign以及Eureka紧密协作
 完成工作的，具体如下：
 * 首先Ribbon会从 Eureka Client里获取到对应的服务注册表，也就知道了所有的服务都部署在了哪些机器上，在监听哪些端口号。
 * 然后Ribbon就可以使用默认的Round Robin算法，从中选择一台机器
@@ -98,10 +98,10 @@ OpenFeign 是SpringCloud在Feign的基础上支持了Spring MVC的注解，并�
 
 ![](/images/spring/springcloud/SpringCloudReqFlow.png "Spring Cloud ReqFlow")
 
-### Hystrix
+## Hystrix
 > Hystrix 是一个延迟和容错库，旨在隔离远程系统，服务和第三方库的访问点，当出现故障是不可避免的故障时，停止级联故障并在复杂的分布式系统中实现弹性。
 
-#### Hystrix有四种防雪崩方式:
+### Hystrix有四种防雪崩方式:
 * 服务降级：接口调用失败就调用本地的方法返回一个空
 * 服务熔断：接口调用失败就会进入调用接口提前定义好的一个熔断的方法，返回错误信息
 * 服务隔离：隔离服务之间相互影响
@@ -109,7 +109,7 @@ OpenFeign 是SpringCloud在Feign的基础上支持了Spring MVC的注解，并�
 * 线程池数量 = 每秒请求数量 * 业务处理时间 + 备用线程数量
 
 
-#### 大致的工作流如下：
+### 大致的工作流如下：
 1. 构建一个HystrixCommand对象，用于封装请求，并在构造方法配置请求被执行需要的参数
 1. 执行命令，Hystrix提供了几种执行命令的方法，比较常用到的是synchrous和asynchrous
 1. 判断电路是否被打开，如果被打开，直接进入fallback方法
