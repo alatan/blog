@@ -146,7 +146,8 @@ Kafka 的消息是保存或缓存在磁盘上的，一般认为在磁盘上读�
 
 ## 参考链接
 * [深入浅出Kafka](https://mp.weixin.qq.com/s/-IPfWPS1WQMEgcIu0Ak2VQ)
-* [Kafka总结](https://mp.weixin.qq.com/s/Voz-ZngT-IO9t_YMxLckdg)
+* [Kafka分区和副本](https://www.cnblogs.com/listenfwind/p/12465409.html)
+* [Kafka原理和实践](https://juejin.cn/post/6844903919424913415)
 * [Kafka整理](https://mp.weixin.qq.com/s/9fJchPJa_raHSkvo29bkEA)
 * [Kafka为什么快](https://mp.weixin.qq.com/s/ejZBAGI7qLE_QYSe-AqipA)
 
