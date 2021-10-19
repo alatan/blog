@@ -56,24 +56,21 @@ Kafka 自从 0.8.2 版本就引入了新版本 Producer API，新版 Producer �
 ### 消息重试
 此外，Kafka 生产端支持重试机制，对于某些原因导致消息发送失败的，比如网络抖动，开启重试后 Producer 会尝试再次发送消息。该功能由参数 retries 控制，参数含义代表重试次数，默认值为 0 表示不重试，建议设置大于 0 比如 3。
 
-## Kafka副本机制
+## Kafka 副本机制
 > 副本机制也称 Replication 机制是 Kafka 实现高可靠、高可用的基础。Kafka 中有 leader 和 follower 两类副本。
 
 ### Kafka 副本作用
-
 Kafka 默认只会给分区设置一个副本，由 broker 端参数 default.replication.factor 控制，默认值为 1，通常我们会修改该默认值，或者命令行创建 topic 时指定 replication-factor 参数，生产建议设置 3 副本。副本作用主要有两方面：
 * 消息冗余存储，提高 Kafka 数据的可靠性；
 * 提高 Kafka 服务的可用性，follower 副本能够在 leader 副本挂掉或者 broker 宕机的时候参与 leader 选举，继续对外提供读写服务。
 
 ### 关于读写分离
-
 这里要说明的是 Kafka 并不支持读写分区，生产消费端所有的读写请求都是由 leader 副本处理的，follower 副本的主要工作就是从 leader 副本处异步拉取消息，进行消息数据的同步，并不对外提供读写服务。
 
 Kafka 之所以这样设计，主要是为了保证读写一致性，因为副本同步是一个异步的过程，如果当 follower 副本还没完全和 leader 同步时，从 follower 副本读取数据可能会读不到最新的消息。
 
 ### ISR 副本集合
-
-Kafka 为了维护分区副本的同步，引入 ISR（In-Sync Replicas）副本集合的概念，ISR 是分区中正在与 leader 副本进行同步的 replica 列表，且必定包含 leader 副本。
+Kafka 为了维护分区副本的同步，引入 ISR（In-Sync Replicas ）副本集合的概念，ISR 是分区中正在与 leader 副本进行同步的 replica 列表，且必定包含 leader 副本。
 
 ISR 列表是持久化在 Zookeeper 中的，任何在 ISR 列表中的副本都有资格参与 leader 选举。
 
