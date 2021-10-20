@@ -7,6 +7,7 @@
             <loc>https://moge.fun/nacos/</loc><lastmod>2020-04-11T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/springcloudalibaba/</loc><lastmod>2020-04-10T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/springcloud-eureka/</loc><lastmod>2020-04-03T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://moge.fun/springcloud-hystrix/</loc><lastmod>2020-04-03T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/springcloud/</loc><lastmod>2020-04-02T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/dubbo/</loc><lastmod>2020-04-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://moge.fun/idempotence/</loc><lastmod>2020-03-01T00:00:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

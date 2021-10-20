@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/moge.fun\/mq-kafka\/"
-        },"genre": "posts","keywords": "MQ, 大纲","wordcount":  618 ,
+        },"genre": "posts","keywords": "MQ, 大纲","wordcount":  620 ,
         "url": "https:\/\/moge.fun\/mq-kafka\/","datePublished": "2019-02-05T00:00:00+00:00","dateModified": "2019-02-05T00:00:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -106,7 +106,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Kafka</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/mq/"><i class="far fa-folder fa-fw"></i>MQ</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-05">2019-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 618 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-02-05">2019-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 620 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -124,7 +124,7 @@
         <li><a href="#消息重试">消息重试</a></li>
       </ul>
     </li>
-    <li><a href="#kafka副本机制">Kafka副本机制</a>
+    <li><a href="#kafka-副本机制">Kafka 副本机制</a>
       <ul>
         <li><a href="#kafka-副本作用">Kafka 副本作用</a></li>
         <li><a href="#关于读写分离">关于读写分离</a></li>
@@ -194,7 +194,7 @@
 <p>那么生成端消息是不是必须要达到一个 batch 大小时，才会批量发送到服务端呢？答案是否定的，Kafka 生产端提供了另一个重要参数 linger.ms，该参数控制了 batch 最大的空闲时间，超过该时间的 batch 也会被发送到 broker 端。</p>
 <h3 id="消息重试">消息重试</h3>
 <p>此外，Kafka 生产端支持重试机制，对于某些原因导致消息发送失败的，比如网络抖动，开启重试后 Producer 会尝试再次发送消息。该功能由参数 retries 控制，参数含义代表重试次数，默认值为 0 表示不重试，建议设置大于 0 比如 3。</p>
-<h2 id="kafka副本机制">Kafka副本机制</h2>
+<h2 id="kafka-副本机制">Kafka 副本机制</h2>
 <blockquote>
 <p>副本机制也称 Replication 机制是 Kafka 实现高可靠、高可用的基础。Kafka 中有 leader 和 follower 两类副本。</p>
 </blockquote>
@@ -208,7 +208,7 @@
 <p>这里要说明的是 Kafka 并不支持读写分区，生产消费端所有的读写请求都是由 leader 副本处理的，follower 副本的主要工作就是从 leader 副本处异步拉取消息，进行消息数据的同步，并不对外提供读写服务。</p>
 <p>Kafka 之所以这样设计，主要是为了保证读写一致性，因为副本同步是一个异步的过程，如果当 follower 副本还没完全和 leader 同步时，从 follower 副本读取数据可能会读不到最新的消息。</p>
 <h3 id="isr-副本集合">ISR 副本集合</h3>
-<p>Kafka 为了维护分区副本的同步，引入 ISR（In-Sync Replicas）副本集合的概念，ISR 是分区中正在与 leader 副本进行同步的 replica 列表，且必定包含 leader 副本。</p>
+<p>Kafka 为了维护分区副本的同步，引入 ISR（In-Sync Replicas ）副本集合的概念，ISR 是分区中正在与 leader 副本进行同步的 replica 列表，且必定包含 leader 副本。</p>
 <p>ISR 列表是持久化在 Zookeeper 中的，任何在 ISR 列表中的副本都有资格参与 leader 选举。</p>
 <p>ISR 列表是动态变化的，并不是所有的分区副本都在 ISR 列表中，哪些副本会被包含在 ISR 列表中呢？副本被包含在 ISR 列表中的条件是由参数 replica.lag.time.max.ms 控制的，参数含义是副本同步落后于 leader 的最大时间间隔，默认10s，意思就是说如果某一 follower 副本中的消息比 leader 延时超过10s，就会被从 ISR 中排除。Kafka 之所以这样设计，主要是为了减少消息丢失，只有与 leader 副本进行实时同步的 follower 副本才有资格参与 leader 选举，这里指相对实时。</p>
 <h3 id="unclean-leader-选举">Unclean leader 选举</h3>

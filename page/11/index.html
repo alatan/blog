@@ -103,60 +103,33 @@
         alt="/images/avatar.png"
         title="/images/avatar.png" /></a></div><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/flashsale/">秒杀(限时抢购)系统设计</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-05-07">2020-05-07</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/"><i class="far fa-folder fa-fw"></i>业务场景</a></span></div><div class="content">参考文章  高性能秒杀系统设计 秒杀架构实践 百万级用户的抽奖系统  </div><div class="post-footer">
-        <a href="/flashsale/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/sso/">单点登录</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-05-06">2020-05-06</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/"><i class="far fa-folder fa-fw"></i>业务场景</a></span></div><div class="content"> 单点登录（Single Sign On），简称为 SSO，是比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。
- 参考文章  单点登录 单点登录总结  </div><div class="post-footer">
-        <a href="/sso/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/nacos/">Nacos解析</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-04-11">2020-04-11</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/springcloud/"><i class="far fa-folder fa-fw"></i>SpringCloud</a></span></div><div class="content">临时实例和持久化实例。  在定义上区分临时实例和持久化实例的关键是健康检查的方式。 临时实例使用客户端上报模式，而持久化实例使用服务端反向探测模式。 临时实例需要能够自动摘除不健康实例，而且无需持久化存储实例，那么这种实例就适用于类 Gossip 的协议。 右边的持久化实例使用服务端探测的健康检查方式，因为客户端不会上报心跳，那么自然就不能去自动摘除下线的实例。  实现对比  Zookeeper：保证CP，放弃可用性；一旦zookeeper集群中master节点宕了，则会重新选举leader，这个过程可能非常漫长，在这过程中服务不可用。 Eureka：保证AP，放弃一致性；Eureka集群中的各个节点都是平等的，一旦某个节点宕了，其他节点正常服务（一旦客户端发现注册失败，则将会连接集群中其他节点），虽然保证了可用性，但是每个节点的数据可能不是最新的。 Nacos：同时支持CP和AP，默认是AP，可以切换；AP模式下以临时实例注册，CP模式下服务永久实例注册。  健康检查 客户端健康检查 客户端健康检查主要关注客户端上报心跳的方式、服务端摘除不健康客户端的机制。
-服务端健康检查 而服务端健康检查，则关注探测客户端的方式、灵敏度及设置客户端健康状态的机制。
-从实现复杂性来说，服务端探测肯定是要更加复杂的，因为需要服务端根据注册服务配置的健康检查方式，去执行相应的接口，判断相应的返回结果，并做好重试机制和线程池的管理。
-这与客户端探测，只需要等待心跳，然后刷新 TTL 是不一样的。同时服务端健康检查无法摘除不健康实例，这意味着只要注册过的服务实例，如果不调用接口主动注销，这些服务实例都需要去维持健康检查的探测任务，而客户端则可以随时摘除不健康实例，减轻服务端的压力。
-Nacos实现配置管理和动态配置  添加对应spring-cloud-starter-alibaba-nacos-config依赖 使用原生注解@Value()导入配置 使用原生注解@RefreshScope刷新配置 根据自己业务场景做好多环境配置隔离(Namespace)、不同业务配置隔离(Group) 切记：命名空间和分组的配置一定要放在bootstrap.yml或者bootstrap.properties配置文件中  参考文章  Nacos 注册中心的设计原理详解 Nacos 实现原理详解 Nacos 使用  </div><div class="post-footer">
-        <a href="/nacos/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/springcloudalibaba/">Spring Cloud Alibaba</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-04-10">2020-04-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/springcloud/"><i class="far fa-folder fa-fw"></i>SpringCloud</a></span></div><div class="content">Spring Cloud Alibaba" Spring Cloud Alibaba 
-组件  Spring Cloud - Gateway 网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心/配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错(限流，降级) Spring Cloud Alibaba - Seata 实现分布式事务  Spring Cloud Alibaba 组件" Spring Cloud Alibaba 组件 
-Nacos  Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
- Nacos 这个名字怎么读呢？它的音标为 /nɑ:kəʊs/。这个名字不是一个标准的单词，而是以下单词的首字母缩写：Name and Config Service。</div><div class="post-footer">
-        <a href="/springcloudalibaba/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/springcloud-eureka/">Spring Cloud Eureka 解析</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-04-03">2020-04-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/springcloud/"><i class="far fa-folder fa-fw"></i>SpringCloud</a></span></div><div class="content">先来一波问题，然后看看Enueka是通过什么方式处理的。
- Eureka注册中心使用什么样的方式来储存各个服务注册时发送过来的机器地址和端口号？ 各个服务找Eureka Server拉取注册表的时候，是什么样的频率？ 各个服务是如何拉取注册表的？ 对于一个有几百个服务，部署上千台机器的大型分布式系统来说，这套系统会对Eureka Server造成多大的访问压力？ Eureka Server从技术层面是如何抗住日千万级访问量的？   基本知识点，各个服务内的Eureka Client组件，默认情况下，每隔30秒会发送一个请求到Eureka Server，来拉取最近有变化的服务信息
- Eureka Server设计精妙的注册表存储结构  维护注册表、拉取注册表、更新心跳时间，全部发生在内存里！这是Eureka Server非常核心的一个点。  Eureka Server端优秀的多级缓存机制  尽可能保证了内存注册表数据不会出现频繁的读写冲突问题。 并且进一步保证对Eureka Server的大量请求，都是快速从纯内存走，性能极高。  总结  通过上面的分析可以看到，Eureka通过设置适当的请求频率拉取注册表30秒间隔，发送心跳30秒间隔），可以保证一个大规模的系统每秒请求Eureka Server的次数在几百次。 同时通过纯内存的注册表，保证了所有的请求都可以在内存处理，确保了极高的性能 另外,多级缓存机制，确保了不会针对内存数据结构发生频繁的读写并发冲突操作，进一步提升性能。  参考文章  eureka原理 Eureka 原理解析  微服务注册中心如何承载大型系统的千万级访问  </div><div class="post-footer">
-        <a href="/springcloud-eureka/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/springcloud-hystrix/">Spring Cloud Hystrix 解析</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-04-03">2020-04-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/springcloud/"><i class="far fa-folder fa-fw"></i>SpringCloud</a></span></div><div class="content">参考文章  Hystrix原理与实战  Hystrix原理与实战   </div><div class="post-footer">
-        <a href="/springcloud-hystrix/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></div></div>
-</article><ul class="pagination"><li class="page-item active">
+        <a href="/energy/">减缓焦虑，积聚生活正能量</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>默哥</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-01-01">2015-01-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8F%8D%E6%80%9D/"><i class="far fa-folder fa-fw"></i>反思</a></span></div><div class="content">面对不断袭来的压力和信息，我们要做的，就是找到自己的节奏，建立一套稳定的模式，用来应对和处理种种事务。尽可能让一切「平稳」下来。 这也许需要一些取舍，一些选择、牺牲和放弃 —— 但一旦这套模式能够建立起来，一切都是值得的。  思虑过载 变被动为主动，自己去决定「我要做什么」，重新找回「自主性」。
+前一天晚上做好安排  整理一遍任务清单，从收集/待办的池子中， 挑出5-6个最重要、最关键的任务，安排到第二天  留出一定的宽裕度  做出取舍。该舍弃的，就果断舍弃。 与其把所有事情做到60分，不如把最重要的事情做到100分。  聚焦在长期价值上  不妨这样问问自己：我可以做些什么，来摆脱目前这种忙碌的状态？
+ 无论是设计一套流程，还是把部分工作委托出去，又或者是把细碎的任务合并起来，还是优化、压缩任务步骤和时间……这些，长期来看都是更具价值的，也是你应该着重去聚焦的。 把它们作为你每天「最重要的事项」，想办法让自己能够抽身出来。
+ 被压榨感  什么是被压榨感？它是指：自己一直在劳动和付出，但却始终得不到反馈、认可和肯定，仿佛自己的付出都是无价值的。
+  去发现生活中微小的幸福感。   决策疲劳  不要在晚上作出重要的决定。 通过给自己设立规则，让规则帮助自己作出决策。规则覆盖不到的地方，则用随机来解决。   外在打扰  建立你的「第二大脑」，把思维外部化。
+  信息过载  我们不断去追逐新信息，不断获取新鲜感的刺激，这本身是一个高耗能的行为 —— 但我们的大脑，会受到新鲜感的蛊惑，从而忽略和掩盖住这种耗能。
+  意识地克制自己，去做好信息的「反刍」，而非追逐新的信息。 试着把你记录的不同笔记放到一起，看看它们之间能产生什么联系，能否创造出新的火花。 在闲暇的碎片时间里，去反刍、回想自己记下的旧内容，尽量控制对新信息的摄入。   tips  一定要睡好。   睡眠过程中的深度睡眠，能够有效促进腺苷到ATP的水合反应，为我们的机体储存能量、清除代谢垃圾。 请保证每天6小时以上不受干扰的睡眠，这极其重要。
+ 多散步。   散步是最轻松有效的锻炼。不但能够促进血清素的合成，也能有效扩充大脑容量。波士顿大学的一项研究表明，每天步行1小时（约5000步），相当于大脑延缓衰老1年。
+ 适当的运动。   每周 150 分钟一定强度的运动，能够有效提高心肺功能，从而提高每一天精力的上限。</div><div class="post-footer">
+        <a href="/energy/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%94%9F%E6%B4%BB/">生活</a></div></div>
+</article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
                     </span>
                 </li><li class="page-item ">
-                    <span class="page-link">
-                        <a href="/page/2/">2</a>
-                    </span>
-                </li><li class="page-item ">
-                    <span class="page-link">
-                        <a href="/page/3/">3</a>
-                    </span>
-                </li><li class="page-item ">
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/9/">9</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/10/">10</a>
+                    </span>
+                </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/11/">11</a>
                     </span>
