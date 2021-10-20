@@ -186,4 +186,5 @@ circuitBreaker.sleepWindowInMilliseconds
 
 ## 学习资料
 * [Spring Cloud中文网](https://www.springcloud.cc/)
-* [spring-cloud 教程](https://www.fangzhipeng.com/spring-cloud.html)
+* [Spring-cloud 教程](https://www.fangzhipeng.com/spring-cloud.html)
+* [Spring Cloud Gateway 原理介绍和应用 ](https://tech.yangqianguan.com/60e27b0e2078082a378ec5ed/
