@@ -36,4 +36,6 @@ toc:
 
 
 ## 参考文章 
+* [eureka原理](https://tech.yangqianguan.com/607d1e7ece7094706059f124/)
+* [Eureka 原理解析 ](https://juejin.cn/post/6904888785616502798)
 * [微服务注册中心如何承载大型系统的千万级访问](https://juejin.cn/post/6844903710301093896)
