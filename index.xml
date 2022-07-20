@@ -6,70 +6,86 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 01 Jan 2015 00:00:00 &#43;0000</lastBuildDate>
             <atom:link href="https://moge.fun/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>性能测试</title>
+    <link>https://moge.fun/pts/</link>
+    <pubDate>Sun, 10 May 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/pts/</guid>
+    <description><![CDATA[˚ 问题排查" 问题排查 
+测试指标  业务指标：如并发用户数、TPS（系统每秒处理事务数）、成功率、响应时间。 资源指标：如CPU资源利用率、内存利用率、I/O、内核参数（信号量、打开文件数）等。 应用指标：如空闲线程数、数据库连接数、GC/FULL GC次数、函数耗时等。 前端指标：如页面加载时间、网络时间（DNS、连接时间、传输时间等）。  工具  APM工具（如ARMS）进行中间件、数据库、应用层面的问题定位。  ]]></description>
+</item>
+<item>
     <title>秒杀(限时抢购)系统设计</title>
     <link>https://moge.fun/flashsale/</link>
     <pubDate>Thu, 07 May 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/flashsale/</guid>
     <description><![CDATA[参考文章  高性能秒杀系统设计 秒杀架构实践 百万级用户的抽奖系统  ]]></description>
-</item><item>
+</item>
+<item>
     <title>单点登录</title>
     <link>https://moge.fun/sso/</link>
     <pubDate>Wed, 06 May 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/sso/</guid>
     <description><![CDATA[ 单点登录（Single Sign On），简称为 SSO，是比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。
  参考文章  单点登录 单点登录总结  ]]></description>
-</item><item>
+</item>
+<item>
     <title>Nacos解析</title>
     <link>https://moge.fun/nacos/</link>
     <pubDate>Sat, 11 Apr 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/nacos/</guid>
     <description><![CDATA[临时实例和持久化实例。  在定义上区分临时实例和持久化实例的关键是健康检查的方式。 临时实例使用客户端上报模式，而持久化实例使用服务端反向探测模式。 临时实例需要能够自动摘除不健康实例，而且无需持久化存储实例，那么这种实例就适用于类 Gossip 的协议。 右边的持久化实例使用服务端探测的健康检查方式，因为客户端不会上报心跳，那么自然就不能去自动摘除下线的实例。  实现对比  Zookeeper：保证CP，放弃可用性；一旦zookeeper集群中master节点宕了，则会重新选举leader，这个过程可能非常漫长，在这过程中服务不可用。 Eureka：保证AP，放弃一致性；Eureka集群中的各个节点都是平等的，一旦某个节点宕了，其他节点正常服务（一旦客户端发现注册失败，则将会连接集群中其他节点），虽然保证了可用性，但是每个节点的数据可能不是最新的。 Nacos：同时支持CP和AP，默认是AP，可以切换；AP模式下以临时实例注册，CP模式下服务永久实例注册。  健康检查 客户端健康检查 客户端健康检查主要关注客户端上报心跳的方式、服务端摘除不健康客户端的机制。
 服务端健康检查 而服务端健康检查，则关注探测客户端的方式、灵敏度及设置客户端健康状态的机制。
 从实现复杂性来说，服务端探测肯定是要更加复杂的，因为需要服务端根据注册服务配置的健康检查方式，去执行相应的接口，判断相应的返回结果，并做好重试机制和线程池的管理。
 这与客户端探测，只需要等待心跳，然后刷新 TTL 是不一样的。同时服务端健康检查无法摘除不健康实例，这意味着只要注册过的服务实例，如果不调用接口主动注销，这些服务实例都需要去维持健康检查的探测任务，而客户端则可以随时摘除不健康实例，减轻服务端的压力。
 Nacos实现配置管理和动态配置  添加对应spring-cloud-starter-alibaba-nacos-config依赖 使用原生注解@Value()导入配置 使用原生注解@RefreshScope刷新配置 根据自己业务场景做好多环境配置隔离(Namespace)、不同业务配置隔离(Group) 切记：命名空间和分组的配置一定要放在bootstrap.yml或者bootstrap.properties配置文件中  参考文章  Nacos 注册中心的设计原理详解 Nacos 实现原理详解 Nacos 使用  ]]></description>
-</item><item>
+</item>
+<item>
     <title>Spring Cloud Alibaba</title>
     <link>https://moge.fun/springcloudalibaba/</link>
     <pubDate>Fri, 10 Apr 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/springcloudalibaba/</guid>
     <description><![CDATA[Spring Cloud Alibaba" Spring Cloud Alibaba 
 组件  Spring Cloud - Gateway 网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心/配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错(限流，降级) Spring Cloud Alibaba - Seata 实现分布式事务  Spring Cloud Alibaba 组件" Spring Cloud Alibaba 组件 
 Nacos  Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
  Nacos 这个名字怎么读呢？它的音标为 /nɑ:kəʊs/。这个名字不是一个标准的单词，而是以下单词的首字母缩写：Name and Config Service。]]></description>
-</item><item>
+</item>
+<item>
     <title>Spring Cloud Hystrix 解析</title>
     <link>https://moge.fun/springcloud-hystrix/</link>
     <pubDate>Sat, 04 Apr 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/springcloud-hystrix/</guid>
     <description><![CDATA[参考文章  Hystrix原理与实战 Hystrix原理与实战 Hystrix 源码分析及实践  ]]></description>
-</item><item>
+</item>
+<item>
     <title>Spring Cloud Eureka 解析</title>
     <link>https://moge.fun/springcloud-eureka/</link>
     <pubDate>Fri, 03 Apr 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/springcloud-eureka/</guid>
     <description><![CDATA[先来一波问题，然后看看Enueka是通过什么方式处理的。
  Eureka注册中心使用什么样的方式来储存各个服务注册时发送过来的机器地址和端口号？ 各个服务找Eureka Server拉取注册表的时候，是什么样的频率？ 各个服务是如何拉取注册表的？ 对于一个有几百个服务，部署上千台机器的大型分布式系统来说，这套系统会对Eureka Server造成多大的访问压力？ Eureka Server从技术层面是如何抗住日千万级访问量的？   基本知识点，各个服务内的Eureka Client组件，默认情况下，每隔30秒会发送一个请求到Eureka Server，来拉取最近有变化的服务信息
  Eureka Server设计精妙的注册表存储结构  维护注册表、拉取注册表、更新心跳时间，全部发生在内存里！这是Eureka Server非常核心的一个点。  Eureka Server端优秀的多级缓存机制  尽可能保证了内存注册表数据不会出现频繁的读写冲突问题。 并且进一步保证对Eureka Server的大量请求，都是快速从纯内存走，性能极高。  总结  通过上面的分析可以看到，Eureka通过设置适当的请求频率拉取注册表30秒间隔，发送心跳30秒间隔），可以保证一个大规模的系统每秒请求Eureka Server的次数在几百次。 同时通过纯内存的注册表，保证了所有的请求都可以在内存处理，确保了极高的性能 另外,多级缓存机制，确保了不会针对内存数据结构发生频繁的读写并发冲突操作，进一步提升性能。  参考文章  Eureka 原理 Eureka 原理解析  深入学习 Eureka 原理 微服务注册中心如何承载大型系统的千万级访问  ]]></description>
-</item><item>
+</item>
+<item>
     <title>Spring Cloud</title>
     <link>https://moge.fun/springcloud/</link>
     <pubDate>Thu, 02 Apr 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/springcloud/</guid>
     <description><![CDATA[Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能，专注于快速方便的开发单个微服务。 Spring Cloud 以 Service（服务） 为中心，关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等集成服务SpringBoot可以离开SpringCloud独立使用开发项目， 但是SpringCloud离不开SpringBoot ，属于依赖的关系。   Spring Cloud是目前最常用的微服务开发框架，Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
  版本对应    Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version     Spring Cloud 2020.0.1 2.4.x 2021.1   Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x   Spring Cloud Greenwich 2.1.x 2.1.x   Spring Cloud Finchley 2.]]></description>
-</item><item>
+</item>
+<item>
     <title>Dubbo总结</title>
     <link>https://moge.fun/dubbo/</link>
     <pubDate>Wed, 01 Apr 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/dubbo/</guid>
     <description><![CDATA[Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
  服务是 Dubbo 中的核心概念，一个服务代表一组 RPC 方法的集合，服务是面向用户编程、服务发现机制等的基本单位。
@@ -80,11 +96,12 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：
 以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置
 1 2 3 4  # application.propertiesdubboregistryaddress:zookeeper://127.0.0.1:2181  服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： 流量管理"]]></description>
-</item><item>
+</item>
+<item>
     <title>幂等</title>
     <link>https://moge.fun/idempotence/</link>
     <pubDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/idempotence/</guid>
     <description><![CDATA[幂等就是：一个操作不论执行多少次，产生的效果和返回的结果都是一样的。
  业务场景 查询操作 查询一次和查询多次，在数据不变的情况下，查询结果是一样的。select是天然的幂等操作。
@@ -97,22 +114,6 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 乐观锁 乐观锁只是在更新数据那一刻锁表，其他时间不锁表，所以相对于悲观锁，效率更高。
 乐观锁的实现方式多种多样可以通过version或者其他状态条件：
  通过版本号实现  1 2 3  update table_xxx set name=#name#,version=version+1 where version=#version#; -- 优化后的 update table_xxx set name=#name#,version=version+1 where id=#id# and version=#version#;   通过条件限制  1 2 3  update table_xxx set avai_amount=avai_amount-#subAmount# where avai_amount-#subAmount# &gt;= 0; -- 优化后的 update table_xxx set avai_amount=avai_amount-#subAmount# where id=#id# and avai_amount-#subAmount# &gt;= 0   要求：quality-#subQuality# &gt;= ，这个情景适合不用版本号，只更新是做数据安全校验，适合库存模型，扣份额和回滚份额，性能更高]]></description>
-</item><item>
-    <title>分布式ID</title>
-    <link>https://moge.fun/distributedid/</link>
-    <pubDate>Thu, 06 Feb 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://moge.fun/distributedid/</guid>
-    <description><![CDATA[在复杂分布式系统中，往往需要对大量的数据和消息进行唯一标识。
- 概括下来，那业务系统对ID号的要求有哪些呢？
- 全局唯一：不能出现重复的ID号，既然是唯一标识，这是最基本的要求。 趋势递增：在MySQL InnoDB引擎中使用的是聚集索引，由于多数RDBMS使用B-tree的数据结构来存储索引数据，在主键的选择上面我们应该尽量使用有序的主键保证写入性能。 单调递增：保证下一个ID一定大于上一个ID，例如事务版本号、IM增量消息、排序等特殊需求。 信息安全：如果ID是连续的，恶意用户的扒取工作就非常容易做了，直接按照顺序下载指定URL即可；如果是订单号就更危险了，竞对可以直接知道我们一天的单量。所以在一些应用场景下，会需要ID无规则、不规则。 高可用：平均延迟和TP999延迟都要尽可能低；可用性5个9； 高QPS。  UUID  UUID是通用唯一识别码（Universally Unique Identifier)的缩写，开放软件基金会(OSF)规范定义了包括网卡MAC地址、时间戳、名字空间（Namespace）、随机或伪随机数、时序等元素。利用这些元素来生成UUID。
- UUID是由128位二进制组成，一般转换成十六进制，然后用String表示。在java中有个UUID类,在他的注释中我们看见这里有4种不同的UUID的生成策略:
- randomly 基于随机数生成UUID，由于Java中的随机数是伪随机数，其重复的概率是可以被计算出来的。这个一般我们用下面的代码获取基于随机数的UUID: time-based 基于时间的UUID,这个一般是通过当前时间，随机数，和本地Mac地址来计算出来，自带的JDK包并没有这个算法的我们在一些UUIDUtil中，比如我们的log4j.core.util，会重新定义UUID的高位和低位。 DCE security:DCE安全的UUID。 name-based：基于名字的UUID，通过计算名字和名字空间的MD5来计算UUID。  UUID的优点  通过本地生成，没有经过网络I/O，性能较快 无序，无法预测他的生成顺序。(当然这个也是他的缺点之一)  UUID的缺点  128位二进制一般转换成36位的16进制，太长了只能用String存储，空间占用较多。 不能生成递增有序的数字  适用场景 UUID的适用场景为不担心过多的空间占用，以及不需要生成有递增趋势的数字。在Log4j里面他在UuidPatternConverter中加入了UUID来标识每一条日志。
-数据库主键自增  大家对于唯一标识最容易想到的就是主键自增，这个也是我们最常用的方法。例如我们有个订单服务，那么把订单id设置为主键自增即可。
- 优点 简单方便，有序递增，方便排序和分页
-缺点  分库分表会带来问题，需要进行改造。 并发性能不高，受限于数据库的性能。 简单递增容易被其他人猜测利用，比如你有一个用户服务用的递增，那么其他人可以根据分析注册的用户ID来得到当天你的服务有多少人注册，从而就能猜测出你这个服务当前的一个大概状况。 数据库宕机服务不可用。  适用场景 根据上面可以总结出来，当数据量不多，并发性能不高的时候这个很适合，比如一些to B的业务，商家注册这些，商家注册和用户注册不是一个数量级的，所以可以数据库主键递增。如果对顺序递增强依赖，那么也可以使用数据库主键自增。
-Redis  Redis中有两个命令Incr，IncrBy,因为Redis是单线程的所以能保证原子性。
- 优点 性能比数据库好，能满足有序递增。
-缺点  由于redis是内存的KV数据库，即使有AOF和RDB，但是依然会存在数据丢失，有可能会造成ID重复。 依赖于redis，redis要是不稳定，会影响ID生成。  适用 由于其性能比数据库好，但是有可能会出现ID重复和不稳定，这一块如果可以接受那么就可以使用。也适用于到了某个时间，比如每天都刷新ID，那么这个ID就需要重置，通过(Incr Today)，每天都会从0开始加。]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

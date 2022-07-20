@@ -7,7 +7,7 @@
     <title>Dubbo总结</title>
     <link>https://moge.fun/dubbo/</link>
     <pubDate>Wed, 01 Apr 2020 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/dubbo/</guid>
     <description><![CDATA[Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
  服务是 Dubbo 中的核心概念，一个服务代表一组 RPC 方法的集合，服务是面向用户编程、服务发现机制等的基本单位。
@@ -18,5 +18,6 @@ Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置
 服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：
 以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置
 1 2 3 4  # application.propertiesdubboregistryaddress:zookeeper://127.0.0.1:2181  服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： 流量管理"]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

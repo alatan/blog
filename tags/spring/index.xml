@@ -7,25 +7,27 @@
     <title>SpringBoot总结</title>
     <link>https://moge.fun/springboot/</link>
     <pubDate>Wed, 03 Apr 2019 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/springboot/</guid>
     <description><![CDATA[使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置，简化Spring应用的初始搭建以及开发过程。简单理解，就是SpringBoot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像Maven整合了所有的Jar包，Spring Boot整合了所有的框架。
  SpringBoot 的启动过程 开始源码分析，先从 SpringBoot 的启动类的 run() 方法开始看，以下是调用链：SpringApplication.run() -&gt; run(new Class[]{primarySource}, args) -&gt; new SpringApplication(primarySources)).run(args)。
 一直在run，终于到重点了，我们直接看 new SpringApplication(primarySources)).run(args) 这个方法。
 1 2 3  public static ConfigurableApplicationContext run(Class&lt;?&gt;[] primarySources,	String[] args) { return new SpringApplication(primarySources).run(args); }   上面的方法主要包括两大步骤：
  创建 SpringApplication 对象。 运行 run() 方法。  创建 SpringApplication 对象 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23  public SpringApplication(ResourceLoader resourceLoader, Class.]]></description>
-</item><item>
+</item>
+<item>
     <title>SpringMVC总结</title>
     <link>https://moge.fun/springmvc/</link>
     <pubDate>Tue, 02 Apr 2019 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/springmvc/</guid>
     <description><![CDATA[SpringMVC 执行流程  用户请求发送到前端控制器DispatcherServlet。 前端控制器DispatcherServlet接收到请求后，DispatcherServlet会使用HandlerMapping来处理，HandlerMapping会查找到具体进行处理请求的Handler对象。 HandlerMapping找到对应的Handler之后，并不是返回一个Handler原始对象，而是一个Handler执行链，在这个执行链中包括了拦截器和处理请求的Handler。HandlerMapping返回一个执行链给DispatcherServlet。 DispatcherServlet接收到执行链之后，会调用Handler适配器去执行Handler。 Handler适配器执行完成Handler（也就是我们写的Controller）之后会得到一个ModelAndView，并返回给DispatcherServlet。 DispatcherServlet接收到Handler适配器返回的ModelAndView之后，会根据其中的视图名调用视图解析器。 视图解析器根据逻辑视图名解析成一个真正的View视图，并返回给DispatcherServlet。 DispatcherServlet接收到视图之后，会根据上面的ModelAndView中的model来进行视图中数据的填充，也就是所谓的视图渲染。 渲染完成之后，DispatcherServlet就可以将结果返回给用户了。  ]]></description>
-</item><item>
+</item>
+<item>
     <title>Spring总结</title>
     <link>https://moge.fun/spring/</link>
     <pubDate>Mon, 01 Apr 2019 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/spring/</guid>
     <description><![CDATA[Spring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。
  我们一般说 Spring 框架指的都是 Spring Framework，它是很多模块的集合，使用这些模块可以很方便地协助我们进行开发。这些模块是：核心容器、数据访问/集成、Web、AOP（面向切面编程）、工具、消息和测试模块。比如：Core Container 中的 Core 组件是Spring 所有组件的核心，Beans 组件和 Context 组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
@@ -37,5 +39,6 @@ IOC容器初始化过程" IOC容器初始化过程
 关键步骤  IOC容器初始化入口是在构造方法中调用refresh开始的。 通过ResourceLoader来完成资源文件位置的定位，DefaultResourceLoader是默认的实现，同时上下文本身就给除了ResourceLoader的实现。 创建的IOC容器是DefaultListableBeanFactory。 IOC对Bean的管理和依赖注入功能的实现是通过对其持有的BeanDefinition进行相关操作来完成的。 通过BeanDefinitionReader来完成定义信息的解析和Bean信息的注册。 XmlBeanDefinitionReader是BeanDefinitionReader的实现了，通过它来解析xml配置中的bean定义。 实际的处理过程是委托给BeanDefinitionParserDelegate来完成的。得到Bean的定义信息，这些信息在Spring中使用BeanDefinition对象来表示。 BeanDefinition的注册是由BeanDefinitionRegistry实现的registerBeanDefiition方法进行的。内部使用ConcurrentHashMap来保存BeanDefiition。  Spring解决循环依赖的过程总结 Spring在初始化Bean的时候，会先初始化当前Bean所依赖的Bean，如果两个Bean互相依赖，就产生了循环依赖，Spring针对循环依赖的办法是：提前曝光加上三个缓存singletonObjects、earlySingletonObjects、singletonFactories。
 假设当前Bean是A，A依赖的Bean是B，B又依赖A。
 提前曝光的意思就是，当前Bean A实例化完，还没有初始化完就先把当前Bean曝光出去，在B初始化需要依赖A的时候，就先拿到提前曝光的A，这样就可以继续将B初始化完成，然后返回A继续进行初始化。]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

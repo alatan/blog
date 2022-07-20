@@ -7,10 +7,11 @@
     <title> MyBatis总结</title>
     <link>https://moge.fun/mybatis/</link>
     <pubDate>Sun, 03 Mar 2019 00:00:00 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>默哥</author>
     <guid>https://moge.fun/mybatis/</guid>
     <description><![CDATA[MyBatis框架整体设计" MyBatis框架整体设计 
 接口层-和数据库交互的方式 MyBatis和数据库的交互有两种方式：
  使用传统的MyBatis提供的API； 使用Mapper接口；  参考文章  常见问题  ]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>
