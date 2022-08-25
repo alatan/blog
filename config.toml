@@ -6,7 +6,7 @@ languageCode = "zh-CN"
 # 是否包括中日韩文字
 hasCJKLanguage = false
 # 网站标题
-title = "追求卓越，幸福就会不期而遇"
+title = "软件开发学习记录"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
@@ -15,7 +15,7 @@ theme = "LoveIt"
   #  LoveIt 主题版本
   version = "0.2.X"
   # 网站描述
-  description = "追求卓越，幸福就会不期而遇"
+  description = "软件开发学习记录"
   # 网站关键词
   keywords = ["Java", "编程"]
   # 网站默认主题样式 ("light", "dark", "auto")
@@ -78,7 +78,7 @@ theme = "LoveIt"
       # LOGO 的 URL
       logo = ""
       # 标题名称
-      name = "追求卓越，幸福就会不期而遇"
+      name = "软件开发学习记录"
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
