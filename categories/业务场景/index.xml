@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>业务场景 - 分类 - 追求卓越，幸福就会不期而遇</title>
+        <title>业务场景 - 分类 - 软件开发学习记录</title>
         <link>https://moge.fun/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/</link>
-        <description>业务场景 - 分类 - 追求卓越，幸福就会不期而遇</description>
+        <description>业务场景 - 分类 - 软件开发学习记录</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 May 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF/" rel="self" type="application/rss+xml" /><item>
     <title>秒杀(限时抢购)系统设计</title>
     <link>https://moge.fun/flashsale/</link>

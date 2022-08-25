@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>缓存 - 标签 - 追求卓越，幸福就会不期而遇</title>
+        <title>缓存 - 标签 - 软件开发学习记录</title>
         <link>https://moge.fun/tags/%E7%BC%93%E5%AD%98/</link>
-        <description>缓存 - 标签 - 追求卓越，幸福就会不期而遇</description>
+        <description>缓存 - 标签 - 软件开发学习记录</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 02 Mar 2019 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E7%BC%93%E5%AD%98/" rel="self" type="application/rss+xml" /><item>
     <title>Redis概览</title>
     <link>https://moge.fun/redis/</link>

@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>理财 - 分类 - 追求卓越，幸福就会不期而遇</title>
+        <title>理财 - 分类 - 软件开发学习记录</title>
         <link>https://moge.fun/categories/%E7%90%86%E8%B4%A2/</link>
-        <description>理财 - 分类 - 追求卓越，幸福就会不期而遇</description>
+        <description>理财 - 分类 - 软件开发学习记录</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 02 Jan 2016 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E7%90%86%E8%B4%A2/" rel="self" type="application/rss+xml" /><item>
     <title>估值</title>
     <link>https://moge.fun/appraisement/</link>

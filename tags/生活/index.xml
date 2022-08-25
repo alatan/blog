@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>生活 - 标签 - 追求卓越，幸福就会不期而遇</title>
+        <title>生活 - 标签 - 软件开发学习记录</title>
         <link>https://moge.fun/tags/%E7%94%9F%E6%B4%BB/</link>
-        <description>生活 - 标签 - 追求卓越，幸福就会不期而遇</description>
+        <description>生活 - 标签 - 软件开发学习记录</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 01 Jan 2015 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E7%94%9F%E6%B4%BB/" rel="self" type="application/rss+xml" /><item>
     <title>减缓焦虑，积聚生活正能量</title>
     <link>https://moge.fun/energy/</link>

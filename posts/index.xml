@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>所有文章 - 追求卓越，幸福就会不期而遇</title>
+        <title>所有文章 - 软件开发学习记录</title>
         <link>https://moge.fun/posts/</link>
-        <description>所有文章 | 追求卓越，幸福就会不期而遇</description>
+        <description>所有文章 | 软件开发学习记录</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 10 May 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/posts/" rel="self" type="application/rss+xml" /><item>
     <title>性能测试</title>
     <link>https://moge.fun/pts/</link>

@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>并发编程 - 标签 - 追求卓越，幸福就会不期而遇</title>
+        <title>并发编程 - 标签 - 软件开发学习记录</title>
         <link>https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
-        <description>并发编程 - 标签 - 追求卓越，幸福就会不期而遇</description>
+        <description>并发编程 - 标签 - 软件开发学习记录</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 05 Apr 2018 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
     <title>AbstractQueuedSynchronizer详解</title>
     <link>https://moge.fun/abstractqueuedsynchronizer/</link>
