@@ -1,0 +1,65 @@
+name: Hexo CICD
+run-name: ${{ github.actor }} build and deploy hexo!
+on:
+  push:
+    branches:
+      - master
+      - github-actions
+
+env:
+  GIT_USER: alatan
+  HEXO_BACKUP_REPO: voidking/hexo-backup
+  HEXO_BACKUP_REPO_BRANCH: master
+  HEXO_THEME_REPO: dillonzq/LoveIt
+  HEXO_THEME_REPO_BRANCH: root
+  GITHUB_PAGES_REPO: github.com/alatan/alatan.github.io.git
+  GITHUB_PAGES_URL: "https://${GIT_USER}:${{ secrets.GH_TOKEN }}@${GITHUB_PAGES_REPO}"
+  
+jobs:
+  build:
+    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node_version: [12.22.5]
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Checkout theme repo
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ env.HEXO_THEME_REPO }}
+        ref: ${{ env.HEXO_THEME_REPO_BRANCH }}
+        path: themes/next
+    - name: Checkout hexo-backup repo
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ env.HEXO_BACKUP_REPO }}
+        ref: ${{ env.HEXO_BACKUP_REPO_BRANCH }}
+        path: hexo-backup
+        token: ${{ secrets.GH_TOKEN }}
+    - name: Move markdown articles to current directory
+      run: mv hexo-backup/source . && rm -rf source/private
+    - name: Install nodejs ${{ matrix.node_version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node_version }}
+    - name: Install nodejs dependencies
+      run: npm install
+    - name: Build nodejs project
+      run: npm run build
+    - name: Push to voidking.github.io and gitee
+      run: |
+        git config --global user.name "voidking"
+        git config --global user.email "voidking@qq.com"
+        git clone https://${{ secrets.GH_TOKEN }}@${{ env.GITHUB_PAGES_REPO }} voidking
+        cd voidking
+        rm -rfv `ls -a | grep -vw '\.' | grep -vw '\.git' | xargs`
+        ls -al
+        # unalias cp 
+        cp -rf ../public/. .
+        cp ../source/.travis.yml .
+        git add . && git commit -m "GitHub Actions Auto Builder"
+        git push --force --quiet ${{ env.GITHUB_PAGES_URL }} master:master
+        git push --force --quiet ${{ env.GITEE_PAGES_URL }} master:master
