@@ -20,8 +20,8 @@ jobs:
           extended: true
 
       - name: build content to public site
-        working-directory: public
-        run: hugo --minify --gc
+        working-directory: ./
+        run: hugo
 
       - name: install nodejs
         uses: actions/setup-node@v2
