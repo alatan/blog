@@ -16,7 +16,7 @@ jobs:
       - name: setup hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: latest
+          hugo-version: 0.69.1
           extended: true
 
       - name: build content to public site

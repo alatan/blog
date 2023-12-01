@@ -1,302 +1,46 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>Markdown语法 - 软件开发学习记录</title><meta name="Description" content="Markdown常用语法"><meta property="og:title" content="Markdown语法" />
-<meta property="og:description" content="Markdown常用语法" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://moge.fun/mdgrammar/" /><meta property="og:image" content="https://moge.fun/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2015-01-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2015-01-01T00:00:00+00:00" /><meta property="og:site_name" content="My cool site" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://moge.fun/logo.png"/>
-
-<meta name="twitter:title" content="Markdown语法"/>
-<meta name="twitter:description" content="Markdown常用语法"/>
-<meta name="application-name" content="Journey to the Life">
-<meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/mdgrammar/" /><link rel="prev" href="https://moge.fun/energy/" /><link rel="next" href="https://moge.fun/studyandthink/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Markdown语法",
-        "inLanguage": "zh-CN",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/moge.fun\/mdgrammar\/"
-        },"genre": "posts","keywords": "Markdown","wordcount":  123 ,
-        "url": "https:\/\/moge.fun\/mdgrammar\/","datePublished": "2015-01-01T00:00:00+00:00","dateModified": "2015-01-01T00:00:00+00:00","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "默哥"
-            },"description": "Markdown常用语法"
-    }
-    </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="软件开发学习记录">软件开发学习记录</a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="软件开发学习记录">软件开发学习记录</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        取消
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a></div>
-    </div>
-</header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">目录</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Markdown语法</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AE%B0%E5%BD%95/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>记录</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2015-01-01">2015-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 123 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#标题">标题</a>
-          <ul>
-            <li><a href="#这是-h5">这是 H5</a></li>
-          </ul>
-        </li>
-        <li><a href="#段落">段落</a></li>
-        <li><a href="#斜体">斜体</a></li>
-        <li><a href="#粗体">粗体</a></li>
-        <li><a href="#粗体斜体">粗体+斜体</a></li>
-        <li><a href="#删除线">删除线</a></li>
-        <li><a href="#引用">引用</a></li>
-        <li><a href="#列表">列表</a></li>
-        <li><a href="#有序列表">有序列表</a></li>
-        <li><a href="#分隔线">分隔线</a></li>
-        <li><a href="#链接">链接</a></li>
-        <li><a href="#表格">表格</a></li>
-        <li><a href="#代码区域四个空格">代码区域（四个空格）</a></li>
-        <li><a href="#图像">图像</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><h3 id="标题">标题</h3>
-<pre><code>#### 这是 H5 ####
-</code></pre>
-<h4 id="这是-h5">这是 H5</h4>
-<h3 id="段落">段落</h3>
-<pre><code>这是一个段落。
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Markdown语法 - 软件开发学习记录</title><meta name=Description content="Markdown常用语法"><meta property="og:title" content="Markdown语法">
+<meta property="og:description" content="Markdown常用语法"><meta property="og:type" content="article"><meta property="og:url" content="https://moge.fun/mdgrammar/"><meta property="og:image" content="https://moge.fun/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2015-01-01T00:00:00+00:00"><meta property="article:modified_time" content="2015-01-01T00:00:00+00:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://moge.fun/logo.png"><meta name=twitter:title content="Markdown语法"><meta name=twitter:description content="Markdown常用语法"><meta name=application-name content="Journey to the Life"><meta name=apple-mobile-web-app-title content="Journey to the Life"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://moge.fun/mdgrammar/><link rel=prev href=https://moge.fun/energy/><link rel=next href=https://moge.fun/studyandthink/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Markdown语法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/moge.fun\/mdgrammar\/"},"genre":"posts","keywords":"Markdown","wordcount":123,"url":"https:\/\/moge.fun\/mdgrammar\/","datePublished":"2015-01-01T00:00:00+00:00","dateModified":"2015-01-01T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"默哥"},"description":"Markdown常用语法"}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/about/ title>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Markdown语法</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>默哥</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E8%AE%B0%E5%BD%95/><i class="far fa-folder fa-fw" aria-hidden=true></i>记录</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2015-01-01>2015-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 123 字&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 1 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><ul><li><a href=#标题>标题</a><ul><li><a href=#这是-h5>这是 H5</a></li></ul></li><li><a href=#段落>段落</a></li><li><a href=#斜体>斜体</a></li><li><a href=#粗体>粗体</a></li><li><a href=#粗体斜体>粗体+斜体</a></li><li><a href=#删除线>删除线</a></li><li><a href=#引用>引用</a></li><li><a href=#列表>列表</a></li><li><a href=#有序列表>有序列表</a></li><li><a href=#分隔线>分隔线</a></li><li><a href=#链接>链接</a></li><li><a href=#表格>表格</a></li><li><a href=#代码区域四个空格>代码区域（四个空格）</a></li><li><a href=#图像>图像</a></li></ul></li></ul></nav></div></div><div class=content id=content><h3 id=标题>标题</h3><pre><code>#### 这是 H5 ####
+</code></pre><h4 id=这是-h5>这是 H5</h4><h3 id=段落>段落</h3><pre><code>这是一个段落。
 
 这是另一个段落。
-</code></pre>
-<p>这是一个段落。</p>
-<p>这是另一个段落。</p>
-<h3 id="斜体">斜体</h3>
-<pre><code>*这是斜体*
-</code></pre>
-<p><em>这是斜体</em></p>
-<h3 id="粗体">粗体</h3>
-<pre><code>**这是粗体**
-</code></pre>
-<p><strong>这是粗体</strong></p>
-<h3 id="粗体斜体">粗体+斜体</h3>
-<pre><code>***这是粗体+斜体***     
-</code></pre>
-<p><em><strong>这是粗体+斜体</strong></em></p>
-<h3 id="删除线">删除线</h3>
-<pre><code>~~没有价值就会被抛弃~~
-</code></pre>
-<p><del>没有价值就会被抛弃</del></p>
-<h3 id="引用">引用</h3>
-<pre><code>&gt; Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。
-</code></pre>
-<blockquote>
-<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
-</blockquote>
-<h3 id="列表">列表</h3>
-<pre><code>* 学习
+</code></pre><p>这是一个段落。</p><p>这是另一个段落。</p><h3 id=斜体>斜体</h3><pre><code>*这是斜体*
+</code></pre><p><em>这是斜体</em></p><h3 id=粗体>粗体</h3><pre><code>**这是粗体**
+</code></pre><p><strong>这是粗体</strong></p><h3 id=粗体斜体>粗体+斜体</h3><pre><code>***这是粗体+斜体***     
+</code></pre><p><em><strong>这是粗体+斜体</strong></em></p><h3 id=删除线>删除线</h3><pre><code>~~没有价值就会被抛弃~~
+</code></pre><p><del>没有价值就会被抛弃</del></p><h3 id=引用>引用</h3><pre><code>&gt; Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。
+</code></pre><blockquote><p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p></blockquote><h3 id=列表>列表</h3><pre><code>* 学习
 * 思考
 * 创造
-</code></pre>
-<ul>
-<li>学习</li>
-<li>思考</li>
-<li>创造</li>
-</ul>
-<h3 id="有序列表">有序列表</h3>
-<pre><code>1. 昨夜西风凋碧树。独上高楼，望尽天涯路。
+</code></pre><ul><li>学习</li><li>思考</li><li>创造</li></ul><h3 id=有序列表>有序列表</h3><pre><code>1. 昨夜西风凋碧树。独上高楼，望尽天涯路。
 2. 衣带渐宽终不悔，为伊消得人憔悴。
 3. 众里寻他千百度。蓦然回首，那人却在，灯火阑珊处。
-</code></pre>
-<ol>
-<li>昨夜西风凋碧树。独上高楼，望尽天涯路。</li>
-<li>衣带渐宽终不悔，为伊消得人憔悴。</li>
-<li>众里寻他千百度。蓦然回首，那人却在，灯火阑珊处。</li>
-</ol>
-<h3 id="分隔线">分隔线</h3>
-<pre><code>---------------------------------------
-</code></pre>
-<hr>
-<h3 id="链接">链接</h3>
-<pre><code>[百度](http://www.baidu.com/ &quot;百度一下&quot;)
-</code></pre>
-<p><a href="http://www.baidu.com/" title="百度一下" target="_blank" rel="noopener noreffer ">百度</a></p>
-<h3 id="表格">表格</h3>
-<pre><code>| 账户    | 余额 | 类别   |
+</code></pre><ol><li>昨夜西风凋碧树。独上高楼，望尽天涯路。</li><li>衣带渐宽终不悔，为伊消得人憔悴。</li><li>众里寻他千百度。蓦然回首，那人却在，灯火阑珊处。</li></ol><h3 id=分隔线>分隔线</h3><pre><code>---------------------------------------
+</code></pre><hr><h3 id=链接>链接</h3><pre><code>[百度](http://www.baidu.com/ &quot;百度一下&quot;)
+</code></pre><p><a href=http://www.baidu.com/ title=百度一下 target=_blank rel="noopener noreffer">百度</a></p><h3 id=表格>表格</h3><pre><code>| 账户    | 余额 | 类别   |
 | :---   | :--- | :---  |
 | 人民币    | 5百万 |  活期    |
 | 比特币    | 5个  |  数字资产 |
 | 股票基金  | 5亿  |  理财     |
-</code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">账户</th>
-<th style="text-align:left">余额</th>
-<th style="text-align:left">类别</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">人民币</td>
-<td style="text-align:left">5百万</td>
-<td style="text-align:left">活期</td>
-</tr>
-<tr>
-<td style="text-align:left">比特币</td>
-<td style="text-align:left">5个</td>
-<td style="text-align:left">数字资产</td>
-</tr>
-<tr>
-<td style="text-align:left">股票基金</td>
-<td style="text-align:left">5亿</td>
-<td style="text-align:left">理财</td>
-</tr>
-</tbody>
-</table>
-<h3 id="代码区域四个空格">代码区域（四个空格）</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/** 这是一个Java代码区块 */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello World&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="图像">图像</h3>
-<pre><code>![](/images/star.png &quot;星辰大海&quot;)
-</code></pre>
-<p><figure><a class="lightgallery" href="/images/star.png" title="/images/star.png" data-thumbnail="/images/star.png" data-sub-html="<h2>星辰大海</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/star.png"
-            data-srcset="/images/star.png, /images/star.png 1.5x, /images/star.png 2x"
-            data-sizes="auto"
-            alt="/images/star.png" />
-    </a><figcaption class="image-caption">星辰大海</figcaption>
-    </figure></p>
-</div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>更新于 2015-01-01</span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://moge.fun/mdgrammar/" data-title="Markdown语法" data-hashtags="Markdown"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://moge.fun/mdgrammar/" data-hashtag="Markdown"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://moge.fun/mdgrammar/" data-title="Markdown语法"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://moge.fun/mdgrammar/" data-title="Markdown语法"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/mdgrammar/" data-title="Markdown语法"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/markdown/">Markdown</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/energy/" class="prev" rel="prev" title="减缓焦虑，积聚生活正能量"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>减缓焦虑，积聚生活正能量</a>
-            <a href="/studyandthink/" class="next" rel="next" title="学与思">学与思<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
-</div>
-<div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2015 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
-                    <span class="icp"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021012209号-1</a></span></div>
-        </div>
-    </footer></div>
-
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":5,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
-</html>
+</code></pre><table><thead><tr><th style=text-align:left>账户</th><th style=text-align:left>余额</th><th style=text-align:left>类别</th></tr></thead><tbody><tr><td style=text-align:left>人民币</td><td style=text-align:left>5百万</td><td style=text-align:left>活期</td></tr><tr><td style=text-align:left>比特币</td><td style=text-align:left>5个</td><td style=text-align:left>数字资产</td></tr><tr><td style=text-align:left>股票基金</td><td style=text-align:left>5亿</td><td style=text-align:left>理财</td></tr></tbody></table><h3 id=代码区域四个空格>代码区域（四个空格）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=cm>/** 这是一个Java代码区块 */</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=o>[]</span><span class=w> </span><span class=n>args</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;Hello World&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=图像>图像</h3><pre><code>![](/images/star.png &quot;星辰大海&quot;)
+</code></pre><p><figure><a class=lightgallery href=/images/star.png title=/images/star.png data-thumbnail=/images/star.png data-sub-html="<h2>星辰大海</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/star.png data-srcset="/images/star.png, /images/star.png 1.5x, /images/star.png 2x" data-sizes=auto alt=/images/star.png></a><figcaption class=image-caption>星辰大海</figcaption></figure></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2015-01-01</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://moge.fun/mdgrammar/ data-title=Markdown语法 data-hashtags=Markdown><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://moge.fun/mdgrammar/ data-hashtag=Markdown><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://moge.fun/mdgrammar/ data-title=Markdown语法><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://moge.fun/mdgrammar/ data-title=Markdown语法><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://moge.fun/mdgrammar/ data-title=Markdown语法><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/markdown/>Markdown</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/energy/ class=prev rel=prev title=减缓焦虑，积聚生活正能量><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>减缓焦虑，积聚生活正能量</a>
+<a href=/studyandthink/ class=next rel=next title=学与思>学与思<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=utterances class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2015 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>默哥</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a href=https://beian.miit.gov.cn/ target=_blank>豫ICP备2021012209号-1</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"alatan/BlogDiscuss"}},lightgallery:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:5,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>

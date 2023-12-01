@@ -1,562 +1,191 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>JUC-并发编程利器 - 软件开发学习记录</title><meta name="Description" content="JUC并发编程利器"><meta property="og:title" content="JUC-并发编程利器" />
-<meta property="og:description" content="JUC并发编程利器" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://moge.fun/juc/" /><meta property="og:image" content="https://moge.fun/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-04-02T00:00:00+00:00" />
-<meta property="article:modified_time" content="2018-04-02T00:00:00+00:00" /><meta property="og:site_name" content="My cool site" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://moge.fun/logo.png"/>
-
-<meta name="twitter:title" content="JUC-并发编程利器"/>
-<meta name="twitter:description" content="JUC并发编程利器"/>
-<meta name="application-name" content="Journey to the Life">
-<meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/juc/" /><link rel="prev" href="https://moge.fun/javacurrent/" /><link rel="next" href="https://moge.fun/synchronized/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "JUC-并发编程利器",
-        "inLanguage": "zh-CN",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/moge.fun\/juc\/"
-        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  493 ,
-        "url": "https:\/\/moge.fun\/juc\/","datePublished": "2018-04-02T00:00:00+00:00","dateModified": "2018-04-02T00:00:00+00:00","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "默哥"
-            },"description": "JUC并发编程利器"
-    }
-    </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="软件开发学习记录">软件开发学习记录</a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="软件开发学习记录">软件开发学习记录</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        取消
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a></div>
-    </div>
-</header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">目录</h2>
-            <div class="toc-content always-active" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JUC-并发编程利器</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-04-02">2018-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 493 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#lock框架和tools类">Lock框架和Tools类</a>
-      <ul>
-        <li><a href="#接口condition">接口Condition</a></li>
-        <li><a href="#接口lock">接口Lock</a></li>
-        <li><a href="#接口readwritelock">接口ReadWriteLock</a></li>
-        <li><a href="#抽象类abstractownablesynchonizer">抽象类AbstractOwnableSynchonizer</a></li>
-        <li><a href="#抽象类abstractqueuedlongsynchronizerlong">抽象类AbstractQueuedLongSynchronizer(long)</a></li>
-        <li><a href="#核心抽象类abstractqueuedsynchronizerint">核心抽象类AbstractQueuedSynchronizer(int)</a></li>
-        <li><a href="#锁常用类locksupport">锁常用类LockSupport</a></li>
-        <li><a href="#锁常用类reentrantlock">锁常用类ReentrantLock</a></li>
-        <li><a href="#锁常用类reentrantreadwritelock">锁常用类ReentrantReadWriteLock</a></li>
-        <li><a href="#锁常用类stampedlock">锁常用类StampedLock</a></li>
-        <li><a href="#工具常用类countdownlatch">工具常用类CountDownLatch</a></li>
-        <li><a href="#工具常用类cyclicbarrier">工具常用类CyclicBarrier</a></li>
-        <li><a href="#工具常用类phaser">工具常用类Phaser</a></li>
-        <li><a href="#工具常用类semaphore">工具常用类Semaphore</a></li>
-        <li><a href="#工具常用类exchanger">工具常用类Exchanger</a></li>
-        <li><a href="#对比">对比</a></li>
-      </ul>
-    </li>
-    <li><a href="#collections-并发集合">Collections: 并发集合</a></li>
-    <li><a href="#casunsafe和原子类">CAS,Unsafe和原子类</a>
-      <ul>
-        <li><a href="#atomic原子类">Atomic原子类</a></li>
-      </ul>
-    </li>
-    <li><a href="#executors线程池">Executors线程池</a>
-      <ul>
-        <li><a href="#executor">Executor</a></li>
-        <li><a href="#executorservice">ExecutorService</a></li>
-        <li><a href="#scheduledexecutorservice">ScheduledExecutorService</a></li>
-        <li><a href="#abstractexecutorservice">AbstractExecutorService</a></li>
-        <li><a href="#futuretask">FutureTask</a></li>
-        <li><a href="#核心-threadpoolexecutor">核心: ThreadPoolExecutor</a></li>
-        <li><a href="#核心-scheduledthreadexecutor">核心: ScheduledThreadExecutor</a></li>
-        <li><a href="#核心-forkjoin框架">核心: Fork/Join框架</a></li>
-        <li><a href="#工具类-executors">工具类: Executors</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><p><figure><a class="lightgallery" href="/images/current/juc/juc-overview.png" title="/images/current/juc/juc-overview.png" data-thumbnail="/images/current/juc/juc-overview.png" data-sub-html="<h2>JUC概览</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/current/juc/juc-overview.png"
-            data-srcset="/images/current/juc/juc-overview.png, /images/current/juc/juc-overview.png 1.5x, /images/current/juc/juc-overview.png 2x"
-            data-sizes="auto"
-            alt="/images/current/juc/juc-overview.png" />
-    </a><figcaption class="image-caption">JUC概览</figcaption>
-    </figure></p>
-<h2 id="lock框架和tools类">Lock框架和Tools类</h2>
-<p><figure><a class="lightgallery" href="/images/current/juc/juc-overview-lock.png" title="/images/current/juc/juc-overview-lock.png" data-thumbnail="/images/current/juc/juc-overview-lock.png" data-sub-html="<h2>Lock框架和Tools类</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/current/juc/juc-overview-lock.png"
-            data-srcset="/images/current/juc/juc-overview-lock.png, /images/current/juc/juc-overview-lock.png 1.5x, /images/current/juc/juc-overview-lock.png 2x"
-            data-sizes="auto"
-            alt="/images/current/juc/juc-overview-lock.png" />
-    </a><figcaption class="image-caption">Lock框架和Tools类</figcaption>
-    </figure></p>
-<h3 id="接口condition">接口Condition</h3>
-<blockquote>
-<p>Condition为接口类型，它将 Object 监视器方法(wait、notify 和 notifyAll)分解成截然不同的对象，以便通过将这些对象与任意Lock实现组合使用，为每个对象提供多个等待set (wait-set)。其中，Lock替代了synchronized方法和语句的使用，Condition替代了Object监视器方法的使用。可以通过await(),signal()来休眠/唤醒线程。</p>
-</blockquote>
-<h3 id="接口lock">接口Lock</h3>
-<blockquote>
-<p>Lock为接口类型，Lock实现提供了比使用synchronized方法和语句可获得的更广泛的锁定操作。此实现允许更灵活的结构，可以具有差别很大的属性，可以支持多个相关的Condition对象。</p>
-</blockquote>
-<h3 id="接口readwritelock">接口ReadWriteLock</h3>
-<blockquote>
-<p>ReadWriteLock为接口类型， 维护了一对相关的锁，一个用于只读操作，另一个用于写入操作。只要没有 writer，读取锁可以由多个 reader 线程同时保持。写入锁是独占的。</p>
-</blockquote>
-<h3 id="抽象类abstractownablesynchonizer">抽象类AbstractOwnableSynchonizer</h3>
-<blockquote>
-<p>AbstractOwnableSynchonizer为抽象类，可以由线程以独占方式拥有的同步器。此类为创建锁和相关同步器(伴随着所有权的概念)提供了基础。AbstractOwnableSynchronizer 类本身不管理或使用此信息。但是，子类和工具可以使用适当维护的值帮助控制和监视访问以及提供诊断。</p>
-</blockquote>
-<h3 id="抽象类abstractqueuedlongsynchronizerlong">抽象类AbstractQueuedLongSynchronizer(long)</h3>
-<blockquote>
-<p>AbstractQueuedLongSynchronizer为抽象类，以 long 形式维护同步状态的一个 AbstractQueuedSynchronizer 版本。此类具有的结构、属性和方法与 AbstractQueuedSynchronizer 完全相同，但所有与状态相关的参数和结果都定义为 long 而不是 int。当创建需要 64 位状态的多级别锁和屏障等同步器时，此类很有用。</p>
-</blockquote>
-<h3 id="核心抽象类abstractqueuedsynchronizerint">核心抽象类AbstractQueuedSynchronizer(int)</h3>
-<blockquote>
-<p>AbstractQueuedSynchronizer为抽象类，其为实现依赖于先进先出 (FIFO) 等待队列的阻塞锁和相关同步器(信号量、事件，等等)提供一个框架。此类的设计目标是成为依靠单个原子int值来表示状态的大多数同步器的一个有用基础。</p>
-</blockquote>
-<h3 id="锁常用类locksupport">锁常用类LockSupport</h3>
-<blockquote>
-<p>LockSupport为常用类，主要作用就是挂起线程，唤醒线程。LockSupport的功能和&quot;Thread中的 Thread.suspend()和Thread.resume()有点类似&quot;，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。</p>
-</blockquote>
-<p>该流程在购物APP上非常常见，当你准备支付时放弃，会有一个支付失效，在支付失效期内可以随时回来支付，过期后需要重新选取支付商品。</p>
-<p>这里基于LockSupport中park和unpark控制线程状态，实现的等待通知机制。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LockAPI04</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">OrderPay</span><span class="w"> </span><span class="n">orderPay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OrderPay</span><span class="p">(</span><span class="s">&#34;UnPaid&#34;</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">orderThread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">orderPay</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">orderThread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">3000</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">orderPay</span><span class="p">.</span><span class="na">changeState</span><span class="p">(</span><span class="s">&#34;Pay&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">unpark</span><span class="p">(</span><span class="n">orderThread</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">OrderPay</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 支付状态</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">orderState</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OrderPay</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">orderState</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">orderState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orderState</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">changeState</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">orderState</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">orderState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orderState</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">orderState</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;UnPaid&#34;</span><span class="p">)){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;订单待支付...&#34;</span><span class="o">+</span><span class="n">orderState</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">LockSupport</span><span class="p">.</span><span class="na">park</span><span class="p">(</span><span class="n">orderState</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;orderState=&#34;</span><span class="o">+</span><span class="n">orderState</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;订单准备发货...&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="锁常用类reentrantlock">锁常用类ReentrantLock</h3>
-<blockquote>
-<p>ReentrantLock为常用类，它是一个可重入的互斥锁 Lock，它具有与使用 synchronized 方法和语句所访问的隐式监视器锁相同的一些基本行为和语义，但功能更强大。</p>
-</blockquote>
-<h3 id="锁常用类reentrantreadwritelock">锁常用类ReentrantReadWriteLock</h3>
-<blockquote>
-<p>ReentrantReadWriteLock是读写锁接口ReadWriteLock的实现类，它包括Lock子类ReadLock和WriteLock。ReadLock是共享锁，WriteLock是独占锁。</p>
-</blockquote>
-<p><strong>基于读锁时，其他线程可以进行读操作，基于写锁时，其他线程读、写操作都禁止。</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LockAPI03</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">DataMap</span><span class="w"> </span><span class="n">dataMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DataMap</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GetRun</span><span class="p">(</span><span class="n">dataMap</span><span class="p">))</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PutRun</span><span class="p">(</span><span class="n">dataMap</span><span class="p">))</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">write</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">read</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">GetRun</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DataMap</span><span class="w"> </span><span class="n">dataMap</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">GetRun</span><span class="w"> </span><span class="p">(</span><span class="n">DataMap</span><span class="w"> </span><span class="n">dataMap</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">dataMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataMap</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;GetRun：&#34;</span><span class="o">+</span><span class="n">dataMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;myKey&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">PutRun</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DataMap</span><span class="w"> </span><span class="n">dataMap</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">PutRun</span><span class="w"> </span><span class="p">(</span><span class="n">DataMap</span><span class="w"> </span><span class="n">dataMap</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">dataMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataMap</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">dataMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;myKey&#34;</span><span class="p">,</span><span class="s">&#34;myValue&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">DataMap</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dataMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ReadWriteLock</span><span class="w"> </span><span class="n">rwLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantReadWriteLock</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Lock</span><span class="w"> </span><span class="n">readLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rwLock</span><span class="p">.</span><span class="na">readLock</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Lock</span><span class="w"> </span><span class="n">writeLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rwLock</span><span class="p">.</span><span class="na">writeLock</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 读取数据</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">get</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">readLock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">dataMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">readLock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 写入数据</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">put</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">writeLock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">dataMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;执行写入结束...&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">10000</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Exception...&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">writeLock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="锁常用类stampedlock">锁常用类StampedLock</h3>
-<blockquote>
-<p>它是java8在java.util.concurrent.locks新增的一个API。StampedLock控制锁有三种模式(写，读，乐观读)，一个StampedLock状态是由版本和模式两个部分组成，锁获取方法返回一个数字作为票据stamp，它用相应的锁状态表示并控制访问，数字0表示没有写锁被授权访问。在读锁上分为悲观锁和乐观锁。</p>
-</blockquote>
-<h3 id="工具常用类countdownlatch">工具常用类CountDownLatch</h3>
-<blockquote>
-<p>CountDownLatch为常用类，它是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。</p>
-</blockquote>
-<h3 id="工具常用类cyclicbarrier">工具常用类CyclicBarrier</h3>
-<blockquote>
-<p>CyclicBarrier为常用类，其是一个同步辅助类，它允许一组线程互相等待，直到到达某个公共屏障点 (common barrier point)。在涉及一组固定大小的线程的程序中，这些线程必须不时地互相等待，此时 CyclicBarrier 很有用。因为该 barrier 在释放等待线程后可以重用，所以称它为循环 的 barrier。</p>
-</blockquote>
-<h3 id="工具常用类phaser">工具常用类Phaser</h3>
-<blockquote>
-<p>Phaser是JDK 7新增的一个同步辅助类，它可以实现CyclicBarrier和CountDownLatch类似的功能，而且它支持对任务的动态调整，并支持分层结构来达到更高的吞吐量。</p>
-</blockquote>
-<h3 id="工具常用类semaphore">工具常用类Semaphore</h3>
-<blockquote>
-<p>Semaphore为常用类，其是一个计数信号量，从概念上讲，信号量维护了一个许可集。如有必要，在许可可用前会阻塞每一个 acquire()，然后再获取该许可。每个 release() 添加一个许可，从而可能释放一个正在阻塞的获取者。但是，不使用实际的许可对象，Semaphore 只对可用许可的号码进行计数，并采取相应的行动。通常用于限制可以访问某些资源(物理或逻辑的)的线程数目。</p>
-</blockquote>
-<h3 id="工具常用类exchanger">工具常用类Exchanger</h3>
-<blockquote>
-<p>Exchanger是用于线程协作的工具类, 主要用于两个线程之间的数据交换。它提供一个同步点，在这个同步点，两个线程可以交换彼此的数据。这两个线程通过exchange()方法交换数据，当一个线程先执行exchange()方法后，它会一直等待第二个线程也执行exchange()方法，当这两个线程到达同步点时，这两个线程就可以交换数据了。</p>
-</blockquote>
-<h3 id="对比">对比</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">同步工具</th>
-<th style="text-align:left">同步工具与AQS的关联</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">ReentrantLock</td>
-<td style="text-align:left">使用AQS保存锁重复持有的次数。当一个线程获取锁时，ReentrantLock记录当前获得锁的线程标识，用于检测是否重复获取，以及错误线程试图解锁操作时异常情况的处理。</td>
-</tr>
-<tr>
-<td style="text-align:left">Semaphore</td>
-<td style="text-align:left">使用AQS同步状态来保存信号量的当前计数。tryRelease会增加计数，acquireShared会减少计数。</td>
-</tr>
-<tr>
-<td style="text-align:left">CountDownLatch</td>
-<td style="text-align:left">使用AQS同步状态来表示计数。计数为0时，所有的Acquire操作（CountDownLatch的await方法）才可以通过。</td>
-</tr>
-<tr>
-<td style="text-align:left">ReentrantReadWriteLock</td>
-<td style="text-align:left">使用AQS同步状态中的16位保存写锁持有的次数，剩下的16位用于保存读锁的持有次数。</td>
-</tr>
-<tr>
-<td style="text-align:left">ThreadPoolExecutor</td>
-<td style="text-align:left">Worker利用AQS同步状态实现对独占线程变量的设置（tryAcquire和tryRelease）。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="collections-并发集合">Collections: 并发集合</h2>
-<p><figure><a class="lightgallery" href="/images/current/juc/juc-overview-collection.png" title="/images/current/juc/juc-overview-collection.png" data-thumbnail="/images/current/juc/juc-overview-collection.png" data-sub-html="<h2>并发集合</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/current/juc/juc-overview-collection.png"
-            data-srcset="/images/current/juc/juc-overview-collection.png, /images/current/juc/juc-overview-collection.png 1.5x, /images/current/juc/juc-overview-collection.png 2x"
-            data-sizes="auto"
-            alt="/images/current/juc/juc-overview-collection.png" />
-    </a><figcaption class="image-caption">并发集合</figcaption>
-    </figure></p>
-<h2 id="casunsafe和原子类">CAS,Unsafe和原子类</h2>
-<p><strong>JUC中多数类是通过volatile和CAS来实现的，CAS本质上提供的是一种无锁方案，而Synchronized和Lock是互斥锁方案; Java原子类本质上使用的是CAS，而CAS底层是通过Unsafe类实现的。</strong></p>
-<h3 id="atomic原子类">Atomic原子类</h3>
-<p>其基本的特性就是在多线程环境下，当有多个线程同时执行这些类的实例包含的方法时，具有排他性，即当某个线程进入方法，执行其中的指令时，不会被其他线程打断，而别的线程就像自旋锁一样，一直等到该方法执行完成，才由JVM从等待队列中选择一个另一个线程进入，这只是一种逻辑上的理解。实际上是借助硬件的相关指令来实现的，不会阻塞线程(或者说只是在硬件级别上阻塞了)。</p>
-<h2 id="executors线程池">Executors线程池</h2>
-<p><figure><a class="lightgallery" href="/images/current/juc/juc-executors.png" title="/images/current/juc/juc-executors.png" data-thumbnail="/images/current/juc/juc-executors.png" data-sub-html="<h2>线程池</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/current/juc/juc-executors.png"
-            data-srcset="/images/current/juc/juc-executors.png, /images/current/juc/juc-executors.png 1.5x, /images/current/juc/juc-executors.png 2x"
-            data-sizes="auto"
-            alt="/images/current/juc/juc-executors.png" />
-    </a><figcaption class="image-caption">线程池</figcaption>
-    </figure></p>
-<h3 id="executor">Executor</h3>
-<blockquote>
-<p>Executor接口提供一种将任务提交与每个任务将如何运行的机制(包括线程使用的细节、调度等)分离开来的方法。通常使用 Executor 而不是显式地创建线程。</p>
-</blockquote>
-<h3 id="executorservice">ExecutorService</h3>
-<blockquote>
-<p>ExecutorService继承自Executor接口，ExecutorService提供了管理终止的方法，以及可为跟踪一个或多个异步任务执行状况而生成 Future 的方法。 可以关闭 ExecutorService，这将导致其停止接受新任务。关闭后，执行程序将最后终止，这时没有任务在执行，也没有任务在等待执行，并且无法提交新任务。</p>
-</blockquote>
-<h3 id="scheduledexecutorservice">ScheduledExecutorService</h3>
-<blockquote>
-<p>ScheduledExecutorService继承自ExecutorService接口，可安排在给定的延迟后运行或定期执行的命令。</p>
-</blockquote>
-<h3 id="abstractexecutorservice">AbstractExecutorService</h3>
-<blockquote>
-<p>AbstractExecutorService继承自ExecutorService接口，其提供 ExecutorService 执行方法的默认实现。此类使用 newTaskFor 返回的 RunnableFuture 实现 submit、invokeAny 和 invokeAll 方法，默认情况下，RunnableFuture 是此包中提供的 FutureTask 类。</p>
-</blockquote>
-<h3 id="futuretask">FutureTask</h3>
-<blockquote>
-<p>FutureTask 为 Future 提供了基础实现，如获取任务执行结果(get)和取消任务(cancel)等。如果任务尚未完成，获取任务执行结果时将会阻塞。一旦执行结束，任务就不能被重启或取消(除非使用runAndReset执行计算)。FutureTask 常用来封装 Callable 和 Runnable，也可以作为一个任务提交到线程池中执行。除了作为一个独立的类之外，此类也提供了一些功能性函数供我们创建自定义 task 类使用。FutureTask 的线程安全由CAS来保证。</p>
-</blockquote>
-<h3 id="核心-threadpoolexecutor">核心: ThreadPoolExecutor</h3>
-<blockquote>
-<p>ThreadPoolExecutor实现了AbstractExecutorService接口，也是一个 ExecutorService，它使用可能的几个池线程之一执行每个提交的任务，通常使用 Executors 工厂方法配置。 线程池可以解决两个不同问题: 由于减少了每个任务调用的开销，它们通常可以在执行大量异步任务时提供增强的性能，并且还可以提供绑定和管理资源(包括执行任务集时使用的线程)的方法。每个 ThreadPoolExecutor 还维护着一些基本的统计数据，如完成的任务数。</p>
-</blockquote>
-<h3 id="核心-scheduledthreadexecutor">核心: ScheduledThreadExecutor</h3>
-<blockquote>
-<p>ScheduledThreadPoolExecutor实现ScheduledExecutorService接口，可安排在给定的延迟后运行命令，或者定期执行命令。需要多个辅助线程时，或者要求 ThreadPoolExecutor 具有额外的灵活性或功能时，此类要优于 Timer。</p>
-</blockquote>
-<h3 id="核心-forkjoin框架">核心: Fork/Join框架</h3>
-<blockquote>
-<p>ForkJoinPool 是JDK 7加入的一个线程池类。Fork/Join 技术是分治算法(Divide-and-Conquer)的并行实现，它是一项可以获得良好的并行性能的简单且高效的设计技术。目的是为了帮助我们更好地利用多处理器带来的好处，使用所有可用的运算能力来提升应用的性能。</p>
-</blockquote>
-<h3 id="工具类-executors">工具类: Executors</h3>
-<blockquote>
-<p>Executors是一个工具类，用其可以创建ExecutorService、ScheduledExecutorService、ThreadFactory、Callable等对象。它的使用融入到了ThreadPoolExecutor, ScheduledThreadExecutor和ForkJoinPool中。</p>
-</blockquote>
-</div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>更新于 2018-04-02</span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://moge.fun/juc/" data-title="JUC-并发编程利器" data-hashtags="并发编程,大纲"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://moge.fun/juc/" data-hashtag="并发编程"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://moge.fun/juc/" data-title="JUC-并发编程利器"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://moge.fun/juc/" data-title="JUC-并发编程利器"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/juc/" data-title="JUC-并发编程利器"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/javacurrent/" class="prev" rel="prev" title="Java并发编程概览"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Java并发编程概览</a>
-            <a href="/synchronized/" class="next" rel="next" title="synchronized(无锁→偏向锁→轻量级锁→重量级锁)">synchronized(无锁→偏向锁→轻量级锁→重量级锁)<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
-</div>
-<div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2015 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
-                    <span class="icp"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021012209号-1</a></span></div>
-        </div>
-    </footer></div>
-
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":5,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
-</html>
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>JUC-并发编程利器 - 软件开发学习记录</title><meta name=Description content="JUC并发编程利器"><meta property="og:title" content="JUC-并发编程利器">
+<meta property="og:description" content="JUC并发编程利器"><meta property="og:type" content="article"><meta property="og:url" content="https://moge.fun/juc/"><meta property="og:image" content="https://moge.fun/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-04-02T00:00:00+00:00"><meta property="article:modified_time" content="2018-04-02T00:00:00+00:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://moge.fun/logo.png"><meta name=twitter:title content="JUC-并发编程利器"><meta name=twitter:description content="JUC并发编程利器"><meta name=application-name content="Journey to the Life"><meta name=apple-mobile-web-app-title content="Journey to the Life"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://moge.fun/juc/><link rel=prev href=https://moge.fun/javacurrent/><link rel=next href=https://moge.fun/synchronized/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"JUC-并发编程利器","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/moge.fun\/juc\/"},"genre":"posts","keywords":"并发编程, 大纲","wordcount":493,"url":"https:\/\/moge.fun\/juc\/","datePublished":"2018-04-02T00:00:00+00:00","dateModified":"2018-04-02T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"默哥"},"description":"JUC并发编程利器"}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/about/ title>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JUC-并发编程利器</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>默哥</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/java%E5%9F%BA%E7%A1%80/><i class="far fa-folder fa-fw" aria-hidden=true></i>Java基础</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2018-04-02>2018-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 493 字&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#lock框架和tools类>Lock框架和Tools类</a><ul><li><a href=#接口condition>接口Condition</a></li><li><a href=#接口lock>接口Lock</a></li><li><a href=#接口readwritelock>接口ReadWriteLock</a></li><li><a href=#抽象类abstractownablesynchonizer>抽象类AbstractOwnableSynchonizer</a></li><li><a href=#抽象类abstractqueuedlongsynchronizerlong>抽象类AbstractQueuedLongSynchronizer(long)</a></li><li><a href=#核心抽象类abstractqueuedsynchronizerint>核心抽象类AbstractQueuedSynchronizer(int)</a></li><li><a href=#锁常用类locksupport>锁常用类LockSupport</a></li><li><a href=#锁常用类reentrantlock>锁常用类ReentrantLock</a></li><li><a href=#锁常用类reentrantreadwritelock>锁常用类ReentrantReadWriteLock</a></li><li><a href=#锁常用类stampedlock>锁常用类StampedLock</a></li><li><a href=#工具常用类countdownlatch>工具常用类CountDownLatch</a></li><li><a href=#工具常用类cyclicbarrier>工具常用类CyclicBarrier</a></li><li><a href=#工具常用类phaser>工具常用类Phaser</a></li><li><a href=#工具常用类semaphore>工具常用类Semaphore</a></li><li><a href=#工具常用类exchanger>工具常用类Exchanger</a></li><li><a href=#对比>对比</a></li></ul></li><li><a href=#collections-并发集合>Collections: 并发集合</a></li><li><a href=#casunsafe和原子类>CAS,Unsafe和原子类</a><ul><li><a href=#atomic原子类>Atomic原子类</a></li></ul></li><li><a href=#executors线程池>Executors线程池</a><ul><li><a href=#executor>Executor</a></li><li><a href=#executorservice>ExecutorService</a></li><li><a href=#scheduledexecutorservice>ScheduledExecutorService</a></li><li><a href=#abstractexecutorservice>AbstractExecutorService</a></li><li><a href=#futuretask>FutureTask</a></li><li><a href=#核心-threadpoolexecutor>核心: ThreadPoolExecutor</a></li><li><a href=#核心-scheduledthreadexecutor>核心: ScheduledThreadExecutor</a></li><li><a href=#核心-forkjoin框架>核心: Fork/Join框架</a></li><li><a href=#工具类-executors>工具类: Executors</a></li></ul></li></ul></nav></div></div><div class=content id=content><p><figure><a class=lightgallery href=/images/current/juc/juc-overview.png title=/images/current/juc/juc-overview.png data-thumbnail=/images/current/juc/juc-overview.png data-sub-html="<h2>JUC概览</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/current/juc/juc-overview.png data-srcset="/images/current/juc/juc-overview.png, /images/current/juc/juc-overview.png 1.5x, /images/current/juc/juc-overview.png 2x" data-sizes=auto alt=/images/current/juc/juc-overview.png></a><figcaption class=image-caption>JUC概览</figcaption></figure></p><h2 id=lock框架和tools类>Lock框架和Tools类</h2><p><figure><a class=lightgallery href=/images/current/juc/juc-overview-lock.png title=/images/current/juc/juc-overview-lock.png data-thumbnail=/images/current/juc/juc-overview-lock.png data-sub-html="<h2>Lock框架和Tools类</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/current/juc/juc-overview-lock.png data-srcset="/images/current/juc/juc-overview-lock.png, /images/current/juc/juc-overview-lock.png 1.5x, /images/current/juc/juc-overview-lock.png 2x" data-sizes=auto alt=/images/current/juc/juc-overview-lock.png></a><figcaption class=image-caption>Lock框架和Tools类</figcaption></figure></p><h3 id=接口condition>接口Condition</h3><blockquote><p>Condition为接口类型，它将 Object 监视器方法(wait、notify 和 notifyAll)分解成截然不同的对象，以便通过将这些对象与任意Lock实现组合使用，为每个对象提供多个等待set (wait-set)。其中，Lock替代了synchronized方法和语句的使用，Condition替代了Object监视器方法的使用。可以通过await(),signal()来休眠/唤醒线程。</p></blockquote><h3 id=接口lock>接口Lock</h3><blockquote><p>Lock为接口类型，Lock实现提供了比使用synchronized方法和语句可获得的更广泛的锁定操作。此实现允许更灵活的结构，可以具有差别很大的属性，可以支持多个相关的Condition对象。</p></blockquote><h3 id=接口readwritelock>接口ReadWriteLock</h3><blockquote><p>ReadWriteLock为接口类型， 维护了一对相关的锁，一个用于只读操作，另一个用于写入操作。只要没有 writer，读取锁可以由多个 reader 线程同时保持。写入锁是独占的。</p></blockquote><h3 id=抽象类abstractownablesynchonizer>抽象类AbstractOwnableSynchonizer</h3><blockquote><p>AbstractOwnableSynchonizer为抽象类，可以由线程以独占方式拥有的同步器。此类为创建锁和相关同步器(伴随着所有权的概念)提供了基础。AbstractOwnableSynchronizer 类本身不管理或使用此信息。但是，子类和工具可以使用适当维护的值帮助控制和监视访问以及提供诊断。</p></blockquote><h3 id=抽象类abstractqueuedlongsynchronizerlong>抽象类AbstractQueuedLongSynchronizer(long)</h3><blockquote><p>AbstractQueuedLongSynchronizer为抽象类，以 long 形式维护同步状态的一个 AbstractQueuedSynchronizer 版本。此类具有的结构、属性和方法与 AbstractQueuedSynchronizer 完全相同，但所有与状态相关的参数和结果都定义为 long 而不是 int。当创建需要 64 位状态的多级别锁和屏障等同步器时，此类很有用。</p></blockquote><h3 id=核心抽象类abstractqueuedsynchronizerint>核心抽象类AbstractQueuedSynchronizer(int)</h3><blockquote><p>AbstractQueuedSynchronizer为抽象类，其为实现依赖于先进先出 (FIFO) 等待队列的阻塞锁和相关同步器(信号量、事件，等等)提供一个框架。此类的设计目标是成为依靠单个原子int值来表示状态的大多数同步器的一个有用基础。</p></blockquote><h3 id=锁常用类locksupport>锁常用类LockSupport</h3><blockquote><p>LockSupport为常用类，主要作用就是挂起线程，唤醒线程。LockSupport的功能和"Thread中的 Thread.suspend()和Thread.resume()有点类似"，LockSupport中的park() 和 unpark() 的作用分别是阻塞线程和解除阻塞线程。但是park()和unpark()不会遇到“Thread.suspend 和 Thread.resume所可能引发的死锁”问题。</p></blockquote><p>该流程在购物APP上非常常见，当你准备支付时放弃，会有一个支付失效，在支付失效期内可以随时回来支付，过期后需要重新选取支付商品。</p><p>这里基于LockSupport中park和unpark控制线程状态，实现的等待通知机制。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>LockAPI04</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=o>[]</span><span class=w> </span><span class=n>args</span><span class=p>)</span><span class=w> </span><span class=kd>throws</span><span class=w> </span><span class=n>Exception</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>OrderPay</span><span class=w> </span><span class=n>orderPay</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>OrderPay</span><span class=p>(</span><span class=s>&#34;UnPaid&#34;</span><span class=p>)</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>Thread</span><span class=w> </span><span class=n>orderThread</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Thread</span><span class=p>(</span><span class=n>orderPay</span><span class=p>)</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>orderThread</span><span class=p>.</span><span class=na>start</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>Thread</span><span class=p>.</span><span class=na>sleep</span><span class=p>(</span><span class=n>3000</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>orderPay</span><span class=p>.</span><span class=na>changeState</span><span class=p>(</span><span class=s>&#34;Pay&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>LockSupport</span><span class=p>.</span><span class=na>unpark</span><span class=p>(</span><span class=n>orderThread</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>class</span> <span class=nc>OrderPay</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>Runnable</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 支付状态</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=n>orderState</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=nf>OrderPay</span><span class=w> </span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>orderState</span><span class=p>){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>orderState</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>orderState</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>synchronized</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>changeState</span><span class=w> </span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>orderState</span><span class=p>){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>orderState</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>orderState</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>run</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>orderState</span><span class=p>.</span><span class=na>equals</span><span class=p>(</span><span class=s>&#34;UnPaid&#34;</span><span class=p>)){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;订单待支付...&#34;</span><span class=o>+</span><span class=n>orderState</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>LockSupport</span><span class=p>.</span><span class=na>park</span><span class=p>(</span><span class=n>orderState</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;orderState=&#34;</span><span class=o>+</span><span class=n>orderState</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;订单准备发货...&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=锁常用类reentrantlock>锁常用类ReentrantLock</h3><blockquote><p>ReentrantLock为常用类，它是一个可重入的互斥锁 Lock，它具有与使用 synchronized 方法和语句所访问的隐式监视器锁相同的一些基本行为和语义，但功能更强大。</p></blockquote><h3 id=锁常用类reentrantreadwritelock>锁常用类ReentrantReadWriteLock</h3><blockquote><p>ReentrantReadWriteLock是读写锁接口ReadWriteLock的实现类，它包括Lock子类ReadLock和WriteLock。ReadLock是共享锁，WriteLock是独占锁。</p></blockquote><p><strong>基于读锁时，其他线程可以进行读操作，基于写锁时，其他线程读、写操作都禁止。</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>LockAPI03</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=o>[]</span><span class=w> </span><span class=n>args</span><span class=p>)</span><span class=w> </span><span class=kd>throws</span><span class=w> </span><span class=n>Exception</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>DataMap</span><span class=w> </span><span class=n>dataMap</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>DataMap</span><span class=p>()</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>Thread</span><span class=w> </span><span class=n>read</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Thread</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>GetRun</span><span class=p>(</span><span class=n>dataMap</span><span class=p>))</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>Thread</span><span class=w> </span><span class=n>write</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Thread</span><span class=p>(</span><span class=k>new</span><span class=w> </span><span class=n>PutRun</span><span class=p>(</span><span class=n>dataMap</span><span class=p>))</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>write</span><span class=p>.</span><span class=na>start</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>Thread</span><span class=p>.</span><span class=na>sleep</span><span class=p>(</span><span class=n>2000</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>read</span><span class=p>.</span><span class=na>start</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>class</span> <span class=nc>GetRun</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>Runnable</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>DataMap</span><span class=w> </span><span class=n>dataMap</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=nf>GetRun</span><span class=w> </span><span class=p>(</span><span class=n>DataMap</span><span class=w> </span><span class=n>dataMap</span><span class=p>){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>dataMap</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>dataMap</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>run</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;GetRun：&#34;</span><span class=o>+</span><span class=n>dataMap</span><span class=p>.</span><span class=na>get</span><span class=p>(</span><span class=s>&#34;myKey&#34;</span><span class=p>));</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>class</span> <span class=nc>PutRun</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>Runnable</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>DataMap</span><span class=w> </span><span class=n>dataMap</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=nf>PutRun</span><span class=w> </span><span class=p>(</span><span class=n>DataMap</span><span class=w> </span><span class=n>dataMap</span><span class=p>){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>dataMap</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>dataMap</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>run</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>dataMap</span><span class=p>.</span><span class=na>put</span><span class=p>(</span><span class=s>&#34;myKey&#34;</span><span class=p>,</span><span class=s>&#34;myValue&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>class</span> <span class=nc>DataMap</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>Map</span><span class=o>&lt;</span><span class=n>String</span><span class=p>,</span><span class=n>String</span><span class=o>&gt;</span><span class=w> </span><span class=n>dataMap</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>HashMap</span><span class=o>&lt;&gt;</span><span class=p>()</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>ReadWriteLock</span><span class=w> </span><span class=n>rwLock</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ReentrantReadWriteLock</span><span class=p>()</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>Lock</span><span class=w> </span><span class=n>readLock</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>rwLock</span><span class=p>.</span><span class=na>readLock</span><span class=p>()</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>Lock</span><span class=w> </span><span class=n>writeLock</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>rwLock</span><span class=p>.</span><span class=na>writeLock</span><span class=p>()</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 读取数据</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>String</span><span class=w> </span><span class=nf>get</span><span class=w> </span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>key</span><span class=p>){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>readLock</span><span class=p>.</span><span class=na>lock</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>try</span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=n>dataMap</span><span class=p>.</span><span class=na>get</span><span class=p>(</span><span class=n>key</span><span class=p>)</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w> </span><span class=k>finally</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>readLock</span><span class=p>.</span><span class=na>unlock</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 写入数据</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>put</span><span class=w> </span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>key</span><span class=p>,</span><span class=n>String</span><span class=w> </span><span class=n>value</span><span class=p>){</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>writeLock</span><span class=p>.</span><span class=na>lock</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>try</span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>dataMap</span><span class=p>.</span><span class=na>put</span><span class=p>(</span><span class=n>key</span><span class=p>,</span><span class=n>value</span><span class=p>)</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;执行写入结束...&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>Thread</span><span class=p>.</span><span class=na>sleep</span><span class=p>(</span><span class=n>10000</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w> </span><span class=k>catch</span><span class=w> </span><span class=p>(</span><span class=n>Exception</span><span class=w> </span><span class=n>e</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;Exception...&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w> </span><span class=k>finally</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>writeLock</span><span class=p>.</span><span class=na>unlock</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=锁常用类stampedlock>锁常用类StampedLock</h3><blockquote><p>它是java8在java.util.concurrent.locks新增的一个API。StampedLock控制锁有三种模式(写，读，乐观读)，一个StampedLock状态是由版本和模式两个部分组成，锁获取方法返回一个数字作为票据stamp，它用相应的锁状态表示并控制访问，数字0表示没有写锁被授权访问。在读锁上分为悲观锁和乐观锁。</p></blockquote><h3 id=工具常用类countdownlatch>工具常用类CountDownLatch</h3><blockquote><p>CountDownLatch为常用类，它是一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。</p></blockquote><h3 id=工具常用类cyclicbarrier>工具常用类CyclicBarrier</h3><blockquote><p>CyclicBarrier为常用类，其是一个同步辅助类，它允许一组线程互相等待，直到到达某个公共屏障点 (common barrier point)。在涉及一组固定大小的线程的程序中，这些线程必须不时地互相等待，此时 CyclicBarrier 很有用。因为该 barrier 在释放等待线程后可以重用，所以称它为循环 的 barrier。</p></blockquote><h3 id=工具常用类phaser>工具常用类Phaser</h3><blockquote><p>Phaser是JDK 7新增的一个同步辅助类，它可以实现CyclicBarrier和CountDownLatch类似的功能，而且它支持对任务的动态调整，并支持分层结构来达到更高的吞吐量。</p></blockquote><h3 id=工具常用类semaphore>工具常用类Semaphore</h3><blockquote><p>Semaphore为常用类，其是一个计数信号量，从概念上讲，信号量维护了一个许可集。如有必要，在许可可用前会阻塞每一个 acquire()，然后再获取该许可。每个 release() 添加一个许可，从而可能释放一个正在阻塞的获取者。但是，不使用实际的许可对象，Semaphore 只对可用许可的号码进行计数，并采取相应的行动。通常用于限制可以访问某些资源(物理或逻辑的)的线程数目。</p></blockquote><h3 id=工具常用类exchanger>工具常用类Exchanger</h3><blockquote><p>Exchanger是用于线程协作的工具类, 主要用于两个线程之间的数据交换。它提供一个同步点，在这个同步点，两个线程可以交换彼此的数据。这两个线程通过exchange()方法交换数据，当一个线程先执行exchange()方法后，它会一直等待第二个线程也执行exchange()方法，当这两个线程到达同步点时，这两个线程就可以交换数据了。</p></blockquote><h3 id=对比>对比</h3><table><thead><tr><th style=text-align:left>同步工具</th><th style=text-align:left>同步工具与AQS的关联</th></tr></thead><tbody><tr><td style=text-align:left>ReentrantLock</td><td style=text-align:left>使用AQS保存锁重复持有的次数。当一个线程获取锁时，ReentrantLock记录当前获得锁的线程标识，用于检测是否重复获取，以及错误线程试图解锁操作时异常情况的处理。</td></tr><tr><td style=text-align:left>Semaphore</td><td style=text-align:left>使用AQS同步状态来保存信号量的当前计数。tryRelease会增加计数，acquireShared会减少计数。</td></tr><tr><td style=text-align:left>CountDownLatch</td><td style=text-align:left>使用AQS同步状态来表示计数。计数为0时，所有的Acquire操作（CountDownLatch的await方法）才可以通过。</td></tr><tr><td style=text-align:left>ReentrantReadWriteLock</td><td style=text-align:left>使用AQS同步状态中的16位保存写锁持有的次数，剩下的16位用于保存读锁的持有次数。</td></tr><tr><td style=text-align:left>ThreadPoolExecutor</td><td style=text-align:left>Worker利用AQS同步状态实现对独占线程变量的设置（tryAcquire和tryRelease）。</td></tr></tbody></table><h2 id=collections-并发集合>Collections: 并发集合</h2><p><figure><a class=lightgallery href=/images/current/juc/juc-overview-collection.png title=/images/current/juc/juc-overview-collection.png data-thumbnail=/images/current/juc/juc-overview-collection.png data-sub-html="<h2>并发集合</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/current/juc/juc-overview-collection.png data-srcset="/images/current/juc/juc-overview-collection.png, /images/current/juc/juc-overview-collection.png 1.5x, /images/current/juc/juc-overview-collection.png 2x" data-sizes=auto alt=/images/current/juc/juc-overview-collection.png></a><figcaption class=image-caption>并发集合</figcaption></figure></p><h2 id=casunsafe和原子类>CAS,Unsafe和原子类</h2><p><strong>JUC中多数类是通过volatile和CAS来实现的，CAS本质上提供的是一种无锁方案，而Synchronized和Lock是互斥锁方案; Java原子类本质上使用的是CAS，而CAS底层是通过Unsafe类实现的。</strong></p><h3 id=atomic原子类>Atomic原子类</h3><p>其基本的特性就是在多线程环境下，当有多个线程同时执行这些类的实例包含的方法时，具有排他性，即当某个线程进入方法，执行其中的指令时，不会被其他线程打断，而别的线程就像自旋锁一样，一直等到该方法执行完成，才由JVM从等待队列中选择一个另一个线程进入，这只是一种逻辑上的理解。实际上是借助硬件的相关指令来实现的，不会阻塞线程(或者说只是在硬件级别上阻塞了)。</p><h2 id=executors线程池>Executors线程池</h2><p><figure><a class=lightgallery href=/images/current/juc/juc-executors.png title=/images/current/juc/juc-executors.png data-thumbnail=/images/current/juc/juc-executors.png data-sub-html="<h2>线程池</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/current/juc/juc-executors.png data-srcset="/images/current/juc/juc-executors.png, /images/current/juc/juc-executors.png 1.5x, /images/current/juc/juc-executors.png 2x" data-sizes=auto alt=/images/current/juc/juc-executors.png></a><figcaption class=image-caption>线程池</figcaption></figure></p><h3 id=executor>Executor</h3><blockquote><p>Executor接口提供一种将任务提交与每个任务将如何运行的机制(包括线程使用的细节、调度等)分离开来的方法。通常使用 Executor 而不是显式地创建线程。</p></blockquote><h3 id=executorservice>ExecutorService</h3><blockquote><p>ExecutorService继承自Executor接口，ExecutorService提供了管理终止的方法，以及可为跟踪一个或多个异步任务执行状况而生成 Future 的方法。 可以关闭 ExecutorService，这将导致其停止接受新任务。关闭后，执行程序将最后终止，这时没有任务在执行，也没有任务在等待执行，并且无法提交新任务。</p></blockquote><h3 id=scheduledexecutorservice>ScheduledExecutorService</h3><blockquote><p>ScheduledExecutorService继承自ExecutorService接口，可安排在给定的延迟后运行或定期执行的命令。</p></blockquote><h3 id=abstractexecutorservice>AbstractExecutorService</h3><blockquote><p>AbstractExecutorService继承自ExecutorService接口，其提供 ExecutorService 执行方法的默认实现。此类使用 newTaskFor 返回的 RunnableFuture 实现 submit、invokeAny 和 invokeAll 方法，默认情况下，RunnableFuture 是此包中提供的 FutureTask 类。</p></blockquote><h3 id=futuretask>FutureTask</h3><blockquote><p>FutureTask 为 Future 提供了基础实现，如获取任务执行结果(get)和取消任务(cancel)等。如果任务尚未完成，获取任务执行结果时将会阻塞。一旦执行结束，任务就不能被重启或取消(除非使用runAndReset执行计算)。FutureTask 常用来封装 Callable 和 Runnable，也可以作为一个任务提交到线程池中执行。除了作为一个独立的类之外，此类也提供了一些功能性函数供我们创建自定义 task 类使用。FutureTask 的线程安全由CAS来保证。</p></blockquote><h3 id=核心-threadpoolexecutor>核心: ThreadPoolExecutor</h3><blockquote><p>ThreadPoolExecutor实现了AbstractExecutorService接口，也是一个 ExecutorService，它使用可能的几个池线程之一执行每个提交的任务，通常使用 Executors 工厂方法配置。 线程池可以解决两个不同问题: 由于减少了每个任务调用的开销，它们通常可以在执行大量异步任务时提供增强的性能，并且还可以提供绑定和管理资源(包括执行任务集时使用的线程)的方法。每个 ThreadPoolExecutor 还维护着一些基本的统计数据，如完成的任务数。</p></blockquote><h3 id=核心-scheduledthreadexecutor>核心: ScheduledThreadExecutor</h3><blockquote><p>ScheduledThreadPoolExecutor实现ScheduledExecutorService接口，可安排在给定的延迟后运行命令，或者定期执行命令。需要多个辅助线程时，或者要求 ThreadPoolExecutor 具有额外的灵活性或功能时，此类要优于 Timer。</p></blockquote><h3 id=核心-forkjoin框架>核心: Fork/Join框架</h3><blockquote><p>ForkJoinPool 是JDK 7加入的一个线程池类。Fork/Join 技术是分治算法(Divide-and-Conquer)的并行实现，它是一项可以获得良好的并行性能的简单且高效的设计技术。目的是为了帮助我们更好地利用多处理器带来的好处，使用所有可用的运算能力来提升应用的性能。</p></blockquote><h3 id=工具类-executors>工具类: Executors</h3><blockquote><p>Executors是一个工具类，用其可以创建ExecutorService、ScheduledExecutorService、ThreadFactory、Callable等对象。它的使用融入到了ThreadPoolExecutor, ScheduledThreadExecutor和ForkJoinPool中。</p></blockquote></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2018-04-02</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://moge.fun/juc/ data-title=JUC-并发编程利器 data-hashtags=并发编程,大纲><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://moge.fun/juc/ data-hashtag=并发编程><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://moge.fun/juc/ data-title=JUC-并发编程利器><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://moge.fun/juc/ data-title=JUC-并发编程利器><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://moge.fun/juc/ data-title=JUC-并发编程利器><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/>并发编程</a>,&nbsp;<a href=/tags/%E5%A4%A7%E7%BA%B2/>大纲</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/javacurrent/ class=prev rel=prev title=Java并发编程概览><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Java并发编程概览</a>
+<a href=/synchronized/ class=next rel=next title=synchronized(无锁→偏向锁→轻量级锁→重量级锁)>synchronized(无锁→偏向锁→轻量级锁→重量级锁)<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=utterances class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2015 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>默哥</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a href=https://beian.miit.gov.cn/ target=_blank>豫ICP备2021012209号-1</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"alatan/BlogDiscuss"}},lightgallery:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:5,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>

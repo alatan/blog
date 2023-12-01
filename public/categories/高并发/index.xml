@@ -1,15 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>高并发 - 分类 - 软件开发学习记录</title>
-        <link>https://moge.fun/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/</link>
-        <description>高并发 - 分类 - 软件开发学习记录</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
-    <title>幂等</title>
-    <link>https://moge.fun/idempotence/</link>
-    <pubDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</pubDate>
-    <author>默哥</author>
-    <guid>https://moge.fun/idempotence/</guid>
-    <description><![CDATA[幂等就是：一个操作不论执行多少次，产生的效果和返回的结果都是一样的。
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>高并发 - 分类 - 软件开发学习记录</title><link>https://moge.fun/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/</link><description>高并发 - 分类 - 软件开发学习记录</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://moge.fun/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml"/><item><title>幂等</title><link>https://moge.fun/idempotence/</link><pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/idempotence/</guid><description><![CDATA[幂等就是：一个操作不论执行多少次，产生的效果和返回的结果都是一样的。
 业务场景 查询操作 查询一次和查询多次，在数据不变的情况下，查询结果是一样的。select是天然的幂等操作。
 删除操作 删除操作也是幂等的，删除一次和多次删除都是把数据删除。(注意可能返回结果不一样，删除的数据不存在，返回0，删除的数据多条，返回结果多个)
 新增操作 唯一索引或唯一组合索引来防止新增数据存在脏数据（当表存在唯一索引，并发时新增报错时，再查询一次就可以了，数据应该已经存在了，返回结果即可）
@@ -19,7 +8,4 @@
 1 select * from table_xxx where id=&#39;xxx&#39; for update; 注意：id字段一定是主键或者唯一索引，不然是锁表，会死人的，悲观锁使用时一般伴随事务一起使用，数据锁定时间可能会很长，根据实际情况选用。
 乐观锁 乐观锁只是在更新数据那一刻锁表，其他时间不锁表，所以相对于悲观锁，效率更高。
 乐观锁的实现方式多种多样可以通过version或者其他状态条件：
-通过版本号实现 1 2 3 update table_xxx set name=#name#,version=version+1 where version=#version#; -- 优化后的 update table_xxx set name=#name#,version=version+1 where id=#id# and version=#version#; 通过条件限制 1 2 3 update table_xxx set avai_amount=avai_amount-#subAmount# where avai_amount-#subAmount# &gt;= 0; -- 优化后的 update table_xxx set avai_amount=avai_amount-#subAmount# where id=#id# and avai_amount-#subAmount# &gt;= 0 要求：quality-#subQuality# &gt;= ，这个情景适合不用版本号，只更新是做数据安全校验，适合库存模型，扣份额和回滚份额，性能更高]]></description>
-</item>
-</channel>
-</rss>
+通过版本号实现 1 2 3 update table_xxx set name=#name#,version=version+1 where version=#version#; -- 优化后的 update table_xxx set name=#name#,version=version+1 where id=#id# and version=#version#; 通过条件限制 1 2 3 update table_xxx set avai_amount=avai_amount-#subAmount# where avai_amount-#subAmount# &gt;= 0; -- 优化后的 update table_xxx set avai_amount=avai_amount-#subAmount# where id=#id# and avai_amount-#subAmount# &gt;= 0 要求：quality-#subQuality# &gt;= ，这个情景适合不用版本号，只更新是做数据安全校验，适合库存模型，扣份额和回滚份额，性能更高]]></description></item></channel></rss>
