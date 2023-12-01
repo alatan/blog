@@ -1,453 +1,84 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <title>Java并发编程概览 - 软件开发学习记录</title><meta name="Description" content="Java并发编程"><meta property="og:title" content="Java并发编程概览" />
-<meta property="og:description" content="Java并发编程" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://moge.fun/javacurrent/" /><meta property="og:image" content="https://moge.fun/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2018-04-01T00:00:00+00:00" />
-<meta property="article:modified_time" content="2018-04-01T00:00:00+00:00" /><meta property="og:site_name" content="My cool site" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://moge.fun/logo.png"/>
-
-<meta name="twitter:title" content="Java并发编程概览"/>
-<meta name="twitter:description" content="Java并发编程"/>
-<meta name="application-name" content="Journey to the Life">
-<meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/javacurrent/" /><link rel="prev" href="https://moge.fun/hashmap/" /><link rel="next" href="https://moge.fun/juc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Java并发编程概览",
-        "inLanguage": "zh-CN",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/moge.fun\/javacurrent\/"
-        },"genre": "posts","keywords": "并发编程, 大纲","wordcount":  327 ,
-        "url": "https:\/\/moge.fun\/javacurrent\/","datePublished": "2018-04-01T00:00:00+00:00","dateModified": "2018-04-01T00:00:00+00:00","publisher": {
-            "@type": "Organization",
-            "name": ""},"author": {
-                "@type": "Person",
-                "name": "默哥"
-            },"description": "Java并发编程"
-    }
-    </script></head>
-    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
-
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="软件开发学习记录">软件开发学习记录</a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-                </a></div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="软件开发学习记录">软件开发学习记录</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
-                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
-                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
-                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-                        取消
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
-            </a></div>
-    </div>
-</header><div class="search-dropdown desktop">
-        <div id="search-dropdown-desktop"></div>
-    </div>
-    <div class="search-dropdown mobile">
-        <div id="search-dropdown-mobile"></div>
-    </div><main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">目录</h2>
-            <div class="toc-content always-active" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java并发编程概览</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Java基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-04-01">2018-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 327 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-        </div><div class="details toc" id="toc-static"  data-kept="">
-                <div class="details-summary toc-title">
-                    <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#并发三要素">并发三要素</a>
-      <ul>
-        <li><a href="#可见性">可见性</a></li>
-        <li><a href="#原子性">原子性</a></li>
-        <li><a href="#有序性">有序性</a></li>
-      </ul>
-    </li>
-    <li><a href="#线程安全的实现方法">线程安全的实现方法</a>
-      <ul>
-        <li><a href="#互斥同步阻塞同步">互斥同步(阻塞同步)</a>
-          <ul>
-            <li><a href="#synchronizedjvm实现">synchronized(JVM实现)</a></li>
-            <li><a href="#lockreentrantlockjdk实现">Lock&amp;ReentrantLock(JDK实现)</a></li>
-          </ul>
-        </li>
-        <li><a href="#非阻塞同步">非阻塞同步</a>
-          <ul>
-            <li><a href="#cas">CAS</a>
-              <ul>
-                <li><a href="#aba问题">ABA问题</a></li>
-              </ul>
-            </li>
-            <li><a href="#atomicinteger">AtomicInteger</a></li>
-          </ul>
-        </li>
-        <li><a href="#无需同步方案">无需同步方案</a>
-          <ul>
-            <li><a href="#栈封闭">栈封闭</a></li>
-            <li><a href="#线程本地存储threadlocal">线程本地存储(ThreadLocal)</a></li>
-            <li><a href="#可重入代码">可重入代码</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#解决并发">解决并发</a>
-      <ul>
-        <li><a href="#3个关键字">3个关键字</a>
-          <ul>
-            <li><a href="#synchronized原子性可见性有序性">synchronized：原子性，可见性，有序性</a></li>
-            <li><a href="#volatile有序性可见性">volatile：有序性，可见性</a>
-              <ul>
-                <li><a href="#防重排序">防重排序</a></li>
-                <li><a href="#实现可见性">实现可见性</a></li>
-                <li><a href="#使用-volatile-必须具备的条件">使用 volatile 必须具备的条件</a></li>
-              </ul>
-            </li>
-            <li><a href="#final有序性">final：有序性</a></li>
-          </ul>
-        </li>
-        <li><a href="#happens-before-规则">Happens-Before 规则</a></li>
-        <li><a href="#锁优化及jmm">锁优化及JMM</a></li>
-      </ul>
-    </li>
-    <li><a href="#juc框架">J.U.C框架</a>
-      <ul>
-        <li><a href="#unsafecas和原子类">Unsafe(CAS)和原子类</a></li>
-        <li><a href="#aqs框架">AQS框架</a></li>
-        <li><a href="#锁">锁</a></li>
-        <li><a href="#并发集合">并发集合</a></li>
-        <li><a href="#线程池">线程池</a></li>
-        <li><a href="#工具类">工具类</a></li>
-      </ul>
-    </li>
-    <li><a href="#参考文章">参考文章</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><p><figure><a class="lightgallery" href="/images/current/concurrentOverview.png" title="Java并发编程概览" data-thumbnail="/images/current/concurrentOverview.png" data-sub-html="<h2>Java并发编程概览</h2><p>Java并发编程概览</p>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="/images/current/concurrentOverview.png"
-            data-srcset="/images/current/concurrentOverview.png, /images/current/concurrentOverview.png 1.5x, /images/current/concurrentOverview.png 2x"
-            data-sizes="auto"
-            alt="/images/current/concurrentOverview.png" />
-    </a><figcaption class="image-caption">Java并发编程概览</figcaption>
-    </figure></p>
-<h2 id="并发三要素">并发三要素</h2>
-<h3 id="可见性">可见性</h3>
-<ul>
-<li>CPU缓存引起：CPU增加了缓存，以均衡与内存的速度差异导致。</li>
-<li>一个线程对共享变量的修改，另外一个线程能够立刻看到。</li>
-</ul>
-<h3 id="原子性">原子性</h3>
-<ul>
-<li>分时复用引起：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致。</li>
-<li>一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">        </span><span class="c1">//语句1: 直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">         </span><span class="c1">//语句2: 包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">x</span><span class="o">++</span><span class="p">;</span><span class="w">           </span><span class="c1">//语句3： x++包括3个操作：读取x的值，进行加1操作，写入新的值。</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">     </span><span class="c1">//语句4： 同语句3</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="有序性">有序性</h3>
-<ul>
-<li>重排序引起：由于编译程序指令重排序优化指令执行次序，使得缓存能够得到更加合理地利用导致。</li>
-<li>程序执行的顺序按照代码的先后顺序执行。</li>
-<li>可参考多线程环境下初始化一个对象的过程来理解。<a href="#head"><code>点击查看</code></a></li>
-</ul>
-<h2 id="线程安全的实现方法">线程安全的实现方法</h2>
-<h3 id="互斥同步阻塞同步">互斥同步(阻塞同步)</h3>
-<h4 id="synchronizedjvm实现">synchronized(JVM实现)</h4>
-<h4 id="lockreentrantlockjdk实现">Lock&amp;ReentrantLock(JDK实现)</h4>
-<p>互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。</p>
-<p>互斥同步属于一种<strong>悲观的并发策略</strong>，总是认为只要不去做正确的同步措施，那就肯定会出现问题。无论共享数据是否真的会出现竞争，它都要进行加锁(这里讨论的是概念模型，实际上虚拟机会优化掉很大一部分不必要的加锁)、用户态核心态转换、维护锁计数器和检查是否有被阻塞的线程需要唤醒等操作。</p>
-<h3 id="非阻塞同步">非阻塞同步</h3>
-<h4 id="cas">CAS</h4>
-<p>随着硬件指令集的发展，我们可以使用基于冲突检测的乐观并发策略: 先进行操作，如果没有其它线程争用共享数据，那操作就成功了，否则采取补偿措施(不断地重试，直到成功为止)。</p>
-<p>这种乐观的并发策略的许多实现都不需要将线程阻塞，因此这种同步操作称为非阻塞同步。</p>
-<p><strong>乐观锁需要操作和冲突检测这两个步骤具备原子性</strong>，这里就不能再使用互斥同步来保证了，只能<strong>靠硬件来完成</strong>。</p>
-<p>硬件支持的原子性操作最典型的是: 比较并交换(Compare-and-Swap，CAS)。</p>
-<p>CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新值B。当执行操作时，只有当V的值等于A，才将V的值更新为B。</p>
-<h5 id="aba问题">ABA问题</h5>
-<p>如果一个变量初次读取的时候是 A 值，它的值被改成了 B，后来又被改回为 A，那 CAS 操作就会误认为它从来没有被改变过。</p>
-<p>J.U.C 包提供了一个带有标记的原子引用类 AtomicStampedReference 来解决这个问题，它可以通过控制变量值的版本来保证 CAS 的正确性。</p>
-<p>大部分情况下 ABA 问题不会影响程序并发的正确性，如果需要解决 ABA 问题，改用传统的互斥同步可能会比原子类更高效。</p>
-<h4 id="atomicinteger">AtomicInteger</h4>
-<p>J.U.C 包里面的整数原子类 AtomicInteger，其中的 compareAndSet() 和 getAndIncrement() 等方法都使用了 Unsafe 类的 CAS 操作。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">incrementAndGet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">unsafe</span><span class="p">.</span><span class="na">getAndAddInt</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">valueOffset</span><span class="p">,</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAndAddInt</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">var1</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">var2</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">var4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">var5</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">var5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getIntVolatile</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="w"> </span><span class="n">var2</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="na">compareAndSwapInt</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="w"> </span><span class="n">var2</span><span class="p">,</span><span class="w"> </span><span class="n">var5</span><span class="p">,</span><span class="w"> </span><span class="n">var5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">var4</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">var5</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="无需同步方案">无需同步方案</h3>
-<h4 id="栈封闭">栈封闭</h4>
-<p>多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为<strong>局部变量存储在虚拟机栈中，属于线程私有的</strong>。</p>
-<h4 id="线程本地存储threadlocal">线程本地存储(ThreadLocal)</h4>
-<ul>
-<li>
-<p>如果一段代码中所需要的数据必须与其他代码共享，那就看看这些共享数据的代码是否能保证在同一个线程中执行。如果能保证，我们就可以把共享数据的可见范围限制在同一个线程之内，这样，无须同步也能保证线程之间不出现数据争用的问题。</p>
-</li>
-<li>
-<p>符合这种特点的应用并不少见，大部分使用消费队列的架构模式(如“生产者-消费者”模式)都会将产品的消费过程尽量在一个线程中消费完。</p>
-</li>
-<li>
-<p>其中最重要的一个应用实例就是经典 Web 交互模型中的“一个请求对应一个服务器线程”(Thread-per-Request)的处理方式，这种处理方式的广泛应用使得很多 Web 服务端应用都可以使用线程本地存储来解决线程安全问题。</p>
-</li>
-</ul>
-<h4 id="可重入代码">可重入代码</h4>
-<p>这种代码也叫做纯代码(Pure Code)，可以在代码执行的任何时刻中断它，转而去执行另外一段代码(包括递归调用它本身)，而在控制权返回后，原来的程序不会出现任何错误。 可重入代码有一些共同的特征，例如不依赖存储在堆上的数据和公用的系统资源、用到的状态量都由参数中传入、不调用非可重入的方法等。</p>
-<h2 id="解决并发">解决并发</h2>
-<h3 id="3个关键字">3个关键字</h3>
-<h4 id="synchronized原子性可见性有序性">synchronized：原子性，可见性，有序性</h4>
-<h4 id="volatile有序性可见性">volatile：有序性，可见性</h4>
-<h5 id="防重排序">防重排序</h5>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Singleton</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="n">singleton</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 构造函数私有，禁止外部实例化
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Singleton</span><span class="p">()</span><span class="w"> </span><span class="p">{};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">singleton</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">singleton</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">singleton</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Singleton</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">singleton</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><a id="head"/>
-现在我们分析一下为什么要在变量singleton之间加上volatile关键字。要理解这个问题，先要了解对象的构造过程，实例化一个对象其实可以分为三个步骤： 
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Java并发编程概览 - 软件开发学习记录</title><meta name=Description content="Java并发编程"><meta property="og:title" content="Java并发编程概览">
+<meta property="og:description" content="Java并发编程"><meta property="og:type" content="article"><meta property="og:url" content="https://moge.fun/javacurrent/"><meta property="og:image" content="https://moge.fun/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-04-01T00:00:00+00:00"><meta property="article:modified_time" content="2018-04-01T00:00:00+00:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://moge.fun/logo.png"><meta name=twitter:title content="Java并发编程概览"><meta name=twitter:description content="Java并发编程"><meta name=application-name content="Journey to the Life"><meta name=apple-mobile-web-app-title content="Journey to the Life"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://moge.fun/javacurrent/><link rel=prev href=https://moge.fun/hashmap/><link rel=next href=https://moge.fun/juc/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Java并发编程概览","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/moge.fun\/javacurrent\/"},"genre":"posts","keywords":"并发编程, 大纲","wordcount":327,"url":"https:\/\/moge.fun\/javacurrent\/","datePublished":"2018-04-01T00:00:00+00:00","dateModified":"2018-04-01T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"默哥"},"description":"Java并发编程"}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/about/ title>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java并发编程概览</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>默哥</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/java%E5%9F%BA%E7%A1%80/><i class="far fa-folder fa-fw" aria-hidden=true></i>Java基础</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2018-04-01>2018-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 327 字&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#并发三要素>并发三要素</a><ul><li><a href=#可见性>可见性</a></li><li><a href=#原子性>原子性</a></li><li><a href=#有序性>有序性</a></li></ul></li><li><a href=#线程安全的实现方法>线程安全的实现方法</a><ul><li><a href=#互斥同步阻塞同步>互斥同步(阻塞同步)</a><ul><li><a href=#synchronizedjvm实现>synchronized(JVM实现)</a></li><li><a href=#lockreentrantlockjdk实现>Lock&amp;ReentrantLock(JDK实现)</a></li></ul></li><li><a href=#非阻塞同步>非阻塞同步</a><ul><li><a href=#cas>CAS</a><ul><li><a href=#aba问题>ABA问题</a></li></ul></li><li><a href=#atomicinteger>AtomicInteger</a></li></ul></li><li><a href=#无需同步方案>无需同步方案</a><ul><li><a href=#栈封闭>栈封闭</a></li><li><a href=#线程本地存储threadlocal>线程本地存储(ThreadLocal)</a></li><li><a href=#可重入代码>可重入代码</a></li></ul></li></ul></li><li><a href=#解决并发>解决并发</a><ul><li><a href=#3个关键字>3个关键字</a><ul><li><a href=#synchronized原子性可见性有序性>synchronized：原子性，可见性，有序性</a></li><li><a href=#volatile有序性可见性>volatile：有序性，可见性</a><ul><li><a href=#防重排序>防重排序</a></li><li><a href=#实现可见性>实现可见性</a></li><li><a href=#使用-volatile-必须具备的条件>使用 volatile 必须具备的条件</a></li></ul></li><li><a href=#final有序性>final：有序性</a></li></ul></li><li><a href=#happens-before-规则>Happens-Before 规则</a></li><li><a href=#锁优化及jmm>锁优化及JMM</a></li></ul></li><li><a href=#juc框架>J.U.C框架</a><ul><li><a href=#unsafecas和原子类>Unsafe(CAS)和原子类</a></li><li><a href=#aqs框架>AQS框架</a></li><li><a href=#锁>锁</a></li><li><a href=#并发集合>并发集合</a></li><li><a href=#线程池>线程池</a></li><li><a href=#工具类>工具类</a></li></ul></li><li><a href=#参考文章>参考文章</a></li></ul></nav></div></div><div class=content id=content><p><figure><a class=lightgallery href=/images/current/concurrentOverview.png title=Java并发编程概览 data-thumbnail=/images/current/concurrentOverview.png data-sub-html="<h2>Java并发编程概览</h2><p>Java并发编程概览</p>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/current/concurrentOverview.png data-srcset="/images/current/concurrentOverview.png, /images/current/concurrentOverview.png 1.5x, /images/current/concurrentOverview.png 2x" data-sizes=auto alt=/images/current/concurrentOverview.png></a><figcaption class=image-caption>Java并发编程概览</figcaption></figure></p><h2 id=并发三要素>并发三要素</h2><h3 id=可见性>可见性</h3><ul><li>CPU缓存引起：CPU增加了缓存，以均衡与内存的速度差异导致。</li><li>一个线程对共享变量的修改，另外一个线程能够立刻看到。</li></ul><h3 id=原子性>原子性</h3><ul><li>分时复用引起：操作系统增加了进程、线程，以分时复用CPU，进而均衡CPU与I/O设备的速度差异导致。</li><li>一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=w>    </span><span class=n>x</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>10</span><span class=p>;</span><span class=w>        </span><span class=c1>//语句1: 直接将数值10赋值给x，也就是说线程执行这个语句的会直接将数值10写入到工作内存中</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>y</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>x</span><span class=p>;</span><span class=w>         </span><span class=c1>//语句2: 包含2个操作，它先要去读取x的值，再将x的值写入工作内存，虽然读取x的值以及 将x的值写入工作内存 这2个操作都是原子性操作，但是合起来就不是原子性操作了。</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>x</span><span class=o>++</span><span class=p>;</span><span class=w>           </span><span class=c1>//语句3： x++包括3个操作：读取x的值，进行加1操作，写入新的值。</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>x</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>x</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>1</span><span class=p>;</span><span class=w>     </span><span class=c1>//语句4： 同语句3</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=有序性>有序性</h3><ul><li>重排序引起：由于编译程序指令重排序优化指令执行次序，使得缓存能够得到更加合理地利用导致。</li><li>程序执行的顺序按照代码的先后顺序执行。</li><li>可参考多线程环境下初始化一个对象的过程来理解。<a href=#head><code>点击查看</code></a></li></ul><h2 id=线程安全的实现方法>线程安全的实现方法</h2><h3 id=互斥同步阻塞同步>互斥同步(阻塞同步)</h3><h4 id=synchronizedjvm实现>synchronized(JVM实现)</h4><h4 id=lockreentrantlockjdk实现>Lock&amp;ReentrantLock(JDK实现)</h4><p>互斥同步最主要的问题就是线程阻塞和唤醒所带来的性能问题，因此这种同步也称为阻塞同步。</p><p>互斥同步属于一种<strong>悲观的并发策略</strong>，总是认为只要不去做正确的同步措施，那就肯定会出现问题。无论共享数据是否真的会出现竞争，它都要进行加锁(这里讨论的是概念模型，实际上虚拟机会优化掉很大一部分不必要的加锁)、用户态核心态转换、维护锁计数器和检查是否有被阻塞的线程需要唤醒等操作。</p><h3 id=非阻塞同步>非阻塞同步</h3><h4 id=cas>CAS</h4><p>随着硬件指令集的发展，我们可以使用基于冲突检测的乐观并发策略: 先进行操作，如果没有其它线程争用共享数据，那操作就成功了，否则采取补偿措施(不断地重试，直到成功为止)。</p><p>这种乐观的并发策略的许多实现都不需要将线程阻塞，因此这种同步操作称为非阻塞同步。</p><p><strong>乐观锁需要操作和冲突检测这两个步骤具备原子性</strong>，这里就不能再使用互斥同步来保证了，只能<strong>靠硬件来完成</strong>。</p><p>硬件支持的原子性操作最典型的是: 比较并交换(Compare-and-Swap，CAS)。</p><p>CAS指令需要有3个操作数，分别是内存地址V旧的预期值A和新值B。当执行操作时，只有当V的值等于A，才将V的值更新为B。</p><h5 id=aba问题>ABA问题</h5><p>如果一个变量初次读取的时候是 A 值，它的值被改成了 B，后来又被改回为 A，那 CAS 操作就会误认为它从来没有被改变过。</p><p>J.U.C 包提供了一个带有标记的原子引用类 AtomicStampedReference 来解决这个问题，它可以通过控制变量值的版本来保证 CAS 的正确性。</p><p>大部分情况下 ABA 问题不会影响程序并发的正确性，如果需要解决 ABA 问题，改用传统的互斥同步可能会比原子类更高效。</p><h4 id=atomicinteger>AtomicInteger</h4><p>J.U.C 包里面的整数原子类 AtomicInteger，其中的 compareAndSet() 和 getAndIncrement() 等方法都使用了 Unsafe 类的 CAS 操作。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=nf>incrementAndGet</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>unsafe</span><span class=p>.</span><span class=na>getAndAddInt</span><span class=p>(</span><span class=k>this</span><span class=p>,</span><span class=w> </span><span class=n>valueOffset</span><span class=p>,</span><span class=w> </span><span class=n>1</span><span class=p>)</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>1</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=kd>public</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=nf>getAndAddInt</span><span class=p>(</span><span class=n>Object</span><span class=w> </span><span class=n>var1</span><span class=p>,</span><span class=w> </span><span class=kt>long</span><span class=w> </span><span class=n>var2</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>var4</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>var5</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>do</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>var5</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>this</span><span class=p>.</span><span class=na>getIntVolatile</span><span class=p>(</span><span class=n>var1</span><span class=p>,</span><span class=w> </span><span class=n>var2</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w> </span><span class=k>while</span><span class=p>(</span><span class=o>!</span><span class=k>this</span><span class=p>.</span><span class=na>compareAndSwapInt</span><span class=p>(</span><span class=n>var1</span><span class=p>,</span><span class=w> </span><span class=n>var2</span><span class=p>,</span><span class=w> </span><span class=n>var5</span><span class=p>,</span><span class=w> </span><span class=n>var5</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=n>var4</span><span class=p>));</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>var5</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=无需同步方案>无需同步方案</h3><h4 id=栈封闭>栈封闭</h4><p>多个线程访问同一个方法的局部变量时，不会出现线程安全问题，因为<strong>局部变量存储在虚拟机栈中，属于线程私有的</strong>。</p><h4 id=线程本地存储threadlocal>线程本地存储(ThreadLocal)</h4><ul><li><p>如果一段代码中所需要的数据必须与其他代码共享，那就看看这些共享数据的代码是否能保证在同一个线程中执行。如果能保证，我们就可以把共享数据的可见范围限制在同一个线程之内，这样，无须同步也能保证线程之间不出现数据争用的问题。</p></li><li><p>符合这种特点的应用并不少见，大部分使用消费队列的架构模式(如“生产者-消费者”模式)都会将产品的消费过程尽量在一个线程中消费完。</p></li><li><p>其中最重要的一个应用实例就是经典 Web 交互模型中的“一个请求对应一个服务器线程”(Thread-per-Request)的处理方式，这种处理方式的广泛应用使得很多 Web 服务端应用都可以使用线程本地存储来解决线程安全问题。</p></li></ul><h4 id=可重入代码>可重入代码</h4><p>这种代码也叫做纯代码(Pure Code)，可以在代码执行的任何时刻中断它，转而去执行另外一段代码(包括递归调用它本身)，而在控制权返回后，原来的程序不会出现任何错误。 可重入代码有一些共同的特征，例如不依赖存储在堆上的数据和公用的系统资源、用到的状态量都由参数中传入、不调用非可重入的方法等。</p><h2 id=解决并发>解决并发</h2><h3 id=3个关键字>3个关键字</h3><h4 id=synchronized原子性可见性有序性>synchronized：原子性，可见性，有序性</h4><h4 id=volatile有序性可见性>volatile：有序性，可见性</h4><h5 id=防重排序>防重排序</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>Singleton</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kd>volatile</span><span class=w> </span><span class=n>Singleton</span><span class=w> </span><span class=n>singleton</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * 构造函数私有，禁止外部实例化
+</span></span></span><span class=line><span class=cl><span class=cm>     */</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=nf>Singleton</span><span class=p>()</span><span class=w> </span><span class=p>{};</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=n>Singleton</span><span class=w> </span><span class=nf>getInstance</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>singleton</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=kc>null</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=kd>synchronized</span><span class=w> </span><span class=p>(</span><span class=n>singleton</span><span class=p>.</span><span class=na>class</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>singleton</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=kc>null</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>singleton</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>Singleton</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>singleton</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><a id=head>现在我们分析一下为什么要在变量singleton之间加上volatile关键字。要理解这个问题，先要了解对象的构造过程，实例化一个对象其实可以分为三个步骤：
 1. 分配内存空间。
-2. 初始化对象。 
-3. 将内存空间的地址赋值给对应的引用。 
-<p>但是由于操作系统可以对指令进行重排序，所以上面的过程也可能会变成如下过程：</p>
-<ol>
-<li>分配内存空间。</li>
-<li>将内存空间的地址赋值给对应的引用。</li>
-<li>初始化对象</li>
-</ol>
-<p>如果是这个流程，多线程环境下就可能将一个未初始化的对象引用暴露出来，从而导致不可预料的结果。因此，为了防止这个过程的重排序，我们需要将变量设置为volatile类型的变量。</p>
-<h5 id="实现可见性">实现可见性</h5>
-<p>volatile 变量的内存可见性是基于内存屏障(Memory Barrier)实现:</p>
-<ul>
-<li>内存屏障，又称内存栅栏，是一个 CPU 指令。</li>
-<li>在程序运行时，为了提高执行性能，编译器和处理器会对指令进行重排序，JMM 为了保证在不同的编译器和 CPU 上有相同的结果，通过插入特定类型的内存屏障来禁止+ 特定类型的编译器重排序和处理器重排序，插入一条内存屏障会告诉编译器和 CPU：不管什么指令都不能和这条 Memory Barrier 指令重排序。</li>
-<li>详细见：<a href="https://www.pdai.tech/md/java/thread/java-thread-x-key-volatile.html" title="volatile理论基础" target="_blank" rel="noopener noreffer ">volatile理论基础</a></li>
-</ul>
-<h5 id="使用-volatile-必须具备的条件">使用 volatile 必须具备的条件</h5>
-<ul>
-<li>对变量的写操作不依赖于当前值。</li>
-<li>该变量没有包含在具有其他变量的不变式中。</li>
-<li>只有在状态真正独立于程序内其他内容时才能使用volatile。</li>
-</ul>
-<h4 id="final有序性">final：有序性</h4>
-<ul>
-<li>写final域的重排序规则可以确保：在对象引用为任意线程可见之前，对象的final域已经被正确初始化过了，而普通域就不具有这个保障。</li>
-<li>读final域的重排序规则可以确保：在读一个对象的final域之前，一定会先读这个包含这个final域的对象的引用。</li>
-</ul>
-<h3 id="happens-before-规则">Happens-Before 规则</h3>
-<p><em>上面提到了可以用volatile和synchronized来保证有序性。除此之外，JVM 还规定了先行发生原则，让一个操作无需控制就能先于另一个操作完成。</em></p>
-<ol>
-<li>单一线程原则（在一个线程内，在程序前面的操作先行发生于后面的操作。）</li>
-<li>管程锁定规则（一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。）</li>
-<li>volatile 变量规则（对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。）</li>
-<li>线程启动规则（Thread 对象的 start() 方法调用先行发生于此线程的每一个动作。）</li>
-<li>线程加入规则（Thread 对象的结束先行发生于 join() 方法返回。）</li>
-<li>线程中断规则（对线程 interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过interrupted()方法检测到是否有中断发生。）</li>
-<li>对象终结规则 一个对象的初始化完成(构造函数执行结束)先行发生于它的 finalize() 方法的开始。</li>
-<li>传递性（如果操作 A 先行发生于操作 B，操作 B 先行发生于操作 C，那么操作 A 先行发生于操作 C。）</li>
-</ol>
-<h3 id="锁优化及jmm">锁优化及JMM</h3>
-<p>新的JDK优化锁的实现保证并发，内存模型也会保证可见性。</p>
-<h2 id="juc框架">J.U.C框架</h2>
-<h3 id="unsafecas和原子类">Unsafe(CAS)和原子类</h3>
-<h3 id="aqs框架">AQS框架</h3>
-<p><strong>AQS框架借助于两个类：Unsafe(提供CAS操作)和LockSupport(提供park/unpark操作)。</strong></p>
-<h3 id="锁">锁</h3>
-<ul>
-<li>LockSupport</li>
-<li>ReentrantLock</li>
-<li>ReentrantReadWriteLock</li>
-</ul>
-<h3 id="并发集合">并发集合</h3>
-<ul>
-<li>ConcurrentHashMap</li>
-<li>CopyOnWriteArrayList</li>
-<li>ConcurrentLinkedQueue</li>
-<li>BlockingQueue</li>
-</ul>
-<h3 id="线程池">线程池</h3>
-<ul>
-<li>FutureTask</li>
-<li>ThreadPoolExecutor</li>
-<li>ScheduledThreadPoolExecutor</li>
-<li>Fork/Join</li>
-</ul>
-<h3 id="工具类">工具类</h3>
-<ul>
-<li>CountDownLatch</li>
-<li>CyclicBarrier</li>
-<li>Semaphore</li>
-<li>Phaser</li>
-<li>Exchanger</li>
-<li>ThreadLocal</li>
-</ul>
-<h2 id="参考文章">参考文章</h2>
-<p><a href="https://www.pdai.tech/md/java/thread/java-thread-x-theorty.html" title="Java 并发 - 理论基础" target="_blank" rel="noopener noreffer ">Java 并发 - 理论基础</a></p>
-</div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>更新于 2018-04-01</span>
-            </div></div>
-        <div class="post-info-line">
-            <div class="post-info-md"></div>
-            <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://moge.fun/javacurrent/" data-title="Java并发编程概览" data-hashtags="并发编程,大纲"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://moge.fun/javacurrent/" data-hashtag="并发编程"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://moge.fun/javacurrent/" data-title="Java并发编程概览"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://moge.fun/javacurrent/" data-title="Java并发编程概览"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/javacurrent/" data-title="Java并发编程概览"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/hashmap/" class="prev" rel="prev" title="HashMap详解"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>HashMap详解</a>
-            <a href="/juc/" class="next" rel="next" title="JUC-并发编程利器">JUC-并发编程利器<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
-</div>
-<div id="comments"><div id="utterances" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
-            </noscript></div></article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2015 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
-                    <span class="icp"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021012209号-1</a></span></div>
-        </div>
-    </footer></div>
-
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
-                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
-            </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":5,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
-</html>
+2. 初始化对象。
+3. 将内存空间的地址赋值给对应的引用。<p>但是由于操作系统可以对指令进行重排序，所以上面的过程也可能会变成如下过程：</p><ol><li>分配内存空间。</li><li>将内存空间的地址赋值给对应的引用。</li><li>初始化对象</li></ol><p>如果是这个流程，多线程环境下就可能将一个未初始化的对象引用暴露出来，从而导致不可预料的结果。因此，为了防止这个过程的重排序，我们需要将变量设置为volatile类型的变量。</p><h5 id=实现可见性>实现可见性</h5><p>volatile 变量的内存可见性是基于内存屏障(Memory Barrier)实现:</p><ul><li>内存屏障，又称内存栅栏，是一个 CPU 指令。</li><li>在程序运行时，为了提高执行性能，编译器和处理器会对指令进行重排序，JMM 为了保证在不同的编译器和 CPU 上有相同的结果，通过插入特定类型的内存屏障来禁止+ 特定类型的编译器重排序和处理器重排序，插入一条内存屏障会告诉编译器和 CPU：不管什么指令都不能和这条 Memory Barrier 指令重排序。</li><li>详细见：<a href=https://www.pdai.tech/md/java/thread/java-thread-x-key-volatile.html title=volatile理论基础 target=_blank rel="noopener noreffer">volatile理论基础</a></li></ul><h5 id=使用-volatile-必须具备的条件>使用 volatile 必须具备的条件</h5><ul><li>对变量的写操作不依赖于当前值。</li><li>该变量没有包含在具有其他变量的不变式中。</li><li>只有在状态真正独立于程序内其他内容时才能使用volatile。</li></ul><h4 id=final有序性>final：有序性</h4><ul><li>写final域的重排序规则可以确保：在对象引用为任意线程可见之前，对象的final域已经被正确初始化过了，而普通域就不具有这个保障。</li><li>读final域的重排序规则可以确保：在读一个对象的final域之前，一定会先读这个包含这个final域的对象的引用。</li></ul><h3 id=happens-before-规则>Happens-Before 规则</h3><p><em>上面提到了可以用volatile和synchronized来保证有序性。除此之外，JVM 还规定了先行发生原则，让一个操作无需控制就能先于另一个操作完成。</em></p><ol><li>单一线程原则（在一个线程内，在程序前面的操作先行发生于后面的操作。）</li><li>管程锁定规则（一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。）</li><li>volatile 变量规则（对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。）</li><li>线程启动规则（Thread 对象的 start() 方法调用先行发生于此线程的每一个动作。）</li><li>线程加入规则（Thread 对象的结束先行发生于 join() 方法返回。）</li><li>线程中断规则（对线程 interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过interrupted()方法检测到是否有中断发生。）</li><li>对象终结规则 一个对象的初始化完成(构造函数执行结束)先行发生于它的 finalize() 方法的开始。</li><li>传递性（如果操作 A 先行发生于操作 B，操作 B 先行发生于操作 C，那么操作 A 先行发生于操作 C。）</li></ol><h3 id=锁优化及jmm>锁优化及JMM</h3><p>新的JDK优化锁的实现保证并发，内存模型也会保证可见性。</p><h2 id=juc框架>J.U.C框架</h2><h3 id=unsafecas和原子类>Unsafe(CAS)和原子类</h3><h3 id=aqs框架>AQS框架</h3><p><strong>AQS框架借助于两个类：Unsafe(提供CAS操作)和LockSupport(提供park/unpark操作)。</strong></p><h3 id=锁>锁</h3><ul><li>LockSupport</li><li>ReentrantLock</li><li>ReentrantReadWriteLock</li></ul><h3 id=并发集合>并发集合</h3><ul><li>ConcurrentHashMap</li><li>CopyOnWriteArrayList</li><li>ConcurrentLinkedQueue</li><li>BlockingQueue</li></ul><h3 id=线程池>线程池</h3><ul><li>FutureTask</li><li>ThreadPoolExecutor</li><li>ScheduledThreadPoolExecutor</li><li>Fork/Join</li></ul><h3 id=工具类>工具类</h3><ul><li>CountDownLatch</li><li>CyclicBarrier</li><li>Semaphore</li><li>Phaser</li><li>Exchanger</li><li>ThreadLocal</li></ul><h2 id=参考文章>参考文章</h2><p><a href=https://www.pdai.tech/md/java/thread/java-thread-x-theorty.html title="Java 并发 - 理论基础" target=_blank rel="noopener noreffer">Java 并发 - 理论基础</a></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2018-04-01</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://moge.fun/javacurrent/ data-title=Java并发编程概览 data-hashtags=并发编程,大纲><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://moge.fun/javacurrent/ data-hashtag=并发编程><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://moge.fun/javacurrent/ data-title=Java并发编程概览><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://moge.fun/javacurrent/ data-title=Java并发编程概览><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://moge.fun/javacurrent/ data-title=Java并发编程概览><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/>并发编程</a>,&nbsp;<a href=/tags/%E5%A4%A7%E7%BA%B2/>大纲</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/hashmap/ class=prev rel=prev title=HashMap详解><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>HashMap详解</a>
+<a href=/juc/ class=next rel=next title=JUC-并发编程利器>JUC-并发编程利器<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=utterances class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2015 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>默哥</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a href=https://beian.miit.gov.cn/ target=_blank>豫ICP备2021012209号-1</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"alatan/BlogDiscuss"}},lightgallery:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:5,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>

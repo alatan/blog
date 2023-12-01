@@ -19,6 +19,10 @@ jobs:
           hugo-version: latest
           extended: true
 
+      - name: build content to public site
+        working-directory: ./
+        run: hugo --minify --gc
+
       - name: install nodejs
         uses: actions/setup-node@v2
         with:
