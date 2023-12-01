@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>架构设计 - 标签 - 软件开发学习记录</title>
+        <link>https://moge.fun/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
+        <description>架构设计 - 标签 - 软件开发学习记录</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 May 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
+    <title>秒杀(限时抢购)系统设计</title>
+    <link>https://moge.fun/flashsale/</link>
+    <pubDate>Thu, 07 May 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/flashsale/</guid>
+    <description><![CDATA[参考文章 高性能秒杀系统设计 秒杀架构实践 百万级用户的抽奖系统 ]]></description>
+</item>
+<item>
+    <title>单点登录</title>
+    <link>https://moge.fun/sso/</link>
+    <pubDate>Wed, 06 May 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/sso/</guid>
+    <description><![CDATA[ 单点登录（Single Sign On），简称为 SSO，是比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。
+参考文章 单点登录 单点登录总结 ]]></description>
+</item>
+<item>
+    <title>业务架构合集</title>
+    <link>https://moge.fun/businessdesign/</link>
+    <pubDate>Fri, 03 Jan 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/businessdesign/</guid>
+    <description><![CDATA[业务场景 对账系统 有赞零售财务中台架构设计与实践 百万TPS支付账务系统的设计与实现 高效的风控规则引擎 最佳实践 最佳实践 服务化 架构设计 如何进行系统分析与设计 系统架构 领域驱动分层架构与对象模型 常见的软件架构套路 项目结构 互联网分层架构的本质 项目应该如何正确分层 分层架构 技术选型 技术选型 DevOps ]]></description>
+</item>
+</channel>
+</rss>
