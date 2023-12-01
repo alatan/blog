@@ -13,15 +13,15 @@ jobs:
       - name: checkout blog repo
         uses: actions/checkout@v2
 
-      - name: setup hugo
-        uses: peaceiris/actions-hugo@v2
+      - name: Setup Hugo 
+        uses: peaceiris/actions-hugo@v2  
         with:
-          hugo-version: 0.69.1
-          extended: true
+        hugo-version: '0.70.0'
+        extended: true 
 
       - name: build content to public site
         working-directory: ./
-        run: hugo --minify --gc
+        run: hugo
 
       - name: install nodejs
         uses: actions/setup-node@v2
