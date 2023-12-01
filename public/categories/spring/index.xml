@@ -1,8 +1,35 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Spring - 分类 - 软件开发学习记录</title><link>https://moge.fun/categories/spring/</link><description>Spring - 分类 - 软件开发学习记录</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 03 Apr 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://moge.fun/categories/spring/" rel="self" type="application/rss+xml"/><item><title>SpringBoot总结</title><link>https://moge.fun/springboot/</link><pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/springboot/</guid><description><![CDATA[使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置，简化Spring应用的初始搭建以及开发过程。简单理解，就是SpringBoot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像Maven整合了所有的Jar包，Spring Boot整合了所有的框架。
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Spring - 分类 - 软件开发学习记录</title>
+        <link>https://moge.fun/categories/spring/</link>
+        <description>Spring - 分类 - 软件开发学习记录</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 03 Apr 2019 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/categories/spring/" rel="self" type="application/rss+xml" /><item>
+    <title>SpringBoot总结</title>
+    <link>https://moge.fun/springboot/</link>
+    <pubDate>Wed, 03 Apr 2019 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/springboot/</guid>
+    <description><![CDATA[使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置，简化Spring应用的初始搭建以及开发过程。简单理解，就是SpringBoot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像Maven整合了所有的Jar包，Spring Boot整合了所有的框架。
 SpringBoot 的启动过程 开始源码分析，先从 SpringBoot 的启动类的 run() 方法开始看，以下是调用链：SpringApplication.run() -&gt; run(new Class[]{primarySource}, args) -&gt; new SpringApplication(primarySources)).run(args)。
 一直在run，终于到重点了，我们直接看 new SpringApplication(primarySources)).run(args) 这个方法。
 1 2 3 public static ConfigurableApplicationContext run(Class&lt;?&gt;[] primarySources,	String[] args) { return new SpringApplication(primarySources).run(args); } 上面的方法主要包括两大步骤：
-创建 SpringApplication 对象。 运行 run() 方法。 创建 SpringApplication 对象 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 public SpringApplication(ResourceLoader resourceLoader, Class.]]></description></item><item><title>SpringMVC总结</title><link>https://moge.fun/springmvc/</link><pubDate>Tue, 02 Apr 2019 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/springmvc/</guid><description>SpringMVC 执行流程 用户请求发送到前端控制器DispatcherServlet。 前端控制器DispatcherServlet接收到请求后，DispatcherServlet会使用HandlerMapping来处理，HandlerMapping会查找到具体进行处理请求的Handler对象。 HandlerMapping找到对应的Handler之后，并不是返回一个Handler原始对象，而是一个Handler执行链，在这个执行链中包括了拦截器和处理请求的Handler。HandlerMapping返回一个执行链给DispatcherServlet。 DispatcherServlet接收到执行链之后，会调用Handler适配器去执行Handler。 Handler适配器执行完成Handler（也就是我们写的Controller）之后会得到一个ModelAndView，并返回给DispatcherServlet。 DispatcherServlet接收到Handler适配器返回的ModelAndView之后，会根据其中的视图名调用视图解析器。 视图解析器根据逻辑视图名解析成一个真正的View视图，并返回给DispatcherServlet。 DispatcherServlet接收到视图之后，会根据上面的ModelAndView中的model来进行视图中数据的填充，也就是所谓的视图渲染。 渲染完成之后，DispatcherServlet就可以将结果返回给用户了。</description></item><item><title>Spring总结</title><link>https://moge.fun/spring/</link><pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/spring/</guid><description>Spring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。
+创建 SpringApplication 对象。 运行 run() 方法。 创建 SpringApplication 对象 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 public SpringApplication(ResourceLoader resourceLoader, Class.]]></description>
+</item>
+<item>
+    <title>SpringMVC总结</title>
+    <link>https://moge.fun/springmvc/</link>
+    <pubDate>Tue, 02 Apr 2019 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/springmvc/</guid>
+    <description><![CDATA[SpringMVC 执行流程 用户请求发送到前端控制器DispatcherServlet。 前端控制器DispatcherServlet接收到请求后，DispatcherServlet会使用HandlerMapping来处理，HandlerMapping会查找到具体进行处理请求的Handler对象。 HandlerMapping找到对应的Handler之后，并不是返回一个Handler原始对象，而是一个Handler执行链，在这个执行链中包括了拦截器和处理请求的Handler。HandlerMapping返回一个执行链给DispatcherServlet。 DispatcherServlet接收到执行链之后，会调用Handler适配器去执行Handler。 Handler适配器执行完成Handler（也就是我们写的Controller）之后会得到一个ModelAndView，并返回给DispatcherServlet。 DispatcherServlet接收到Handler适配器返回的ModelAndView之后，会根据其中的视图名调用视图解析器。 视图解析器根据逻辑视图名解析成一个真正的View视图，并返回给DispatcherServlet。 DispatcherServlet接收到视图之后，会根据上面的ModelAndView中的model来进行视图中数据的填充，也就是所谓的视图渲染。 渲染完成之后，DispatcherServlet就可以将结果返回给用户了。 ]]></description>
+</item>
+<item>
+    <title>Spring总结</title>
+    <link>https://moge.fun/spring/</link>
+    <pubDate>Mon, 01 Apr 2019 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/spring/</guid>
+    <description><![CDATA[Spring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。
 我们一般说 Spring 框架指的都是 Spring Framework，它是很多模块的集合，使用这些模块可以很方便地协助我们进行开发。这些模块是：核心容器、数据访问/集成、Web、AOP（面向切面编程）、工具、消息和测试模块。比如：Core Container 中的 Core 组件是Spring 所有组件的核心，Beans 组件和 Context 组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
 Spring 官网列出的 Spring 的 6 个特征:
 核心技术 ：依赖注入(DI)，AOP，事件(events)，资源，i18n，验证，数据绑定，类型转换，SpEL。 测试 ：模拟对象，TestContext框架，Spring MVC 测试，WebTestClient。 数据访问 ：事务，DAO支持，JDBC，ORM，编组XML。 Web支持 : Spring MVC和Spring WebFlux Web框架。 集成 ：远程处理，JMS，JCA，JMX，电子邮件，任务，调度，缓存。 语言 ：Kotlin，Groovy，动态语言。 Spring模块 IOC IOC容器初始化过程 BeanFactory和ApplicationContext是Spring中两种很重要的容器，前者提供了最基本的依赖注入的支持，后者在继承前者的基础上进行了功能的拓展，增加了事件传播，资源访问，国际化的支持等功能。同时两者的生命周期也稍微有些不同。
@@ -11,4 +38,7 @@ IOC容器初始化过程 关键步骤 IOC容器初始化入口是在构造方法
 假设当前Bean是A，A依赖的Bean是B，B又依赖A。
 提前曝光的意思就是，当前Bean A实例化完，还没有初始化完就先把当前Bean曝光出去，在B初始化需要依赖A的时候，就先拿到提前曝光的A，这样就可以继续将B初始化完成，然后返回A继续进行初始化。
 循环依赖解决只针对单例Bean。
-总结 Spring启动。 加载配置文件，xml、JavaConfig、注解、其他形式等等，将描述我们自己定义的和Spring内置的定义的Bean加载进来。 加载完配置文件后将配置文件转化成统一的Resource来处理。 使用Resource解析将我们定义的一些配置都转化成Spring内部的标识形式：BeanDefinition。 在低级的容器BeanFactory中，到这里就可以宣告Spring容器初始化完成了，Bean的初始化是在我们使用Bean的时候触发的；在高级的容器ApplicationContext中，会自动触发那些1. lazy-init=false的单例Bean，让Bean以及依赖的Bean进行初始化的流程，初始化完成Bean之后高级容器也初始化完成了。 在我们的应用中使用Bean。 Spring容器关闭，销毁各个Bean。 SpringBean生命周期 SpringBean生命周期 手动或者自动的触发获取一个Bean，使用BeanFactory的时候需要我们代码自己获取Bean，ApplicationContext则是在IOC启动的时候自动初始化一个Bean。 IOC会根据BeanDefinition来实例化这个Bean，如果这个Bean还有依赖其他的Bean则会先初始化依赖的Bean，这里又涉及到了循环依赖的解决。实例化Bean的时候根据工厂方法、构造方法或者简单初始化等选择具体的实例来进行实例化，最终都是使用反射进行实例化。 Bean实例化完成，也就是一个对象实例化完成后，会继续填充这个Bean的各个属性，也是使用反射机制将属性设置到Bean中去。 填充完属性后，会调用各种Aware方法，将需要的组件设置到当前Bean中。BeanFactory这种低级容器需要我们手动注册Aware接口，而ApplicationContext这种高级容器在IOC启动的时候就自动给我们注册了Aware等接口。 接下来如果Bean实现了PostProcessor一系列的接口，会先调用其中的postProcessBeforeInitialization方法。BeanFactory这种低级容器需要我们手动注册PostProcessor接口，而ApplicationContext这种高级容器在IOC启动的时候就自动给我们注册了PostProcessor等接口。 如果Bean实现了InitializingBean接口，则会调用对应的afterPropertiesSet方法。 如果Bean设置了init-method属性，则会调用init-method指定的方法。 接下来如果Bean实现了PostProcessor一系列的接口，会先调用其中的postProcessAfterInitialization方法。BeanFactory这种低级容器需要我们手动注册PostProcessor接口，而 ApplicationContext这种高级容器在IOC启动的时候就自动给我们注册了PostProcessor等接口。 到这里Bean就可以使用了。 容器关闭的时候需要销毁Bean。 如果Bean实现了DisposableBean，则调用destroy方法。 如果Bean配置了destroy-method属性，则调用指定的destroy-method方法。 AOP Spring AOP流程大致上可以分为三个阶段：标签解析和AutoProxyCreator的注册、AOP代理的创建、代理的使用。</description></item></channel></rss>
+总结 Spring启动。 加载配置文件，xml、JavaConfig、注解、其他形式等等，将描述我们自己定义的和Spring内置的定义的Bean加载进来。 加载完配置文件后将配置文件转化成统一的Resource来处理。 使用Resource解析将我们定义的一些配置都转化成Spring内部的标识形式：BeanDefinition。 在低级的容器BeanFactory中，到这里就可以宣告Spring容器初始化完成了，Bean的初始化是在我们使用Bean的时候触发的；在高级的容器ApplicationContext中，会自动触发那些1. lazy-init=false的单例Bean，让Bean以及依赖的Bean进行初始化的流程，初始化完成Bean之后高级容器也初始化完成了。 在我们的应用中使用Bean。 Spring容器关闭，销毁各个Bean。 SpringBean生命周期 SpringBean生命周期 手动或者自动的触发获取一个Bean，使用BeanFactory的时候需要我们代码自己获取Bean，ApplicationContext则是在IOC启动的时候自动初始化一个Bean。 IOC会根据BeanDefinition来实例化这个Bean，如果这个Bean还有依赖其他的Bean则会先初始化依赖的Bean，这里又涉及到了循环依赖的解决。实例化Bean的时候根据工厂方法、构造方法或者简单初始化等选择具体的实例来进行实例化，最终都是使用反射进行实例化。 Bean实例化完成，也就是一个对象实例化完成后，会继续填充这个Bean的各个属性，也是使用反射机制将属性设置到Bean中去。 填充完属性后，会调用各种Aware方法，将需要的组件设置到当前Bean中。BeanFactory这种低级容器需要我们手动注册Aware接口，而ApplicationContext这种高级容器在IOC启动的时候就自动给我们注册了Aware等接口。 接下来如果Bean实现了PostProcessor一系列的接口，会先调用其中的postProcessBeforeInitialization方法。BeanFactory这种低级容器需要我们手动注册PostProcessor接口，而ApplicationContext这种高级容器在IOC启动的时候就自动给我们注册了PostProcessor等接口。 如果Bean实现了InitializingBean接口，则会调用对应的afterPropertiesSet方法。 如果Bean设置了init-method属性，则会调用init-method指定的方法。 接下来如果Bean实现了PostProcessor一系列的接口，会先调用其中的postProcessAfterInitialization方法。BeanFactory这种低级容器需要我们手动注册PostProcessor接口，而 ApplicationContext这种高级容器在IOC启动的时候就自动给我们注册了PostProcessor等接口。 到这里Bean就可以使用了。 容器关闭的时候需要销毁Bean。 如果Bean实现了DisposableBean，则调用destroy方法。 如果Bean配置了destroy-method属性，则调用指定的destroy-method方法。 AOP Spring AOP流程大致上可以分为三个阶段：标签解析和AutoProxyCreator的注册、AOP代理的创建、代理的使用。]]></description>
+</item>
+</channel>
+</rss>

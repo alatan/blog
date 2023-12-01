@@ -1,2 +1,16 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>网络 - 标签 - 软件开发学习记录</title><link>https://moge.fun/tags/%E7%BD%91%E7%BB%9C/</link><description>网络 - 标签 - 软件开发学习记录</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml"/><item><title>计算机网络</title><link>https://moge.fun/network/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/network/</guid><description> 一般网线传输的模拟信号需要通过猫(调制解调器)转换成数字信号，再经由路由器把信号发给PC端，如果PC端数量超过了路由器的连接上限就需要加装交换器。因此，家里有宽带就必须有猫，有多台电脑上网就必须要路由器，假如电脑很多，超过路由器的接口数就需要交换机扩展接口。
-传输示例 协议对照 各层协议对照 HTTP协议 DNS协议 参考文章 7层协议 HTTP协议 DNS协议 知识点串联：输入URL到页面加载过程详解</description></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>网络 - 标签 - 软件开发学习记录</title>
+        <link>https://moge.fun/tags/%E7%BD%91%E7%BB%9C/</link>
+        <description>网络 - 标签 - 软件开发学习记录</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 05 Jan 2017 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>计算机网络</title>
+    <link>https://moge.fun/network/</link>
+    <pubDate>Thu, 05 Jan 2017 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/network/</guid>
+    <description><![CDATA[ 一般网线传输的模拟信号需要通过猫(调制解调器)转换成数字信号，再经由路由器把信号发给PC端，如果PC端数量超过了路由器的连接上限就需要加装交换器。因此，家里有宽带就必须有猫，有多台电脑上网就必须要路由器，假如电脑很多，超过路由器的接口数就需要交换机扩展接口。
+传输示例 协议对照 各层协议对照 HTTP协议 DNS协议 参考文章 7层协议 HTTP协议 DNS协议 知识点串联：输入URL到页面加载过程详解 ]]></description>
+</item>
+</channel>
+</rss>
