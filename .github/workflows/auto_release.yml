@@ -20,7 +20,7 @@ jobs:
           extended: true
 
       - name: build content to public site
-        working-directory: ./
+        working-directory: ./public
         run: hugo --minify --gc
 
       - name: install nodejs
