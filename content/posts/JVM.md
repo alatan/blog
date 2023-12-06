@@ -15,7 +15,10 @@ toc:
   auto: false
 ---
 
-![](/images/jvm/jvm-overview.png "JVM概览")
+### 路线图
+➢ JVM基本常识 → 类加载系统 → 运行时数据区 → 一个对象的一生 → GC收集器 →实战
+
+![](/images/jvm/JVM_Arch.png "JVM架构图")
 
 ## Class文件的结构属性
 ![](/images/jvm/class-struct.png "类的结构")
