@@ -1,21 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>框架 on 软件开发学习记录</title>
-    <link>https://moge.fun/tags/%E6%A1%86%E6%9E%B6/</link>
-    <description>Recent content in 框架 on 软件开发学习记录</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://moge.fun/tags/%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title> MyBatis总结</title>
-      <link>https://moge.fun/mybatis/</link>
-      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>https://moge.fun/mybatis/</guid>
-      <description>
-接口层-和数据库交互的方式 MyBatis和数据库的交互有两种方式：
-使用传统的MyBatis提供的API； 使用Mapper接口； 参考文章 常见问题 </description>
-    </item>
-  </channel>
-</rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>框架 - 标签 - 软件开发学习记录</title><link>https://moge.fun/tags/%E6%A1%86%E6%9E%B6/</link><description>框架 - 标签 - 软件开发学习记录</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E6%A1%86%E6%9E%B6/" rel="self" type="application/rss+xml"/><item><title> MyBatis总结</title><link>https://moge.fun/mybatis/</link><pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/mybatis/</guid><description> MyBatis框架整体设计 接口层-和数据库交互的方式 MyBatis和数据库的交互有两种方式：
+使用传统的MyBatis提供的API； 使用Mapper接口； 参考文章 常见问题</description></item></channel></rss>
