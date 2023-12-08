@@ -1,27 +1,483 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Spring Cloud - 软件开发学习记录</title><meta name=Description content="Spring Cloud "><meta property="og:title" content="Spring Cloud">
-<meta property="og:description" content="Spring Cloud "><meta property="og:type" content="article"><meta property="og:url" content="https://moge.fun/springcloud/"><meta property="og:image" content="https://moge.fun/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-04-02T00:00:00+00:00"><meta property="article:modified_time" content="2020-04-02T00:00:00+00:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://moge.fun/logo.png"><meta name=twitter:title content="Spring Cloud"><meta name=twitter:description content="Spring Cloud "><meta name=application-name content="Journey to the Life"><meta name=apple-mobile-web-app-title content="Journey to the Life"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://moge.fun/springcloud/><link rel=prev href=https://moge.fun/dubbo/><link rel=next href=https://moge.fun/springcloud-eureka/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Spring Cloud","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/moge.fun\/springcloud\/"},"genre":"posts","keywords":"SpringCloud, 大纲","wordcount":277,"url":"https:\/\/moge.fun\/springcloud\/","datePublished":"2020-04-02T00:00:00+00:00","dateModified":"2020-04-02T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"默哥"},"description":"Spring Cloud "}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
-</span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/about/ title>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spring Cloud</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>默哥</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/springcloud/><i class="far fa-folder fa-fw" aria-hidden=true></i>SpringCloud</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2020-04-02>2020-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 277 字&nbsp;
-<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><ul><li><a href=#版本对应>版本对应</a></li></ul></li><li><a href=#springcloud的基础功能>SpringCloud的基础功能</a></li><li><a href=#服务治理-eureka>服务治理-Eureka</a><ul><li><a href=#eureka-和-zookeeper-作为注册中心的区别>Eureka 和 Zookeeper 作为注册中心的区别</a><ul><li><a href=#cp>CP</a></li><li><a href=#ap>AP</a></li></ul></li></ul></li><li><a href=#ribbon>Ribbon</a><ul><li><a href=#nginx与ribbon的区别>Nginx与Ribbon的区别</a></li></ul></li><li><a href=#openfeign>OpenFeign</a><ul><li><a href=#openfeign工作原理>OpenFeign工作原理</a><ul><li><a href=#ribbon和feign的区别>Ribbon和Feign的区别</a></li><li><a href=#ribbon是和feign以及eureka紧密协作>Ribbon是和Feign以及Eureka紧密协作</a></li></ul></li></ul></li><li><a href=#hystrix>Hystrix</a><ul><li><a href=#hystrix有四种防雪崩方式>Hystrix有四种防雪崩方式:</a></li><li><a href=#大致的工作流如下>大致的工作流如下：</a><ul><li><a href=#服务熔断>服务熔断</a></li></ul></li></ul></li><li><a href=#网关>网关</a></li><li><a href=#总结>总结</a></li><li><a href=#参考文章>参考文章</a></li><li><a href=#学习资料>学习资料</a></li></ul></nav></div></div><div class=content id=content><ul><li>Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。</li><li>Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能，专注于快速方便的开发单个微服务。</li><li>Spring Cloud 以 Service（服务） 为中心，关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等集成服务SpringBoot可以离开SpringCloud独立使用开发项目， 但是SpringCloud离不开SpringBoot ，属于依赖的关系。</li></ul><blockquote><p>Spring Cloud是目前最常用的微服务开发框架，Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p></blockquote><h3 id=版本对应>版本对应</h3><table><thead><tr><th style=text-align:left>Spring Cloud Version</th><th style=text-align:left>Spring Boot Version</th><th style=text-align:left>Spring Cloud Alibaba Version</th></tr></thead><tbody><tr><td style=text-align:left>Spring Cloud 2020.0.1</td><td style=text-align:left>2.4.x</td><td style=text-align:left>2021.1</td></tr><tr><td style=text-align:left>Spring Cloud Hoxton</td><td style=text-align:left>2.2.x, 2.3.x</td><td style=text-align:left>2.2.x</td></tr><tr><td style=text-align:left>Spring Cloud Greenwich</td><td style=text-align:left>2.1.x</td><td style=text-align:left>2.1.x</td></tr><tr><td style=text-align:left>Spring Cloud Finchley</td><td style=text-align:left>2.0.x</td><td style=text-align:left>2.0.x(停止维护，建议升级)</td></tr><tr><td style=text-align:left>Spring Cloud Edgware</td><td style=text-align:left>1.5.x</td><td style=text-align:left>1.5.x(停止维护，建议升级)</td></tr><tr><td style=text-align:left>Spring Cloud Dalston</td><td style=text-align:left>1.5.x</td><td style=text-align:left>1.5.x(停止维护，建议升级)</td></tr></tbody></table><h2 id=springcloud的基础功能>SpringCloud的基础功能</h2><ul><li>服务治理： Spring Cloud Eureka</li><li>服务容错保护： Spring Cloud Hystrix</li><li>客户端负载均衡： Spring Cloud Ribbon</li><li>基于Ribbon和Hystrix的声明式服务调用组件： Spring Cloud OpenFeign<ul><li>整合了ribbon，具有负载均衡的能力。</li><li>整合了Hystrix，具有熔断的能力。</li></ul></li><li>API网关服务：Spring Cloud Zuul</li><li>分布式配置中心： Spring Cloud Config</li></ul><p><figure><a class=lightgallery href=/images/spring/springcloud/springcloud.jpg title=/images/spring/springcloud/springcloud.jpg data-thumbnail=/images/spring/springcloud/springcloud.jpg data-sub-html="<h2>Spring Cloud</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/spring/springcloud/springcloud.jpg data-srcset="/images/spring/springcloud/springcloud.jpg, /images/spring/springcloud/springcloud.jpg 1.5x, /images/spring/springcloud/springcloud.jpg 2x" data-sizes=auto alt=/images/spring/springcloud/springcloud.jpg></a><figcaption class=image-caption>Spring Cloud</figcaption></figure></p><h2 id=服务治理-eureka>服务治理-Eureka</h2><blockquote><p>为了解决微服务架构中的服务实例维护问题(ip地址)， 产生了大量的服务治理框架和产品。 这些框架和产品的实现都围绕着服务注册与服务发现机制来完成对微服务应用实例的自动化管理。</p></blockquote><ul><li><p>服务提供者</p><ul><li>服务注册：启动的时候会通过发送REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息。</li><li>服务续约：在注册完服务之后，服务提供者会维护一个心跳用来持续告诉Eureka Server: &ldquo;我还活着”</li><li>服务下线：当服务实例进行正常的关闭操作时，它会触发一个服务下线的REST请求给Eureka Server, 告诉服务注册中心：“我要下线了 ”。</li></ul></li><li><p>服务消费者</p><ul><li>获取服务：当我们启动服务消费者的时候，它会发送一个REST请求给服务注册中心，来获取上面注册的服务清单</li><li>服务调用：服务消费者在获取服务清单后，通过服务名可以获得具体提供服务的实例名和该实例的元数据信息。在进行服务调用的时候，优先访问同处一个Zone中的服务提供方。</li></ul></li><li><p>Eureka Server(服务注册中心)：</p><ul><li>失效剔除：默认每隔一段时间（默认为60秒） 将当前清单中超时（默认为90秒）没有续约的服务剔除出去。</li><li>自我保护：EurekaServer 在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%(通常由于网络不稳定导致)。 Eureka Server会将当前的实例注册信息保护起来， 让这些实例不会过期，不在删除注册表中的数据，当网络故障恢复后，Eureka Server 节点会自动退出自我保护模式。</li></ul></li></ul><h3 id=eureka-和-zookeeper-作为注册中心的区别>Eureka 和 Zookeeper 作为注册中心的区别</h3><ul><li>Eureka取CAP的AP注重可用性，Zookeeper取CAP的CP注重一致性。</li><li>Zookeeper在选举期间注册服务瘫痪，虽然服务最终会恢复，但选举期间不可用。</li><li>eureka的自我保护机制，会导致一个结果就是不会再从注册列表移除因长时间没收到心跳而过期的服务。依然能接受新服务的注册和查询请求，但不会被同步到其他节点。不会服务瘫痪。</li><li>Zookeeper有Leader和Follower角色，Eureka各个节点平等。</li><li>Zookeeper采用过半数存活原则， reka采用自我保护机制解决分区 。</li><li>Eureka 本质是一个工程，Zookeeper只是一个进程。</li><li>Eureka还有一种自我保护机制，如果在15分钟内超过85%的节点都没有正常的心跳，那么Eureka就认为客户端与注册中心出现了网络故障。而不会像zookeeper那样使整个注册服务瘫痪。</li></ul><h4 id=cp>CP</h4><p>当向注册中心查询服务列表时，我们可以容忍注册中心返回的是几分钟以前的信息，但不能容忍直接down掉不可用。也就是说，服务注册功能对高可用性要求比较高，但zk会出现这样一种情况，当master节点因为网络故障与其他节点失去联系时，剩余节点会重新选leader。问题在于，选取leader时间过长，30 ~120s，且选取期间zk集群都不可用，这样就会导致选取期间注册服务瘫痪。在云部署的环境下，因网络问题使得zk集群失去master节点是较大概率会发生的事，虽然服务能够恢复，但是漫长的选取时间导致的注册长期不可用是不能容忍的。</p><h4 id=ap>AP</h4><p>Eureka保证 用性，Eureka各个节点是平等的，几个节点挂掉不会影响正常节点的工作，剩余的节点仍然可以提供注册和查询服务。而Eureka的客户端向某个Eureka注册或发现时发生连接失败，则会自动切换到其他节点，只要有一台Eureka还在，就能保证注册服务可用，只是查到的信息可能不是最新的。除此之外，Eureka还有自我保护机制，如果在15分钟内超过85%的节点没有正常的心跳，那么Eureka就认为客户端与注册中心发生了网络故障，此时会出现以下几种情况：</p><ol><li>Eureka不在从注册列表中移除因为长时间没有收到心跳而应该过期的服务。</li><li>Eureka仍然能够接受新服务的注册和查询请求，但是不会被同步到其他节点上（即保证当前节点仍然可用）</li><li>当网络稳定时，当前实例新的注册信息会被同步到其他节点。因此，Eureka可以很好的应对因网络故障导致部分节点失去联系的情况，而不会像Zookeeper那样使整个微服务瘫痪</li></ol><h2 id=ribbon>Ribbon</h2><blockquote><p>Ribbon客户端组件提供一系列完善的配置项如连接超时，重试等。简单的说，就是在配置文件中列出Load Balancer（简称LB）后面所有的机器，Ribbon会自动的帮助你基于某种规则（如简单轮询，随机连接等）去连接这些机器。我们也很容易使用Ribbon实现自定义的负载均衡算法。</p></blockquote><ul><li>将用户的请求平摊的分配到多个服务上</li><li>集中式LB即在服务的消费方和提供方之间使用独立的LB设施(可以是硬件，如F5, 也可以是软件，如nginx), 由该设施负责把访问请求通过某种策略转发至服务的提供方；</li><li>进程内LB将LB逻辑集成到消费方，消费方从服务注册中心获知有哪些地址可用，然后自己再从这些地址中选择出一个合适的服务器。</li><li>注意：Ribbon就属于进程内LB，它只是一个类库，集成于消费方进程，消费方 它来获取到服务提供方的地址。</li></ul><h3 id=nginx与ribbon的区别>Nginx与Ribbon的区别</h3><p>Nginx是反向代理同时可以实现负载均衡，nginx拦截客户端请求采用负载均衡策略根据upstream配置进行转发，相当于请求通过nginx服务器进行转发。Ribbon是客户端负载均衡，从注册中心读取目标服务器信息，然后客户端采用轮询策略对服务直接访问，全程在客户端操作。</p><h2 id=openfeign>OpenFeign</h2><blockquote><p>OpenFeign 是一个声明式的web服务客户端，让编写web服务客户端变的非常容易，只需要创建一个接口并在接口上添加注解即可，openFeign的前身是Feign，后者目前已经停更了。</p></blockquote><p>OpenFeign 是SpringCloud在Feign的基础上支持了Spring MVC的注解，并通过动态代理的方式产生实现类来做负载均衡并进行调用其他服务。</p><h3 id=openfeign工作原理>OpenFeign工作原理</h3><ul><li>添加@EnableFeignClients注解开启对@FeignClient注解的扫描加载处理。根据Feign Client的开发规范，定义接口并添加@FeiginClient注解</li><li>当程序启动之后，会进行包扫描，扫描所有@FeignClient注解的接口，并将这些信息注入到IOC容器中。当定义的Feign接口被调用时，通过JDK的代理的方式生成具体的RequestTemplate。Feign会为每个接口方法创建一个RequestTemplate对象。该对象封装了HTTP请求需要的所有信息，例如请求参数名、请求方法等信息。</li><li>然后由RequestTemplate生成Request，把Request交给Client去处理，这里的Client可以是JDK原生的URLConnection、HttpClient或Okhttp。最后Client被封装到LoadBalanceClient类，看这个类的名字既可以知道是结合Ribbon负载均衡发起服务之间的调用，因为在OpenFeign中默认是已经整合了Ribbon了。</li></ul><h4 id=ribbon和feign的区别>Ribbon和Feign的区别</h4><ul><li>Ribbon都是调用其他服务的，但方式不同。</li><li>启动类注解不同，Ribbon是@RibbonClient feign的是@EnableFeignClients</li><li>服务指定的位置不同，Ribbon是在@RibbonClient注解上声明，Feign则是在定义抽象方法的接口中使用@FeignClient声明。</li><li>调用方式不同，Ribbon需要自己构建http请求，模拟http请求然后使用RestTemplate发送给其他服务，步骤相当繁琐。Feign需要将调用的方法定义成抽象方法即可。</li></ul><h4 id=ribbon是和feign以及eureka紧密协作>Ribbon是和Feign以及Eureka紧密协作</h4><p>完成工作的，具体如下：</p><ul><li>首先Ribbon会从 Eureka Client里获取到对应的服务注册表，也就知道了所有的服务都部署在了哪些机器上，在监听哪些端口号。</li><li>然后Ribbon就可以使用默认的Round Robin算法，从中选择一台机器</li><li>Feign就会针对这台机器，构造并发起请求。</li></ul><p><figure><a class=lightgallery href=/images/spring/springcloud/SpringCloudReqFlow.png title=/images/spring/springcloud/SpringCloudReqFlow.png data-thumbnail=/images/spring/springcloud/SpringCloudReqFlow.png data-sub-html="<h2>Spring Cloud ReqFlow</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/spring/springcloud/SpringCloudReqFlow.png data-srcset="/images/spring/springcloud/SpringCloudReqFlow.png, /images/spring/springcloud/SpringCloudReqFlow.png 1.5x, /images/spring/springcloud/SpringCloudReqFlow.png 2x" data-sizes=auto alt=/images/spring/springcloud/SpringCloudReqFlow.png></a><figcaption class=image-caption>Spring Cloud ReqFlow</figcaption></figure></p><h2 id=hystrix>Hystrix</h2><blockquote><p>Hystrix 是一个延迟和容错库，旨在隔离远程系统，服务和第三方库的访问点，当出现故障是不可避免的故障时，停止级联故障并在复杂的分布式系统中实现弹性。</p></blockquote><h3 id=hystrix有四种防雪崩方式>Hystrix有四种防雪崩方式:</h3><ul><li>服务降级：接口调用失败就调用本地的方法返回一个空</li><li>服务熔断：接口调用失败就会进入调用接口提前定义好的一个熔断的方法，返回错误信息</li><li>服务隔离：隔离服务之间相互影响</li><li>服务监控：在服务发生调用时,会将每秒请求数、成功请求数等运行指标记录下来。</li><li>线程池数量 = 每秒请求数量 * 业务处理时间 + 备用线程数量</li></ul><h3 id=大致的工作流如下>大致的工作流如下：</h3><ol><li>构建一个HystrixCommand对象，用于封装请求，并在构造方法配置请求被执行需要的参数</li><li>执行命令，Hystrix提供了几种执行命令的方法，比较常用到的是synchrous和asynchrous</li><li>判断电路是否被打开，如果被打开，直接进入fallback方法</li><li>判断线程池/队列/信号量是否已经满，如果满了，直接进入fallback方法</li><li>执行run方法，一般是HystrixCommand.run()，进入实际的业务调用，执行超时或者执行失败抛出未提前预计的异常时，直接进入fallback方法</li><li>无论中间走到哪一步都会进行上报metrics，统计出熔断器的监控指标</li><li>fallback方法也分实现和备用的环节</li><li>最后是返回请求响应</li></ol><h4 id=服务熔断>服务熔断</h4><blockquote><p>服务熔断：当下游的服务因为某种原因突然变得不可用或响应过慢，上游服务为了保证自己整体服务的可用性，不再继续调用目标服务，直接返回，快速释放资源。如果目标服务情况好转则恢复调用。</p></blockquote><p>是在服务降级的基础上更直接的一种保护方式，需要说明的是熔断其实是一个框架级的处理，那么这套熔断机制的设计，基本上业内用的是断路器模式</p><p>在Hystrix中，对应配置如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>//滑动窗口的大小（当在一个统计时间范围内的请求失败数量达到设定值），默认为20</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>circuitBreaker</span><span class=p>.</span><span class=na>requestVolumeThreshold</span><span class=w> 
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>//错误率，默认50%（当前的请求错误率达到设定的错误率阈值）</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>circuitBreaker</span><span class=p>.</span><span class=na>errorThresholdPercentage</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>//过多长时间，熔断器再次检测是否开启，默认为5000，即5s钟（在设定时间（sleepWindowInMilliseconds）后尝试恢复。）</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>circuitBreaker</span><span class=p>.</span><span class=na>sleepWindowInMilliseconds</span><span class=w> 
-</span></span></span></code></pre></td></tr></table></div></div><p><strong>每当20个请求中，有50%失败时，熔断器就会打开，此时再调用此服务，将会直接返回失败，不再调远程服务。直到5s钟之后，重新检测该触发条件，判断是否把熔断器关闭，或者继续打开。</strong></p><p>这些属于框架层级的实现，我们只要实现对应接口就好！</p><h2 id=网关>网关</h2><blockquote><p>网关相当于一个网络服务架构的入口，所有网络请求必须通过网关转发到具体的服务。</p></blockquote><ol><li>反向代理<ul><li>这个是所有网关，包括nginx的基本功能。除了能够对服务进行整形，网关一个非常重要的附加收益，就是对后端的服务细节进行了屏蔽。</li><li>反向代理同时会带有负载均衡的功能，包括带权重的流量分配。</li></ul></li><li>鉴权<ul><li>就是权限认证，也就是常说的权限系统。由于鉴权服务有非常高的相似性，就可以进行抽象处理，放在网关层。</li><li>比如https协议的统一接入，分布式session的处理问题，新的登录鉴权通道的接入等。</li></ul></li><li>流量控制<ul><li>流量控制如果分散到每个服务里去做，就是一种灾难，网关是最适合的地方。</li><li>流量控制通常有多种策略，对后端服务进行屏蔽。非正常请求和超出负载能力的请求，都会被快速拦截在外，为系统的稳定性提供了必不可少的支持。</li><li>流量控制有单机限流和分布式限流两种方式，后者控制更加精细一些，spring cloud gateway都有提供。</li></ul></li><li>熔断<ul><li>熔断与流控的主要区别，在于前者在一段时间内，服务“不可用”，而后者仅概率性失败。</li><li>除了服务之间的调用涉及到熔断，在网关层的熔断，作用范围会更大，需要对服务进行准确的分级。</li></ul></li><li>灰度控制<ul><li>网关的一个终极功能，就是实现服务的灰度发布。比如常说的AB test，就是一种灰度发布方式。</li><li>灰度会进行精细化控制，比如针对一类用户，某个物理区域，特定请求路径，特定模块，随机百分比等方面的一些灰度控制等。</li><li>灰度是一个整体架构配合的结果，但协调的入口就是网关，通过对请求头或者参数加入一些特定的标志，就可以对每个请求进行划分，决定是否落入灰度。</li></ul></li><li>日志监控<ul><li>网关是最适合进行日志监控的地方。通过对访问日志的精细分析，能够得到很多有价值的数据，进而对后端服务的优化提供决策依据。</li><li>比如，某个“业务”的访问趋势，运营数据，QPS峰值，同比、环比等。</li></ul></li><li>路由转发</li></ol><h2 id=总结>总结</h2><ul><li>Eureka：各个服务启动时，Eureka Client都会将服务注册到Eureka Server，并且Eureka Client还可以反过来从Eureka Server拉取注册表，从而知道其他服务在哪里</li><li>Ribbon：服务间发起请求的时候，基于Ribbon做负载均衡，从一个服务的多台机器中选择一台</li><li>Feign：基于Feign的动态代理机制，根据注解和选择的机器，拼接请求URL地址，发起请求</li><li>Hystrix：发起请求是通过Hystrix的线程池来走的，不同的服务走不同的线程池，实现了不同服务调用的隔离，避免了服务雪崩的问题</li><li>Zuul：如果前端、移动端要调用后端系统，统一从Zuul网关进入，由Zuul网关转发请求给对应的服务</li></ul><h2 id=参考文章>参考文章</h2><ul><li><a href=https://juejin.cn/post/6844903705553174541 target=_blank rel="noopener noreffer">Spring Cloud底层原理</a></li></ul><h2 id=学习资料>学习资料</h2><ul><li><a href=https://www.springcloud.cc/ target=_blank rel="noopener noreffer">Spring Cloud中文网</a></li><li><a href=https://www.fangzhipeng.com/spring-cloud.html target=_blank rel="noopener noreffer">Spring-cloud 教程</a></li><li>[Spring Cloud Gateway 原理介绍和应用 ](<a href=https://tech.yangqianguan.com/60e27b0e2078082a378ec5ed/ target=_blank rel="noopener noreffer">https://tech.yangqianguan.com/60e27b0e2078082a378ec5ed/</a></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2020-04-02</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://moge.fun/springcloud/ data-title="Spring Cloud" data-hashtags=SpringCloud,大纲><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://moge.fun/springcloud/ data-hashtag=SpringCloud><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://moge.fun/springcloud/ data-title="Spring Cloud"><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://moge.fun/springcloud/ data-title="Spring Cloud"><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://moge.fun/springcloud/ data-title="Spring Cloud"><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/springcloud/>SpringCloud</a>,&nbsp;<a href=/tags/%E5%A4%A7%E7%BA%B2/>大纲</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/dubbo/ class=prev rel=prev title=Dubbo总结><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Dubbo总结</a>
-<a href=/springcloud-eureka/ class=next rel=next title="Spring Cloud Eureka 解析">Spring Cloud Eureka 解析<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=utterances class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2015 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>默哥</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a href=https://beian.miit.gov.cn/ target=_blank>豫ICP备2021012209号-1</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"alatan/BlogDiscuss"}},lightgallery:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:5,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Spring Cloud - 软件开发学习记录</title><meta name="Description" content="Spring Cloud "><meta property="og:title" content="Spring Cloud" />
+<meta property="og:description" content="Spring Cloud " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moge.fun/springcloud/" /><meta property="og:image" content="https://moge.fun/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-04-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-02T00:00:00+00:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://moge.fun/logo.png"/>
+
+<meta name="twitter:title" content="Spring Cloud"/>
+<meta name="twitter:description" content="Spring Cloud "/>
+<meta name="application-name" content="Journey to the Life">
+<meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/springcloud/" /><link rel="prev" href="https://moge.fun/dubbo/" /><link rel="next" href="https://moge.fun/springcloud-eureka/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Spring Cloud",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/moge.fun\/springcloud\/"
+        },"genre": "posts","keywords": "SpringCloud, 大纲","wordcount":  277 ,
+        "url": "https:\/\/moge.fun\/springcloud\/","datePublished": "2020-04-02T00:00:00+00:00","dateModified": "2020-04-02T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "默哥"
+            },"description": "Spring Cloud "
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="软件开发学习记录">软件开发学习记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="软件开发学习记录">软件开发学习记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Spring Cloud</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/springcloud/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>SpringCloud</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-04-02">2020-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 277 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#版本对应">版本对应</a></li>
+      </ul>
+    </li>
+    <li><a href="#springcloud的基础功能">SpringCloud的基础功能</a></li>
+    <li><a href="#服务治理-eureka">服务治理-Eureka</a>
+      <ul>
+        <li><a href="#eureka-和-zookeeper-作为注册中心的区别">Eureka 和 Zookeeper 作为注册中心的区别</a>
+          <ul>
+            <li><a href="#cp">CP</a></li>
+            <li><a href="#ap">AP</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#ribbon">Ribbon</a>
+      <ul>
+        <li><a href="#nginx与ribbon的区别">Nginx与Ribbon的区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#openfeign">OpenFeign</a>
+      <ul>
+        <li><a href="#openfeign工作原理">OpenFeign工作原理</a>
+          <ul>
+            <li><a href="#ribbon和feign的区别">Ribbon和Feign的区别</a></li>
+            <li><a href="#ribbon是和feign以及eureka紧密协作">Ribbon是和Feign以及Eureka紧密协作</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#hystrix">Hystrix</a>
+      <ul>
+        <li><a href="#hystrix有四种防雪崩方式">Hystrix有四种防雪崩方式:</a></li>
+        <li><a href="#大致的工作流如下">大致的工作流如下：</a>
+          <ul>
+            <li><a href="#服务熔断">服务熔断</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#网关">网关</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#参考文章">参考文章</a></li>
+    <li><a href="#学习资料">学习资料</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><ul>
+<li>Spring       以 Bean（对象） 为中心，提供 IOC、AOP 等功能。</li>
+<li>Spring Boot  以 Application（应用） 为中心，提供自动配置、监控等功能，专注于快速方便的开发单个微服务。</li>
+<li>Spring Cloud 以 Service（服务） 为中心，关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等集成服务SpringBoot可以离开SpringCloud独立使用开发项目， 但是SpringCloud离不开SpringBoot ，属于依赖的关系。</li>
+</ul>
+<blockquote>
+<p>Spring Cloud是目前最常用的微服务开发框架，Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p>
+</blockquote>
+<h3 id="版本对应">版本对应</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Spring Cloud Version</th>
+<th style="text-align:left">Spring Boot Version</th>
+<th style="text-align:left">Spring Cloud Alibaba Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Spring Cloud 2020.0.1</td>
+<td style="text-align:left">2.4.x</td>
+<td style="text-align:left">2021.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Spring Cloud Hoxton</td>
+<td style="text-align:left">2.2.x, 2.3.x</td>
+<td style="text-align:left">2.2.x</td>
+</tr>
+<tr>
+<td style="text-align:left">Spring Cloud Greenwich</td>
+<td style="text-align:left">2.1.x</td>
+<td style="text-align:left">2.1.x</td>
+</tr>
+<tr>
+<td style="text-align:left">Spring Cloud Finchley</td>
+<td style="text-align:left">2.0.x</td>
+<td style="text-align:left">2.0.x(停止维护，建议升级)</td>
+</tr>
+<tr>
+<td style="text-align:left">Spring Cloud Edgware</td>
+<td style="text-align:left">1.5.x</td>
+<td style="text-align:left">1.5.x(停止维护，建议升级)</td>
+</tr>
+<tr>
+<td style="text-align:left">Spring Cloud Dalston</td>
+<td style="text-align:left">1.5.x</td>
+<td style="text-align:left">1.5.x(停止维护，建议升级)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="springcloud的基础功能">SpringCloud的基础功能</h2>
+<ul>
+<li>服务治理： Spring  Cloud Eureka</li>
+<li>服务容错保护： Spring  Cloud Hystrix</li>
+<li>客户端负载均衡： Spring Cloud Ribbon</li>
+<li>基于Ribbon和Hystrix的声明式服务调用组件： Spring  Cloud OpenFeign
+<ul>
+<li>整合了ribbon，具有负载均衡的能力。</li>
+<li>整合了Hystrix，具有熔断的能力。</li>
+</ul>
+</li>
+<li>API网关服务：Spring Cloud Zuul</li>
+<li>分布式配置中心： Spring Cloud Config</li>
+</ul>
+<p><figure><a class="lightgallery" href="/images/spring/springcloud/springcloud.jpg" title="/images/spring/springcloud/springcloud.jpg" data-thumbnail="/images/spring/springcloud/springcloud.jpg" data-sub-html="<h2>Spring Cloud</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/spring/springcloud/springcloud.jpg"
+            data-srcset="/images/spring/springcloud/springcloud.jpg, /images/spring/springcloud/springcloud.jpg 1.5x, /images/spring/springcloud/springcloud.jpg 2x"
+            data-sizes="auto"
+            alt="/images/spring/springcloud/springcloud.jpg" />
+    </a><figcaption class="image-caption">Spring Cloud</figcaption>
+    </figure></p>
+<h2 id="服务治理-eureka">服务治理-Eureka</h2>
+<blockquote>
+<p>为了解决微服务架构中的服务实例维护问题(ip地址)， 产生了大量的服务治理框架和产品。 这些框架和产品的实现都围绕着服务注册与服务发现机制来完成对微服务应用实例的自动化管理。</p>
+</blockquote>
+<ul>
+<li>
+<p>服务提供者</p>
+<ul>
+<li>服务注册：启动的时候会通过发送REST请求的方式将自己注册到Eureka Server上，同时带上了自身服务的一些元数据信息。</li>
+<li>服务续约：在注册完服务之后，服务提供者会维护一个心跳用来持续告诉Eureka Server:  &ldquo;我还活着”</li>
+<li>服务下线：当服务实例进行正常的关闭操作时，它会触发一个服务下线的REST请求给Eureka Server, 告诉服务注册中心：“我要下线了 ”。</li>
+</ul>
+</li>
+<li>
+<p>服务消费者</p>
+<ul>
+<li>获取服务：当我们启动服务消费者的时候，它会发送一个REST请求给服务注册中心，来获取上面注册的服务清单</li>
+<li>服务调用：服务消费者在获取服务清单后，通过服务名可以获得具体提供服务的实例名和该实例的元数据信息。在进行服务调用的时候，优先访问同处一个Zone中的服务提供方。</li>
+</ul>
+</li>
+<li>
+<p>Eureka Server(服务注册中心)：</p>
+<ul>
+<li>失效剔除：默认每隔一段时间（默认为60秒） 将当前清单中超时（默认为90秒）没有续约的服务剔除出去。</li>
+<li>自我保护：EurekaServer 在运行期间，会统计心跳失败的比例在15分钟之内是否低于85%(通常由于网络不稳定导致)。 Eureka Server会将当前的实例注册信息保护起来， 让这些实例不会过期，不在删除注册表中的数据，当网络故障恢复后，Eureka Server 节点会自动退出自我保护模式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="eureka-和-zookeeper-作为注册中心的区别">Eureka 和 Zookeeper 作为注册中心的区别</h3>
+<ul>
+<li>Eureka取CAP的AP注重可用性，Zookeeper取CAP的CP注重一致性。</li>
+<li>Zookeeper在选举期间注册服务瘫痪，虽然服务最终会恢复，但选举期间不可用。</li>
+<li>eureka的自我保护机制，会导致一个结果就是不会再从注册列表移除因长时间没收到心跳而过期的服务。依然能接受新服务的注册和查询请求，但不会被同步到其他节点。不会服务瘫痪。</li>
+<li>Zookeeper有Leader和Follower角色，Eureka各个节点平等。</li>
+<li>Zookeeper采用过半数存活原则， reka采用自我保护机制解决分区 。</li>
+<li>Eureka 本质是一个工程，Zookeeper只是一个进程。</li>
+<li>Eureka还有一种自我保护机制，如果在15分钟内超过85%的节点都没有正常的心跳，那么Eureka就认为客户端与注册中心出现了网络故障。而不会像zookeeper那样使整个注册服务瘫痪。</li>
+</ul>
+<h4 id="cp">CP</h4>
+<p>当向注册中心查询服务列表时，我们可以容忍注册中心返回的是几分钟以前的信息，但不能容忍直接down掉不可用。也就是说，服务注册功能对高可用性要求比较高，但zk会出现这样一种情况，当master节点因为网络故障与其他节点失去联系时，剩余节点会重新选leader。问题在于，选取leader时间过长，30 ~120s，且选取期间zk集群都不可用，这样就会导致选取期间注册服务瘫痪。在云部署的环境下，因网络问题使得zk集群失去master节点是较大概率会发生的事，虽然服务能够恢复，但是漫长的选取时间导致的注册长期不可用是不能容忍的。</p>
+<h4 id="ap">AP</h4>
+<p>Eureka保证 用性，Eureka各个节点是平等的，几个节点挂掉不会影响正常节点的工作，剩余的节点仍然可以提供注册和查询服务。而Eureka的客户端向某个Eureka注册或发现时发生连接失败，则会自动切换到其他节点，只要有一台Eureka还在，就能保证注册服务可用，只是查到的信息可能不是最新的。除此之外，Eureka还有自我保护机制，如果在15分钟内超过85%的节点没有正常的心跳，那么Eureka就认为客户端与注册中心发生了网络故障，此时会出现以下几种情况：</p>
+<ol>
+<li>Eureka不在从注册列表中移除因为长时间没有收到心跳而应该过期的服务。</li>
+<li>Eureka仍然能够接受新服务的注册和查询请求，但是不会被同步到其他节点上（即保证当前节点仍然可用）</li>
+<li>当网络稳定时，当前实例新的注册信息会被同步到其他节点。因此，Eureka可以很好的应对因网络故障导致部分节点失去联系的情况，而不会像Zookeeper那样使整个微服务瘫痪</li>
+</ol>
+<h2 id="ribbon">Ribbon</h2>
+<blockquote>
+<p>Ribbon客户端组件提供一系列完善的配置项如连接超时，重试等。简单的说，就是在配置文件中列出Load Balancer（简称LB）后面所有的机器，Ribbon会自动的帮助你基于某种规则（如简单轮询，随机连接等）去连接这些机器。我们也很容易使用Ribbon实现自定义的负载均衡算法。</p>
+</blockquote>
+<ul>
+<li>将用户的请求平摊的分配到多个服务上</li>
+<li>集中式LB即在服务的消费方和提供方之间使用独立的LB设施(可以是硬件，如F5, 也可以是软件，如nginx), 由该设施负责把访问请求通过某种策略转发至服务的提供方；</li>
+<li>进程内LB将LB逻辑集成到消费方，消费方从服务注册中心获知有哪些地址可用，然后自己再从这些地址中选择出一个合适的服务器。</li>
+<li>注意：Ribbon就属于进程内LB，它只是一个类库，集成于消费方进程，消费方 它来获取到服务提供方的地址。</li>
+</ul>
+<h3 id="nginx与ribbon的区别">Nginx与Ribbon的区别</h3>
+<p>Nginx是反向代理同时可以实现负载均衡，nginx拦截客户端请求采用负载均衡策略根据upstream配置进行转发，相当于请求通过nginx服务器进行转发。Ribbon是客户端负载均衡，从注册中心读取目标服务器信息，然后客户端采用轮询策略对服务直接访问，全程在客户端操作。</p>
+<h2 id="openfeign">OpenFeign</h2>
+<blockquote>
+<p>OpenFeign 是一个声明式的web服务客户端，让编写web服务客户端变的非常容易，只需要创建一个接口并在接口上添加注解即可，openFeign的前身是Feign，后者目前已经停更了。</p>
+</blockquote>
+<p>OpenFeign 是SpringCloud在Feign的基础上支持了Spring MVC的注解，并通过动态代理的方式产生实现类来做负载均衡并进行调用其他服务。</p>
+<h3 id="openfeign工作原理">OpenFeign工作原理</h3>
+<ul>
+<li>添加@EnableFeignClients注解开启对@FeignClient注解的扫描加载处理。根据Feign Client的开发规范，定义接口并添加@FeiginClient注解</li>
+<li>当程序启动之后，会进行包扫描，扫描所有@FeignClient注解的接口，并将这些信息注入到IOC容器中。当定义的Feign接口被调用时，通过JDK的代理的方式生成具体的RequestTemplate。Feign会为每个接口方法创建一个RequestTemplate对象。该对象封装了HTTP请求需要的所有信息，例如请求参数名、请求方法等信息。</li>
+<li>然后由RequestTemplate生成Request，把Request交给Client去处理，这里的Client可以是JDK原生的URLConnection、HttpClient或Okhttp。最后Client被封装到LoadBalanceClient类，看这个类的名字既可以知道是结合Ribbon负载均衡发起服务之间的调用，因为在OpenFeign中默认是已经整合了Ribbon了。</li>
+</ul>
+<h4 id="ribbon和feign的区别">Ribbon和Feign的区别</h4>
+<ul>
+<li>Ribbon都是调用其他服务的，但方式不同。</li>
+<li>启动类注解不同，Ribbon是@RibbonClient feign的是@EnableFeignClients</li>
+<li>服务指定的位置不同，Ribbon是在@RibbonClient注解上声明，Feign则是在定义抽象方法的接口中使用@FeignClient声明。</li>
+<li>调用方式不同，Ribbon需要自己构建http请求，模拟http请求然后使用RestTemplate发送给其他服务，步骤相当繁琐。Feign需要将调用的方法定义成抽象方法即可。</li>
+</ul>
+<h4 id="ribbon是和feign以及eureka紧密协作">Ribbon是和Feign以及Eureka紧密协作</h4>
+<p>完成工作的，具体如下：</p>
+<ul>
+<li>首先Ribbon会从 Eureka Client里获取到对应的服务注册表，也就知道了所有的服务都部署在了哪些机器上，在监听哪些端口号。</li>
+<li>然后Ribbon就可以使用默认的Round Robin算法，从中选择一台机器</li>
+<li>Feign就会针对这台机器，构造并发起请求。</li>
+</ul>
+<p><figure><a class="lightgallery" href="/images/spring/springcloud/SpringCloudReqFlow.png" title="/images/spring/springcloud/SpringCloudReqFlow.png" data-thumbnail="/images/spring/springcloud/SpringCloudReqFlow.png" data-sub-html="<h2>Spring Cloud ReqFlow</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/spring/springcloud/SpringCloudReqFlow.png"
+            data-srcset="/images/spring/springcloud/SpringCloudReqFlow.png, /images/spring/springcloud/SpringCloudReqFlow.png 1.5x, /images/spring/springcloud/SpringCloudReqFlow.png 2x"
+            data-sizes="auto"
+            alt="/images/spring/springcloud/SpringCloudReqFlow.png" />
+    </a><figcaption class="image-caption">Spring Cloud ReqFlow</figcaption>
+    </figure></p>
+<h2 id="hystrix">Hystrix</h2>
+<blockquote>
+<p>Hystrix 是一个延迟和容错库，旨在隔离远程系统，服务和第三方库的访问点，当出现故障是不可避免的故障时，停止级联故障并在复杂的分布式系统中实现弹性。</p>
+</blockquote>
+<h3 id="hystrix有四种防雪崩方式">Hystrix有四种防雪崩方式:</h3>
+<ul>
+<li>服务降级：接口调用失败就调用本地的方法返回一个空</li>
+<li>服务熔断：接口调用失败就会进入调用接口提前定义好的一个熔断的方法，返回错误信息</li>
+<li>服务隔离：隔离服务之间相互影响</li>
+<li>服务监控：在服务发生调用时,会将每秒请求数、成功请求数等运行指标记录下来。</li>
+<li>线程池数量 = 每秒请求数量 * 业务处理时间 + 备用线程数量</li>
+</ul>
+<h3 id="大致的工作流如下">大致的工作流如下：</h3>
+<ol>
+<li>构建一个HystrixCommand对象，用于封装请求，并在构造方法配置请求被执行需要的参数</li>
+<li>执行命令，Hystrix提供了几种执行命令的方法，比较常用到的是synchrous和asynchrous</li>
+<li>判断电路是否被打开，如果被打开，直接进入fallback方法</li>
+<li>判断线程池/队列/信号量是否已经满，如果满了，直接进入fallback方法</li>
+<li>执行run方法，一般是HystrixCommand.run()，进入实际的业务调用，执行超时或者执行失败抛出未提前预计的异常时，直接进入fallback方法</li>
+<li>无论中间走到哪一步都会进行上报metrics，统计出熔断器的监控指标</li>
+<li>fallback方法也分实现和备用的环节</li>
+<li>最后是返回请求响应</li>
+</ol>
+<h4 id="服务熔断">服务熔断</h4>
+<blockquote>
+<p>服务熔断：当下游的服务因为某种原因突然变得不可用或响应过慢，上游服务为了保证自己整体服务的可用性，不再继续调用目标服务，直接返回，快速释放资源。如果目标服务情况好转则恢复调用。</p>
+</blockquote>
+<p>是在服务降级的基础上更直接的一种保护方式，需要说明的是熔断其实是一个框架级的处理，那么这套熔断机制的设计，基本上业内用的是断路器模式</p>
+<p>在Hystrix中，对应配置如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//滑动窗口的大小（当在一个统计时间范围内的请求失败数量达到设定值），默认为20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">circuitBreaker</span><span class="p">.</span><span class="na">requestVolumeThreshold</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//错误率，默认50%（当前的请求错误率达到设定的错误率阈值）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">circuitBreaker</span><span class="p">.</span><span class="na">errorThresholdPercentage</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//过多长时间，熔断器再次检测是否开启，默认为5000，即5s钟（在设定时间（sleepWindowInMilliseconds）后尝试恢复。）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">circuitBreaker</span><span class="p">.</span><span class="na">sleepWindowInMilliseconds</span><span class="w"> 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>每当20个请求中，有50%失败时，熔断器就会打开，此时再调用此服务，将会直接返回失败，不再调远程服务。直到5s钟之后，重新检测该触发条件，判断是否把熔断器关闭，或者继续打开。</strong></p>
+<p>这些属于框架层级的实现，我们只要实现对应接口就好！</p>
+<h2 id="网关">网关</h2>
+<blockquote>
+<p>网关相当于一个网络服务架构的入口，所有网络请求必须通过网关转发到具体的服务。</p>
+</blockquote>
+<ol>
+<li>反向代理
+<ul>
+<li>这个是所有网关，包括nginx的基本功能。除了能够对服务进行整形，网关一个非常重要的附加收益，就是对后端的服务细节进行了屏蔽。</li>
+<li>反向代理同时会带有负载均衡的功能，包括带权重的流量分配。</li>
+</ul>
+</li>
+<li>鉴权
+<ul>
+<li>就是权限认证，也就是常说的权限系统。由于鉴权服务有非常高的相似性，就可以进行抽象处理，放在网关层。</li>
+<li>比如https协议的统一接入，分布式session的处理问题，新的登录鉴权通道的接入等。</li>
+</ul>
+</li>
+<li>流量控制
+<ul>
+<li>流量控制如果分散到每个服务里去做，就是一种灾难，网关是最适合的地方。</li>
+<li>流量控制通常有多种策略，对后端服务进行屏蔽。非正常请求和超出负载能力的请求，都会被快速拦截在外，为系统的稳定性提供了必不可少的支持。</li>
+<li>流量控制有单机限流和分布式限流两种方式，后者控制更加精细一些，spring cloud gateway都有提供。</li>
+</ul>
+</li>
+<li>熔断
+<ul>
+<li>熔断与流控的主要区别，在于前者在一段时间内，服务“不可用”，而后者仅概率性失败。</li>
+<li>除了服务之间的调用涉及到熔断，在网关层的熔断，作用范围会更大，需要对服务进行准确的分级。</li>
+</ul>
+</li>
+<li>灰度控制
+<ul>
+<li>网关的一个终极功能，就是实现服务的灰度发布。比如常说的AB test，就是一种灰度发布方式。</li>
+<li>灰度会进行精细化控制，比如针对一类用户，某个物理区域，特定请求路径，特定模块，随机百分比等方面的一些灰度控制等。</li>
+<li>灰度是一个整体架构配合的结果，但协调的入口就是网关，通过对请求头或者参数加入一些特定的标志，就可以对每个请求进行划分，决定是否落入灰度。</li>
+</ul>
+</li>
+<li>日志监控
+<ul>
+<li>网关是最适合进行日志监控的地方。通过对访问日志的精细分析，能够得到很多有价值的数据，进而对后端服务的优化提供决策依据。</li>
+<li>比如，某个“业务”的访问趋势，运营数据，QPS峰值，同比、环比等。</li>
+</ul>
+</li>
+<li>路由转发</li>
+</ol>
+<h2 id="总结">总结</h2>
+<ul>
+<li>Eureka：各个服务启动时，Eureka Client都会将服务注册到Eureka Server，并且Eureka Client还可以反过来从Eureka Server拉取注册表，从而知道其他服务在哪里</li>
+<li>Ribbon：服务间发起请求的时候，基于Ribbon做负载均衡，从一个服务的多台机器中选择一台</li>
+<li>Feign：基于Feign的动态代理机制，根据注解和选择的机器，拼接请求URL地址，发起请求</li>
+<li>Hystrix：发起请求是通过Hystrix的线程池来走的，不同的服务走不同的线程池，实现了不同服务调用的隔离，避免了服务雪崩的问题</li>
+<li>Zuul：如果前端、移动端要调用后端系统，统一从Zuul网关进入，由Zuul网关转发请求给对应的服务</li>
+</ul>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://juejin.cn/post/6844903705553174541" target="_blank" rel="noopener noreffer ">Spring Cloud底层原理</a></li>
+</ul>
+<h2 id="学习资料">学习资料</h2>
+<ul>
+<li><a href="https://www.springcloud.cc/" target="_blank" rel="noopener noreffer ">Spring Cloud中文网</a></li>
+<li><a href="https://www.fangzhipeng.com/spring-cloud.html" target="_blank" rel="noopener noreffer ">Spring-cloud 教程</a></li>
+<li>[Spring Cloud Gateway 原理介绍和应用 ](<a href="https://tech.yangqianguan.com/60e27b0e2078082a378ec5ed/" target="_blank" rel="noopener noreffer ">https://tech.yangqianguan.com/60e27b0e2078082a378ec5ed/</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-04-02</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://moge.fun/springcloud/" data-title="Spring Cloud" data-hashtags="SpringCloud,大纲"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://moge.fun/springcloud/" data-hashtag="SpringCloud"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://moge.fun/springcloud/" data-title="Spring Cloud"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://moge.fun/springcloud/" data-title="Spring Cloud"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/springcloud/" data-title="Spring Cloud"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/springcloud/">SpringCloud</a>,&nbsp;<a href="/tags/%E5%A4%A7%E7%BA%B2/">大纲</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/dubbo/" class="prev" rel="prev" title="Dubbo总结"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Dubbo总结</a>
+            <a href="/springcloud-eureka/" class="next" rel="next" title="Spring Cloud Eureka 解析">Spring Cloud Eureka 解析<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2015 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021012209号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":5,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

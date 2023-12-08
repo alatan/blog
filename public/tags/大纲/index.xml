@@ -1,38 +1,124 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>大纲 - 标签 - 软件开发学习记录</title><link>https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/</link><description>大纲 - 标签 - 软件开发学习记录</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/" rel="self" type="application/rss+xml"/><item><title>Spring Cloud Alibaba</title><link>https://moge.fun/springcloudalibaba/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/springcloudalibaba/</guid><description>Spring Cloud Alibaba 组件 Spring Cloud - Gateway 网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心/配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错(限流，降级) Spring Cloud Alibaba - Seata 实现分布式事务 Spring Cloud Alibaba 组件 Nacos Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>大纲 - 标签 - 软件开发学习记录</title>
+        <link>https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/</link>
+        <description>大纲 - 标签 - 软件开发学习记录</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 10 Apr 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E5%A4%A7%E7%BA%B2/" rel="self" type="application/rss+xml" /><item>
+    <title>Spring Cloud Alibaba</title>
+    <link>https://moge.fun/springcloudalibaba/</link>
+    <pubDate>Fri, 10 Apr 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/springcloudalibaba/</guid>
+    <description><![CDATA[Spring Cloud Alibaba组件 Spring Cloud - Gateway 网关 Spring Cloud - Ribbon 实现负载均衡 Spring Cloud - Feign 实现远程调用 Spring Cloud - Sleuth 实现调用链监控 Spring Cloud Alibaba - Nacos 实现注册中心/配置中心 Spring Cloud Alibaba - Sentinel 实现服务容错(限流，降级) Spring Cloud Alibaba - Seata 实现分布式事务 Spring Cloud Alibaba 组件Nacos Nacos 是一个 Alibaba 开源的、易于构建云原生应用的动态服务发现、配置管理和服务管理平台。
 Nacos 这个名字怎么读呢？它的音标为 /nɑ:kəʊs/。这个名字不是一个标准的单词，而是以下单词的首字母缩写：Name and Config Service。
-Nacos Discovery 使用 Spring Cloud Alibaba Nacos Discovery，可基于 Spring Cloud 的编程模型快速接入 Nacos 服务注册功能。</description></item><item><title>Spring Cloud Hystrix 解析</title><link>https://moge.fun/springcloud-hystrix/</link><pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/springcloud-hystrix/</guid><description>参考文章 Hystrix原理与实战 Hystrix原理与实战 Hystrix 源码分析及实践</description></item><item><title>Spring Cloud Eureka 解析</title><link>https://moge.fun/springcloud-eureka/</link><pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/springcloud-eureka/</guid><description>先来一波问题，然后看看Enueka是通过什么方式处理的。
+Nacos Discovery 使用 Spring Cloud Alibaba Nacos Discovery，可基于 Spring Cloud 的编程模型快速接入 Nacos 服务注册功能。]]></description>
+</item>
+<item>
+    <title>Spring Cloud Hystrix 解析</title>
+    <link>https://moge.fun/springcloud-hystrix/</link>
+    <pubDate>Sat, 04 Apr 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/springcloud-hystrix/</guid>
+    <description><![CDATA[参考文章 Hystrix原理与实战 Hystrix原理与实战 Hystrix 源码分析及实践 ]]></description>
+</item>
+<item>
+    <title>Spring Cloud Eureka 解析</title>
+    <link>https://moge.fun/springcloud-eureka/</link>
+    <pubDate>Fri, 03 Apr 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/springcloud-eureka/</guid>
+    <description><![CDATA[先来一波问题，然后看看Enueka是通过什么方式处理的。
 Eureka注册中心使用什么样的方式来储存各个服务注册时发送过来的机器地址和端口号？ 各个服务找Eureka Server拉取注册表的时候，是什么样的频率？ 各个服务是如何拉取注册表的？ 对于一个有几百个服务，部署上千台机器的大型分布式系统来说，这套系统会对Eureka Server造成多大的访问压力？ Eureka Server从技术层面是如何抗住日千万级访问量的？ 基本知识点，各个服务内的Eureka Client组件，默认情况下，每隔30秒会发送一个请求到Eureka Server，来拉取最近有变化的服务信息
-Eureka Server设计精妙的注册表存储结构 维护注册表、拉取注册表、更新心跳时间，全部发生在内存里！这是Eureka Server非常核心的一个点。 Eureka Server端优秀的多级缓存机制 尽可能保证了内存注册表数据不会出现频繁的读写冲突问题。 并且进一步保证对Eureka Server的大量请求，都是快速从纯内存走，性能极高。 总结 通过上面的分析可以看到，Eureka通过设置适当的请求频率拉取注册表30秒间隔，发送心跳30秒间隔），可以保证一个大规模的系统每秒请求Eureka Server的次数在几百次。 同时通过纯内存的注册表，保证了所有的请求都可以在内存处理，确保了极高的性能 另外,多级缓存机制，确保了不会针对内存数据结构发生频繁的读写并发冲突操作，进一步提升性能。 参考文章 Eureka 原理 Eureka 原理解析 深入学习 Eureka 原理 微服务注册中心如何承载大型系统的千万级访问</description></item><item><title>Spring Cloud</title><link>https://moge.fun/springcloud/</link><pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/springcloud/</guid><description>Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能，专注于快速方便的开发单个微服务。 Spring Cloud 以 Service（服务） 为中心，关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等集成服务SpringBoot可以离开SpringCloud独立使用开发项目， 但是SpringCloud离不开SpringBoot ，属于依赖的关系。 Spring Cloud是目前最常用的微服务开发框架，Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
-版本对应 Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version Spring Cloud 2020.0.1 2.4.x 2021.1 Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x Spring Cloud Greenwich 2.1.x 2.1.x Spring Cloud Finchley 2.0.x 2.0.x(停止维护，建议升级) Spring Cloud Edgware 1.5.x 1.5.x(停止维护，建议升级) Spring Cloud Dalston 1.5.x 1.5.x(停止维护，建议升级) SpringCloud的基础功能 服务治理： Spring Cloud Eureka 服务容错保护： Spring Cloud Hystrix 客户端负载均衡： Spring Cloud Ribbon 基于Ribbon和Hystrix的声明式服务调用组件： Spring Cloud OpenFeign 整合了ribbon，具有负载均衡的能力。 整合了Hystrix，具有熔断的能力。 API网关服务：Spring Cloud Zuul 分布式配置中心： Spring Cloud Config Spring Cloud 服务治理-Eureka 为了解决微服务架构中的服务实例维护问题(ip地址)， 产生了大量的服务治理框架和产品。 这些框架和产品的实现都围绕着服务注册与服务发现机制来完成对微服务应用实例的自动化管理。</description></item><item><title>Dubbo总结</title><link>https://moge.fun/dubbo/</link><pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/dubbo/</guid><description>Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
+Eureka Server设计精妙的注册表存储结构 维护注册表、拉取注册表、更新心跳时间，全部发生在内存里！这是Eureka Server非常核心的一个点。 Eureka Server端优秀的多级缓存机制 尽可能保证了内存注册表数据不会出现频繁的读写冲突问题。 并且进一步保证对Eureka Server的大量请求，都是快速从纯内存走，性能极高。 总结 通过上面的分析可以看到，Eureka通过设置适当的请求频率拉取注册表30秒间隔，发送心跳30秒间隔），可以保证一个大规模的系统每秒请求Eureka Server的次数在几百次。 同时通过纯内存的注册表，保证了所有的请求都可以在内存处理，确保了极高的性能 另外,多级缓存机制，确保了不会针对内存数据结构发生频繁的读写并发冲突操作，进一步提升性能。 参考文章 Eureka 原理 Eureka 原理解析 深入学习 Eureka 原理 微服务注册中心如何承载大型系统的千万级访问 ]]></description>
+</item>
+<item>
+    <title>Spring Cloud</title>
+    <link>https://moge.fun/springcloud/</link>
+    <pubDate>Thu, 02 Apr 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/springcloud/</guid>
+    <description><![CDATA[Spring 以 Bean（对象） 为中心，提供 IOC、AOP 等功能。 Spring Boot 以 Application（应用） 为中心，提供自动配置、监控等功能，专注于快速方便的开发单个微服务。 Spring Cloud 以 Service（服务） 为中心，关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等集成服务SpringBoot可以离开SpringCloud独立使用开发项目， 但是SpringCloud离不开SpringBoot ，属于依赖的关系。 Spring Cloud是目前最常用的微服务开发框架，Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、熔断保护、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。
+版本对应 Spring Cloud Version Spring Boot Version Spring Cloud Alibaba Version Spring Cloud 2020.0.1 2.4.x 2021.1 Spring Cloud Hoxton 2.2.x, 2.3.x 2.2.x Spring Cloud Greenwich 2.1.x 2.1.x Spring Cloud Finchley 2.0.x 2.0.x(停止维护，建议升级) Spring Cloud Edgware 1.5.x 1.5.x(停止维护，建议升级) Spring Cloud Dalston 1.5.x 1.5.x(停止维护，建议升级) SpringCloud的基础功能 服务治理： Spring Cloud Eureka 服务容错保护： Spring Cloud Hystrix 客户端负载均衡： Spring Cloud Ribbon 基于Ribbon和Hystrix的声明式服务调用组件： Spring Cloud OpenFeign 整合了ribbon，具有负载均衡的能力。 整合了Hystrix，具有熔断的能力。 API网关服务：Spring Cloud Zuul 分布式配置中心： Spring Cloud Config Spring Cloud服务治理-Eureka 为了解决微服务架构中的服务实例维护问题(ip地址)， 产生了大量的服务治理框架和产品。 这些框架和产品的实现都围绕着服务注册与服务发现机制来完成对微服务应用实例的自动化管理。]]></description>
+</item>
+<item>
+    <title>Dubbo总结</title>
+    <link>https://moge.fun/dubbo/</link>
+    <pubDate>Wed, 01 Apr 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/dubbo/</guid>
+    <description><![CDATA[Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
 服务是 Dubbo 中的核心概念，一个服务代表一组 RPC 方法的集合，服务是面向用户编程、服务发现机制等的基本单位。
 Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置 方式将 RPC 声明为 Dubbo 服务，然后就可以基于服务 API 进行编程了。对服务提供者来说是提供 RPC 服务的具体实现，而对服务消费者来说则是使用特定数据发起服务调用。
 服务发现 服务发现，即消费端自动发现服务地址列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。
 实现服务发现的方式有很多种，Dubbo 提供的是一种 Client-Based 的服务发现机制，通常还需要部署额外的第三方注册中心组件来协调服务发现过程，如常用的 Nacos、Consul、Zookeeper 等，Dubbo 自身也提供了对多种注册中心组件的对接，用户可以灵活选择。
-服务发现 服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：
+服务发现服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：
 以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置
-1 2 3 4 # application.properties dubbo registry address: zookeeper://127.0.0.1:2181 服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： 流量管理 Dubbo提供了支持mesh方式的流量管理策略，可以很容易实现 A/B测试、金丝雀发布、蓝绿发布等能力。</description></item><item><title>分布式概览</title><link>https://moge.fun/distributed/</link><pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/distributed/</guid><description>分布式理论基础 CAP CAP 理论是分布式中基础理论，有三个重要指标：一致性、可用性、分区容错性。
+1 2 3 4 # application.properties dubbo registry address: zookeeper://127.0.0.1:2181 服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： 流量管理Dubbo提供了支持mesh方式的流量管理策略，可以很容易实现 A/B测试、金丝雀发布、蓝绿发布等能力。]]></description>
+</item>
+<item>
+    <title>分布式概览</title>
+    <link>https://moge.fun/distributed/</link>
+    <pubDate>Mon, 03 Feb 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/distributed/</guid>
+    <description><![CDATA[分布式理论基础 CAP CAP 理论是分布式中基础理论，有三个重要指标：一致性、可用性、分区容错性。
 一致性（Consistency）：一致性意思就是写操作之后进行读操作无论在哪个节点都需要返回写操作的值 可用性（Availability）：非故障的节点在合理的时间内返回合理的响应 分区容错性（Partition Tolerance）：当网络出现分区后，系统依然能够继续履行职责 在分布式的环境下，网络无法做到100%可靠，有可能出现故障，因此分区是一个必须的选项，如果选择了CA而放弃了P，若发生分区现象，为了保证C，系统需要禁止写入，此时就与A发生冲突，如果是为了保证A，则会出现正常的分区可以写入数据，有故障的分区不能写入数据，则与C就冲突了。因此分布式系统理论上不可能选择CA架构，而必须选择CP或AP架构。
 BASE（最终一致性） BASE是对CAP 理论中强一致性和可用性权衡的结果，其来源于对大规模互联网系统分布式实践的总结，是基于CAP定理逐步演化而来的，其核心思想是即使无法做到强一致性(Strong consistency)，每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性(Eventual consistency)。
 BASE理论是对CAP的延伸和补充，是对CAP中的AP方案的一个补充，即在选择AP方案的情况下，如何更好的最终达到C。
 BASE是基本可用，柔性状态，最终一致性三个短语的缩写，核心的思想是即使无法做到强一致性，但应用可以采用适合的方式达到最终一致性。
 多数情况下，其实我们也并非一定要求强一致性，部分业务可以容忍一定程度的延迟一致，所以为了兼顾效率，发展出来了最终一致性理论BASE
 BA-基本可用(Basically Available)：基本可用是指分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用。 S-软状态(Soft State)：软状态是指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据至少会有三个副本，允许不同节点间副本同步的延时就是软状态的体现。 E-最终一致性(Eventual Consistency)：最终一致性是指系统中的所有数据副本经过一定时间后，最终能够达到一致的状态。弱一致性和强一致性相反，最终一致性是弱一致性的一种特殊情况。 一致性算法 分布式架构的核心就在一致性的实现和妥协，那么如何设计一套算法来保证不同节点之间的通信和数据达到无限趋向一致性，就非常重要了。
-参考文章 分布式架构知识体系 通过一个订单查看微服务整个流程 分布式整体概览从CAP说起 学习资料 分布式系统合集</description></item><item><title>微服务介绍</title><link>https://moge.fun/microservices/</link><pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/microservices/</guid><description>微服务架构（MicroServices Architecture，MSA）：微服务架构可以看做是面向服务架构和分布式服务架构的拓展，使用更细粒度的服务（所以叫微服务）和一组设计准则来考虑大规模的复杂系统架构设计。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力。
-常见的微服务组件及概念 服务注册：服务提供方将自己调用地址注册到服务注册中心，让服务调用方能够方便地找到自己。 服务发现：服务调用方从服务注册中心找到自己需要调用的服务的地址。 负载均衡：服务提供方一般以多实例的形式提供服务，负载均衡功能能够让服务调用方连接到合适的服务节点。并且，节点选择的工作对服务调用方来说是透明的。 服务网关：服务网关是服务调用的唯一入口，可以在这个组件是实现用户鉴权、动态路由、灰度发布、A/B 测试、负载限流等功能。 配置中心：将本地化的配置信息（properties, xml, yaml 等）注册到配置中心，实现程序包在开发、测试、生产环境的无差别性，方便程序包的迁移。 API 管理：以方便的形式编写及更新 API 文档，并以方便的形式供调用者查看和测试。 集成框架：微服务组件都以职责单一的程序包对外提供服务，集成框架以配置的形式将所有微服务组件（特别是管理端组件）集成到统一的界面框架下，让用户能够在统一的界面中使用系统。 分布式事务：对于重要的业务，需要通过分布式事务技术（TCC、高可用消息服务、最大努力通知）保证数据的一致性。 调用链：记录完成一个业务逻辑时调用到的微服务，并将这种串行或并行的调用关系展示出来。在系统出错时，可以方便地找到出错点。 支撑平台：系统微服务化后，系统变得更加碎片化，系统的部署、运维、监控等都比单体架构更加复杂，那么，就需要将大部分的工作自动化。现在，可以通过 Docker 等工具来中和这些微服务架构带来的弊端。 例如持续集成、蓝绿发布、健康检查、性能健康等等。严重点，以我们两年的实践经验，可以这么说，如果没有合适的支撑平台或工具，就不要使用微服务架构。 微服务架构的优点 降低系统复杂度：每个服务都比较简单，只关注于一个业务功能。 松耦合：微服务架构方式是松耦合的，每个微服务可由不同团队独立开发，互不影响。 跨语言：只要符合服务 API 契约，开发人员可以自由选择开发技术。这就意味着开发人员可以采用新技术编写或重构服务，由于服务相对较小，所以这并不会对整体应用造成太大影响。 独立部署：微服务架构可以使每个微服务独立部署。开发人员无需协调对服务升级或更改的部署。这些更改可以在测试通过后立即部署。所以微服务架构也使得 CI／CD 成为可能。 Docker 容器：和 Docker 容器结合的更好。 DDD 领域驱动设计：和 DDD 的概念契合，结合开发会更好。 微服务架构的缺点 微服务强调了服务大小，但实际上这并没有一个统一的标准：业务逻辑应该按照什么规则划分为微服务，这本身就是一个经验工程。有些开发者主张 10-100 行代码就应该建立一个微服务。微服务的目标是充分分解应用程序，以促进敏捷开发和持续集成部署。 微服务的分布式特点带来的复杂性：开发人员需要基于 RPC 或者消息实现微服务之间的调用和通信，而这就使得服务之间的发现、服务调用链的跟踪和质量问题变得的相当棘手。 分区的数据库体系和分布式事务：更新多个业务实体的业务交易相当普遍，不同服务可能拥有不同的数据库。CAP 原理的约束，使得我们不得不放弃传统的强一致性，而转而追求最终一致性，这个对开发人员来说是一个挑战。 测试挑战：传统的单体WEB应用只需测试单一的 REST API 即可，而对微服务进行测试，需要启动它依赖的所有其他服务。这种复杂性不可低估。 跨多个服务的更改：比如在传统单体应用中，若有 A、B、C 三个服务需要更改，A 依赖 B，B 依赖 C。我们只需更改相应的模块，然后一次性部署即可。但是在微服务架构中，我们需要仔细规划和* 调每个服务的变更部署。我们需要先更新 C，然后更新 B，最后更新 A。 部署复杂：微服务由不同的大量服务构成。每种服务可能拥有自己的配置、应用实例数量以及基础服务地址。这里就需要不同的配置、部署、扩展和监控组件。此外，我们还需要服务发现机制，以便服* 可以发现与其通信的其他服务的地址。因此，成功部署微服务应用需要开发人员有更好地部署策略和高度自动化的水平。 总结（问题和挑战）：API Gateway、服务间调用、服务发现、服务容错、服务部署、数据调用。 不过，现在很多微服务的框架（比如 Spring Cloud、Dubbo）已经很好的解决了上面的问题。</description></item><item><title>高并发系统设计</title><link>https://moge.fun/3h/</link><pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/3h/</guid><description>软件开发通常会提到一个名词 “三高”，即高并发、高性能、高可用。
+参考文章 分布式架构知识体系 通过一个订单查看微服务整个流程 分布式整体概览从CAP说起 学习资料 分布式系统合集 ]]></description>
+</item>
+<item>
+    <title>微服务介绍</title>
+    <link>https://moge.fun/microservices/</link>
+    <pubDate>Sun, 02 Feb 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/microservices/</guid>
+    <description><![CDATA[微服务架构（MicroServices Architecture，MSA）：微服务架构可以看做是面向服务架构和分布式服务架构的拓展，使用更细粒度的服务（所以叫微服务）和一组设计准则来考虑大规模的复杂系统架构设计。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力。
+常见的微服务组件及概念 服务注册：服务提供方将自己调用地址注册到服务注册中心，让服务调用方能够方便地找到自己。 服务发现：服务调用方从服务注册中心找到自己需要调用的服务的地址。 负载均衡：服务提供方一般以多实例的形式提供服务，负载均衡功能能够让服务调用方连接到合适的服务节点。并且，节点选择的工作对服务调用方来说是透明的。 服务网关：服务网关是服务调用的唯一入口，可以在这个组件是实现用户鉴权、动态路由、灰度发布、A/B 测试、负载限流等功能。 配置中心：将本地化的配置信息（properties, xml, yaml 等）注册到配置中心，实现程序包在开发、测试、生产环境的无差别性，方便程序包的迁移。 API 管理：以方便的形式编写及更新 API 文档，并以方便的形式供调用者查看和测试。 集成框架：微服务组件都以职责单一的程序包对外提供服务，集成框架以配置的形式将所有微服务组件（特别是管理端组件）集成到统一的界面框架下，让用户能够在统一的界面中使用系统。 分布式事务：对于重要的业务，需要通过分布式事务技术（TCC、高可用消息服务、最大努力通知）保证数据的一致性。 调用链：记录完成一个业务逻辑时调用到的微服务，并将这种串行或并行的调用关系展示出来。在系统出错时，可以方便地找到出错点。 支撑平台：系统微服务化后，系统变得更加碎片化，系统的部署、运维、监控等都比单体架构更加复杂，那么，就需要将大部分的工作自动化。现在，可以通过 Docker 等工具来中和这些微服务架构带来的弊端。 例如持续集成、蓝绿发布、健康检查、性能健康等等。严重点，以我们两年的实践经验，可以这么说，如果没有合适的支撑平台或工具，就不要使用微服务架构。 微服务架构的优点 降低系统复杂度：每个服务都比较简单，只关注于一个业务功能。 松耦合：微服务架构方式是松耦合的，每个微服务可由不同团队独立开发，互不影响。 跨语言：只要符合服务 API 契约，开发人员可以自由选择开发技术。这就意味着开发人员可以采用新技术编写或重构服务，由于服务相对较小，所以这并不会对整体应用造成太大影响。 独立部署：微服务架构可以使每个微服务独立部署。开发人员无需协调对服务升级或更改的部署。这些更改可以在测试通过后立即部署。所以微服务架构也使得 CI／CD 成为可能。 Docker 容器：和 Docker 容器结合的更好。 DDD 领域驱动设计：和 DDD 的概念契合，结合开发会更好。 微服务架构的缺点 微服务强调了服务大小，但实际上这并没有一个统一的标准：业务逻辑应该按照什么规则划分为微服务，这本身就是一个经验工程。有些开发者主张 10-100 行代码就应该建立一个微服务。微服务的目标是充分分解应用程序，以促进敏捷开发和持续集成部署。 微服务的分布式特点带来的复杂性：开发人员需要基于 RPC 或者消息实现微服务之间的调用和通信，而这就使得服务之间的发现、服务调用链的跟踪和质量问题变得的相当棘手。 分区的数据库体系和分布式事务：更新多个业务实体的业务交易相当普遍，不同服务可能拥有不同的数据库。CAP 原理的约束，使得我们不得不放弃传统的强一致性，而转而追求最终一致性，这个对开发人员来说是一个挑战。 测试挑战：传统的单体WEB应用只需测试单一的 REST API 即可，而对微服务进行测试，需要启动它依赖的所有其他服务。这种复杂性不可低估。 跨多个服务的更改：比如在传统单体应用中，若有 A、B、C 三个服务需要更改，A 依赖 B，B 依赖 C。我们只需更改相应的模块，然后一次性部署即可。但是在微服务架构中，我们需要仔细规划和* 调每个服务的变更部署。我们需要先更新 C，然后更新 B，最后更新 A。 部署复杂：微服务由不同的大量服务构成。每种服务可能拥有自己的配置、应用实例数量以及基础服务地址。这里就需要不同的配置、部署、扩展和监控组件。此外，我们还需要服务发现机制，以便服* 可以发现与其通信的其他服务的地址。因此，成功部署微服务应用需要开发人员有更好地部署策略和高度自动化的水平。 总结（问题和挑战）：API Gateway、服务间调用、服务发现、服务容错、服务部署、数据调用。 不过，现在很多微服务的框架（比如 Spring Cloud、Dubbo）已经很好的解决了上面的问题。]]></description>
+</item>
+<item>
+    <title>高并发系统设计</title>
+    <link>https://moge.fun/3h/</link>
+    <pubDate>Sat, 01 Feb 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/3h/</guid>
+    <description><![CDATA[软件开发通常会提到一个名词 “三高”，即高并发、高性能、高可用。
 具体的指标定义，如：高并发方面要求QPS 大于10万；高性能方面要求请求延迟小于 100 ms；高可用方面要高于 99.99%。
-三高 高并发 高并发（High Concurrency）是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求。高并发相关常用的一些指标有响应时间（Response Time），吞吐量（Throughput），每秒查询率QPS（Query Per Second），并发用户数等。
-高并发 高并发架构设计 系统拆分 将一个系统拆分为多个子系统，用 dubbo 来搞。然后每个系统连一个数据库，这样本来就一个库，现在多个数据库，不也可以扛高并发么。
+三高高并发 高并发（High Concurrency）是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求。高并发相关常用的一些指标有响应时间（Response Time），吞吐量（Throughput），每秒查询率QPS（Query Per Second），并发用户数等。
+高并发高并发架构设计系统拆分 将一个系统拆分为多个子系统，用 dubbo 来搞。然后每个系统连一个数据库，这样本来就一个库，现在多个数据库，不也可以扛高并发么。
 读写分离 读写分离，这个就是说大部分时候数据库可能也是读多写少，没必要所有请求都集中在一个库上吧，可以搞个主从架构，主库写入，从库读取，搞一个读写分离。读流量太多的时候，还可以加更多的从库。
 分库分表 分库分表，可能到了最后数据库层面还是免不了抗高并发的要求，好吧，那么就将一个数据库拆分为多个库，多个库来扛更高的并发；然后将一个表拆分为多个表，每个表的数据量保持少一点，提高 sql 跑的性能。
 缓存 缓存，必须得用缓存。大部分的高并发场景，都是读多写少，那你完全可以在数据库和缓存里都写一份，然后读的时候大量走缓存不就得了。毕竟人家 redis 轻轻松松单机几万的并发。所以你可以考虑考虑你的项目里，那些承载主要请求的读场景，怎么用缓存来抗高并发。
 消息队列 MQ，必须得用 MQ。可能你还是会出现高并发写的场景，比如说一个业务操作里要频繁搞数据库几十次，增删改增删改，疯了。那高并发绝对搞挂你的系统，你要是用 redis 来承载写那肯定不行，人家是缓存，数据随时就被 LRU 了，数据格式还无比简单，没有事务支持。所以该用 mysql 还得用 mysql 啊。那你咋办？用 MQ 吧，大量的写请求灌入 MQ 里，排队慢慢玩儿，后边系统消费后慢慢写，控制在 mysql 承载范围之内。所以你得考虑考虑你的项目里，那些承载复杂写业务逻辑的场景里，如何用 MQ 来异步写，提升并发性。MQ 单机抗几万并发也是 ok 的，这个之前还特意说过。
 ElasticSearch Elasticsearch，简称 es。es 是分布式的，可以随便扩容，分布式天然就可以支撑高并发，因为动不动就可以扩容加机器来扛更高的并发。那么一些比较简单的查询、统计类的操作，可以考虑用 es 来承载，还有一些全文搜索类的操作，也可以考虑用 es 来承载。
-高性能 性能体现了系统的并行处理能力，在有限的硬件投入下，提高性能意味着节省成本。同时，性能也反映了用户体验，响应时间分别是100毫秒和1秒，给用户的感受是完全不同的。 高性能 高可用 表示系统可以正常服务的时间。一个全年不停机、无故障；另一个隔三差五出线上事故、宕机，用户肯定选择前者。另外，如果系统只能做到90%可用，也会大大拖累业务。 高可用 高扩展 表示系统的扩展能力，流量高峰时能否在短时间内完成扩容，更平稳地承接峰值流量，比如双11活动、明星离婚等热点事件。
-常用指标 吞吐量 在了解qps、tps、rt、并发数之前，首先我们应该明确一个系统的吞吐量到底代表什么含义，一般来说，系统吞吐量指的是系统的抗压、负载能力，代表一个系统每秒钟能承受的最大用户访问量。</description></item><item><title>Java架构演变历史</title><link>https://moge.fun/javaarchhistory/</link><pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/javaarchhistory/</guid><description>Java网站架构演变过程，大致分为5个阶段，分别为单体架构、集群架构、分布式架构、SOA架构和微服务架构。
+高性能 性能体现了系统的并行处理能力，在有限的硬件投入下，提高性能意味着节省成本。同时，性能也反映了用户体验，响应时间分别是100毫秒和1秒，给用户的感受是完全不同的。 高性能高可用 表示系统可以正常服务的时间。一个全年不停机、无故障；另一个隔三差五出线上事故、宕机，用户肯定选择前者。另外，如果系统只能做到90%可用，也会大大拖累业务。 高可用高扩展 表示系统的扩展能力，流量高峰时能否在短时间内完成扩容，更平稳地承接峰值流量，比如双11活动、明星离婚等热点事件。
+常用指标 吞吐量 在了解qps、tps、rt、并发数之前，首先我们应该明确一个系统的吞吐量到底代表什么含义，一般来说，系统吞吐量指的是系统的抗压、负载能力，代表一个系统每秒钟能承受的最大用户访问量。]]></description>
+</item>
+<item>
+    <title>Java架构演变历史</title>
+    <link>https://moge.fun/javaarchhistory/</link>
+    <pubDate>Thu, 02 Jan 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/javaarchhistory/</guid>
+    <description><![CDATA[Java网站架构演变过程，大致分为5个阶段，分别为单体架构、集群架构、分布式架构、SOA架构和微服务架构。
 单体架构 应用、数据库、文件都部署在一台机器上。简单来讲其实就是我们熟知的SSM架构(Spring+SpringMVC+MyBatis)，把所有的业务模块都放在一个应用中开发，这里面又衍生出三层架构，即表示层、业务逻辑层和数据库访问层，虽然在软件设计中划分了经典的三层模型，但是对业务场景没有划分，一个典型的单体应用就是将所有的业务场景的表示层、业务逻辑层和数据访问层放在一个工程项目中，最终经过编译、打包，部署在一台服务器上。
 单体架构优点 部署简单: 由于是完整的结构体，可以直接部署在一个服务器上即可。 技术单一: 项目不需要复杂的技术栈，往往一套熟悉的技术栈就可以完成开发。 用人成本低: 单个程序员可以完成业务接口到数据库的整个流程。 单体架构缺点 系统启动慢： 一个进程包含了所有的业务逻辑，涉及到的启动模块过多，导致系统的启动、重启时间周期过长; 系统错误隔离性差、可用性差：任何一个模块的错误均可能造成整个系统的宕机; 可伸缩性差：系统的扩容只能只对这个应用进行扩容，不能做到对某个功能点进行扩容; 线上问题修复周期长：任何一个线上问题修复需要对整个应用系统进行全面升级。 集群架构（cluster） 不同服务器部署同一套应用程序对外提供服务，实现服务的负载均衡或者互备(热备，主从)。同一种组件的多个实例，形成逻辑上的整体。单个节点可以提供完整服务，集群是物理形态。
 集群架构相关技术点 应用和数据分离(大量用户高并发的访问导致系统性能越来越差，数据存储空间开始出现不足) 缓存的使用(QPS持续提高，为了降低接口访问时间、提高服务性能和并发，根据二八定律可以将80%的数据缓存) 负载均衡器的代理服务器 数据库读写分离 反向代理和CDN加速 负载平衡 集群就是把一个的事情交给多个人去做，假如要做1000个产品给一个人做要10天，我叫10个人做就是一天，这就是集群，负载均衡的话就是用来控制集群，他把做的最多的人让他慢慢做休息会，把做的最少的人让他加量让他做多点。
 分布式架构 服务的不同模块部署在不同的机器上，单个节点不能提供完整服务，需要多节点协调提供服务(相同组件部署在不同节点，节点间通过交互信息协作提供服务)，分布式强调的是工作方式。
 分布式相关技术点 业务分库分表 业务模块拆分成子项目 NoSQL和搜索引擎对可伸缩的分布式特性具有更好的支持，应用服务器通过一个统一的数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。 SOA架构 面向服务的设计架构，其中包含多个服务，服务之间通过相互依赖最终提供一系列的功能。一个服务通常以独立的形式存在于操作系统进程中。各个服务之间通过网络调用。
 中心化实现：ESB(企业服务总线)，各服务通过ESB进行交互，解决异构系统之间的连通性，通过协议转换，消息解析，消息路由把服务提供者的数据传送到服务消费者。 去中心化实现：微服务 微服务架构(在SOA上做的升华) 微服务就是一个独立的职责单一的服务应用程序，微服务架构强调业务需要彻底组件化和服务化，原有的单个业务系统会拆分为多个可独立开发，设计，运行的小应用。这些小应用通过服务完成交互和集成。
-优点 每个服务直接足够内聚，代码容易理解 开发效率高，一个服务只做一件事，适合小团队开发 松耦合，有功能意义的服务。 可以用不同语言开发，面向接口编程。 易于第三方集成 微服务只是业务逻辑的代码，不会和HTML,CSS或其他界 可以灵活搭配，连接公共库/连接独立库 缺点 分布式系统的责任性 多服务运维难度加大。 系统部署依赖，服务间通信成本，数据一致 ，系统集成测试，性能监控。 服务间通信成本 数据一致性 系统集成测试 性能监控 Service Mesh 架构（集中管理微服务中非业务相关内容，让微服务更加专注于业务处理） 最初，流量管理和控制能力（比如图例中的熔断、服务发现）是和业务逻辑耦合在一起，即便以引用包的方式被调用，依然解决不了异构系统无法重用的问题。 流控功能和业务耦合相当不美好，于是出现了提供这些功能的公共库和框架。但这些库通常比较复杂，无论是学习使用，与业务系统整合、维护都会带来很大的成本。 为避免花费太多时间开发和维护这些通用库，人们希望流量控制能力可以下沉到网络通讯栈的层面，但几乎无法实现。 于是另一种思路出现，就是将这些功能独立成一个代理，由它先接管业务服务的流量，处理完成后再转发给业务服务本身，这就是 Sidecar 模式。 为统一管理 Sidecar，该模式进一步进化，形成网络拓扑，增加了控制平面，演变成 Service Mesh（最后的网格图中，绿色代表业务服务，蓝色代表 sidecar 服务）。 业务系统的核心价值应该是业务本身，而不是服务，微服务只是一种实现手段，实现业务才是目标。现有的微服务架构下，为解决可能出现的网络通信问题，提升系统的弹性，开发人员不得不花费大量时间和精力去实现流量控制相关的非业务需求，不能聚焦在业务本身。</description></item><item><title>Java知识大纲</title><link>https://moge.fun/javaoutline/</link><pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/javaoutline/</guid><description>基础 数据结构与算法 数组、链表、二叉树、队列、栈的各种操作（性能，场景） 二分查找和各种变种的二分查找 各类排序算法以及复杂度分析（快排、归并、堆） 各类算法题（手写） 理解并可以分析时间和空间复杂度。 动态规划（笔试回回有。。）、贪心。 红黑树、AVL树、Hash树、Tire树、B树、B+树。 图算法（比较少，也就两个最短路径算法理解吧） 操作系统 进程通信IPC（几种方式），与线程区别 OS的几种策略（页面置换，进程调度等，每个里面有几种算法） 互斥与死锁相关的 linux常用命令（问的时候都会给具体某一个场景） Linux内核相关（select、poll、epoll） 网络基础 OSI7层模型（TCP4层） 每层的协议 url到页面的过程 HTTP http/https 1.0、1.1、2.0 get/post 以及幂等性 http 协议头相关 网络攻击（CSRF、XSS） TCP/IP 三次握手、四次挥手 拥塞控制（过程、阈值） 流量控制与滑动窗口 TCP与UDP比较 子网划分（一般只有笔试有） DDos攻击 (B)IO/NIO/AIO 三者原理，各个语言是怎么实现的 Netty Linux内核select poll epoll 数据库 索引（包括分类及优化方式，失效条件，底层结构） sql语法（join，union，子查询，having，group by） 引擎对比（InnoDB，MyISAM） 数据库的锁（行锁，表锁，页级锁，意向锁，读锁，写锁，悲观锁，乐观锁，以及加锁的select sql方式） 隔离级别，依次解决的问题（脏读、不可重复读、幻读） 事务的ACID B树、B+树 优化（explain，慢查询，show profile） 数据库的范式。 分库分表，主从复制，读写分离。 Nosql相关（redis和mem***d区别之类的，如果你熟悉redis，redis还有一堆要问的） 编译原理 Java Java基础 把我之后的面经过一遍，Java感觉覆盖的就差不多了，不过下面还是分个类。 Java基础（面向对象、四个特性、重载重写、static和final等等很多东西） 集合（HashMap、ConcurrentHashMap、各种List，最好结合源码看） 并发和多线程（线程池、SYNC和Lock锁机制、线程通信、volatile、ThreadLocal、CyclicBarrier、Atom包、CountDownLatch、AQS、CAS原理等等） JVM（内存模型、GC垃圾回收，包括分代，GC算法，收集器、类加载和双亲委派、JVM调优，内存泄漏和内存溢出） IO/NIO相关 反射和***、异常、Java8相关、序列化 设计模式（常用的，jdk中有的） Web相关（servlet、cookie/session、Spring&amp;lt;AOP、IOC、MVC、事务、动态***&amp;gt;、Mybatis、Tomcat、Hibernate等） 并发编程 JVM 性能优化 性能指标体系 JVM调优 Tomcat调优 MySQL调优 故障排除 最佳实践 重构 设计模式 开发框架 Spring体系 MyBatis 常见业务 支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。 应该保证互斥性（在任何时候只有一个客户端持有锁。使用setnx）。 不能死锁（设置过期时间）。 保证上锁和解锁是同一个客户端（设置不同的value值）。 业务时间太长。导致锁过期（设置看门狗。自动续锁）。 锁的重入性（使用redis的hset）。 分布式事务 分布式缓存 中间价 消息队列 缓存 本地缓存 分布式缓存 ELK 数据库 分库分表 数据同步 数据库连接池 分布式 CAP原理和BASE理论。 Nosql与KV存储（redis，hbase，mongodb，mem***d等） 服务化理论（包括服务发现、治理等，zookeeper、etcd、springcloud微服务、） 负载均衡（原理、cdn、一致性hash） RPC框架（包括整体的一些框架理论，通信的netty，序列化协议thrift，protobuff等） 消息队列（原理、kafka，activeMQ，rocketMQ） 分布式存储系统（GFS、HDFS、fastDFS）、存储模型（skipList、LSM等） 分布式事务、分布式锁等 四大理论 拜占庭将军问题 CAP 理论 ACID 理论 BASE 理论 八大协议/算法 Paxos 算法 Raft 算法 一致性 Hash 算法 Gossip 协议算法 Quorum NWR 算法 FBFT 算法 POW 算法 ZAB 协议 大数据与数据分析： hadoop生态圈(hive、hbase、hdfs、zookeeper、storm、kafka) spark体系 语言：python、R、scala 搜索引擎与技术 工具 版本管理 Git 项目管理 Maven/Gradle 代码质量管理 Sonar 持续集成部署 Jenkins&amp;amp;GitLab CI/CD 监控系统 测试 Postman Jmeter VisualVM</description></item></channel></rss>
+优点 每个服务直接足够内聚，代码容易理解 开发效率高，一个服务只做一件事，适合小团队开发 松耦合，有功能意义的服务。 可以用不同语言开发，面向接口编程。 易于第三方集成 微服务只是业务逻辑的代码，不会和HTML,CSS或其他界 可以灵活搭配，连接公共库/连接独立库 缺点 分布式系统的责任性 多服务运维难度加大。 系统部署依赖，服务间通信成本，数据一致 ，系统集成测试，性能监控。 服务间通信成本 数据一致性 系统集成测试 性能监控 Service Mesh 架构（集中管理微服务中非业务相关内容，让微服务更加专注于业务处理） 最初，流量管理和控制能力（比如图例中的熔断、服务发现）是和业务逻辑耦合在一起，即便以引用包的方式被调用，依然解决不了异构系统无法重用的问题。 流控功能和业务耦合相当不美好，于是出现了提供这些功能的公共库和框架。但这些库通常比较复杂，无论是学习使用，与业务系统整合、维护都会带来很大的成本。 为避免花费太多时间开发和维护这些通用库，人们希望流量控制能力可以下沉到网络通讯栈的层面，但几乎无法实现。 于是另一种思路出现，就是将这些功能独立成一个代理，由它先接管业务服务的流量，处理完成后再转发给业务服务本身，这就是 Sidecar 模式。 为统一管理 Sidecar，该模式进一步进化，形成网络拓扑，增加了控制平面，演变成 Service Mesh（最后的网格图中，绿色代表业务服务，蓝色代表 sidecar 服务）。 业务系统的核心价值应该是业务本身，而不是服务，微服务只是一种实现手段，实现业务才是目标。现有的微服务架构下，为解决可能出现的网络通信问题，提升系统的弹性，开发人员不得不花费大量时间和精力去实现流量控制相关的非业务需求，不能聚焦在业务本身。]]></description>
+</item>
+<item>
+    <title>Java知识大纲</title>
+    <link>https://moge.fun/javaoutline/</link>
+    <pubDate>Wed, 01 Jan 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/javaoutline/</guid>
+    <description><![CDATA[基础 数据结构与算法 数组、链表、二叉树、队列、栈的各种操作（性能，场景） 二分查找和各种变种的二分查找 各类排序算法以及复杂度分析（快排、归并、堆） 各类算法题（手写） 理解并可以分析时间和空间复杂度。 动态规划（笔试回回有。。）、贪心。 红黑树、AVL树、Hash树、Tire树、B树、B+树。 图算法（比较少，也就两个最短路径算法理解吧） 操作系统 进程通信IPC（几种方式），与线程区别 OS的几种策略（页面置换，进程调度等，每个里面有几种算法） 互斥与死锁相关的 linux常用命令（问的时候都会给具体某一个场景） Linux内核相关（select、poll、epoll） 网络基础 OSI7层模型（TCP4层） 每层的协议 url到页面的过程 HTTP http/https 1.0、1.1、2.0 get/post 以及幂等性 http 协议头相关 网络攻击（CSRF、XSS） TCP/IP 三次握手、四次挥手 拥塞控制（过程、阈值） 流量控制与滑动窗口 TCP与UDP比较 子网划分（一般只有笔试有） DDos攻击 (B)IO/NIO/AIO 三者原理，各个语言是怎么实现的 Netty Linux内核select poll epoll 数据库 索引（包括分类及优化方式，失效条件，底层结构） sql语法（join，union，子查询，having，group by） 引擎对比（InnoDB，MyISAM） 数据库的锁（行锁，表锁，页级锁，意向锁，读锁，写锁，悲观锁，乐观锁，以及加锁的select sql方式） 隔离级别，依次解决的问题（脏读、不可重复读、幻读） 事务的ACID B树、B+树 优化（explain，慢查询，show profile） 数据库的范式。 分库分表，主从复制，读写分离。 Nosql相关（redis和mem***d区别之类的，如果你熟悉redis，redis还有一堆要问的） 编译原理 Java Java基础 把我之后的面经过一遍，Java感觉覆盖的就差不多了，不过下面还是分个类。 Java基础（面向对象、四个特性、重载重写、static和final等等很多东西） 集合（HashMap、ConcurrentHashMap、各种List，最好结合源码看） 并发和多线程（线程池、SYNC和Lock锁机制、线程通信、volatile、ThreadLocal、CyclicBarrier、Atom包、CountDownLatch、AQS、CAS原理等等） JVM（内存模型、GC垃圾回收，包括分代，GC算法，收集器、类加载和双亲委派、JVM调优，内存泄漏和内存溢出） IO/NIO相关 反射和***、异常、Java8相关、序列化 设计模式（常用的，jdk中有的） Web相关（servlet、cookie/session、Spring&lt;AOP、IOC、MVC、事务、动态***&gt;、Mybatis、Tomcat、Hibernate等） 并发编程 JVM 性能优化 性能指标体系 JVM调优 Tomcat调优 MySQL调优 故障排除 最佳实践 重构 设计模式 开发框架 Spring体系 MyBatis 常见业务 支付幂等性 减库存 秒杀 分布式锁 redis实现的分布式锁。 应该保证互斥性（在任何时候只有一个客户端持有锁。使用setnx）。 不能死锁（设置过期时间）。 保证上锁和解锁是同一个客户端（设置不同的value值）。 业务时间太长。导致锁过期（设置看门狗。自动续锁）。 锁的重入性（使用redis的hset）。 分布式事务 分布式缓存 中间价 消息队列 缓存 本地缓存 分布式缓存 ELK 数据库 分库分表 数据同步 数据库连接池 分布式 CAP原理和BASE理论。 Nosql与KV存储（redis，hbase，mongodb，mem***d等） 服务化理论（包括服务发现、治理等，zookeeper、etcd、springcloud微服务、） 负载均衡（原理、cdn、一致性hash） RPC框架（包括整体的一些框架理论，通信的netty，序列化协议thrift，protobuff等） 消息队列（原理、kafka，activeMQ，rocketMQ） 分布式存储系统（GFS、HDFS、fastDFS）、存储模型（skipList、LSM等） 分布式事务、分布式锁等 四大理论 拜占庭将军问题 CAP 理论 ACID 理论 BASE 理论 八大协议/算法 Paxos 算法 Raft 算法 一致性 Hash 算法 Gossip 协议算法 Quorum NWR 算法 FBFT 算法 POW 算法 ZAB 协议 大数据与数据分析： hadoop生态圈(hive、hbase、hdfs、zookeeper、storm、kafka) spark体系 语言：python、R、scala 搜索引擎与技术 工具 版本管理 Git 项目管理 Maven/Gradle 代码质量管理 Sonar 持续集成部署 Jenkins&amp;GitLab CI/CD 监控系统 测试 Postman Jmeter VisualVM ]]></description>
+</item>
+</channel>
+</rss>

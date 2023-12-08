@@ -1,49 +1,263 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>分布式锁 - 软件开发学习记录</title><meta name=Description content="分布式锁"><meta property="og:title" content="分布式锁">
-<meta property="og:description" content="分布式锁"><meta property="og:type" content="article"><meta property="og:url" content="https://moge.fun/distributedlock/"><meta property="og:image" content="https://moge.fun/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-02-04T00:00:00+00:00"><meta property="article:modified_time" content="2020-02-04T00:00:00+00:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://moge.fun/logo.png"><meta name=twitter:title content="分布式锁"><meta name=twitter:description content="分布式锁"><meta name=application-name content="Journey to the Life"><meta name=apple-mobile-web-app-title content="Journey to the Life"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://moge.fun/distributedlock/><link rel=prev href=https://moge.fun/distributed/><link rel=next href=https://moge.fun/distributedtransaction/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"分布式锁","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/moge.fun\/distributedlock\/"},"genre":"posts","keywords":"分布式","wordcount":117,"url":"https:\/\/moge.fun\/distributedlock\/","datePublished":"2020-02-04T00:00:00+00:00","dateModified":"2020-02-04T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"默哥"},"description":"分布式锁"}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
-</span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/about/ title>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">分布式锁</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>默哥</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/%E5%88%86%E5%B8%83%E5%BC%8F/><i class="far fa-folder fa-fw" aria-hidden=true></i>分布式</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2020-02-04>2020-02-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 117 字&nbsp;
-<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 1 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#基于数据库>基于数据库</a></li><li><a href=#基于redis>基于Redis</a><ul><li><a href=#redis分布式锁如何续期建议使用redisson客户端可以自动续期>Redis分布式锁如何续期，建议使用redisson客户端（可以自动续期）</a></li></ul></li><li><a href=#基于zookeeper>基于ZooKeeper</a><ul><li><a href=#zk分布式锁的代码实现>zk分布式锁的代码实现</a></li></ul></li><li><a href=#究竟该用cp还是ap的分布式锁>究竟该用CP还是AP的分布式锁</a></li><li><a href=#参考文章>参考文章</a></li></ul></nav></div></div><div class=content id=content><h2 id=基于数据库>基于数据库</h2><ul><li>基于数据库表数据记录做唯一约束</li></ul><p>上面这种简单的实现有以下几个问题：</p><ol><li>这把锁强依赖数据库的可用性，数据库是一个单点，一旦数据库挂掉，会导致业务系统不可用。</li><li>这把锁没有失效时间，一旦解锁操作失败，就会导致锁记录一直在数据库中，其他线程无法再获得到锁。</li><li>这把锁只能是非阻塞的，因为数据的insert操作，一旦插入失败就会直接报错。没有获得锁的线程并不会进入排队队列，要想再次获得锁就要再次触发获得锁操作。</li><li>这把锁是非重入的，同一个线程在没有释放锁之前无法再次获得该锁。因为数据中数据已经存在了。</li><li>不过这种方式对于单主却无法自动切换主从的mysql来说，基本就无法现实P分区容错性，（Mysql自动主从切换在目前并没有十分完美的解决方案）。可以说这种方式强依赖于数据库的可用性，数据库写操作是一个单点，一旦数据库挂掉，就导致锁的不可用。这种方式基本不在CAP的一个讨论范围。</li></ol><h2 id=基于redis>基于Redis</h2><p>使用redis的setNX()用于分布式锁。（原子性）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=nx>setnx</span> <span class=nx>key</span> <span class=nx>value</span> <span class=nx>Expire_time</span>
-</span></span><span class=line><span class=cl><span class=nx>获取到锁</span> <span class=nx>返回</span> <span class=mi>1</span> <span class=err>，</span> <span class=nx>获取失败</span> <span class=nx>返回</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl><span class=o>*</span> <span class=nx>返回1</span><span class=err>，</span><span class=nx>说明该进程获得锁</span><span class=err>，</span><span class=nx>SETNX将键</span> <span class=nx>lock</span><span class=p>.</span><span class=nx>id</span> <span class=nx>的值设置为锁的超时时间</span><span class=err>，</span><span class=nx>当前时间</span> <span class=o>+</span><span class=nx>加上锁的有效时间</span><span class=err>。</span>
-</span></span><span class=line><span class=cl><span class=o>*</span> <span class=nx>返回0</span><span class=err>，</span><span class=nx>说明其他进程已经获得了锁</span><span class=err>，</span><span class=nx>进程不能进入临界区</span><span class=err>。</span><span class=nx>进程可以在一个循环中不断地尝试</span> <span class=nx>SETNX</span> <span class=nx>操作</span><span class=err>，</span><span class=nx>以获得锁</span><span class=err>。</span>
-</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>protected</span><span class=w> </span><span class=kt>boolean</span><span class=w> </span><span class=nf>getLock</span><span class=p>(</span><span class=n>String</span><span class=w> </span><span class=n>lockKey</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>time</span><span class=p>,</span><span class=n>TimeUnit</span><span class=w> </span><span class=n>timeUnit</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// 使用redis的setNX命令实现分布式锁</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=kt>boolean</span><span class=w> </span><span class=n>isSuccess</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>redisTemplate</span><span class=p>.</span><span class=na>opsForValue</span><span class=p>().</span><span class=na>setIfAbsent</span><span class=p>(</span><span class=n>lockKey</span><span class=p>,</span><span class=w> </span><span class=s>&#34;lock&#34;</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c1>// 防止进程中断导致redis分布锁死锁，检查是否设置了超时时间。</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=n>Long</span><span class=w> </span><span class=n>timeLeft</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>redisTemplate</span><span class=p>.</span><span class=na>getExpire</span><span class=p>(</span><span class=n>lockKey</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>isSuccess</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>timeLeft</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>0</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 设置失效时间（最好与该任务执行频率时间一致）：如果执行期间宕机，5分钟后也能被另一机器获得lock</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>redisTemplate</span><span class=p>.</span><span class=na>expire</span><span class=p>(</span><span class=n>lockKey</span><span class=p>,</span><span class=w> </span><span class=n>time</span><span class=p>,</span><span class=w> </span><span class=n>timeUnit</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=p>}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=k>return</span><span class=w> </span><span class=n>isSuccess</span><span class=p>;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
-</span></span></span></code></pre></td></tr></table></div></div><p>为了解决数据库锁的主从切换的问题，可以选择redis集群，或者是 sentinel 哨兵模式，实现主从故障转移，当master节点出现故障，哨兵会从slave中选取节点，重新变成新的master节点。</p><p>哨兵模式故障转移是由sentinel集群进行监控判断，当maser出现异常即复制中止，重新推选新slave成为master，sentinel在重新进行选举并不保证主从数据复制完毕具备一致性。
-所以redis的复制模式是属于AP的模式。保证可用性，在主从复制中“主”有数据，但是可能“从”还没有数据，这个时候，一旦主挂掉或者网络抖动等各种原因，可能会切换到“从”节点，这个时候可能会导致两个业务县城同时获取得两把锁</p><p>能不能使用redis作为分布式锁，这个本身就不是redis的问题，还是取决于业务场景，我们先要自己确认我们的场景是适合 AP 还是 CP ， 如果在社交发帖等场景下，我们并没有非常强的事务一致性问题，redis提供给我们高性能的AP模型是非常适合的，但如果是交易类型，对数据一致性非常敏感的场景，我们可能要寻在一种更加适合的 CP 模型</p><h3 id=redis分布式锁如何续期建议使用redisson客户端可以自动续期>Redis分布式锁如何续期，建议使用redisson客户端（可以自动续期）</h3><h2 id=基于zookeeper>基于ZooKeeper</h2><blockquote><p>每个客户端对某个方法加锁时，在zookeeper上的与该方法对应的指定节点的目录下，生成一个唯一的临时有序节点。 判断是否获取锁的方式很简单，只需要判断有序节点中序号最小的一个。 当释放锁的时候，只需将这个临时节点删除即可。同时，排队的节点需要监听排在自己之前的节点，这样能在节点释放时候接收到回调通知，让其获得锁。zk的session由客户端管理，其可以避免服务宕机导致的锁无
-法释放，而产生的死锁问题，不需要关注锁超时。</p></blockquote><p>刚刚也分析过，redis其实无法确保数据的一致性，先来看ZooKeeper是否合适作为我们需要的分布式锁，首先zk的模式是CP模型，也就是说，当zk锁提供给我们进行访问的时候，在zk集群中能确保这把锁在zk的每一个节点都存在。</p><h3 id=zk分布式锁的代码实现>zk分布式锁的代码实现</h3><p>zk官方提供的客户端并不支持分布式锁的直接实现，我们需要自己写代码去利用zk的这几个特性去进行实现。<figure><a class=lightgallery href=/images/distributed/DL-zookeeper.jpg title=/images/distributed/DL-zookeeper.jpg data-thumbnail=/images/distributed/DL-zookeeper.jpg data-sub-html="<h2>zk分布式锁</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/distributed/DL-zookeeper.jpg data-srcset="/images/distributed/DL-zookeeper.jpg, /images/distributed/DL-zookeeper.jpg 1.5x, /images/distributed/DL-zookeeper.jpg 2x" data-sizes=auto alt=/images/distributed/DL-zookeeper.jpg></a><figcaption class=image-caption>zk分布式锁</figcaption></figure></p><h2 id=究竟该用cp还是ap的分布式锁>究竟该用CP还是AP的分布式锁</h2><p>首先得了解清楚我们使用分布式锁的场景，为何使用分布式锁，用它来帮我们解决什么问题，先聊场景后聊分布式锁的技术选型。</p><p>无论是Redis，zk，例如Redis的AP模型会限制很多使用场景，但它却拥有了几者中最高的性能，ZooKeeper的分布式锁要比Redis可靠很多，但他繁琐的实现机制导致了它的性能不如Redis，而且zk会随着集群的扩大而性能更加下降。</p><h2 id=参考文章>参考文章</h2><ul><li><a href=https://juejin.cn/post/6844903936718012430#heading-12 target=_blank rel="noopener noreffer">分布式锁，是选择AP还是选择CP</a></li><li><a href=https://juejin.cn/post/6844903726268809224 target=_blank rel="noopener noreffer">分布式锁总结</a></li><li><a href=https://juejin.cn/post/6844904126288150542 target=_blank rel="noopener noreffer">基于 Redis 的分布式锁</a></li><li><a href=https://juejin.cn/post/6844903874675867656 target=_blank rel="noopener noreffer">Redis分布式锁如何续期</a></li><li><a href=https://juejin.cn/post/6844903719318847495 target=_blank rel="noopener noreffer">分布式锁高并发优化实践</a></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2020-02-04</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://moge.fun/distributedlock/ data-title=分布式锁 data-hashtags=分布式><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://moge.fun/distributedlock/ data-hashtag=分布式><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://moge.fun/distributedlock/ data-title=分布式锁><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://moge.fun/distributedlock/ data-title=分布式锁><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://moge.fun/distributedlock/ data-title=分布式锁><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/%E5%88%86%E5%B8%83%E5%BC%8F/>分布式</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/distributed/ class=prev rel=prev title=分布式概览><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>分布式概览</a>
-<a href=/distributedtransaction/ class=next rel=next title=分布式事务>分布式事务<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=utterances class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2015 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>默哥</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a href=https://beian.miit.gov.cn/ target=_blank>豫ICP备2021012209号-1</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"alatan/BlogDiscuss"}},lightgallery:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:5,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>分布式锁 - 软件开发学习记录</title><meta name="Description" content="分布式锁"><meta property="og:title" content="分布式锁" />
+<meta property="og:description" content="分布式锁" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moge.fun/distributedlock/" /><meta property="og:image" content="https://moge.fun/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-02-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-04T00:00:00+00:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://moge.fun/logo.png"/>
+
+<meta name="twitter:title" content="分布式锁"/>
+<meta name="twitter:description" content="分布式锁"/>
+<meta name="application-name" content="Journey to the Life">
+<meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/distributedlock/" /><link rel="prev" href="https://moge.fun/distributed/" /><link rel="next" href="https://moge.fun/distributedtransaction/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "分布式锁",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/moge.fun\/distributedlock\/"
+        },"genre": "posts","keywords": "分布式","wordcount":  117 ,
+        "url": "https:\/\/moge.fun\/distributedlock\/","datePublished": "2020-02-04T00:00:00+00:00","dateModified": "2020-02-04T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "默哥"
+            },"description": "分布式锁"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="软件开发学习记录">软件开发学习记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="软件开发学习记录">软件开发学习记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">分布式锁</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>分布式</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-02-04">2020-02-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 117 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基于数据库">基于数据库</a></li>
+    <li><a href="#基于redis">基于Redis</a>
+      <ul>
+        <li><a href="#redis分布式锁如何续期建议使用redisson客户端可以自动续期">Redis分布式锁如何续期，建议使用redisson客户端（可以自动续期）</a></li>
+      </ul>
+    </li>
+    <li><a href="#基于zookeeper">基于ZooKeeper</a>
+      <ul>
+        <li><a href="#zk分布式锁的代码实现">zk分布式锁的代码实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#究竟该用cp还是ap的分布式锁">究竟该用CP还是AP的分布式锁</a></li>
+    <li><a href="#参考文章">参考文章</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="基于数据库">基于数据库</h2>
+<ul>
+<li>基于数据库表数据记录做唯一约束</li>
+</ul>
+<p>上面这种简单的实现有以下几个问题：</p>
+<ol>
+<li>这把锁强依赖数据库的可用性，数据库是一个单点，一旦数据库挂掉，会导致业务系统不可用。</li>
+<li>这把锁没有失效时间，一旦解锁操作失败，就会导致锁记录一直在数据库中，其他线程无法再获得到锁。</li>
+<li>这把锁只能是非阻塞的，因为数据的insert操作，一旦插入失败就会直接报错。没有获得锁的线程并不会进入排队队列，要想再次获得锁就要再次触发获得锁操作。</li>
+<li>这把锁是非重入的，同一个线程在没有释放锁之前无法再次获得该锁。因为数据中数据已经存在了。</li>
+<li>不过这种方式对于单主却无法自动切换主从的mysql来说，基本就无法现实P分区容错性，（Mysql自动主从切换在目前并没有十分完美的解决方案）。可以说这种方式强依赖于数据库的可用性，数据库写操作是一个单点，一旦数据库挂掉，就导致锁的不可用。这种方式基本不在CAP的一个讨论范围。</li>
+</ol>
+<h2 id="基于redis">基于Redis</h2>
+<p>使用redis的setNX()用于分布式锁。（原子性）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">setnx</span> <span class="nx">key</span> <span class="nx">value</span> <span class="nx">Expire_time</span>
+</span></span><span class="line"><span class="cl"><span class="nx">获取到锁</span> <span class="nx">返回</span> <span class="mi">1</span> <span class="err">，</span> <span class="nx">获取失败</span> <span class="nx">返回</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="nx">返回1</span><span class="err">，</span><span class="nx">说明该进程获得锁</span><span class="err">，</span><span class="nx">SETNX将键</span> <span class="nx">lock</span><span class="p">.</span><span class="nx">id</span> <span class="nx">的值设置为锁的超时时间</span><span class="err">，</span><span class="nx">当前时间</span> <span class="o">+</span><span class="nx">加上锁的有效时间</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="nx">返回0</span><span class="err">，</span><span class="nx">说明其他进程已经获得了锁</span><span class="err">，</span><span class="nx">进程不能进入临界区</span><span class="err">。</span><span class="nx">进程可以在一个循环中不断地尝试</span> <span class="nx">SETNX</span> <span class="nx">操作</span><span class="err">，</span><span class="nx">以获得锁</span><span class="err">。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">protected</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">getLock</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">lockKey</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">timeUnit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// 使用redis的setNX命令实现分布式锁</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">setIfAbsent</span><span class="p">(</span><span class="n">lockKey</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;lock&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// 防止进程中断导致redis分布锁死锁，检查是否设置了超时时间。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Long</span><span class="w"> </span><span class="n">timeLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">getExpire</span><span class="p">(</span><span class="n">lockKey</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isSuccess</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">timeLeft</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 设置失效时间（最好与该任务执行频率时间一致）：如果执行期间宕机，5分钟后也能被另一机器获得lock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">expire</span><span class="p">(</span><span class="n">lockKey</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">timeUnit</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">isSuccess</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>为了解决数据库锁的主从切换的问题，可以选择redis集群，或者是 sentinel 哨兵模式，实现主从故障转移，当master节点出现故障，哨兵会从slave中选取节点，重新变成新的master节点。</p>
+<p>哨兵模式故障转移是由sentinel集群进行监控判断，当maser出现异常即复制中止，重新推选新slave成为master，sentinel在重新进行选举并不保证主从数据复制完毕具备一致性。
+所以redis的复制模式是属于AP的模式。保证可用性，在主从复制中“主”有数据，但是可能“从”还没有数据，这个时候，一旦主挂掉或者网络抖动等各种原因，可能会切换到“从”节点，这个时候可能会导致两个业务县城同时获取得两把锁</p>
+<p>能不能使用redis作为分布式锁，这个本身就不是redis的问题，还是取决于业务场景，我们先要自己确认我们的场景是适合 AP 还是 CP ， 如果在社交发帖等场景下，我们并没有非常强的事务一致性问题，redis提供给我们高性能的AP模型是非常适合的，但如果是交易类型，对数据一致性非常敏感的场景，我们可能要寻在一种更加适合的 CP 模型</p>
+<h3 id="redis分布式锁如何续期建议使用redisson客户端可以自动续期">Redis分布式锁如何续期，建议使用redisson客户端（可以自动续期）</h3>
+<h2 id="基于zookeeper">基于ZooKeeper</h2>
+<blockquote>
+<p>每个客户端对某个方法加锁时，在zookeeper上的与该方法对应的指定节点的目录下，生成一个唯一的临时有序节点。 判断是否获取锁的方式很简单，只需要判断有序节点中序号最小的一个。 当释放锁的时候，只需将这个临时节点删除即可。同时，排队的节点需要监听排在自己之前的节点，这样能在节点释放时候接收到回调通知，让其获得锁。zk的session由客户端管理，其可以避免服务宕机导致的锁无
+法释放，而产生的死锁问题，不需要关注锁超时。</p>
+</blockquote>
+<p>刚刚也分析过，redis其实无法确保数据的一致性，先来看ZooKeeper是否合适作为我们需要的分布式锁，首先zk的模式是CP模型，也就是说，当zk锁提供给我们进行访问的时候，在zk集群中能确保这把锁在zk的每一个节点都存在。</p>
+<h3 id="zk分布式锁的代码实现">zk分布式锁的代码实现</h3>
+<p>zk官方提供的客户端并不支持分布式锁的直接实现，我们需要自己写代码去利用zk的这几个特性去进行实现。
+<figure><a class="lightgallery" href="/images/distributed/DL-zookeeper.jpg" title="/images/distributed/DL-zookeeper.jpg" data-thumbnail="/images/distributed/DL-zookeeper.jpg" data-sub-html="<h2>zk分布式锁</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/distributed/DL-zookeeper.jpg"
+            data-srcset="/images/distributed/DL-zookeeper.jpg, /images/distributed/DL-zookeeper.jpg 1.5x, /images/distributed/DL-zookeeper.jpg 2x"
+            data-sizes="auto"
+            alt="/images/distributed/DL-zookeeper.jpg" />
+    </a><figcaption class="image-caption">zk分布式锁</figcaption>
+    </figure></p>
+<h2 id="究竟该用cp还是ap的分布式锁">究竟该用CP还是AP的分布式锁</h2>
+<p>首先得了解清楚我们使用分布式锁的场景，为何使用分布式锁，用它来帮我们解决什么问题，先聊场景后聊分布式锁的技术选型。</p>
+<p>无论是Redis，zk，例如Redis的AP模型会限制很多使用场景，但它却拥有了几者中最高的性能，ZooKeeper的分布式锁要比Redis可靠很多，但他繁琐的实现机制导致了它的性能不如Redis，而且zk会随着集群的扩大而性能更加下降。</p>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://juejin.cn/post/6844903936718012430#heading-12" target="_blank" rel="noopener noreffer ">分布式锁，是选择AP还是选择CP</a></li>
+<li><a href="https://juejin.cn/post/6844903726268809224" target="_blank" rel="noopener noreffer ">分布式锁总结</a></li>
+<li><a href="https://juejin.cn/post/6844904126288150542" target="_blank" rel="noopener noreffer ">基于 Redis 的分布式锁</a></li>
+<li><a href="https://juejin.cn/post/6844903874675867656" target="_blank" rel="noopener noreffer ">Redis分布式锁如何续期</a></li>
+<li><a href="https://juejin.cn/post/6844903719318847495" target="_blank" rel="noopener noreffer ">分布式锁高并发优化实践</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-02-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://moge.fun/distributedlock/" data-title="分布式锁" data-hashtags="分布式"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://moge.fun/distributedlock/" data-hashtag="分布式"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://moge.fun/distributedlock/" data-title="分布式锁"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://moge.fun/distributedlock/" data-title="分布式锁"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/distributedlock/" data-title="分布式锁"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/distributed/" class="prev" rel="prev" title="分布式概览"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>分布式概览</a>
+            <a href="/distributedtransaction/" class="next" rel="next" title="分布式事务">分布式事务<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2015 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021012209号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":5,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

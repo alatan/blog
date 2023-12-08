@@ -1,17 +1,318 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>JVM类加载器 - 软件开发学习记录</title><meta name=Description content="JVM类加载系统"><meta property="og:title" content="JVM类加载器">
-<meta property="og:description" content="JVM类加载系统"><meta property="og:type" content="article"><meta property="og:url" content="https://moge.fun/jvm-classload/"><meta property="og:image" content="https://moge.fun/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-05-02T00:00:00+00:00"><meta property="article:modified_time" content="2018-05-02T00:00:00+00:00"><meta property="og:site_name" content="My cool site"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://moge.fun/logo.png"><meta name=twitter:title content="JVM类加载器"><meta name=twitter:description content="JVM类加载系统"><meta name=application-name content="Journey to the Life"><meta name=apple-mobile-web-app-title content="Journey to the Life"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://moge.fun/jvm-classload/><link rel=prev href=https://moge.fun/jvm-memory/><link rel=next href=https://moge.fun/mq/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=/lib/fontawesome-free/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload href=/lib/animate/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"JVM类加载器","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/moge.fun\/jvm-classload\/"},"genre":"posts","keywords":"JVM","wordcount":96,"url":"https:\/\/moge.fun\/jvm-classload\/","datePublished":"2018-05-02T00:00:00+00:00","dateModified":"2018-05-02T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"默哥"},"description":"JVM类加载系统"}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>所有文章 </a><a class=menu-item href=/tags/>标签 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/about/>关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i>
-</span></span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=软件开发学习记录>软件开发学习记录</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>所有文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/about/ title>关于</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class="toc-content always-active" id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM类加载器</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>默哥</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/jvm/><i class="far fa-folder fa-fw" aria-hidden=true></i>JVM</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2018-05-02>2018-05-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;约 96 字&nbsp;
-<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;预计阅读 1 分钟&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#类加载器>类加载器</a><ul><li><a href=#启动类加载器bootstrap-classloader>启动类加载器(Bootstrap ClassLoader)</a></li><li><a href=#扩展类加载器extension-classloader>扩展类加载器(Extension ClassLoader)</a></li><li><a href=#应用程序类加载器application-classloader>应用程序类加载器(Application ClassLoader)</a></li><li><a href=#自定义类加载器user-classloader>自定义类加载器（User ClassLoader）</a></li></ul></li><li><a href=#执行顺序>执行顺序</a></li><li><a href=#加载时机与过程>加载时机与过程</a><ul><li><a href=#类加载的四时机>类加载的四时机：</a></li><li><a href=#一个类的一生>一个类的一生</a></li><li><a href=#类加载做了什么主要做三件事>类加载做了什么？主要做三件事</a></li><li><a href=#jvm类加载机制>JVM类加载机制</a></li></ul></li><li><a href=#类加载途径>类加载途径</a></li><li><a href=#双亲委派模型与打破双亲委派>双亲委派模型与打破双亲委派</a><ul><li><a href=#什么是双亲委派>什么是双亲委派？</a></li><li><a href=#为什么需要双亲委派呢>为什么需要双亲委派呢？</a></li><li><a href=#为什么还需要破坏双亲委派>为什么还需要破坏双亲委派</a></li><li><a href=#如何破坏双亲委派>如何破坏双亲委派</a><ul><li><a href=#重写classloader的loadclass方法>重写ClassLoader的loadClass方法</a></li><li><a href=#双亲委派机制是一种自上而下的加载需求越往上类越基础spi代码打破了双亲委派>双亲委派机制是一种自上而下的加载需求，越往上类越基础,SPI代码打破了双亲委派</a></li><li><a href=#热部署和不停机更新用到的osgi技术>热部署和不停机更新用到的OSGI技术</a></li></ul></li></ul></li><li><a href=#class文件的结构属性>Class文件的结构属性</a></li></ul></nav></div></div><div class=content id=content><h2 id=类加载器>类加载器</h2><h3 id=启动类加载器bootstrap-classloader>启动类加载器(Bootstrap ClassLoader)</h3><p>负责加载 JAVA_HOME\lib 目录的或通过-Xbootclasspath参数指定路径中的且被虚拟机认可（rt.jar）的类库</p><h3 id=扩展类加载器extension-classloader>扩展类加载器(Extension ClassLoader)</h3><p>负责加载 JAVA_HOME\lib\ext 目录或通过java.ext.dirs系统变量指定路径中的类库</p><h3 id=应用程序类加载器application-classloader>应用程序类加载器(Application ClassLoader)</h3><p>负责加载用户路径classpath上的类库</p><h3 id=自定义类加载器user-classloader>自定义类加载器（User ClassLoader）</h3><p>加载应用之外的类文件</p><p><figure><a class=lightgallery href=/images/jvm/jvm-cl.png title=/images/jvm/jvm-cl.png data-thumbnail=/images/jvm/jvm-cl.png data-sub-html="<h2>JVM类加载器</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/jvm/jvm-cl.png data-srcset="/images/jvm/jvm-cl.png, /images/jvm/jvm-cl.png 1.5x, /images/jvm/jvm-cl.png 2x" data-sizes=auto alt=/images/jvm/jvm-cl.png></a><figcaption class=image-caption>JVM类加载器</figcaption></figure></p><h2 id=执行顺序>执行顺序</h2><ol><li>检查顺序是自底向上：加载过程中会先检查类是否被已加载，从Custom到BootStrap逐层检查，只要某个类加载器已加载就视为此类已加载，保证此类所有ClassLoader只加载一次</li><li>加载的顺序是自顶向下：也就是由上层来逐层尝试加载此类。</li></ol><h2 id=加载时机与过程>加载时机与过程</h2><h3 id=类加载的四时机>类加载的四时机：</h3><ol><li>遇到new、getStatic、putStatic、invokeStatic四条指令时</li><li>使用java.lang.reflect包方法时，对类进行反射调用</li><li>初始化一个类时，发现其父类还没初始化，要先初始化其父类</li><li>当虚拟机启动时，用户需要指定一个主类main，需要先将主类加载</li></ol><h3 id=一个类的一生>一个类的一生</h3><p><figure><a class=lightgallery href=/images/jvm/jvm-class-left.png title=/images/jvm/jvm-class-left.png data-thumbnail=/images/jvm/jvm-class-left.png data-sub-html="<h2>类的生命周期</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/jvm/jvm-class-left.png data-srcset="/images/jvm/jvm-class-left.png, /images/jvm/jvm-class-left.png 1.5x, /images/jvm/jvm-class-left.png 2x" data-sizes=auto alt=/images/jvm/jvm-class-left.png></a><figcaption class=image-caption>类的生命周期</figcaption></figure></p><h3 id=类加载做了什么主要做三件事>类加载做了什么？主要做三件事</h3><ol><li>类全限定名称 → 二进制字节流加载class文件</li><li>字节流静态数据 → 方法区（永久代，元空间）</li><li>创建字节码Class对象</li></ol><h3 id=jvm类加载机制>JVM类加载机制</h3><ul><li><strong>全盘负责</strong>， 当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入</li><li><strong>父类委托</strong>，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类</li><li><strong>缓存机制</strong>，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效</li><li><strong>双亲委派机制</strong>, 如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</li></ul><h2 id=类加载途径>类加载途径</h2><ol><li>jar/war</li><li>jsp生成的class</li><li>数据库中的二进制字节流</li><li>网络中的二进制字节流</li><li>动态代理生成的二进制字节流<figure><a class=lightgallery href=/images/jvmjvm-cl-channel.png title=/images/jvmjvm-cl-channel.png data-thumbnail=/images/jvmjvm-cl-channel.png data-sub-html="<h2>类加载途径</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/jvmjvm-cl-channel.png data-srcset="/images/jvmjvm-cl-channel.png, /images/jvmjvm-cl-channel.png 1.5x, /images/jvmjvm-cl-channel.png 2x" data-sizes=auto alt=/images/jvmjvm-cl-channel.png></a><figcaption class=image-caption>类加载途径</figcaption></figure></li></ol><h2 id=双亲委派模型与打破双亲委派>双亲委派模型与打破双亲委派</h2><h3 id=什么是双亲委派>什么是双亲委派？</h3><ul><li>当一个类加载器收到类加载任务，会先交给其父类加载器去完成，因此最终加载任务都会传递到顶层的启动类加载器，只有当父类加载器无法完成加载任务时，才会尝试执行加载任务</li></ul><h3 id=为什么需要双亲委派呢>为什么需要双亲委派呢？</h3><ul><li>主要考虑安全因素，双亲委派可以避免重复加载核心的类，当父类加载器已经加载了该类时，子类加载
-器不会再去加载</li><li>比如：要加载位于rt.jar包中的类java.lang.Object，不管是哪个加载器加载，最终都委托给顶层的启动
-类加载器进行加载，这样就可以保证使用不同的类加载器最终得到的都是同样的Object对象。</li></ul><h3 id=为什么还需要破坏双亲委派>为什么还需要破坏双亲委派</h3><ul><li>在实际应用中，<strong>双亲委派解决了Java 基础类统一加载的问题，但是却存在着缺陷。<strong>JDK中的基础类作为典型的API被用户调用，但是也存在</strong>API调用用户代码</strong>的情况，典型的如：SPI代码。这种情况就需要打破双亲委派模式。</li><li>数据库驱动DriverManager。以Driver接口为例，Driver接口定义在JDK中，其**实现由各个数据库的服务商来提供，由系统类加载器加载。**这个时候就需要 <strong>启动类加载器来委托</strong> 子类来加载Driver实现，这就破坏了双亲委派。</li></ul><h3 id=如何破坏双亲委派>如何破坏双亲委派</h3><h4 id=重写classloader的loadclass方法>重写ClassLoader的loadClass方法</h4><ul><li>在 jdk 1.2 之前，那时候还没有双亲委派模型，不过已经有了 ClassLoader 这个抽象类，所以已经有人继承这个抽象类，重写 loadClass 方法来实现用户自定义类加载器。</li><li>而在 1.2 的时候要引入双亲委派模型，为了向前兼容， loadClass 这个方法还得保留着使之得以重写，新搞了个 findClass 方法让用户去重写，并呼吁大家不要重写 loadClass 只要重写 findClass。</li><li>这就是第一次对双亲委派模型的破坏，因为双亲委派的逻辑在 loadClass 上，但是又允许重写loadClass，重写了之后就可以破坏委派逻辑了。</li></ul><h4 id=双亲委派机制是一种自上而下的加载需求越往上类越基础spi代码打破了双亲委派>双亲委派机制是一种自上而下的加载需求，越往上类越基础,SPI代码打破了双亲委派</h4><ul><li>以数据库驱动DriverManager为例,线程上下文类加载器(ThreadContextClassLoader)</li></ul><h4 id=热部署和不停机更新用到的osgi技术>热部署和不停机更新用到的OSGI技术</h4><ul><li>为了满足热部署、不停机更新需求。OSGI 就是利用自定义的类加载器机制来完成模块化热部署，而它实现的类加载机制就没有完全遵循自下而上的委托，有很多平级之间的类加载器查找</li></ul><p><figure><a class=lightgallery href=/images/jvm/jvm-cl-break.png title=/images/jvm/jvm-cl-break.png data-thumbnail=/images/jvm/jvm-cl-break.png data-sub-html="<h2>SPI机制破坏双亲委派模型</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/jvm/jvm-cl-break.png data-srcset="/images/jvm/jvm-cl-break.png, /images/jvm/jvm-cl-break.png 1.5x, /images/jvm/jvm-cl-break.png 2x" data-sizes=auto alt=/images/jvm/jvm-cl-break.png></a><figcaption class=image-caption>SPI机制破坏双亲委派模型</figcaption></figure></p><h2 id=class文件的结构属性>Class文件的结构属性</h2><p><figure><a class=lightgallery href=/images/jvm/class-struct.png title=/images/jvm/class-struct.png data-thumbnail=/images/jvm/class-struct.png data-sub-html="<h2>类的结构</h2>"><img class=lazyload src=/svg/loading.min.svg data-src=/images/jvm/class-struct.png data-srcset="/images/jvm/class-struct.png, /images/jvm/class-struct.png 1.5x, /images/jvm/class-struct.png 2x" data-sizes=auto alt=/images/jvm/class-struct.png></a><figcaption class=image-caption>类的结构</figcaption></figure></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2018-05-02</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://moge.fun/jvm-classload/ data-title=JVM类加载器 data-hashtags=JVM><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://moge.fun/jvm-classload/ data-hashtag=JVM><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Hacker News" data-sharer=hackernews data-url=https://moge.fun/jvm-classload/ data-title=JVM类加载器><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 Line" data-sharer=line data-url=https://moge.fun/jvm-classload/ data-title=JVM类加载器><i data-svg-src=/lib/simple-icons/icons/line.min.svg aria-hidden=true></i></a><a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://moge.fun/jvm-classload/ data-title=JVM类加载器><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/jvm/>JVM</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/jvm-memory/ class=prev rel=prev title=JVM运行时数据区（JVM内存结构）><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>JVM运行时数据区（JVM内存结构）</a>
-<a href=/mq/ class=next rel=next title=消息队列>消息队列<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div><div id=comments><div id=utterances class=comment></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://utteranc.es/>utterances</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2015 - 2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank>默哥</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span><span class=icp-splitter>&nbsp;|&nbsp;</span><br class=icp-br><span class=icp><a href=https://beian.miit.gov.cn/ target=_blank>豫ICP备2021012209号-1</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/katex/katex.min.css><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/lightgallery/lightgallery.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js></script><script type=text/javascript src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/contrib/auto-render.min.js></script><script type=text/javascript src=/lib/katex/contrib/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/contrib/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{utterances:{darkTheme:"github-dark",issueTerm:"pathname",label:"",lightTheme:"github-light",repo:"alatan/BlogDiscuss"}},lightgallery:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!0,left:"\\begin{equation}",right:"\\end{equation}"},{display:!0,left:"\\begin{equation*}",right:"\\end{equation*}"},{display:!0,left:"\\begin{align}",right:"\\end{align}"},{display:!0,left:"\\begin{align*}",right:"\\end{align*}"},{display:!0,left:"\\begin{alignat}",right:"\\end{alignat}"},{display:!0,left:"\\begin{alignat*}",right:"\\end{alignat*}"},{display:!0,left:"\\begin{gather}",right:"\\end{gather}"},{display:!0,left:"\\begin{CD}",right:"\\end{CD}"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:5,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>JVM类加载器 - 软件开发学习记录</title><meta name="Description" content="JVM类加载系统"><meta property="og:title" content="JVM类加载器" />
+<meta property="og:description" content="JVM类加载系统" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://moge.fun/jvm-classload/" /><meta property="og:image" content="https://moge.fun/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-05-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-05-02T00:00:00+00:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://moge.fun/logo.png"/>
+
+<meta name="twitter:title" content="JVM类加载器"/>
+<meta name="twitter:description" content="JVM类加载系统"/>
+<meta name="application-name" content="Journey to the Life">
+<meta name="apple-mobile-web-app-title" content="Journey to the Life"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://moge.fun/jvm-classload/" /><link rel="prev" href="https://moge.fun/jvm-memory/" /><link rel="next" href="https://moge.fun/mq/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JVM类加载器",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/moge.fun\/jvm-classload\/"
+        },"genre": "posts","keywords": "JVM","wordcount":  96 ,
+        "url": "https:\/\/moge.fun\/jvm-classload\/","datePublished": "2018-05-02T00:00:00+00:00","dateModified": "2018-05-02T00:00:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "默哥"
+            },"description": "JVM类加载系统"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="软件开发学习记录">软件开发学习记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="软件开发学习记录">软件开发学习记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content always-active" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JVM类加载器</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>默哥</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/jvm/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>JVM</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-05-02">2018-05-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 96 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#类加载器">类加载器</a>
+      <ul>
+        <li><a href="#启动类加载器bootstrap-classloader">启动类加载器(Bootstrap ClassLoader)</a></li>
+        <li><a href="#扩展类加载器extension-classloader">扩展类加载器(Extension ClassLoader)</a></li>
+        <li><a href="#应用程序类加载器application-classloader">应用程序类加载器(Application ClassLoader)</a></li>
+        <li><a href="#自定义类加载器user-classloader">自定义类加载器（User ClassLoader）</a></li>
+      </ul>
+    </li>
+    <li><a href="#执行顺序">执行顺序</a></li>
+    <li><a href="#加载时机与过程">加载时机与过程</a>
+      <ul>
+        <li><a href="#类加载的四时机">类加载的四时机：</a></li>
+        <li><a href="#一个类的一生">一个类的一生</a></li>
+        <li><a href="#类加载做了什么主要做三件事">类加载做了什么？主要做三件事</a></li>
+        <li><a href="#jvm类加载机制">JVM类加载机制</a></li>
+      </ul>
+    </li>
+    <li><a href="#类加载途径">类加载途径</a></li>
+    <li><a href="#双亲委派模型与打破双亲委派">双亲委派模型与打破双亲委派</a>
+      <ul>
+        <li><a href="#什么是双亲委派">什么是双亲委派？</a></li>
+        <li><a href="#为什么需要双亲委派呢">为什么需要双亲委派呢？</a></li>
+        <li><a href="#为什么还需要破坏双亲委派">为什么还需要破坏双亲委派</a></li>
+        <li><a href="#如何破坏双亲委派">如何破坏双亲委派</a>
+          <ul>
+            <li><a href="#重写classloader的loadclass方法">重写ClassLoader的loadClass方法</a></li>
+            <li><a href="#双亲委派机制是一种自上而下的加载需求越往上类越基础spi代码打破了双亲委派">双亲委派机制是一种自上而下的加载需求，越往上类越基础,SPI代码打破了双亲委派</a></li>
+            <li><a href="#热部署和不停机更新用到的osgi技术">热部署和不停机更新用到的OSGI技术</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#class文件的结构属性">Class文件的结构属性</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="类加载器">类加载器</h2>
+<h3 id="启动类加载器bootstrap-classloader">启动类加载器(Bootstrap ClassLoader)</h3>
+<p>负责加载 JAVA_HOME\lib 目录的或通过-Xbootclasspath参数指定路径中的且被虚拟机认可（rt.jar）的类库</p>
+<h3 id="扩展类加载器extension-classloader">扩展类加载器(Extension ClassLoader)</h3>
+<p>负责加载 JAVA_HOME\lib\ext 目录或通过java.ext.dirs系统变量指定路径中的类库</p>
+<h3 id="应用程序类加载器application-classloader">应用程序类加载器(Application ClassLoader)</h3>
+<p>负责加载用户路径classpath上的类库</p>
+<h3 id="自定义类加载器user-classloader">自定义类加载器（User ClassLoader）</h3>
+<p>加载应用之外的类文件</p>
+<p><figure><a class="lightgallery" href="/images/jvm/jvm-cl.png" title="/images/jvm/jvm-cl.png" data-thumbnail="/images/jvm/jvm-cl.png" data-sub-html="<h2>JVM类加载器</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/jvm-cl.png"
+            data-srcset="/images/jvm/jvm-cl.png, /images/jvm/jvm-cl.png 1.5x, /images/jvm/jvm-cl.png 2x"
+            data-sizes="auto"
+            alt="/images/jvm/jvm-cl.png" />
+    </a><figcaption class="image-caption">JVM类加载器</figcaption>
+    </figure></p>
+<h2 id="执行顺序">执行顺序</h2>
+<ol>
+<li>检查顺序是自底向上：加载过程中会先检查类是否被已加载，从Custom到BootStrap逐层检查，只要某个类加载器已加载就视为此类已加载，保证此类所有ClassLoader只加载一次</li>
+<li>加载的顺序是自顶向下：也就是由上层来逐层尝试加载此类。</li>
+</ol>
+<h2 id="加载时机与过程">加载时机与过程</h2>
+<h3 id="类加载的四时机">类加载的四时机：</h3>
+<ol>
+<li>遇到new、getStatic、putStatic、invokeStatic四条指令时</li>
+<li>使用java.lang.reflect包方法时，对类进行反射调用</li>
+<li>初始化一个类时，发现其父类还没初始化，要先初始化其父类</li>
+<li>当虚拟机启动时，用户需要指定一个主类main，需要先将主类加载</li>
+</ol>
+<h3 id="一个类的一生">一个类的一生</h3>
+<p><figure><a class="lightgallery" href="/images/jvm/jvm-class-left.png" title="/images/jvm/jvm-class-left.png" data-thumbnail="/images/jvm/jvm-class-left.png" data-sub-html="<h2>类的生命周期</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/jvm-class-left.png"
+            data-srcset="/images/jvm/jvm-class-left.png, /images/jvm/jvm-class-left.png 1.5x, /images/jvm/jvm-class-left.png 2x"
+            data-sizes="auto"
+            alt="/images/jvm/jvm-class-left.png" />
+    </a><figcaption class="image-caption">类的生命周期</figcaption>
+    </figure></p>
+<h3 id="类加载做了什么主要做三件事">类加载做了什么？主要做三件事</h3>
+<ol>
+<li>类全限定名称 → 二进制字节流加载class文件</li>
+<li>字节流静态数据 → 方法区（永久代，元空间）</li>
+<li>创建字节码Class对象</li>
+</ol>
+<h3 id="jvm类加载机制">JVM类加载机制</h3>
+<ul>
+<li><strong>全盘负责</strong>， 当一个类加载器负责加载某个Class时，该Class所依赖的和引用的其他Class也将由该类加载器负责载入，除非显示使用另外一个类加载器来载入</li>
+<li><strong>父类委托</strong>，先让父类加载器试图加载该类，只有在父类加载器无法加载该类时才尝试从自己的类路径中加载该类</li>
+<li><strong>缓存机制</strong>，缓存机制将会保证所有加载过的Class都会被缓存，当程序中需要使用某个Class时，类加载器先从缓存区寻找该Class，只有缓存区不存在，系统才会读取该类对应的二进制数据，并将其转换成Class对象，存入缓存区。这就是为什么修改了Class后，必须重启JVM，程序的修改才会生效</li>
+<li><strong>双亲委派机制</strong>, 如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</li>
+</ul>
+<h2 id="类加载途径">类加载途径</h2>
+<ol>
+<li>jar/war</li>
+<li>jsp生成的class</li>
+<li>数据库中的二进制字节流</li>
+<li>网络中的二进制字节流</li>
+<li>动态代理生成的二进制字节流
+<figure><a class="lightgallery" href="/images/jvmjvm-cl-channel.png" title="/images/jvmjvm-cl-channel.png" data-thumbnail="/images/jvmjvm-cl-channel.png" data-sub-html="<h2>类加载途径</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvmjvm-cl-channel.png"
+            data-srcset="/images/jvmjvm-cl-channel.png, /images/jvmjvm-cl-channel.png 1.5x, /images/jvmjvm-cl-channel.png 2x"
+            data-sizes="auto"
+            alt="/images/jvmjvm-cl-channel.png" />
+    </a><figcaption class="image-caption">类加载途径</figcaption>
+    </figure></li>
+</ol>
+<h2 id="双亲委派模型与打破双亲委派">双亲委派模型与打破双亲委派</h2>
+<h3 id="什么是双亲委派">什么是双亲委派？</h3>
+<ul>
+<li>当一个类加载器收到类加载任务，会先交给其父类加载器去完成，因此最终加载任务都会传递到顶层的启动类加载器，只有当父类加载器无法完成加载任务时，才会尝试执行加载任务</li>
+</ul>
+<h3 id="为什么需要双亲委派呢">为什么需要双亲委派呢？</h3>
+<ul>
+<li>主要考虑安全因素，双亲委派可以避免重复加载核心的类，当父类加载器已经加载了该类时，子类加载
+器不会再去加载</li>
+<li>比如：要加载位于rt.jar包中的类java.lang.Object，不管是哪个加载器加载，最终都委托给顶层的启动
+类加载器进行加载，这样就可以保证使用不同的类加载器最终得到的都是同样的Object对象。</li>
+</ul>
+<h3 id="为什么还需要破坏双亲委派">为什么还需要破坏双亲委派</h3>
+<ul>
+<li>在实际应用中，<strong>双亲委派解决了Java 基础类统一加载的问题，但是却存在着缺陷。<strong>JDK中的基础类作为典型的API被用户调用，但是也存在</strong>API调用用户代码</strong>的情况，典型的如：SPI代码。这种情况就需要打破双亲委派模式。</li>
+<li>数据库驱动DriverManager。以Driver接口为例，Driver接口定义在JDK中，其**实现由各个数据库的服务商来提供，由系统类加载器加载。**这个时候就需要 <strong>启动类加载器来委托</strong> 子类来加载Driver实现，这就破坏了双亲委派。</li>
+</ul>
+<h3 id="如何破坏双亲委派">如何破坏双亲委派</h3>
+<h4 id="重写classloader的loadclass方法">重写ClassLoader的loadClass方法</h4>
+<ul>
+<li>在 jdk 1.2 之前，那时候还没有双亲委派模型，不过已经有了 ClassLoader 这个抽象类，所以已经有人继承这个抽象类，重写 loadClass 方法来实现用户自定义类加载器。</li>
+<li>而在 1.2 的时候要引入双亲委派模型，为了向前兼容， loadClass 这个方法还得保留着使之得以重写，新搞了个 findClass 方法让用户去重写，并呼吁大家不要重写 loadClass 只要重写 findClass。</li>
+<li>这就是第一次对双亲委派模型的破坏，因为双亲委派的逻辑在 loadClass 上，但是又允许重写loadClass，重写了之后就可以破坏委派逻辑了。</li>
+</ul>
+<h4 id="双亲委派机制是一种自上而下的加载需求越往上类越基础spi代码打破了双亲委派">双亲委派机制是一种自上而下的加载需求，越往上类越基础,SPI代码打破了双亲委派</h4>
+<ul>
+<li>以数据库驱动DriverManager为例,线程上下文类加载器(ThreadContextClassLoader)</li>
+</ul>
+<h4 id="热部署和不停机更新用到的osgi技术">热部署和不停机更新用到的OSGI技术</h4>
+<ul>
+<li>为了满足热部署、不停机更新需求。OSGI 就是利用自定义的类加载器机制来完成模块化热部署，而它实现的类加载机制就没有完全遵循自下而上的委托，有很多平级之间的类加载器查找</li>
+</ul>
+<p><figure><a class="lightgallery" href="/images/jvm/jvm-cl-break.png" title="/images/jvm/jvm-cl-break.png" data-thumbnail="/images/jvm/jvm-cl-break.png" data-sub-html="<h2>SPI机制破坏双亲委派模型</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/jvm-cl-break.png"
+            data-srcset="/images/jvm/jvm-cl-break.png, /images/jvm/jvm-cl-break.png 1.5x, /images/jvm/jvm-cl-break.png 2x"
+            data-sizes="auto"
+            alt="/images/jvm/jvm-cl-break.png" />
+    </a><figcaption class="image-caption">SPI机制破坏双亲委派模型</figcaption>
+    </figure></p>
+<h2 id="class文件的结构属性">Class文件的结构属性</h2>
+<p><figure><a class="lightgallery" href="/images/jvm/class-struct.png" title="/images/jvm/class-struct.png" data-thumbnail="/images/jvm/class-struct.png" data-sub-html="<h2>类的结构</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/images/jvm/class-struct.png"
+            data-srcset="/images/jvm/class-struct.png, /images/jvm/class-struct.png 1.5x, /images/jvm/class-struct.png 2x"
+            data-sizes="auto"
+            alt="/images/jvm/class-struct.png" />
+    </a><figcaption class="image-caption">类的结构</figcaption>
+    </figure></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2018-05-02</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://moge.fun/jvm-classload/" data-title="JVM类加载器" data-hashtags="JVM"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://moge.fun/jvm-classload/" data-hashtag="JVM"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://moge.fun/jvm-classload/" data-title="JVM类加载器"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://moge.fun/jvm-classload/" data-title="JVM类加载器"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://moge.fun/jvm-classload/" data-title="JVM类加载器"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/jvm/">JVM</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/jvm-memory/" class="prev" rel="prev" title="JVM运行时数据区（JVM内存结构）"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>JVM运行时数据区（JVM内存结构）</a>
+            <a href="/mq/" class="next" rel="next" title="消息队列">消息队列<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.120.4">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2015 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">默哥</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span><span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
+                    <span class="icp"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021012209号-1</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"","lightTheme":"github-light","repo":"alatan/BlogDiscuss"}},"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":5,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

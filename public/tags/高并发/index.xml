@@ -1,4 +1,15 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>高并发 - 标签 - 软件开发学习记录</title><link>https://moge.fun/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/</link><description>高并发 - 标签 - 软件开发学习记录</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml"/><item><title>幂等</title><link>https://moge.fun/idempotence/</link><pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/idempotence/</guid><description><![CDATA[幂等就是：一个操作不论执行多少次，产生的效果和返回的结果都是一样的。
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>高并发 - 标签 - 软件开发学习记录</title>
+        <link>https://moge.fun/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/</link>
+        <description>高并发 - 标签 - 软件开发学习记录</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://moge.fun/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
+    <title>幂等</title>
+    <link>https://moge.fun/idempotence/</link>
+    <pubDate>Sun, 01 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/idempotence/</guid>
+    <description><![CDATA[幂等就是：一个操作不论执行多少次，产生的效果和返回的结果都是一样的。
 业务场景 查询操作 查询一次和查询多次，在数据不变的情况下，查询结果是一样的。select是天然的幂等操作。
 删除操作 删除操作也是幂等的，删除一次和多次删除都是把数据删除。(注意可能返回结果不一样，删除的数据不存在，返回0，删除的数据多条，返回结果多个)
 新增操作 唯一索引或唯一组合索引来防止新增数据存在脏数据（当表存在唯一索引，并发时新增报错时，再查询一次就可以了，数据应该已经存在了，返回结果即可）
@@ -8,14 +19,25 @@
 1 select * from table_xxx where id=&#39;xxx&#39; for update; 注意：id字段一定是主键或者唯一索引，不然是锁表，会死人的，悲观锁使用时一般伴随事务一起使用，数据锁定时间可能会很长，根据实际情况选用。
 乐观锁 乐观锁只是在更新数据那一刻锁表，其他时间不锁表，所以相对于悲观锁，效率更高。
 乐观锁的实现方式多种多样可以通过version或者其他状态条件：
-通过版本号实现 1 2 3 update table_xxx set name=#name#,version=version+1 where version=#version#; -- 优化后的 update table_xxx set name=#name#,version=version+1 where id=#id# and version=#version#; 通过条件限制 1 2 3 update table_xxx set avai_amount=avai_amount-#subAmount# where avai_amount-#subAmount# &gt;= 0; -- 优化后的 update table_xxx set avai_amount=avai_amount-#subAmount# where id=#id# and avai_amount-#subAmount# &gt;= 0 要求：quality-#subQuality# &gt;= ，这个情景适合不用版本号，只更新是做数据安全校验，适合库存模型，扣份额和回滚份额，性能更高]]></description></item><item><title>高并发系统设计</title><link>https://moge.fun/3h/</link><pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/3h/</guid><description>软件开发通常会提到一个名词 “三高”，即高并发、高性能、高可用。
+通过版本号实现 1 2 3 update table_xxx set name=#name#,version=version+1 where version=#version#; -- 优化后的 update table_xxx set name=#name#,version=version+1 where id=#id# and version=#version#; 通过条件限制 1 2 3 update table_xxx set avai_amount=avai_amount-#subAmount# where avai_amount-#subAmount# &gt;= 0; -- 优化后的 update table_xxx set avai_amount=avai_amount-#subAmount# where id=#id# and avai_amount-#subAmount# &gt;= 0 要求：quality-#subQuality# &gt;= ，这个情景适合不用版本号，只更新是做数据安全校验，适合库存模型，扣份额和回滚份额，性能更高]]></description>
+</item>
+<item>
+    <title>高并发系统设计</title>
+    <link>https://moge.fun/3h/</link>
+    <pubDate>Sat, 01 Feb 2020 00:00:00 &#43;0000</pubDate>
+    <author>默哥</author>
+    <guid>https://moge.fun/3h/</guid>
+    <description><![CDATA[软件开发通常会提到一个名词 “三高”，即高并发、高性能、高可用。
 具体的指标定义，如：高并发方面要求QPS 大于10万；高性能方面要求请求延迟小于 100 ms；高可用方面要高于 99.99%。
-三高 高并发 高并发（High Concurrency）是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求。高并发相关常用的一些指标有响应时间（Response Time），吞吐量（Throughput），每秒查询率QPS（Query Per Second），并发用户数等。
-高并发 高并发架构设计 系统拆分 将一个系统拆分为多个子系统，用 dubbo 来搞。然后每个系统连一个数据库，这样本来就一个库，现在多个数据库，不也可以扛高并发么。
+三高高并发 高并发（High Concurrency）是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求。高并发相关常用的一些指标有响应时间（Response Time），吞吐量（Throughput），每秒查询率QPS（Query Per Second），并发用户数等。
+高并发高并发架构设计系统拆分 将一个系统拆分为多个子系统，用 dubbo 来搞。然后每个系统连一个数据库，这样本来就一个库，现在多个数据库，不也可以扛高并发么。
 读写分离 读写分离，这个就是说大部分时候数据库可能也是读多写少，没必要所有请求都集中在一个库上吧，可以搞个主从架构，主库写入，从库读取，搞一个读写分离。读流量太多的时候，还可以加更多的从库。
 分库分表 分库分表，可能到了最后数据库层面还是免不了抗高并发的要求，好吧，那么就将一个数据库拆分为多个库，多个库来扛更高的并发；然后将一个表拆分为多个表，每个表的数据量保持少一点，提高 sql 跑的性能。
 缓存 缓存，必须得用缓存。大部分的高并发场景，都是读多写少，那你完全可以在数据库和缓存里都写一份，然后读的时候大量走缓存不就得了。毕竟人家 redis 轻轻松松单机几万的并发。所以你可以考虑考虑你的项目里，那些承载主要请求的读场景，怎么用缓存来抗高并发。
 消息队列 MQ，必须得用 MQ。可能你还是会出现高并发写的场景，比如说一个业务操作里要频繁搞数据库几十次，增删改增删改，疯了。那高并发绝对搞挂你的系统，你要是用 redis 来承载写那肯定不行，人家是缓存，数据随时就被 LRU 了，数据格式还无比简单，没有事务支持。所以该用 mysql 还得用 mysql 啊。那你咋办？用 MQ 吧，大量的写请求灌入 MQ 里，排队慢慢玩儿，后边系统消费后慢慢写，控制在 mysql 承载范围之内。所以你得考虑考虑你的项目里，那些承载复杂写业务逻辑的场景里，如何用 MQ 来异步写，提升并发性。MQ 单机抗几万并发也是 ok 的，这个之前还特意说过。
 ElasticSearch Elasticsearch，简称 es。es 是分布式的，可以随便扩容，分布式天然就可以支撑高并发，因为动不动就可以扩容加机器来扛更高的并发。那么一些比较简单的查询、统计类的操作，可以考虑用 es 来承载，还有一些全文搜索类的操作，也可以考虑用 es 来承载。
-高性能 性能体现了系统的并行处理能力，在有限的硬件投入下，提高性能意味着节省成本。同时，性能也反映了用户体验，响应时间分别是100毫秒和1秒，给用户的感受是完全不同的。 高性能 高可用 表示系统可以正常服务的时间。一个全年不停机、无故障；另一个隔三差五出线上事故、宕机，用户肯定选择前者。另外，如果系统只能做到90%可用，也会大大拖累业务。 高可用 高扩展 表示系统的扩展能力，流量高峰时能否在短时间内完成扩容，更平稳地承接峰值流量，比如双11活动、明星离婚等热点事件。
-常用指标 吞吐量 在了解qps、tps、rt、并发数之前，首先我们应该明确一个系统的吞吐量到底代表什么含义，一般来说，系统吞吐量指的是系统的抗压、负载能力，代表一个系统每秒钟能承受的最大用户访问量。</description></item></channel></rss>
+高性能 性能体现了系统的并行处理能力，在有限的硬件投入下，提高性能意味着节省成本。同时，性能也反映了用户体验，响应时间分别是100毫秒和1秒，给用户的感受是完全不同的。 高性能高可用 表示系统可以正常服务的时间。一个全年不停机、无故障；另一个隔三差五出线上事故、宕机，用户肯定选择前者。另外，如果系统只能做到90%可用，也会大大拖累业务。 高可用高扩展 表示系统的扩展能力，流量高峰时能否在短时间内完成扩容，更平稳地承接峰值流量，比如双11活动、明星离婚等热点事件。
+常用指标 吞吐量 在了解qps、tps、rt、并发数之前，首先我们应该明确一个系统的吞吐量到底代表什么含义，一般来说，系统吞吐量指的是系统的抗压、负载能力，代表一个系统每秒钟能承受的最大用户访问量。]]></description>
+</item>
+</channel>
+</rss>
