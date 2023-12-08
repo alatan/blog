@@ -1,2 +1,5 @@
-resources/*
+.idea
 *.DS_Store
+public/*
+themes/*
+resources/*
