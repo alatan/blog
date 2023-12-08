@@ -1,8 +1,26 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Dubbo - 标签 - 软件开发学习记录</title><link>https://moge.fun/tags/dubbo/</link><description>Dubbo - 标签 - 软件开发学习记录</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://moge.fun/tags/dubbo/" rel="self" type="application/rss+xml"/><item><title>Dubbo总结</title><link>https://moge.fun/dubbo/</link><pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate><author>默哥</author><guid>https://moge.fun/dubbo/</guid><description>Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dubbo on 软件开发学习记录</title>
+    <link>https://moge.fun/tags/dubbo/</link>
+    <description>Recent content in Dubbo on 软件开发学习记录</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://moge.fun/tags/dubbo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dubbo总结</title>
+      <link>https://moge.fun/dubbo/</link>
+      <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://moge.fun/dubbo/</guid>
+      <description>Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。
 服务是 Dubbo 中的核心概念，一个服务代表一组 RPC 方法的集合，服务是面向用户编程、服务发现机制等的基本单位。
 Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置 方式将 RPC 声明为 Dubbo 服务，然后就可以基于服务 API 进行编程了。对服务提供者来说是提供 RPC 服务的具体实现，而对服务消费者来说则是使用特定数据发起服务调用。
 服务发现 服务发现，即消费端自动发现服务地址列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。
 实现服务发现的方式有很多种，Dubbo 提供的是一种 Client-Based 的服务发现机制，通常还需要部署额外的第三方注册中心组件来协调服务发现过程，如常用的 Nacos、Consul、Zookeeper 等，Dubbo 自身也提供了对多种注册中心组件的对接，用户可以灵活选择。
-服务发现 服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：
+服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：
 以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置
-1 2 3 4 # application.properties dubbo registry address: zookeeper://127.0.0.1:2181 服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： 流量管理 Dubbo提供了支持mesh方式的流量管理策略，可以很容易实现 A/B测试、金丝雀发布、蓝绿发布等能力。</description></item></channel></rss>
+1 2 3 4 # application.properties dubbo registry address: zookeeper://127.0.0.1:2181 服务流量管理 流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示： Dubbo提供了支持mesh方式的流量管理策略，可以很容易实现 A/B测试、金丝雀发布、蓝绿发布等能力。</description>
+    </item>
+  </channel>
+</rss>
