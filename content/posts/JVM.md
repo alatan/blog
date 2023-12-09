@@ -18,7 +18,6 @@ toc:
 ## JVM概览
 * 什么是JVM？广义上的JVM是指一种规范，狭义上的JVM指的是Hotspot类的虚拟机实现
 * Java语言与JVM的关系：Java语言编写程序生成class字节码在JVM虚拟机里执行。其他语言也可以如Scala、Groovy
-
 ### 主要知识
 1. JVM基本常识
 2. 类加载系统
