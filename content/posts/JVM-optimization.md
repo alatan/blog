@@ -43,7 +43,7 @@ toc:
 * 优先原则：产品、架构、代码、数据库优先，JVM是不得已的最后的手段(大多数的Java应用不需要进行JVM优化)
 * 观测性原则：发现问题解决问题，没问题不创造问题。
 
-## JVM实践调优主要步骤
+## 调优主要步骤
 ![](/images/jvm/jvm-ty-bz.png)
 
 * 第一步：监控分析GC日志
@@ -67,12 +67,6 @@ JVM调优典型参数设置：
 * -Xmx堆内存最大值
 * -Xmn新生代内存的最大值
 * -Xss每个线程的栈内存
-
-```yml
-# 计算最大线程数的公式：理论上限
-Number of threads = (MaxProcess内存 - JVM内存 - ReservedOsMemory) / (ThreadStackSize)
-系统最大可创建的线程数量=(机器本身可用内存 - (JVM分配的堆内存+JVM元数据区)) / Xss的值
-```
 
 建议：在开发测试环境可以用Xms和Xmx设置最小值最大值，但是在线上生产环境，Xms和Xmx设置的值相同防止抖动；
 
