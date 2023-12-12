@@ -1,6 +1,6 @@
 ---  
 title: "JVM-一个对象的一生（出生、死亡与内涵）"  
-date: 2018-05-05
+date: 2018-05-04
 weight: 70  
 draft: false  
 keywords: [""]  
