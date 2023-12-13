@@ -1,13 +1,13 @@
 ---  
-title: "Java并发编程概览"  
-date: 2018-04-01
+title: "Java并发编程基础理论"  
+date: 2018-04-02
 weight: 70  
 draft: false  
 keywords: [""]  
-description: "Java并发编程"  
-tags: ["并发编程", "大纲"]
-categories: ["Java基础"]  
-author: "默哥"  
+description: "Java并发编程基础理论"  
+tags: ["Java并发编程"]
+categories: ["Java并发编程"]  
+author: "默哥"
 
 lightgallery: true
 
@@ -15,7 +15,20 @@ toc:
   auto: false
 ---
 
-![Java并发编程概览](/images/current/concurrentOverview.png "Java并发编程概览")
+## 线程安全问题
+### 什么是线程安全问题
+* 多个线程同时执行，可能会运行同一行代码，如果程序每次运行结果与单线程执行结果一致，且变量的预期值也一样，就是线程安全的，反之则是线程不安全。
+### 引发线程安全问题的根本原因：多个线程共享变量
+* 如果多个线程对共享变量只有读操作，无写操作，那么此操作是线程安全的
+* 如果多个线程同时执行共享变量的写和读操作，则操作不是线程安全的
+
+## 解决线程安全问题，Java给出了各种办法
+* 同步机制Synchronized
+* Volatile关键字：内存屏障
+* 原子类：CAS
+* 锁：AQS
+* 并发容器
+
 
 ## 并发三要素
 ### 可见性
