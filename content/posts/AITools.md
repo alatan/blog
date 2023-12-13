@@ -5,7 +5,7 @@ weight: 70
 draft: false  
 keywords: ["AI"]  
 description: "AI工具"  
-tags: [ "AI"]  
+tags: [ "Tools"]  
 categories: ["AI"]  
 author: "默哥"  
 

@@ -1,6 +1,6 @@
 ---  
 title: "Java内存模型(JMM)"  
-date: 2018-04-03
+date: 2018-04-02
 weight: 70  
 draft: false  
 keywords: [""]  

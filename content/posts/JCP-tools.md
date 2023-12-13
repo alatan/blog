@@ -66,10 +66,8 @@ toc:
     * 优点：对于读多写少的场景， CopyOnWrite这种无锁操作性能更好，相比于其它同步容器
     * 缺点：①数据一致性问题，②内存占用问题及导致更多的GC次数
 
-* ConcurrentHashMap
-
-* ConcurrentLinkedQueue
-* BlockingQueue
+### ConcurrentHashMap
+[ConcurrentHashMap详解](https://mp.weixin.qq.com/s?__biz=MzIwNTI2ODY5OA==&mid=2649938471&idx=1&sn=2964df2adc4feaf87c11b4915b9a018e "ConcurrentHashMap详解")
 
 ## 并发队列
 队列是线程协作的利器，通过队列可以很容易的实现数据共享，并且解决上下游处理速度不匹配的问题，典型的生产者消费者模式

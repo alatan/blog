@@ -5,8 +5,8 @@ weight: 70
 draft: false  
 keywords: [""]  
 description: "JVM-一个对象的一生（出生、死亡与内涵）"  
-tags: ["git"]
-categories: ["Tools"]
+tags: ["Tools"]
+categories: ["git"]
 author: "默哥"  
 
 lightgallery: true

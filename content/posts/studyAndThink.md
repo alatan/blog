@@ -1,6 +1,6 @@
 ---  
 title: "学与思"  
-date: 2015-01-02
+date: 2015-01-03
 weight: 70  
 markup: mmark  
 draft: false  

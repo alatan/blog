@@ -1,6 +1,6 @@
 ---  
 title: "减缓焦虑，积聚生活正能量"  
-date: 2015-01-01
+date: 2015-01-02
 weight: 70  
 draft: false  
 author: "默哥" 

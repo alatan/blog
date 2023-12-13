@@ -6,8 +6,8 @@ markup: mmark
 draft: false  
 keywords: [""]  
 description: "Markdown常用语法"  
-tags: ["Markdown"]  
-categories: ["记录"]  
+tags: ["Tools"]  
+categories: ["Markdown"]  
 author: "默哥"  
 ---  
 
