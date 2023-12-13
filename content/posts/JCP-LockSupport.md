@@ -1,12 +1,12 @@
 ---  
 title: "LockSupport详解"  
-date: 2018-04-04
+date: 2018-04-11
 weight: 70  
 draft: false  
 keywords: [""]  
 description: "LockSupport详解"  
-tags: ["并发编程"]
-categories: ["Java基础"]  
+tags: ["Java并发编程"]
+categories: ["Java并发编程"]  
 author: "默哥"  
 
 lightgallery: true

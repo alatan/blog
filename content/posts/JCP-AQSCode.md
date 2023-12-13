@@ -1,12 +1,12 @@
 ---  
-title: "AbstractQueuedSynchronizer详解"  
-date: 2018-04-05
+title: "AQS代码分析"  
+date: 2018-04-08
 weight: 70  
 draft: false  
 keywords: [""]  
-description: "AbstractQueuedSynchronizer详解"  
-tags: ["并发编程"]
-categories: ["Java基础"]  
+description: "AQS代码分析"  
+tags: ["Java并发编程"]
+categories: ["Java并发编程"]  
 author: "默哥"  
 
 lightgallery: true
