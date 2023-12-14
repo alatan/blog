@@ -1,14 +1,14 @@
 ---  
 title: "数据切分（分库分表）总结"
 description: "分库分表"
-keywords: ["数据库"]
+keywords: ["MySQL"]
 date: 2017-03-05
 author: "默哥"
 weight: 70
 draft: false
 
-categories: ["数据库"]
-tags: ["数据库", "性能优化", "分布式"]  
+categories: ["MySQL"]
+tags: ["MySQL", "性能优化", "分布式"]  
 toc: 
     auto: false
 ---

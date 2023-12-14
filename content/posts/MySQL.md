@@ -1,14 +1,14 @@
 ---  
 title: "MySQL总结"
 description: "MySQL总结"
-keywords: ["数据库"]
+keywords: ["MySQL"]
 date: 2017-03-02
 author: "默哥"
 weight: 70
 draft: false
 
-categories: ["数据库"]
-tags: ["数据库", "大纲"]  
+categories: ["MySQL"]
+tags: ["MySQL"]  
 toc: 
     auto: false
 ---
