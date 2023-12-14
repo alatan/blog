@@ -7,8 +7,8 @@ author: "默哥"
 weight: 70
 draft: false
 
-categories: ["数据库"]
-tags: ["数据库", "MyBatis", "框架", "大纲"]  
+categories: ["MySQL"]
+tags: ["MySQL", "MyBatis", "框架", "大纲"]  
 toc: 
     auto: false
 ---
