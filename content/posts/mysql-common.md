@@ -3,7 +3,7 @@
 title: "MySQL常用命令"
 description: "MySQL总结"
 keywords: ["MySQL"]
-date: 2017-03-02
+date: 2017-03-09
 author: "默哥"
 weight: 70
 draft: false

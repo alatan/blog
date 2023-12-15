@@ -2,7 +2,7 @@
 title: "MySQL高可用方案"
 description: "MySQL高可用方案"
 keywords: ["MySQL"]
-date: 2017-03-04
+date: 2017-03-07
 author: "默哥"
 weight: 70
 draft: false

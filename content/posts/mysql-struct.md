@@ -31,14 +31,14 @@ MySQL是通过文件系统对数据索引后进行存储的，MySQL从物理结�
 ```sql
 show variables like 'log_%';
 ```
-### 常用日志文件如下：
+### 常用日志文件如下
 1. **错误日志**：/var/log/mysql-error.log
 2. 二进制日志：/var/lib/mysql/mysql-bin
 3. **通用查询日志**：general_query.log
 4. **慢查询日志**：slow_query_log.log
 5. 事务重做日志：redo log
 6. 中继日志：relay log
-#### 错误日志：error log
+### 错误日志：error log
 默认开启，错误日志记录了运行过程中**遇到的所有严重的错误信息**，以及 MySQL**每次启动和关闭的详细信息**。错误日志所记录的信息是可以通过**log_error和log_warnings配置**来定义的。从5.5.7以后不能关闭错误日志。
 * log_error：指定错误日志存储位置
 * log-warnings：是否将警告信息输出到错误日志中。
@@ -46,31 +46,31 @@ show variables like 'log_%';
     * log_warnings 为1， 表示告警信息写入错误日志。
     * log_warnings 大于1， 表示各类告警信息，例如：有关网络故障的信息和重新连接信息写入错误日志。
 
-```yml
+```shell
 log_error=/var/log/mysql-error.log
 log_warnings=2
 ```
 
-#### 二进制日志：bin log
+### 二进制日志：bin log
 默认关闭，需要通过以下配置进行开启。binlog记录了数据库所有的ddl语句和dml语句，但不包括select语句内容，语句以事件的形式保存，描述了数据的变更顺序binlog还包括了每个更新语句的执行时间信息。如果是DDL语句，则直接记录到binlog日志，而DML语句，必须通过事务提交才能记录到binlog日志中。
 
 * binlog主要用于实现mysql**主从复制、数据备份、数据恢复**。
 * 配置中mysql-bin是binlog日志文件的basename，binlog日志文件的完整名称：mysql-bin.000001。
-```yml
+```shell
 server_id=42
 log-bin=mysql-bin
 ```
-#### 通用查询日志：general query log
+### 通用查询日志：general query log
 默认关闭，由于通用查询日志会记录用户的所有操作，其中还包含增删查改等信息，在并发操作大的环下会产生大量的信息从而导致不必要的磁盘IO，会影响MySQL的性能的。
 
 如果不是为了调试数据库，不建议开启查询日志。
-```yml
+```shell
 #启动开关
 general_log={ON|OFF}
 #日志文件变量，而general_log_file如果没有指定，默认名是host_name.log
 general_log_file=/var/lib/mysql/host_name.log
 ```
-#### 慢查询日志：slow query log
+### 慢查询日志：slow query log
 默认关闭，通过以下设置开启。记录执行时间超过long_query_time秒的所有查询，便于收集查询时间比较长的SQL语句。
 
 查看阈值
@@ -80,7 +80,7 @@ show variables like '%slow_query%';
 show variables like 'long_query_time%';
 ```
 配置慢查询开启
-```yml
+```
 # 开启慢查询日志
 slow_query_log=ON
 # 慢查询的阈值，单位秒

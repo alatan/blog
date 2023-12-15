@@ -2,7 +2,7 @@
 title: "数据切分（分库分表）总结"
 description: "分库分表"
 keywords: ["MySQL"]
-date: 2017-03-05
+date: 2017-03-08
 author: "默哥"
 weight: 70
 draft: false
