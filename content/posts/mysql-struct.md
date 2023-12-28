@@ -124,7 +124,7 @@ show variables like '%datadir%';
 ```sql
 select c_id,first_name,last_name from customer where c_id=14;
 ```
-![](/images/db/rdb/sqlLine.png "一条SQL的执行流程")
+![](../images/db/rdb/sqlLine.png "一条SQL的执行流程")
 
 大体来说，MySQL 可以分为**Server层**和**存储引擎层**两部分：
 1. Server层
