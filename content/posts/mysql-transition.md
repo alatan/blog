@@ -95,7 +95,7 @@ toc:
 
 
 
-#### 基于版本并发控制**MVCC**
+#### 基于版本并发控制MVCC
 
 使用版本的并发控制MVCC（Multi Version Concurrency Control）机制也可以解决这个问题。
 
@@ -182,10 +182,10 @@ ReadView是张存储事务id的表，主要包含当前系统中有哪些活跃�
 
 #### 四个列
 
-- **m_ids：**生成ReadView时，当前**活跃的事务id列表**
+- **m_ids：**生成ReadView时，当前活跃的事务id列表
 - **m_low_limit_id：事务id下限**，当前活跃事务中最小的事务id
 - **m_up_limit_id：事务id上限**，生成ReadView时，应该分配给下一个事务的id值
-- **m_creator_trx_id：**生成该ReadView的事务的事务id
+- **m_creator_trx_id：** 生成该ReadView的事务的事务id
 
 ![](../images/db/rdb/ts-readview.png "readView")
 
@@ -202,7 +202,7 @@ RC 和 RR 隔离级别的差异本质是因为MVCC中ReadView的生成时机不�
   - 如果被访问版本的 trx_id 属性值，小于ReadView中的**事务下限id**，表明生成该版本的事务在生成 ReadView 前已经提交，所以该版本**可以**被当前事务访问。
   - 如果被访问版本的 trx_id 属性值，等于ReadView中的 m_creator_trx_id ，**可以**被访问。
   - 如果被访问版本的 trx_id 属性值，大于等于ReadView中的**事务上限id**，在生成 ReadView 后才产生的数据，所以该版本**不可以**被当前事务访问。
-  - 如果被访问版本的 trx_id 属性值，在**事务下限****id**和**事务上限****id**之间，那就需要判断是不是在m_ids 列表中。
+  - 如果被访问版本的 trx_id 属性值，在**事务下限id**和**事务上限id**之间，那就需要判断是不是在m_ids 列表中。
     - 如果在，说明创建 ReadView 时生成该版本的事务还是活跃的，该版本**不可以**被访问；
     - 如果不在，说明创建 ReadView 时生成该版本的事务已经被提交，该版本**可以**被访问。
 
@@ -223,8 +223,8 @@ RC 和 RR 隔离级别的差异本质是因为MVCC中ReadView的生成时机不�
 
 在MVCC并发控制中，读操作可以分成两类：**快照读** **(Snapshot Read)与当前读Current Read)**
 
-- **快照读：**读不加锁，读取的是**版本链**的快照数据，默认的读都是快照读
-- **当前读：**读加锁，读取的永远都是最新数据，保证其他事务不会再并发修改这条记录
+- **快照读：** 读不加锁，读取的是**版本链**的快照数据，默认的读都是快照读
+- **当前读：** 读加锁，读取的永远都是最新数据，保证其他事务不会再并发修改这条记录
 
 ![](../images/db/rdb/ts-read.png "read")
 
