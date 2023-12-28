@@ -1,4 +1,4 @@
----  
+---
 title: "MySQL架构"
 description: "MySQL架构"
 keywords: ["MySQL"]
@@ -12,7 +12,7 @@ tags: ["MySQL", "大纲"]
 toc: 
     auto: false
 ---
-![](/images/db/rdb/mysql-overview.png "MySQL架构图")
+![](../images/db/rdb/mysql-overview.png "MySQL架构图")
 
 ## 逻辑架构图
 * Connectors连接器：负责跟客户端建立连接
