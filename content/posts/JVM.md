@@ -1,4 +1,4 @@
----  
+---
 title: "JVM概览"  
 date: 2018-05-01
 weight: 70  
@@ -8,9 +8,7 @@ description: "JVM概览"
 tags: ["JVM", "大纲"]
 categories: ["JVM"]  
 author: "默哥"  
-
 lightgallery: true
-
 toc:
   auto: false
 ---
