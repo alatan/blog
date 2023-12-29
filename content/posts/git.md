@@ -4,13 +4,11 @@ date:  2017-01-01
 weight: 70  
 draft: false  
 keywords: [""]  
-description: "JVM-一个对象的一生（出生、死亡与内涵）"  
+description: "git"  
 tags: ["Tools"]
 categories: ["git"]
 author: "默哥"  
-
 lightgallery: true
-
 toc:
   auto: false
 ---
