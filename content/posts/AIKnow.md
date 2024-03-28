@@ -1,3 +1,4 @@
+---
 title: "AI认知"  
 date: 2023-02-03
 weight: 70  
@@ -10,7 +11,7 @@ author: "默哥"
 
 lightgallery: true
 toc: auto: false
-
+---
 ## 态度
 
 

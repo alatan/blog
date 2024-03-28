@@ -11,6 +11,7 @@ author: "默哥"
 
 lightgallery: true
 toc: auto: false
+---
 
 ### 文本
 * ChatGPT
