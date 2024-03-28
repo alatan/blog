@@ -148,8 +148,11 @@ select c_id,first_name,last_name from customer where c_id=14;
         * **命中率不高**：对于更新压力大的数据库来说，查询缓存的命中率会非常低。除非你的业务就是有一张静态表，很长时间才会更新一次。比如，一个系统配置表，那这张表上的查询才适合使用查询缓存。
         * **功能并不如专业的缓存工具更好**：redis、memcache、ehcache...
     * 好在 MySQL 也提供了这种按需使用的方式。你可以将参数 query_cache_type 设置成 DEMAND，这样对于默认的 SQL 语句都不使用查询缓存。而对于你确定要使用查询缓存的语句，可以用 SQL_CACHE 显式指定.
-
-    *注意：MySQL 8.0 版本直接将查询缓存的整块功能删掉了*
+    以下是query_cache_type三个参数的含义:
+        * query_cache_type=0（OFF）关闭
+        * query_cache_type=1（ON）缓存所有结果，除非select语句使用SQL_NO_CACHE禁用查询缓存
+        * query_cache_type=2(DEMAND)，只缓存select语句中通过SQL_CACHE指定需要缓存的查询
+        * 注意：MySQL 8.0 版本直接将查询缓存的整块功能删掉了*
 4. 分析器（对SQL进行词法分析和语法分析操作） 
 5. 优化器（优化器顾名思义就是对查询进行优化。作用是根据解析树生成不同的执行计划，然后选择最优的执行计划。） 
 6. 执行器（执行时会先看用户是否有执行权限，有才去使用这个引擎提供的接口）

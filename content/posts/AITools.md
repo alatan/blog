@@ -1,4 +1,4 @@
----  
+---
 title: "AI工具"  
 date: 2023-02-02
 weight: 70  
@@ -10,9 +10,7 @@ categories: ["AI"]
 author: "默哥"  
 
 lightgallery: true
-toc:
-  auto: false
----
+toc: auto: false
 
 ### 文本
 * ChatGPT
