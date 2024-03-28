@@ -1,4 +1,4 @@
----  
+---
 title: "Redis概览"
 description: "Redis概览"
 keywords: ["缓存"]
@@ -13,7 +13,7 @@ toc:
     auto: false
 ---
 
-![](/images/redis/redis-overview.png "Redis总览")
+![](../images/redis/redis-overview.png "Redis总览")
 
 > Redis是一款内存高速缓存数据库。Redis全称为：Remote Dictionary Server（远程数据服务. ，Redis是一种支持key-value等多种数据结构的存储系统。可用于缓存，事件发布或订阅，高速队列等场景。支持网络，提供字符串，哈希，列表，队列，集合结构直接存取，基于内存，可持久化。
 
@@ -105,10 +105,10 @@ Redis 4.0 中提出了一个混合使用 AOF 日志和内存快照的方法。�
 ###  主从复制原理
 #### 全量复制
 > 当我们启动多个 Redis 实例的时候，它们相互之间就可以通过 replicaof（Redis 5.0 之前使用 slaveof. 命令形成主库和从库的关系，之后会按照三个阶段完成数据的第一次同步。
-![](/images/redis/redis-copy-all.jpg "全量复制")
+![](../images/redis/redis-copy-all.jpg "全量复制")
 
 #### 增量复制
-![](/images/redis/redis-copy-add.jpg "增量复制")
+![](../images/redis/redis-copy-add.jpg "增量复制")
 
 ## 高可用：哨兵机制（Redis Sentinel）
 > 如果主节点出现故障该怎么办呢？ 在 Redis 主从集群中，哨兵机制是实现主从库自动切换的关键机制，它有效地解决了主从复制模式下故障转移的问题。
@@ -126,6 +126,22 @@ Redis 4.0 中提出了一个混合使用 AOF 日志和内存快照的方法。�
 * 事前：Redis 高可用，主从+哨兵，Redis cluster，避免全盘崩溃。
 * 事中：本地 ehcache 缓存 + Hystrix 限流+降级，避免MySQL被打死。
 * 事后：Redis 持久化 RDB+AOF，一旦重启，自动从磁盘上加载数据，快速恢复缓存数据。
+
+
+
+## 最新
+
+主从复制的流程：
+
+1.建立链接；2.rdb全量复制；
+
+2.网络长链接复制。 
+
+主-从-从的级联主从复制模式:减少主库的bgsave压力，减少网络传输的压力
+
+ 断网重连：repl_backlog_size环形缓冲区，存在覆盖情况。
+
+主库还可以根据slave_repl_offset判断是全量复制，还是增量复制
 
 
 ## 参考文章
