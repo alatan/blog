@@ -10,7 +10,8 @@ categories: ["AI"]
 author: "默哥"  
 
 lightgallery: true
-toc: auto: false
+toc:
+ auto: false
 ---
 
 ### 文本
