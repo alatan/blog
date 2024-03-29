@@ -1,6 +1,6 @@
 ---
 title: "AI 应用总结"  
-date: 2023-02-01
+date: 2024-02-01
 weight: 70  
 draft: false  
 keywords: ["AI"]  

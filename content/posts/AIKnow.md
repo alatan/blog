@@ -1,6 +1,6 @@
 ---
 title: "AI认知"  
-date: 2023-02-03
+date: 2024-02-03
 weight: 70  
 draft: false  
 keywords: ["AI"]  
@@ -15,12 +15,9 @@ toc:
 ---  
 
 ## 态度
-
-
-
 信息差
 
 认知差
 
-资源查
+资源差
 

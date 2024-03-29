@@ -1,6 +1,6 @@
 ---
 title: "AI工具"  
-date: 2023-02-02
+date: 2024-02-02
 weight: 70  
 draft: false  
 keywords: ["AI"]  
